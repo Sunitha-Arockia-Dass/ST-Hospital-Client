@@ -1,10 +1,10 @@
 /*
- * ----------------------
- * INITIALIZE
- * ----------------------
- */
+* ----------------------
+* INITIALIZE
+* ----------------------
+*/
 
- html {
+html {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 
@@ -73,4 +73,59 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+
+
+/*
+* ----------------------
+* DarkMode
+* ----------------------
+*/
+
+:root {
+  --clr-light: hsl(210, 32%, 95%);
+  --clr-dark: hsl(210, 68%, 5%);
+
+  --foreground: var(--clr-dark);
+  --background: var(--clr-light);
+}
+
+.darkmode {
+  --foreground: var(--clr-light);
+  --background: var(--clr-dark);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.dark-mode-toggle {
+  position: absolute;
+  z-index: 100;
+  top: 1em;
+  right: 1em;
+  color: var(--foreground);
+  border: 2px solid currentColor;
+  padding: 4px;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+
+/*
+* ----------------------
+* DarkMode
+* ----------------------
+*/
+
+a {
+  padding: 0 5px;
+}
+
+.active {
+  color: red;
 }
