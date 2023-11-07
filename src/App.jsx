@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom"
+
 /* Components */
 import Navbar from "./components/Navbar"
 
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+        <Navbar />
 
       <Routes>
         {/*   Add <Route /> components between <Routes> and </Routes>   */}
@@ -28,7 +29,7 @@ function App() {
 
         {/* Error Pages */}
         <Route path="/500" element={<Error />} />
-        <Route path="*" element={<NotFound />} />        
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   )

@@ -10,7 +10,7 @@ const enableDarkMode = () => {
   // 2. Update darkMode in localStorage
   localStorage.setItem('darkMode', 'enabled')
   // 3. Update the meta color-scheme
-  darkModeMeta.setAttribute("content", "dark")
+  darkModeMeta.setAttribute('content', 'dark')
 }
 
 const disableDarkMode = () => {
@@ -19,7 +19,7 @@ const disableDarkMode = () => {
   // 2. Update darkMode in localStorage 
   localStorage.setItem('darkMode', null)
    // 3. Update the meta color-scheme
-   darkModeMeta.setAttribute("content", "light")
+   darkModeMeta.setAttribute('content', 'light')
 }
  
 // If the user already visited and enabled darkMode
