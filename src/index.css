@@ -75,7 +75,6 @@ h6 {
   isolation: isolate;
 }
 
-
 /*
 * ----------------------
 * DarkMode
@@ -85,6 +84,8 @@ h6 {
 :root {
   --clr-light: hsl(210, 32%, 95%);
   --clr-dark: hsl(210, 68%, 05%);
+  --blue-primary: hsl(240, 100%, 30%);
+  --blue-secondary: hsl(240, 100%, 70%);
 
   --foreground: var(--clr-dark);
   --background: var(--clr-light);
@@ -115,7 +116,6 @@ body {
   height: 30px;
 }
 
-
 /*
 * ----------------------
 * Playground
@@ -131,4 +131,40 @@ a {
 
 .active {
   color: red;
+}
+
+/*
+* ----------------------
+* Main Button
+* ----------------------
+*/
+
+@property --bg-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+
+@keyframes spin {
+  to {
+    --bg-angle: 360deg;
+  }
+}
+
+button {
+  color: var(--background);
+  border-radius: 9999px;
+  padding: .5rem 1rem;
+  animation: spin 2.5s infinite linear paused;
+  background:
+    linear-gradient(var(--foreground), var(--foreground))
+    padding-box,
+    conic-gradient(from var(--bg-angle) at 50% 50%, var(--blue-primary) 0%, var(--blue-secondary) 50%, var(--blue-primary) 50%, var(--blue-secondary) 100%)
+    border-box;
+  border: .5rem solid transparent;
+  margin: .5rem;
+
+  &:hover {
+    animation-play-state: running;
+  }
 }
