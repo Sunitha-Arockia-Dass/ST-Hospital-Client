@@ -18,17 +18,17 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-}
-
 *,
 *::before,
 *::after {
   -moz-box-sizing: inherit;
   box-sizing: inherit;
   text-decoration: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
 
 a:active,
@@ -83,12 +83,14 @@ h6 {
 
 :root {
   --clr-light: hsl(210, 32%, 95%);
-  --clr-dark: hsl(210, 68%, 05%);
+  --clr-dark: hsl(210, 68%, 10%);
   --blue-primary: hsl(240, 100%, 30%);
   --blue-secondary: hsl(240, 100%, 70%);
 
   --foreground: var(--clr-dark);
   --background: var(--clr-light);
+
+  --timing1: 500ms;
 }
 
 .darkmode {
@@ -101,19 +103,46 @@ body {
   color: var(--foreground);
 }
 
-#dark-mode-toggle {
+.container, .DM {
   position: absolute;
   z-index: 100;
-  top: 10px;
-  right: 10px;
-  color: var(--foreground);
-  border: 2px solid currentColor;
+  top: -3.25rem;
+  right: 0.75rem;
+  width: 3rem;
+  height: 3.25rem;
+  background-color: var(--foreground);
+  border-radius: 0 0 1.5rem 1.5rem;
+  animation: dm-animation var(--timing1) linear var(--timing1) forwards;
+}
+
+@keyframes dm-animation {
+  75% {
+    transform: translateY(3.25rem);
+    border-radius: 0 0 1.375rem 1.375rem;
+  }
+  80% {
+    transform: translateY(3rem);
+    border-radius: 0 0 1.25rem 1.25rem;
+  }
+  90% {
+    transform: translateY(3.25rem);
+    border-radius: 0 0 1.375rem 1.375rem;
+  }
+  100% {
+    transform: translateY(3rem);
+  }
+}
+
+#dark-mode-toggle {
+  display: block;
+  color: var(--background);
   padding: 4px;
-  background: transparent;
+  background: var(--foreground);
   cursor: pointer;
-  border-radius: 5px;
-  width: 30px;
-  height: 30px;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  margin: 0.75rem auto 0;
 }
 
 /*
@@ -121,6 +150,7 @@ body {
 * Playground
 * ----------------------
 */
+
 #root {
   margin: 0 2rem;
 }
@@ -139,6 +169,7 @@ a {
 * ----------------------
 */
 
+/* Form Button */
 @property --bg-angle {
   inherits: false;
   initial-value: 0deg;
@@ -151,20 +182,64 @@ a {
   }
 }
 
-button {
-  color: var(--background);
-  border-radius: 9999px;
-  padding: .5rem 1rem;
+form button {
+  cursor: pointer;
+  color: var(--foreground);
+  border-radius: 0.75rem 0.75rem 1.5rem 1.5rem;
+  padding: 0.5rem 1rem;
+  margin: 1.5rem 0;
+  width: 80%;
+
   animation: spin 2.5s infinite linear paused;
-  background:
-    linear-gradient(var(--foreground), var(--foreground))
-    padding-box,
-    conic-gradient(from var(--bg-angle) at 50% 50%, var(--blue-primary) 0%, var(--blue-secondary) 50%, var(--blue-primary) 50%, var(--blue-secondary) 100%)
-    border-box;
-  border: .5rem solid transparent;
-  margin: .5rem;
+  background: linear-gradient(var(--background), var(--background)) padding-box,
+    conic-gradient(
+        from var(--bg-angle) at 50% 50%,
+        var(--blue-primary) 0%,
+        var(--blue-secondary) 50%,
+        var(--blue-primary) 50%,
+        var(--blue-secondary) 100%
+      )
+      border-box;
+  border: 0.25rem solid transparent;
 
   &:hover {
     animation-play-state: running;
+  }
+}
+
+/*
+* ----------------------
+* Forms
+* ----------------------
+*/
+
+form {
+  width: 50%;
+}
+
+form,
+label,
+input,
+select,
+textarea {
+  display: block;
+  border-radius: 1rem 1rem 0.5rem 0.5rem;
+}
+
+label {
+  padding-left: 1rem;
+  margin-top: 1rem;
+}
+
+input,
+select,
+textarea {
+  width: 80%;
+  padding: 0.5rem 1rem;
+  border: 0.125rem solid var(--blue-primary);
+
+  &:focus {
+    outline: transparent;
+    border: 0.125rem solid var(--blue-secondary);
   }
 }
