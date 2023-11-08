@@ -82,20 +82,65 @@ h6 {
 */
 
 :root {
-  --clr-light: hsl(210, 32%, 95%);
-  --clr-dark: hsl(210, 68%, 10%);
-  --blue-primary: hsl(240, 100%, 30%);
-  --blue-secondary: hsl(240, 100%, 70%);
+  /* Colors */
+  --clr-light: hsl(210, 8%, 95%);
+  --shdw-light: 210deg 8% 95%;
+  --clr-dark: hsl(205, 35%, 10%);
+  --shdw-dark: 205deg 35% 10%;
+
+  --blue-primary: hsl(195, 95%, 55%);
+  --blue-secondary: hsl(200, 100%, 35%);
+  --blue-third: hsl(190, 90%, 90%);
+
+  --green-primary: hsl(100, 35%, 50%);
+  --green-secondary: hsl(100, 25%, 35%);
+  --green-third: hsl(95, 70%, 90%);
+
+  --yellow-msg: hsl(60, 90%, 55%);
+  --orange-msg: hsl(30, 90%, 55%);
+  --red-msg: hsl(0, 90%, 55%);
 
   --foreground: var(--clr-dark);
   --background: var(--clr-light);
 
-  --timing1: 500ms;
+  /* Animations */
+  --timing03: 300ms;
+  --timing05: 500ms;
+  --timing1: 1s;
+
+  /* Shadows */
+  --shadow-color: var(--shdw-dark);
+  --shadow-elevation-low: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.46),
+    0.6px 0.8px 1.1px -1.5px hsl(var(--shadow-color) / 0.4),
+    1.4px 2.1px 2.7px -3px hsl(var(--shadow-color) / 0.35);
+  --shadow-elevation-lmedium: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.48),
+    1px 1.5px 1.9px -1px hsl(var(--shadow-color) / 0.44),
+    2.8px 4px 5.1px -2px hsl(var(--shadow-color) / 0.4),
+    3.5px 5px 6.5px -3px hsl(var(--shadow-color) / 0.36);
+  --shadow-elevation-medium: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.48),
+    1px 1.5px 1.9px -1px hsl(var(--shadow-color) / 0.44),
+    2.8px 4px 5.1px -2px hsl(var(--shadow-color) / 0.4),
+    7.1px 10.3px 13.1px -3px hsl(var(--shadow-color) / 0.36);
+  --shadow-elevation-high: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.44),
+    1.8px 2.6px 3.3px -0.4px hsl(var(--shadow-color) / 0.43),
+    3.4px 5px 6.3px -0.9px hsl(var(--shadow-color) / 0.41),
+    5.9px 8.6px 11px -1.3px hsl(var(--shadow-color) / 0.39),
+    9.9px 14.4px 18.3px -1.7px hsl(var(--shadow-color) / 0.37),
+    16px 23.2px 29.6px -2.1px hsl(var(--shadow-color) / 0.35),
+    24.9px 36.1px 46px -2.6px hsl(var(--shadow-color) / 0.33),
+    37.1px 53.8px 68.6px -3px hsl(var(--shadow-color) / 0.31);
 }
 
 .darkmode {
   --foreground: var(--clr-light);
   --background: var(--clr-dark);
+  --shadow-color: var(--shdw-light);
+
+  --blue-primary: hsl(200, 100%, 35%);
+  --blue-secondary: hsl(195, 95%, 55%);
+
+  --green-primary: hsl(100, 25%, 35%);
+  --green-secondary: hsl(100, 35%, 50%);
 }
 
 body {
@@ -103,7 +148,8 @@ body {
   color: var(--foreground);
 }
 
-.container, .DM {
+.container,
+.DM {
   position: absolute;
   z-index: 100;
   top: -3.25rem;
@@ -112,7 +158,15 @@ body {
   height: 3.25rem;
   background-color: var(--foreground);
   border-radius: 0 0 1.5rem 1.5rem;
-  animation: dm-animation var(--timing1) linear var(--timing1) forwards;
+  animation: dm-animation var(--timing05) linear var(--timing1) forwards;
+  transition: var(--timing05);
+
+  &:hover {
+    box-shadow: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.48),
+      1px 1.5px 1.9px -1px hsl(var(--shadow-color) / 0.44),
+      2.8px 4px 5.1px -2px hsl(var(--shadow-color) / 0.4),
+      3.5px 5px 6.5px -3px hsl(var(--shadow-color) / 0.36);
+  }
 }
 
 @keyframes dm-animation {
@@ -137,12 +191,21 @@ body {
   display: block;
   color: var(--background);
   padding: 4px;
-  background: var(--foreground);
+  background: transparent;
   cursor: pointer;
   width: 2rem;
   height: 2rem;
   border: none;
   margin: 0.75rem auto 0;
+  
+  &:hover{
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 .15rem var(--background));
+  }
+}
+
+#sun {
+  display: none;
 }
 
 /*
@@ -151,16 +214,27 @@ body {
 * ----------------------
 */
 
+/*React 1st Div*/
 #root {
   margin: 0 2rem;
 }
 
 a {
-  padding: 0 5px;
+  padding: 5px 10px;
+  color: var(--blue-secondary);
+  border-radius: 0.5rem;
+  transition: var(--timing03) ease-in-out;
+
+  &:hover {
+    background-color: var(--blue-third);
+    box-shadow: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.46),
+      0.6px 0.8px 1.1px -1.5px hsl(var(--shadow-color) / 0.4),
+      1.4px 2.1px 2.7px -3px hsl(var(--shadow-color) / 0.35);
+  }
 }
 
 .active {
-  color: red;
+  color: var(--blue-primary);
 }
 
 /*
@@ -184,26 +258,43 @@ a {
 
 form button {
   cursor: pointer;
-  color: var(--foreground);
-  border-radius: 0.75rem 0.75rem 1.5rem 1.5rem;
+  color: var(--clr-dark);
+  text-shadow: 0 0 1px white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-indent: 55%;
+  width: 40%;
   padding: 0.5rem 1rem;
-  margin: 1.5rem 0;
-  width: 80%;
-
-  animation: spin 2.5s infinite linear paused;
-  background: linear-gradient(var(--background), var(--background)) padding-box,
+  border-radius: 25rem;
+  margin: 1.5rem 0 1.5rem 40%;
+  
+  animation: spin 3s infinite linear paused;
+  border: 0.25rem solid transparent;
+  background: linear-gradient(
+        to left,
+        var(--blue-third) 0%,
+        var(--blue-third) 50%,
+        var(--green-third) 50%
+      )
+      padding-box,
     conic-gradient(
         from var(--bg-angle) at 50% 50%,
-        var(--blue-primary) 0%,
-        var(--blue-secondary) 50%,
+        var(--blue-secondary) 0%,
         var(--blue-primary) 50%,
-        var(--blue-secondary) 100%
+        var(--blue-secondary) 50%,
+        var(--blue-primary) 100%
       )
       border-box;
-  border: 0.25rem solid transparent;
-
+  box-shadow: inset 0px -2px 6px var(--clr-dark);
+  transition: var(--timing03) ease-in;
+  
   &:hover {
     animation-play-state: running;
+    transform: scale(1.05);
+    box-shadow: inset 0px -2px 6px var(--clr-dark),0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.48),
+    1px 1.5px 1.9px -1px hsl(var(--shadow-color) / 0.44),
+    2.8px 4px 5.1px -2px hsl(var(--shadow-color) / 0.4),
+    7.1px 10.3px 13.1px -3px hsl(var(--shadow-color) / 0.36);
   }
 }
 
@@ -223,7 +314,7 @@ input,
 select,
 textarea {
   display: block;
-  border-radius: 1rem 1rem 0.5rem 0.5rem;
+  border-radius: 0.75rem;
 }
 
 label {
@@ -240,6 +331,6 @@ textarea {
 
   &:focus {
     outline: transparent;
-    border: 0.125rem solid var(--blue-secondary);
+    border: 0.125rem solid var(--blue-third);
   }
 }
