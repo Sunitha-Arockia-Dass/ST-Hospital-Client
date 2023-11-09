@@ -1,0 +1,34 @@
+{
+    "EN": {
+        "navbar":{
+            "links":{
+                "home":"Home",
+                "signup":"Signup",
+                "login":"Login",
+                "account": "Account",
+                "editaccount": "Edit Account"
+            }
+
+        },
+        "hompage":{
+
+        }
+    },
+
+    "FR": {
+        "navbar":{
+            "links":{
+                "home":"Accueil",
+                "signup":"S'enregistrer",
+                "login":"Se connecter",
+                "account": "Compte",
+                "editaccount": "Editer Compte"
+            }
+
+        },
+        "hompage":{
+
+        }
+
+    }
+}

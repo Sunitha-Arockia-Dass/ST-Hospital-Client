@@ -41,8 +41,14 @@ picture,
 video,
 canvas,
 svg {
-  display: block;
   max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  font-style: italic;
+  shape-margin: 1rem;
+  /*if lowres picture are first loaded*/
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 button,
@@ -75,30 +81,23 @@ h6 {
   isolation: isolate;
 }
 
-/*
-* ----------------------
-* DarkMode
-* ----------------------
-*/
-
 :root {
   /* Colors */
-  --clr-light: hsl(210, 8%, 95%);
-  --shdw-light: 210deg 8% 95%;
-  --clr-dark: hsl(205, 35%, 10%);
-  --shdw-dark: 205deg 35% 10%;
+  --clr-light: hsl(210, 15%, 90%);
+  --clr-dark: hsl(205, 15%, 10%);
 
-  --blue-primary: hsl(195, 95%, 55%);
-  --blue-secondary: hsl(200, 100%, 35%);
-  --blue-third: hsl(190, 90%, 90%);
+  --blue-primary: hsl(195, 85%, 70%);
+  --blue-secondary: hsl(198, 90%, 40%);
+  --blue-third: hsl(209, 100%, 20%);
 
-  --green-primary: hsl(100, 35%, 50%);
-  --green-secondary: hsl(100, 25%, 35%);
-  --green-third: hsl(95, 70%, 90%);
+  --green-primary: hsl(159, 85%, 70%);
+  --green-secondary: hsl(162, 90%, 40%);
+  --green-third: hsl(170, 100%, 20%);
 
-  --yellow-msg: hsl(60, 90%, 55%);
-  --orange-msg: hsl(30, 90%, 55%);
-  --red-msg: hsl(0, 90%, 55%);
+  --info-msg: hsl(290, 55%, 50%);
+  --ok-msg: hsl(70, 55%, 50%);
+  --careful-msg: hsl(35, 55%, 50%);
+  --danger-msg: hsl(0, 55%, 50%);
 
   --foreground: var(--clr-dark);
   --background: var(--clr-light);
@@ -109,6 +108,8 @@ h6 {
   --timing1: 1s;
 
   /* Shadows */
+  --shdw-light: 210deg 100% 100%;
+  --shdw-dark: 205deg 100% 0%;
   --shadow-color: var(--shdw-dark);
   --shadow-elevation-low: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.46),
     0.6px 0.8px 1.1px -1.5px hsl(var(--shadow-color) / 0.4),
@@ -131,34 +132,32 @@ h6 {
     37.1px 53.8px 68.6px -3px hsl(var(--shadow-color) / 0.31);
 }
 
-.darkmode {
-  --foreground: var(--clr-light);
-  --background: var(--clr-dark);
-  --shadow-color: var(--shdw-light);
-
-  --blue-primary: hsl(200, 100%, 35%);
-  --blue-secondary: hsl(195, 95%, 55%);
-
-  --green-primary: hsl(100, 25%, 35%);
-  --green-secondary: hsl(100, 35%, 50%);
-}
+/*
+* ----------------------
+* DarkMode
+* ----------------------
+*/
 
 body {
   background: var(--background);
   color: var(--foreground);
 }
 
-.container,
-.DM {
+.darkmode {
+  --foreground: var(--clr-light);
+  --background: var(--clr-dark);
+}
+
+.containerToggle {
   position: absolute;
   z-index: 100;
-  top: -3.25rem;
-  right: 0.75rem;
   width: 3rem;
   height: 3.25rem;
-  background-color: var(--foreground);
+  fill: var(--clr-light);
+  border: 2px solid var(--clr-light);
+  border-top: transparent;
   border-radius: 0 0 1.5rem 1.5rem;
-  animation: dm-animation var(--timing05) linear var(--timing1) forwards;
+  background: var(--clr-dark);
   transition: var(--timing05);
 
   &:hover {
@@ -169,8 +168,21 @@ body {
   }
 }
 
+.containerToggle.DM {
+  top: -3.25rem;
+  right: 0.75rem;
+  animation: dm-animation var(--timing05) linear var(--timing1) forwards;
+}
+
+.containerToggle.lang {
+  top: -3.25rem;
+  right: 4.5rem;
+  animation: dm-animation var(--timing05) linear var(--timing05) forwards;
+}
+
 @keyframes dm-animation {
-  75% {
+  75%,
+  90% {
     transform: translateY(3.25rem);
     border-radius: 0 0 1.375rem 1.375rem;
   }
@@ -178,18 +190,16 @@ body {
     transform: translateY(3rem);
     border-radius: 0 0 1.25rem 1.25rem;
   }
-  90% {
-    transform: translateY(3.25rem);
-    border-radius: 0 0 1.375rem 1.375rem;
-  }
+
   100% {
     transform: translateY(3rem);
   }
 }
 
-#dark-mode-toggle {
+#dark-mode-toggle,
+#languageBtn {
   display: block;
-  color: var(--background);
+  color: var(--clr-light);
   padding: 4px;
   background: transparent;
   cursor: pointer;
@@ -197,10 +207,18 @@ body {
   height: 2rem;
   border: none;
   margin: 0.75rem auto 0;
-  
-  &:hover{
+  transition: var(--timing03) ease-in;
+
+  &:hover {
     transform: scale(1.05);
-    filter: drop-shadow(0 0 .15rem var(--background));
+    filter: drop-shadow(0 0 0.15rem var(--clr-light));
+  }
+}
+
+#languageBtn {
+  &:hover {
+    filter: none;
+    transform: scale(1.1);
   }
 }
 
@@ -237,6 +255,59 @@ a {
   color: var(--blue-primary);
 }
 
+.test {
+  width: 25%;
+  height: 5rem;
+  margin: 5px;
+  display: inline-block;
+  text-align: center;
+  box-shadow: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.48),
+    1px 1.5px 1.9px -1px hsl(var(--shadow-color) / 0.44),
+    2.8px 4px 5.1px -2px hsl(var(--shadow-color) / 0.4),
+    3.5px 5px 6.5px -3px hsl(var(--shadow-color) / 0.36);
+}
+
+div.one,
+div.four {
+  color: var(--clr-dark);
+}
+
+div.three,
+div.six {
+  color: var(--clr-light);
+}
+
+div.one {
+  background-color: var(--blue-primary);
+}
+div.two {
+  background-color: var(--blue-secondary);
+}
+div.three {
+  background-color: var(--blue-third);
+}
+div.four {
+  background-color: var(--green-primary);
+}
+div.five {
+  background-color: var(--green-secondary);
+}
+div.six {
+  background-color: var(--green-third);
+}
+div.seven {
+  background-color: var(--info-msg);
+}
+div.height {
+  background-color: var(--ok-msg);
+}
+div.nine {
+  background-color: var(--careful-msg);
+}
+div.ten {
+  background-color: var(--danger-msg);
+}
+
 /*
 * ----------------------
 * Main Button
@@ -267,7 +338,7 @@ form button {
   padding: 0.5rem 1rem;
   border-radius: 25rem;
   margin: 1.5rem 0 1.5rem 40%;
-  
+
   animation: spin 3s infinite linear paused;
   border: 0.25rem solid transparent;
   background: linear-gradient(
@@ -287,14 +358,15 @@ form button {
       border-box;
   box-shadow: inset 0px -2px 6px var(--clr-dark);
   transition: var(--timing03) ease-in;
-  
+
   &:hover {
     animation-play-state: running;
     transform: scale(1.05);
-    box-shadow: inset 0px -2px 6px var(--clr-dark),0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.48),
-    1px 1.5px 1.9px -1px hsl(var(--shadow-color) / 0.44),
-    2.8px 4px 5.1px -2px hsl(var(--shadow-color) / 0.4),
-    7.1px 10.3px 13.1px -3px hsl(var(--shadow-color) / 0.36);
+    box-shadow: inset 0px -2px 6px var(--clr-dark),
+      0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.48),
+      1px 1.5px 1.9px -1px hsl(var(--shadow-color) / 0.44),
+      2.8px 4px 5.1px -2px hsl(var(--shadow-color) / 0.4),
+      7.1px 10.3px 13.1px -3px hsl(var(--shadow-color) / 0.36);
   }
 }
 

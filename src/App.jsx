@@ -16,13 +16,12 @@ import Error from "./pages/error/Error"
 
 
 function App() {
-
   return (
     <>
       <Navbar />
 
       <Routes>
-        {/*   Add <Route /> components between <Routes> and </Routes>   */}
+        {/*   HomePage  */}
         <Route path="/" element={<HomePage />} />
 
         {/* Auth Pages */}
