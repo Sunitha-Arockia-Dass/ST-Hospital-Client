@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client"
 import { BrowserRouter as Router } from "react-router-dom"
 import "./index.css"
 import App from "./App"
-import { AuthProviderWrapper } from "./context/auth.context"; 
+import { AuthProviderWrapper } from "./context/auth.context";
 
 
 /* JSON Data */
@@ -14,9 +14,15 @@ const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   <React.StrictMode>
     <Router>
+
       <LanguageWrapper>
-        <App />
+      <AuthProviderWrapper>
+          
+          <App />
+
+      </AuthProviderWrapper>
       </LanguageWrapper>
+      
     </Router>
   </React.StrictMode>
 )
