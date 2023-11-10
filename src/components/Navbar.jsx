@@ -37,7 +37,7 @@ function Navbar() {
       </nav>
 
       <div className="containerToggle lang">
-        {/* <!-- DarkMode Toggling button --> */}
+        {/* <!-- Languages button --> */}
         <button id="languageBtn" onClick={changeLanguage}>
           {lang}
         </button>
