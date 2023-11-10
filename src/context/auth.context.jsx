@@ -38,6 +38,9 @@ function AuthProviderWrapper(props) {
           setIsLoggedIn(true);
           setIsLoading(false);
           setUser(user);
+          console.log(user);
+          console.log("log in successful from context");
+          localStorage.setItem("userDetails", user);
         })
         .catch((error) => {
           // If the server sends an error response (invalid token)
@@ -60,6 +63,7 @@ function AuthProviderWrapper(props) {
   const logOutUser = () => {
     removeToken();
     authenticateUser();
+    localStorage.removeItem("userDetails");
   };
   useEffect(() => {
     authenticateUser();

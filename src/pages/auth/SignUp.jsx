@@ -19,7 +19,7 @@ function SignUp() {
       .post(`${API_URL}/auth/signup`, data)
       .then((response) => {
         console.log("Signed up successfully");
-        console.log(response.data);
+        console.log(response.data.data);
         navigate('/login')
       })
       .catch((error) => {
