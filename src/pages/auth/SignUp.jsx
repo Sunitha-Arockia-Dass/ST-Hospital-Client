@@ -1,10 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { NavLink , useNavigate} from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+const API_URL = "http://localhost:5005"
 function SignUp() {
-//   const [user, setUser] = useState();
-
+  //   const [user, setUser] = useState();
+  const [errorMessage, setErrorMessage] = useState(undefined);
+  const navigate = useNavigate();
+  
   const signup = (e) => {
     e.preventDefault();
     let data = {
@@ -14,15 +16,36 @@ function SignUp() {
     };
     console.log(data);
     axios
-      .post("http://localhost:5005/auth/signup", data)
+      .post(`${API_URL}/auth/signup`, data)
       .then((response) => {
         console.log("Signed up successfully");
         console.log(response.data);
+        navigate('/login')
       })
       .catch((error) => {
         console.log(error);
+        setErrorMessage(error)
       });
   };
+  // const addAdmin = () => {
+  //   let data = {
+  //     name: "admin",
+  //     email: "admin@admin.com",
+  //     password: "sthospital123",
+  //     role: "admin",
+  //   };
+  //   console.log(data);
+  //   axios
+  //     .post(`${API_URL}/auth/signup`, data)
+  //     .then((response) => {
+  //       console.log("Signed up successfully");
+  //       console.log(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
   return (
     <div id="signup">
       <h2>Sign Up</h2>
@@ -42,6 +65,8 @@ function SignUp() {
 
         <button type="submit">Sign Up</button>
       </form>
+      { errorMessage && <p className="error-message">{errorMessage}</p> }
+      {/* <button onClick={addAdmin}>Add Admin</button> */}
     </div>
   );
 }
