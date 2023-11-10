@@ -2,15 +2,15 @@
 
 <h1>Links</h1>
 
-<h3>Follow the Trello Board : <a href="https://trello.com/invite/b/LJqzCzCl/ATTI2457db54afb77558ab662601bc60a286E6926B91/ironhack-project3-st-hospital">Here</a></h3>
+<h3>Follow the Trello Board : <a target="_blank" href="https://trello.com/invite/b/LJqzCzCl/ATTI2457db54afb77558ab662601bc60a286E6926B91/ironhack-project3-st-hospital">Here</a></h3>
 
-<h3>Slides presentation : <a href="#"></a></h3>
+<h3>Slides presentation : <a target="_blank" href="#"></a></h3>
 
-<h3>Github Server repository : <a href="https://github.com/Thomas-LBS/st-hospital-server.git">Here</a></h3>
+<h3>Github Server repository : <a target="_blank" href="https://github.com/Thomas-LBS/st-hospital-server.git">Here</a></h3>
 
-<h3>Github Client repository : <a href="https://github.com/Sunitha-Arockia-Dass/ST-Hospital-Client.git">Here</a></h3>
+<h3>Github Client repository : <a target="_blank" href="https://github.com/Sunitha-Arockia-Dass/ST-Hospital-Client.git">Here</a></h3>
 
-<h3>App deployed with ?? : <a href="#"></a></h3>
+<h3>App deployed with ?? : <a target="_blank" href="#"></a></h3>
 
 
 <h1>Introduction</h1>

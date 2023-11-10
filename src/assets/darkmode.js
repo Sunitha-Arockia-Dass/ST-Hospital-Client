@@ -3,6 +3,8 @@ let darkMode = localStorage.getItem('darkMode')
 
 const darkModeToggle = document.querySelector('#dark-mode-toggle')
 const darkModeMeta = document.querySelector('meta[name="color-scheme"]')
+const sun = document.querySelector('#sun')
+const moon = document.querySelector('#moon')
 
 const enableDarkMode = () => {
   // 1. Add the class to the body
@@ -10,7 +12,10 @@ const enableDarkMode = () => {
   // 2. Update darkMode in localStorage
   localStorage.setItem('darkMode', 'enabled')
   // 3. Update the meta color-scheme
-  darkModeMeta.setAttribute("content", "dark")
+  darkModeMeta.setAttribute('content', 'dark')
+  // 4. Change the icon
+  sun.style.display = "block"
+  moon.style.display = "none"
 }
 
 const disableDarkMode = () => {
@@ -19,7 +24,10 @@ const disableDarkMode = () => {
   // 2. Update darkMode in localStorage 
   localStorage.setItem('darkMode', null)
    // 3. Update the meta color-scheme
-   darkModeMeta.setAttribute("content", "light")
+   darkModeMeta.setAttribute('content', 'light')
+   // 4. Change the icon
+  sun.style.display = "none"
+  moon.style.display = "block"
 }
  
 // If the user already visited and enabled darkMode
@@ -29,13 +37,10 @@ if (darkMode === 'enabled') {
 
 // When someone clicks the button
 darkModeToggle.addEventListener('click', () => {
-  // get their darkMode setting
   darkMode = localStorage.getItem('darkMode') 
   
-  // if it not current enabled, enable it
   if (darkMode !== 'enabled') {
     enableDarkMode()
-  // if it has been enabled, turn it off  
   } else {  
     disableDarkMode() 
   }
