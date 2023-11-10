@@ -5,7 +5,7 @@ const LanguageContext = createContext()
 
 function LanguageWrapper(props) {
 
-    const [lang, setLang] = useState("FR")
+    const [lang, setLang] = useState("EN")
     const [strings, setStrings] = useState(stringsJson[lang])
 
     useEffect(() => {
