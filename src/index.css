@@ -99,17 +99,17 @@ h6 {
   --ft-Texte: "Poppins", sans-serif;
 
   /* Colors */
-  --clr-light: hsl(220, 15%, 90%);
-  --clr-medium: hsl(220, 15%, 51%);
+  --clr-light: hsl(220, 10%, 95%);
+  --clr-medium: hsl(220, 12%, 52%);
   --clr-dark: hsl(220, 15%, 12%);
 
-  --blue-primary: hsl(195, 85%, 70%);
-  --blue-secondary: hsl(198, 90%, 40%);
-  --blue-third: hsl(209, 100%, 20%);
+  --blue-primary: hsl(190, 85%, 80%);
+  --blue-secondary: hsl(193, 90%,50%);
+  --blue-third: hsl(205, 100%, 20%);
 
-  --green-primary: hsl(159, 85%, 70%);
-  --green-secondary: hsl(162, 90%, 40%);
-  --green-third: hsl(170, 100%, 20%);
+  --green-primary: hsl(160, 90%, 85%);
+  --green-secondary: hsl(163, 95%, 50%);
+  --green-third: hsl(175, 100%, 15%);
 
   --info-msg: hsl(290, 55%, 50%);
   --ok-msg: hsl(70, 55%, 50%);
