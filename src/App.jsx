@@ -25,7 +25,7 @@ function App() {
 
       <Routes>
         {/*   HomePage  */}
-        <Route path="/" element={<IsAnon><HomePage /></IsAnon>} />
+        <Route path="/" element={<HomePage />} />
 
         {/* Auth Pages */}
         <Route path="/signup" element={<IsAnon><SignUp /></IsAnon>} />
