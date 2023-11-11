@@ -19,7 +19,7 @@ function SignUp() {
       .post(`${API_URL}/auth/signup`, data)
       .then((response) => {
         console.log("Signed up successfully");
-        console.log(response.data);
+        console.log(response.data.data);
         navigate('/login')
       })
       .catch((error) => {
@@ -29,7 +29,7 @@ function SignUp() {
   };
   // const addAdmin = () => {
   //   let data = {
-  //     name: "admin",
+  //     name: "admins",
   //     email: "admin@admin.com",
   //     password: "sthospital123",
   //     role: "admin",

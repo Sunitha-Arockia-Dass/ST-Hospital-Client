@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../../context/auth.context";
+import { AuthContext } from "./../../context/auth.context";
 
 const API_URL = "http://localhost:5005";
 
@@ -11,19 +11,16 @@ function LogIn() {
   const navigate = useNavigate();
 
   /*  UPDATE - get authenticateUser from the context */
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+  const { storeToken, authenticateUser, user } = useContext(AuthContext);
   const login = (e) => {
     e.preventDefault();
     let data = {
       name: e.target.username.value,
       password: e.target.password.value,
     };
-    console.log(data);
     axios
       .post(`${API_URL}/auth/login`, data)
       .then((response) => {
-        console.log("logged in up successfully");
-        console.log("JWT token", response.data.authToken);
         storeToken(response.data.authToken);
         authenticateUser();
         navigate("/");
