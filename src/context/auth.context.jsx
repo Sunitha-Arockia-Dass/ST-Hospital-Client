@@ -38,8 +38,6 @@ function AuthProviderWrapper(props) {
           setIsLoggedIn(true);
           setIsLoading(false);
           setUser(user);
-          console.log(user);
-          console.log("log in successful from context");
           localStorage.setItem("userDetails", user);
         })
         .catch((error) => {
@@ -68,6 +66,7 @@ function AuthProviderWrapper(props) {
   useEffect(() => {
     authenticateUser();
   }, []);
+  console.log(user)
   return (
     <AuthContext.Provider
       value={{

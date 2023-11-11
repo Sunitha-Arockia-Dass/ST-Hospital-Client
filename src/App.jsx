@@ -10,9 +10,12 @@ import SignUp from "./pages/auth/SignUp"
 import LogIn from "./pages/auth/LogIn"
 import Account from "./pages/auth/Account"
 import EditAccount from "./pages/auth/EditAccount"
-
+import AdminPage from "./pages/AdminPage"
 import NotFound from "./pages/error/NotFound"
 import Error from "./pages/error/Error"
+import IsPrivate from "./components/isPrivate"
+import IsAnon from "./components/IsAnon"
+import IsAdmin from "./components/IsAdmin"
 
 
 function App() {
@@ -22,17 +25,22 @@ function App() {
 
       <Routes>
         {/*   HomePage  */}
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<IsAnon><HomePage /></IsAnon>} />
 
         {/* Auth Pages */}
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/editaccount" element={<EditAccount />} />
+        <Route path="/signup" element={<IsAnon><SignUp /></IsAnon>} />
+        <Route path="/login" element={<IsAnon><LogIn /></IsAnon>} />
+        <Route path="/account" element={<IsPrivate><Account /></IsPrivate>} />
+        <Route path="/editaccount" element={<IsPrivate><EditAccount /></IsPrivate>} />
 
         {/* Error Pages */}
         <Route path="/500" element={<Error />} />
         <Route path="*" element={<NotFound />} />
+
+        {/*Admin Pages */}
+        <Route path="/admin" element={<IsAdmin><AdminPage /></IsAdmin>} />
+
+
       </Routes>
     </>
   )

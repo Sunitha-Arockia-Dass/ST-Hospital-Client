@@ -32,7 +32,8 @@ function Navbar() {
             {strings.navbar.links.editaccount}
           </NavLink>
           <span>{user && user.username}</span>
-          <button onClick={logOutUser}>Logout</button>
+          {user && user.role==="admin" && <NavLink to="/admin">Admin Page</NavLink>}
+          {user && <button onClick={logOutUser}>Logout</button>}
         </ul>
       </nav>
 

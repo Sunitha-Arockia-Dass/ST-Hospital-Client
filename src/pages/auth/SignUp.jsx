@@ -29,7 +29,7 @@ function SignUp() {
   };
   // const addAdmin = () => {
   //   let data = {
-  //     name: "admin",
+  //     name: "admins",
   //     email: "admin@admin.com",
   //     password: "sthospital123",
   //     role: "admin",
