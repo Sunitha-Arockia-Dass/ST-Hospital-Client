@@ -97,6 +97,7 @@ h6 {
   /* Fonts */
   --ft-Headings: "Sofia Sans", sans-serif;
   --ft-Texte: "Poppins", sans-serif;
+  --test: ;
 
   /* Colors */
   --clr-light: hsl(220, 10%, 95%);
