@@ -1,9 +1,7 @@
-import IsLogged from "../../components/IsLogged"
 
 function Account() {
     return (
         <>
-        <IsLogged/>
         <div id="account">
             
             <h2>Welcome to your Account</h2>
