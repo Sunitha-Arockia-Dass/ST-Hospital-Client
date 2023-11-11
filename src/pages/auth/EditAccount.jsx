@@ -1,10 +1,8 @@
-
 function EditAccount() {
     
     
     return (
-        <>
-        
+        <>        
         <div id="editaccount">
             
             <h2>Edit Account</h2>
