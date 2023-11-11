@@ -13,7 +13,7 @@ import EditAccount from "./pages/auth/EditAccount"
 import AdminPage from "./pages/AdminPage"
 import NotFound from "./pages/error/NotFound"
 import Error from "./pages/error/Error"
-import IsPrivate from "./components/isPrivate"
+import IsPrivate from "./components/IsPrivate"
 import IsAnon from "./components/IsAnon"
 import IsAdmin from "./components/IsAdmin"
 
