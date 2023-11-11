@@ -1,12 +1,8 @@
-import IsLogged from "../../components/IsLogged"
-
 function EditAccount() {
     
     
     return (
-        <>
-        <IsLogged/>
-        
+        <>        
         <div id="editaccount">
             
             <h2>Edit Account</h2>
