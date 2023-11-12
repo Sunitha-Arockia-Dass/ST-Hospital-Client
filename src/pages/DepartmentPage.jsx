@@ -22,7 +22,7 @@ function DepartmentPage() {
   return (
     <div>
       <h1>Department Page</h1>
-      {setSelectedDeptId && selectedDept ? (
+      {selectedDeptId && selectedDept ? (
         <div key={selectedDept._id}>
           <h1>{selectedDept.name}</h1>
           <h2>{selectedDept.description}</h2>
