@@ -21,6 +21,7 @@ function Navbar() {
       <nav className="navbar">
         <ul>
           <NavLink to="/">{strings.navbar.links.home}</NavLink>
+          <NavLink to="/departments">{strings.navbar.links.departments}</NavLink>
 
           {!user &&<NavLink to="/signup">{strings.navbar.links.signup}</NavLink>}
 
