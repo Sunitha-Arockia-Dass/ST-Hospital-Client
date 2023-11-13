@@ -28,9 +28,8 @@ function Navbar() {
 
           <NavLink to="/account">{strings.navbar.links.account}</NavLink>
 
-          <NavLink to="/editaccount">
-            {strings.navbar.links.editaccount}
-          </NavLink>
+          <NavLink to="/editaccount">{strings.navbar.links.editaccount}</NavLink>
+          
           <span>{user && user.username}</span>
           {user && user.role==="admin" && <NavLink to="/admin">Admin Page</NavLink>}
           {user && <button onClick={logOutUser}>Logout</button>}

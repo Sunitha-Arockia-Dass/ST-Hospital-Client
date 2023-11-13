@@ -46,37 +46,43 @@ Students must submit the following deliverables in order for the project to be d
 
 <h2>Fonts</h2>
 
-  --ft-Headings: "Sofia Sans", sans-serif
-  --ft-Texte: "Poppins", sans-serif
+  --ft-Headings: "Sofia Sans", sans-serif;
+  --ft-Texte: "Poppins", sans-serif;
 
 <h2>Color Palette</h2>
 
-  --clr-light: hsl(220, 15%, 90%)
-  --clr-medium: hsl(220, 15%, 51%)
-  --clr-dark: hsl(220, 15%, 12%)
-
+  --clr-light: hsl(220, 10%, 95%);
+  --clr-medium: hsl(220, 10%, 30%);
+  --clr-dark: hsl(220, 10%, 12%);
+ 
 Light blue is a peaceful, calming color. According to color psychology, blue is associated with trustworthiness and reliability. Blue is also said to promote feelings of tranquility; light blue’s gentle appearance means it is particularly likely to make that impression.
-  --blue-primary: hsl(195, 85%, 70%)
-  --blue-secondary: hsl(198, 90%, 40%)
-  --blue-third: hsl(209, 100%, 20%)
+  --clr-blue: hsl(193, 90%, 53%);
+  --clr-blue-medium: hsl(193, 90%, 25%);
 
 Green is the result of mixing blue and yellow. Green has two paradoxical meanings—one being nature and the environment and the other being money. When it comes to nature, green represents renewal and growth. It is also associated with wealth, prestige, and greed.
-  --green-primary: hsl(159, 85%, 70%)
-  --green-secondary: hsl(162, 90%, 40%)
-  --green-third: hsl(170, 100%, 20%)
+  --clr-green: hsl(157, 95%, 53%);
+  --clr-green-medium: hsl(157, 95%, 25%);
 
 message to the user colors :
-  --info-msg: hsl(290, 55%, 50%)
-  --ok-msg: hsl(70, 55%, 50%)
-  --careful-msg: hsl(35, 55%, 50%)
-  --danger-msg: hsl(0, 55%, 50%)
+  --info-msg: hsl(290, 55%, 53%);
+  --ok-msg: hsl(70, 55%, 53%);
+  --careful-msg: hsl(35, 55%, 53%);
+  --danger-msg: hsl(0, 55%, 53%);
 
 
 ## DARKMODE
 using JS DOMmanipulation to change the mode of the browser, the css, register user choice to the localstorage.
+Colors : 
+  --foreground: var(--clr-light);
+  --background: var(--clr-dark);
+  --clr-medium: hsl(220, 10%, 77%);
+  --clr-blue-medium: hsl(193, 90%, 77%);
+  --clr-green-medium: hsl(157, 95%, 77%);
+
 
 ## LANGUAGES
-using react usecontext for french or english
+using react usecontext for french or english, just to show how it works on the navbar and the homepage
+
 
 ## CRUD
 
@@ -89,6 +95,7 @@ User can create members, each members can be updated, deleted and acces to 3 lev
 <h2>Agenda</h2>
 User can create appointments, each appointment can be updated, deleted or display to see details.
 
+
 ## MONGOOSE MODELS
 
 <ul>
@@ -98,25 +105,31 @@ User can create appointments, each appointment can be updated, deleted or displa
   <li>Data.model.jsfor BMI calculator with feedback</li> 
 </ul>
 
+
 ## Agenda
 
 all members can accès to the same agenda.
+
 
 ## Healthify
 
 this the art of the app that allow you to calculate and follow your BMI, depending on it you will have acces to healthy lifestyle to gain or loss weight depending of the last BMI and adapted to the user diet Paleo, Vegan or Vegetarian.
 
+
 ## app.js
 
 contain the app.use informations
+
 
 ## routes folder
 
 contain all the routes to display all the pages and run the form
 
+
 ## script.js
 
 contain the javascript code for DOM manipulations
+
 
 ## API used
 
