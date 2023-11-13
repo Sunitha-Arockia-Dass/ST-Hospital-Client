@@ -1,22 +1,22 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom";
 
 /* Components */
-import Navbar from "./components/Navbar"
+import Navbar from "./components/Navbar";
 
 /* Pages */
-import HomePage from "./pages/HomePage"
+import HomePage from "./pages/HomePage";
 
-import SignUp from "./pages/auth/SignUp"
-import LogIn from "./pages/auth/LogIn"
-import Account from "./pages/auth/Account"
-import EditAccount from "./pages/auth/EditAccount"
-import AdminPage from "./pages/admins/AdminPage"
-import NotFound from "./pages/error/NotFound"
-import Error from "./pages/error/Error"
-import IsPrivate from "./components/isPrivate"
-import IsAnon from "./components/IsAnon"
-import IsAdmin from "./components/IsAdmin"
-
+import SignUp from "./pages/auth/SignUp";
+import LogIn from "./pages/auth/LogIn";
+import Account from "./pages/auth/Account";
+import EditAccount from "./pages/auth/EditAccount";
+import AdminPage from "./pages/AdminPage";
+import NotFound from "./pages/error/NotFound";
+import Error from "./pages/error/Error";
+import IsPrivate from "./components/IsPrivate";
+import IsAnon from "./components/IsAnon";
+import IsAdmin from "./components/IsAdmin";
+import DepartmentPage from "./pages/DepartmentPage";
 
 function App() {
   return (
@@ -28,23 +28,57 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         {/* Auth Pages */}
-        <Route path="/signup" element={<IsAnon><SignUp /></IsAnon>} />
-        <Route path="/login" element={<IsAnon><LogIn /></IsAnon>} />
-        <Route path="/account" element={<IsPrivate><Account /></IsPrivate>} />
-        <Route path="/editaccount" element={<IsPrivate><EditAccount /></IsPrivate>} />
-        
-        {/*Admin Pages */}
-        <Route path="/admin" element={<IsAdmin><AdminPage /></IsAdmin>} />
+        <Route
+          path="/signup"
+          element={
+            <IsAnon>
+              <SignUp />
+            </IsAnon>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <IsAnon>
+              <LogIn />
+            </IsAnon>
+          }
+        />
+        <Route
+          path="/account"
+          element={
+            <IsPrivate>
+              <Account />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/editaccount"
+          element={
+            <IsPrivate>
+              <EditAccount />
+            </IsPrivate>
+          }
+        />
 
         {/* Error Pages */}
         <Route path="/500" element={<Error />} />
         <Route path="*" element={<NotFound />} />
 
-
-
+        {/*Admin Pages */}
+        <Route
+          path="/admin"
+          element={
+            <IsAdmin>
+              <AdminPage />
+            </IsAdmin>
+          }
+        />
+        {/*Department List Page */}
+        <Route path="/departments" element={<DepartmentPage />} />
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

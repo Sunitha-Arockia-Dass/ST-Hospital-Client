@@ -6,7 +6,8 @@
                 "signup":"Signup",
                 "login":"Login",
                 "account": "Account",
-                "editaccount": "Edit Account"
+                "editaccount": "Edit Account",
+                "departments":"Departments"
             }
 
         },
@@ -25,7 +26,9 @@
                 "signup":"S'enregistrer",
                 "login":"Se connecter",
                 "account": "Compte",
-                "editaccount": "Editer Compte"
+                "editaccount": "Editer Compte",
+                "departments":"départements"
+
             }
 
         },

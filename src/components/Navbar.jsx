@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 
 /*Languages context*/
 import { useContext } from "react";
-import { LanguageContext } from "../context/language.context";
 import { AuthContext } from "../context/auth.context";
+import { LanguageContext } from "../context/language.context";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
@@ -21,15 +21,17 @@ function Navbar() {
       <nav className="navbar">
         <ul>
           <NavLink to="/">{strings.navbar.links.home}</NavLink>
+          <NavLink to="/departments">{strings.navbar.links.departments}</NavLink>
 
-          <NavLink to="/signup">{strings.navbar.links.signup}</NavLink>
+          {!user &&<NavLink to="/signup">{strings.navbar.links.signup}</NavLink>}
 
-          <NavLink to="/login">{strings.navbar.links.login}</NavLink>
+          {!user && <NavLink to="/login">{strings.navbar.links.login}</NavLink>}
 
-          <NavLink to="/account">{strings.navbar.links.account}</NavLink>
+          {user &&<NavLink to="/account">{strings.navbar.links.account}</NavLink>}
 
-          <NavLink to="/editaccount">{strings.navbar.links.editaccount}</NavLink>
-          
+          {user &&<NavLink to="/editaccount">
+            {strings.navbar.links.editaccount}
+          </NavLink>}
           <span>{user && user.username}</span>
           {user && user.role==="admin" && <NavLink to="/admin">Admin Page</NavLink>}
           {user && <button onClick={logOutUser}>Logout</button>}

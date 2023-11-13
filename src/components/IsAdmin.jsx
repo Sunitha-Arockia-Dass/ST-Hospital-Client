@@ -1,23 +1,21 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Navigate } from "react-router-dom";
+import IsLoading from "./IsLoading";
 
+function IsAdmin({ children }) {
+  const { user } = useContext(AuthContext);
 
+  // If the authentication is still loading
+  <IsLoading />;
 
-function IsAdmin({ children }){
-    const { isLoggedIn, isLoading ,user} = useContext(AuthContext);
-
-    // If the authentication is still loading 
-    if (isLoading) return <p>Loading ...</p>;
-  
-    if (user.role!=="admin") {
-    // If the user is not logged in 
-      return <Navigate to="/" />;
-    } else {
-    // If the user is logged in, allow to see the page 
-      return children;
-    }
-
+  if (user.role !== "admin") {
+    // If the user is not logged in
+    return <Navigate to="/" />;
+  } else {
+    // If the user is logged in, allow to see the page
+    return children;
+  }
 }
 
-export default IsAdmin
+export default IsAdmin;
