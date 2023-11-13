@@ -26,7 +26,10 @@ function DepartmentPage() {
         <div key={selectedDept._id}>
           <h1>{selectedDept.name}</h1>
           <h2>{selectedDept.description}</h2>
-          <h2>Doctors:{selectedDept.doctors}</h2>
+          <h2>Doctors:{selectedDept.doctors.map((doctor,index)=>{
+            return (<p key={index}>{doctor.position}:{doctor.firstname} {doctor.lastname},</p>)
+          })}</h2>
+          <img src={selectedDept.image} alt="error"></img>
           <button
             onClick={() => {
               setSelectedDeptId(null);
