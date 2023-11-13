@@ -2,6 +2,9 @@ import { Routes, Route } from "react-router-dom";
 
 /* Components */
 import Navbar from "./components/Navbar";
+import IsPrivate from "./components/IsPrivate";
+import IsAnon from "./components/IsAnon";
+import IsAdmin from "./components/IsAdmin";
 
 /* Pages */
 import HomePage from "./pages/HomePage";
@@ -10,13 +13,15 @@ import SignUp from "./pages/auth/SignUp";
 import LogIn from "./pages/auth/LogIn";
 import Account from "./pages/auth/Account";
 import EditAccount from "./pages/auth/EditAccount";
-import AdminPage from "./pages/AdminPage";
+import AdminPage from "./pages/admins/AdminPage";
+
+import DepartmentPage from "./pages/DepartmentPage";
+
+/* error Pages */
 import NotFound from "./pages/error/NotFound";
 import Error from "./pages/error/Error";
-import IsPrivate from "./components/IsPrivate";
-import IsAnon from "./components/IsAnon";
-import IsAdmin from "./components/IsAdmin";
-import DepartmentPage from "./pages/DepartmentPage";
+
+
 
 function App() {
   return (
