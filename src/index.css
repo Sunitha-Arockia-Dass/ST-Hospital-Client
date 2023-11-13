@@ -97,20 +97,17 @@ h6 {
   /* Fonts */
   --ft-Headings: "Sofia Sans", sans-serif;
   --ft-Texte: "Poppins", sans-serif;
-  --test: ;
 
   /* Colors */
   --clr-light: hsl(220, 10%, 95%);
-  --clr-medium: hsl(220, 12%, 52%);
-  --clr-dark: hsl(220, 15%, 12%);
+  --clr-medium: hsl(220, 10%, 30%);
+  --clr-dark: hsl(220, 10%, 12%);
 
-  --blue-primary: hsl(190, 85%, 80%);
-  --blue-secondary: hsl(193, 90%,50%);
-  --blue-third: hsl(205, 100%, 20%);
+  --clr-blue: hsl(193, 90%, 50%);
+  --clr-blue-medium: hsl(193, 90%, 23%);
 
-  --green-primary: hsl(160, 90%, 85%);
-  --green-secondary: hsl(163, 95%, 50%);
-  --green-third: hsl(175, 100%, 15%);
+  --clr-green: hsl(157, 95%, 50%);
+  --clr-green-medium: hsl(157, 95%, 23%);
 
   --info-msg: hsl(290, 55%, 50%);
   --ok-msg: hsl(70, 55%, 50%);
@@ -126,35 +123,18 @@ h6 {
   --timing1: 1s;
 
   /* Shadows */
-  --shdw-light: 220deg 100% 90%;
-  --shdw-dark: 220deg 100% 0%;
-  --shadow-color: var(--shdw-dark);
-  --shadow-elevation-low: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.46),
-    0.6px 0.8px 1.1px -1.5px hsl(var(--shadow-color) / 0.4),
-    1.4px 2.1px 2.7px -3px hsl(var(--shadow-color) / 0.35);
-  --shadow-elevation-lmedium: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.48),
-    1px 1.5px 1.9px -1px hsl(var(--shadow-color) / 0.44),
-    2.8px 4px 5.1px -2px hsl(var(--shadow-color) / 0.4),
-    3.5px 5px 6.5px -3px hsl(var(--shadow-color) / 0.36);
-  --shadow-elevation-medium: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.48),
-    1px 1.5px 1.9px -1px hsl(var(--shadow-color) / 0.44),
-    2.8px 4px 5.1px -2px hsl(var(--shadow-color) / 0.4),
-    7.1px 10.3px 13.1px -3px hsl(var(--shadow-color) / 0.36);
-  --shadow-elevation-high: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.44),
-    1.8px 2.6px 3.3px -0.4px hsl(var(--shadow-color) / 0.43),
-    3.4px 5px 6.3px -0.9px hsl(var(--shadow-color) / 0.41),
-    5.9px 8.6px 11px -1.3px hsl(var(--shadow-color) / 0.39),
-    9.9px 14.4px 18.3px -1.7px hsl(var(--shadow-color) / 0.37),
-    16px 23.2px 29.6px -2.1px hsl(var(--shadow-color) / 0.35),
-    24.9px 36.1px 46px -2.6px hsl(var(--shadow-color) / 0.33),
-    37.1px 53.8px 68.6px -3px hsl(var(--shadow-color) / 0.31);
+  --shadow-color: 220 10% 0%;
+  --shadow-elevation-low: 0.3px 0.6px 0.7px hsl(var(--shadow-color) / 0.46),
+    1px 2px 2.3px -1px hsl(var(--shadow-color) / 0.4),
+    1.3px 2.7px 3.1px -3px hsl(var(--shadow-color) / 0.35);
+  --shadow-elevation-medium: 0.3px 0.6px 0.7px hsl(var(--shadow-color) / 0.48),
+    1px 2px 2.3px -1px hsl(var(--shadow-color) / 0.44),
+    2.6px 5.3px 6.2px -2px hsl(var(--shadow-color) / 0.4);
+  --shadow-elevation-high: 0.3px 0.6px 0.7px hsl(var(--shadow-color) / 0.44),
+    1.7px 3.4px 4px -0.4px hsl(var(--shadow-color) / 0.43),
+    3.2px 6.5px 7.6px -0.9px hsl(var(--shadow-color) / 0.41),
+    5.6px 11.2px 13.1px -1.3px hsl(var(--shadow-color) / 0.37);
 }
-
-/*
-* ----------------------
-* DarkMode
-* ----------------------
-*/
 
 body {
   background: var(--background);
@@ -172,9 +152,18 @@ button {
   font-family: var(--ft-Headings);
 }
 
+/*
+* ----------------------
+* DarkMode
+* ----------------------
+*/
+
 .darkmode {
   --foreground: var(--clr-light);
   --background: var(--clr-dark);
+  --clr-medium: hsl(220, 10%, 77%);
+  --clr-blue-medium: hsl(193, 90%, 77%);
+  --clr-green-medium: hsl(157, 95%, 77%);
 }
 
 .containerToggle {
@@ -191,25 +180,22 @@ button {
   transition: var(--timing05) ease-in;
 
   &:hover {
-    box-shadow: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.48),
-      1px 1.5px 1.9px -1px hsl(var(--shadow-color) / 0.44),
-      2.8px 4px 5.1px -2px hsl(var(--shadow-color) / 0.4),
-      3.5px 5px 6.5px -3px hsl(var(--shadow-color) / 0.36);
+    box-shadow: var(--shadow-elevation-medium);
   }
 }
 
 .containerToggle.DM {
   right: 0.5rem;
-  animation: dm-animation var(--timing05) linear calc(var(--timing05) * 1.5)
+  animation: onglet-animation var(--timing05) linear calc(var(--timing05) * 1.5)
     forwards;
 }
 
 .containerToggle.lang {
   right: 4rem;
-  animation: dm-animation var(--timing05) linear var(--timing05) forwards;
+  animation: onglet-animation var(--timing05) linear var(--timing05) forwards;
 }
 
-@keyframes dm-animation {
+@keyframes onglet-animation {
   75%,
   90% {
     transform: translateY(3.25rem);
@@ -262,39 +248,44 @@ button {
 * ----------------------
 */
 
-/*React 1st Div*/
-#root {
-  margin: 0 2rem;
-}
-
 a {
+  color: var(--foreground);
   padding: 5px 10px;
-  color: var(--blue-secondary);
+  margin-right: 5px;
   border-radius: 0.5rem;
   transition: var(--timing03) ease-in-out;
 
-  &:hover {
-    background-color: var(--blue-third);
-    box-shadow: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.46),
-      0.6px 0.8px 1.1px -1.5px hsl(var(--shadow-color) / 0.4),
-      1.4px 2.1px 2.7px -3px hsl(var(--shadow-color) / 0.35);
+  &:visited {
+    color: var(--foreground);
   }
+  
+  &:hover {
+    color: var(--clr-dark);
+    background-color: var(--clr-green);
+    box-shadow: var(--shadow-elevation-low);
+  }  
 }
 
 .active {
-  color: var(--green-secondary);
+  color: var(--clr-green-medium);
+
+  &:visited {
+    color: var(--clr-green-medium);
+  }
+
+  &:hover {
+    color: var(--clr-dark);
+  }
 }
+
 
 .test {
   width: 25%;
   height: 5rem;
-  margin: 5px;
+  margin: 10px;
   display: inline-block;
   text-align: center;
-  box-shadow: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.48),
-    1px 1.5px 1.9px -1px hsl(var(--shadow-color) / 0.44),
-    2.8px 4px 5.1px -2px hsl(var(--shadow-color) / 0.4),
-    3.5px 5px 6.5px -3px hsl(var(--shadow-color) / 0.36);
+  box-shadow: var(--shadow-elevation-medium);
 }
 
 span {
@@ -302,34 +293,42 @@ span {
 }
 
 div.one {
-  color: var(--blue-primary);
+  background-color: var(--clr-light);
 }
 div.two {
-  color: var(--blue-secondary);
+  background-color: var(--clr-medium);
 }
 div.three {
-  color: var(--blue-third);
+  background-color: var(--clr-dark);
 }
+
+
 div.four {
-  color: var(--green-primary);
+  background-color: var(--clr-blue-medium);
 }
 div.five {
-  color: var(--green-secondary);
+  background-color: var(--clr-blue);
 }
-div.six {
-  color: var(--green-third);
+
+div.eleven {
+  background-color: var(--clr-green-medium);
 }
+div.twelve {
+  background-color: var(--clr-green);
+}
+
+
 div.seven {
-  color: var(--info-msg);
+  background-color: var(--info-msg);
 }
 div.height {
-  color: var(--ok-msg);
+  background-color: var(--ok-msg);
 }
 div.nine {
-  color: var(--careful-msg);
+  background-color: var(--careful-msg);
 }
 div.ten {
-  color: var(--danger-msg);
+  background-color: var(--danger-msg);
 }
 
 /*

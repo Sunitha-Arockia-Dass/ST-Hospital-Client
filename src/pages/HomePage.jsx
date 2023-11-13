@@ -14,7 +14,15 @@ function testPage() {
 
             <div className="test four">{strings.homepage.div.test}</div>
             <div className="test five">{strings.homepage.div.test}</div>
-            <div className="test six">{strings.homepage.div.test}</div> 
+            <div className="test six">{strings.homepage.div.test}</div>
+
+            <div className="test eleven">{strings.homepage.div.test}</div>
+            <div className="test twelve">{strings.homepage.div.test}</div>
+            <div className="test thirteen">{strings.homepage.div.test}</div>  
+            
+            <div className="test">{strings.homepage.div.test}</div> 
+            <div className="test seven">{strings.homepage.div.test}</div>
+            <div className="test">{strings.homepage.div.test}</div> 
 
             <div className="test">{strings.homepage.div.test}</div>           
             <div className="test height">{strings.homepage.div.test}</div>
@@ -24,14 +32,10 @@ function testPage() {
             <div className="test nine">{strings.homepage.div.test}</div>
             <div className="test">{strings.homepage.div.test}</div> 
 
-            <div className="test">{strings.homepage.div.test}
-            <span> test 2nd colors</span></div> 
+            <div className="test">{strings.homepage.div.test}</div> 
             <div className="test ten">{strings.homepage.div.test}</div>
             <div className="test">{strings.homepage.div.test}</div> 
 
-            <div className="test">{strings.homepage.div.test}</div> 
-            <div className="test seven">{strings.homepage.div.test}</div>
-            <div className="test">{strings.homepage.div.test}</div> 
         </div>
     )
 }
