@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom"
+
 function Account() {
     return (
         <>
@@ -5,10 +7,12 @@ function Account() {
             
             <h2>Welcome to your Account</h2>
             <p>We can display information here</p>
-
-            <form action="/editaccount" method="GET">
-                <button type="submit">Edit Account</button>
+            
+            <NavLink to="/editaccount">
+            <form>
+                <button>Edit Account</button>
             </form>
+            </NavLink>
         </div>
         </>
     )

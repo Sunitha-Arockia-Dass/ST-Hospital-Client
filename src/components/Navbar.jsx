@@ -1,19 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"
 
 /*Languages context*/
-import { useContext } from "react";
-import { AuthContext } from "../context/auth.context";
-import { LanguageContext } from "../context/language.context";
+import { useContext } from "react"
+import { AuthContext } from "../context/auth.context"
+import { LanguageContext } from "../context/language.context"
 
 function Navbar() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-  const { lang, strings, setLang } = useContext(LanguageContext);
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext)
+  const { lang, strings, setLang } = useContext(LanguageContext)
 
   function changeLanguage() {
     // return french if it's english and vice versa
     setLang((lang) => {
-      return lang == "EN" ? "FR" : "EN";
-    });
+      return lang == "EN" ? "FR" : "EN"
+    })
   }
 
   return (
@@ -45,7 +45,7 @@ function Navbar() {
         </button>
       </div>
     </header>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar

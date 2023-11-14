@@ -44,7 +44,7 @@ function EditAccount() {
                 <input type="text" name="username" defaultValue={user.username} />
 
                 <label>Email</label>
-                <input type="email" name="email" defaultValue={user.email} />
+                <input type="text" name="email" defaultValue={user.email} />
 
                 <label> Current Password</label>
                 <input type="password" name="password" placeholder="Your password" />
