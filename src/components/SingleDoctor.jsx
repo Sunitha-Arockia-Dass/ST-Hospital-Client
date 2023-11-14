@@ -1,18 +1,18 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+// import axios from "axios";
+// import { useEffect, useState } from "react";
 
 
-function SingleDept({departments}){
-    const [selectedDeptId, setSelectedDeptId] = useState(null);
-    const [selectedDept, setSelectedDept] = useState(null);
-    const displayDept = (id) => {
-        setSelectedDeptId(id);
-        const filteredDept = departments.filter((department) => {
-          return department._id === id;
-        });
-        setSelectedDept(filteredDept[0]);
-      };
+function SingleDoctor({doctor}){
+    
+
+   return(
+    <div>
+
+     {doctor.firstname}
+    </div>
+
+   )
 
 }
 
-export default SingleDept
+export default SingleDoctor

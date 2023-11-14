@@ -1,6 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
+import URL from '../../links/links.json'
+
 import { AuthContext } from "./../../context/auth.context";
 
 const API_URL = "http://localhost:5005";
@@ -19,7 +21,7 @@ function LogIn() {
       password: e.target.password.value,
     };
     axios
-      .post(`${API_URL}/auth/login`, data)
+      .post(URL.login, data)
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();

@@ -2,9 +2,8 @@ import { NavLink , useNavigate} from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
+import URL from '../../links/links.json'
 import { AuthContext } from "./../../context/auth.context";
-
-const API_URL = "http://localhost:5005"
 
 function EditAccount() {
   const { user ,logOutUser} = useContext(AuthContext);
@@ -22,7 +21,7 @@ function EditAccount() {
         };
         console.log("data",data);
         axios
-          .put(`${API_URL}/patient/update/${user._id}`, data)
+          .put(`${URL.patientUpdate}/${user._id}`, data)
           .then((response) => {
             console.log(response.data.data);
             logOutUser()

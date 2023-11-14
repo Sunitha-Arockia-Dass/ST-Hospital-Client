@@ -1,7 +1,8 @@
 import { NavLink , useNavigate} from "react-router-dom";
 import axios from "axios";
+import URL from '../../links/links.json'
 import { useEffect, useState } from "react";
-const API_URL = "http://localhost:5005"
+
 function SignUp() {
   //   const [user, setUser] = useState();
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -16,7 +17,7 @@ function SignUp() {
     };
     console.log(data);
     axios
-      .post(`${API_URL}/auth/signup`, data)
+      .post(URL.signup, data)
       .then((response) => {
         console.log("Signed up successfully");
         console.log(response.data.data);
