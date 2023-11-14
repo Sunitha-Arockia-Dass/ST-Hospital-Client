@@ -6,7 +6,7 @@ import { AuthContext } from "../context/auth.context";
 import { LanguageContext } from "../context/language.context";
 
 function Navbar() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const {  user, logOutUser } = useContext(AuthContext);
   const { lang, strings, setLang } = useContext(LanguageContext);
 
   function changeLanguage() {

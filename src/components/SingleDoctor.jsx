@@ -15,4 +15,4 @@ function SingleDept({departments}){
 
 }
 
-exportd default SingleDept
+export default SingleDept

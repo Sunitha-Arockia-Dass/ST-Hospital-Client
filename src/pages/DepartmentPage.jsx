@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+// import SingleDoctor from '../components/'
 
 function DepartmentPage() {
   const [departments, setDepartments] = useState();
-  const [selectedDeptId, setSelectedDeptId] = useState(null);
   const [selectedDept, setSelectedDept] = useState(null);
 
   useEffect(() => {
@@ -12,28 +12,38 @@ function DepartmentPage() {
     });
   }, []);
   const displayDept = (id) => {
-    setSelectedDeptId(id);
-    const filteredDept = departments.filter((department) => {
-      return department._id === id;
-    });
-    setSelectedDept(filteredDept[0]);
+    axios
+      .get(`http://localhost:5005/departments/${id}`)
+      .then((foundDepartments) => {
+        setSelectedDept(foundDepartments.data);
+      });
   };
 
   return (
     <div>
       <h1>Department Page</h1>
-      {selectedDeptId && selectedDept ? (
+      {selectedDept ? (
         <div key={selectedDept._id}>
           <h1>{selectedDept.name}</h1>
           <h2>{selectedDept.description}</h2>
-          <h2>Doctors:{selectedDept.doctors.map((doctor,index)=>{
-            return (<p key={index}>{doctor.position}:{doctor.firstname} {doctor.lastname},</p>)
-          })}</h2>
+          <h2>
+            Doctors:
+            {selectedDept.doctors.map((doctor, index) => {
+              return (
+                <p key={index} onClick={()=>{<SingleDoctor />}}>
+                  {doctor.position}:{doctor.firstname} {doctor.lastname},
+                </p>
+              );
+            })}
+          </h2>
           <img src={selectedDept.image} alt="error"></img>
           <button
             onClick={() => {
-              setSelectedDeptId(null);
-              setSelectedDept(null);}}>Back</button>
+              setSelectedDept(null);
+            }}
+          >
+            Back
+          </button>
         </div>
       ) : (
         departments?.map((department) => {
