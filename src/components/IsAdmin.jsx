@@ -8,8 +8,10 @@ function IsAdmin({ children }) {
 
   // If the authentication is still loading
   <IsLoading />;
-
-  if (user.role !== "admin") {
+  if(!user){
+    return <Navigate to="/login" />;
+  }
+ else if (user.role !== "admin") {
     // If the user is not logged in
     return <Navigate to="/" />;
   } else {

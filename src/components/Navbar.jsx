@@ -6,8 +6,8 @@ import { AuthContext } from "../context/auth.context"
 import { LanguageContext } from "../context/language.context"
 
 function Navbar() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext)
-  const { lang, strings, setLang } = useContext(LanguageContext)
+  const {  user, logOutUser } = useContext(AuthContext);
+  const { lang, strings, setLang } = useContext(LanguageContext);
 
   function changeLanguage() {
     // return french if it's english and vice versa

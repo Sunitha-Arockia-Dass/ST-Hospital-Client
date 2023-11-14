@@ -1,0 +1,10 @@
+{
+  
+    " API_URL": "http://localhost:5005",
+    "signup": "http://localhost:5005/auth/signup",
+    "verify": "http://localhost:5005/auth/verify",
+    "login": "http://localhost:5005/auth/login",
+    "departments": "http://localhost:5005/departments",
+    "doctors": "http://localhost:5005/doctors",
+  "patientUpdate":"http://localhost:5005/patient/update"
+}

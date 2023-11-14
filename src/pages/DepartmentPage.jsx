@@ -1,49 +1,57 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import SingleDoctor from "../components/SingleDoctor";
+import SingleDept from "../components/SingleDept";
+import URL from '../links/links.json'
 function DepartmentPage() {
   const [departments, setDepartments] = useState();
-  const [selectedDeptId, setSelectedDeptId] = useState(null);
   const [selectedDept, setSelectedDept] = useState(null);
-
+  const [doctor, setDoctor] = useState(null);
   useEffect(() => {
-    axios.get("http://localhost:5005/departments").then((foundDepartments) => {
+    axios.get(URL.departments).then((foundDepartments) => {
       setDepartments(foundDepartments.data);
     });
   }, []);
   const displayDept = (id) => {
-    setSelectedDeptId(id);
-    const filteredDept = departments.filter((department) => {
-      return department._id === id;
-    });
-    setSelectedDept(filteredDept[0]);
+    axios
+      .get(`${URL.departments}/${id}`)
+      .then((foundDepartments) => {
+        setSelectedDept(foundDepartments.data);
+      });
   };
 
   return (
     <div>
-      <h1>Department Page</h1>
-      {selectedDeptId && selectedDept ? (
-        <div key={selectedDept._id}>
-          <h1>{selectedDept.name}</h1>
-          <h2>{selectedDept.description}</h2>
-          <h2>Doctors:{selectedDept.doctors}</h2>
-          <button
-            onClick={() => {
-              setSelectedDeptId(null);
-              setSelectedDept(null);}}>Back</button>
-        </div>
+    {!doctor && (
+        <h1>Department Page</h1>
+      )}
+      {doctor ? (
+        <SingleDoctor doctor={doctor} selectedDept={selectedDept} setDoctor={setDoctor}/>
       ) : (
-        departments?.map((department) => {
-          return (
-            <div
-              key={department._id}
-              onClick={() => displayDept(department._id)}
-            >
-              <h2>{department.name}</h2>
-              <p>{department.description}</p>
-            </div>
-          );
-        })
+        <div>
+          {selectedDept ? (
+            <SingleDept
+              selectedDept={selectedDept}
+              setSelectedDept={setSelectedDept}
+              setDoctor={setDoctor}
+            />
+          ) : (
+
+            departments?.map((department) => {
+              return (
+                <div
+                  key={department._id}
+                  onClick={() => displayDept(department._id)}
+                >
+                  <h2>{department.name}</h2>
+                  <p>{department.description}</p>
+                </div>
+              );
+            })
+            
+          )
+          }
+        </div>
       )}
     </div>
   );
