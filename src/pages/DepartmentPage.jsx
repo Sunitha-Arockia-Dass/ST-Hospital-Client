@@ -22,9 +22,11 @@ function DepartmentPage() {
 
   return (
     <div>
-      <h1>Department Page</h1>
+    {!doctor && (
+        <h1>Department Page</h1>
+      )}
       {doctor ? (
-        <SingleDoctor doctor={doctor} />
+        <SingleDoctor doctor={doctor} selectedDept={selectedDept} setDoctor={setDoctor}/>
       ) : (
         <div>
           {selectedDept ? (
@@ -34,6 +36,7 @@ function DepartmentPage() {
               setDoctor={setDoctor}
             />
           ) : (
+
             departments?.map((department) => {
               return (
                 <div
@@ -45,7 +48,9 @@ function DepartmentPage() {
                 </div>
               );
             })
-          )}
+            
+          )
+          }
         </div>
       )}
     </div>
