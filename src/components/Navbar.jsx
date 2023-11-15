@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"
 
 /*Languages context*/
-import { useContext } from "react";
-import { AuthContext } from "../context/auth.context";
-import { LanguageContext } from "../context/language.context";
+import { useContext } from "react"
+import { AuthContext } from "../context/auth.context"
+import { LanguageContext } from "../context/language.context"
 
 function Navbar() {
   const {  user, logOutUser } = useContext(AuthContext);
@@ -12,29 +12,30 @@ function Navbar() {
   function changeLanguage() {
     // return french if it's english and vice versa
     setLang((lang) => {
-      return lang == "EN" ? "FR" : "EN";
-    });
+      return lang == "EN" ? "FR" : "EN"
+    })
   }
 
   return (
     <header>
       <nav className="navbar">
         <ul>
-          <NavLink to="/">{strings.navbar.links.home}</NavLink>
-          <NavLink to="/departments">{strings.navbar.links.departments}</NavLink>
+          <li><NavLink to="/">{strings.navbar.links.home}</NavLink></li>
 
-          {!user &&<NavLink to="/signup">{strings.navbar.links.signup}</NavLink>}
+          <li><NavLink to="/departments">{strings.navbar.links.departments}</NavLink></li>
 
-          {!user && <NavLink to="/login">{strings.navbar.links.login}</NavLink>}
+          <li>{!user &&<NavLink to="/signup">{strings.navbar.links.signup}</NavLink>}</li>
 
-          {user &&<NavLink to="/account">{strings.navbar.links.account}</NavLink>}
+          <li>{!user && <NavLink to="/login">{strings.navbar.links.login}</NavLink>}</li>
 
-          {user &&<NavLink to="/editaccount">
+          <li>{user &&<NavLink to="/account">{strings.navbar.links.account}</NavLink>}</li>
+
+          <li>{user &&<NavLink to="/editaccount">
             {strings.navbar.links.editaccount}
-          </NavLink>}
-          <span>{user && user.username}</span>
-          {user && user.role==="admin" && <NavLink to="/admin">Admin Page</NavLink>}
-          {user && <button onClick={logOutUser}>Logout</button>}
+          </NavLink>}</li>
+          <li><span>{user && user.username}</span></li>
+          <li>{user && user.role==="admin" && <NavLink to="/admin">Admin Page</NavLink>}</li>
+          <li>{user && <button onClick={logOutUser}>Logout</button>}</li>
         </ul>
       </nav>
 
@@ -45,7 +46,7 @@ function Navbar() {
         </button>
       </div>
     </header>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar
