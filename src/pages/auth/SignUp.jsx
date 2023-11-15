@@ -1,7 +1,7 @@
-import { NavLink , useNavigate} from "react-router-dom";
-import axios from "axios";
+import { NavLink, useNavigate } from "react-router-dom"
+import axios from "axios"
 import URL from '../../links/links.json'
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
 function SignUp() {
   //   const [user, setUser] = useState()
@@ -63,64 +63,93 @@ function SignUp() {
     confirmPassword: "",
   })
 
-  // submit if no errors
-  const [submitting, setSubmitting] = useState(false);
 
-  //check input changes
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value;
-    setFormInput({
-      ...formInput,
-      [name]: value
-    })
 
-    // check validity of inputs    
+
+
+  useEffect(() => {
     if (!formInput.username) {
       errorsInput.username = "Username is required"
     }
-
-    if (!formInput.email) {
-      errorsInput.email = "Email is required"
+    if (formInput.username) {
+      errorsInput.username = ""
     }
 
-    if (!formInput.password) {
-      errorsInput.password = "Password is required"
-    }
+  }, [formInput.username])
 
-    if (formInput.confirmPassword  != formInput.password) {
-      errorsInput.confirmPassword = "Password confirmation is required"
-    }
-    //   if (formInput.username.length < 5) {
-    //   errorsInput.username = "Username must be at least 5 characters long"
-    //   }
-    //   const emailRegex = /^[a-zA-Z0-9.!#$%&"*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    //   if (!emailRegex.test(formInput.email)) {
-    //      errorsInput.email = "Email is invalid"
-    //    }
-    //    const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
-    //    if (!passwordRegex.test(formInput.password)) {
-    //      errorsInput.password = "Password must be 6 characters long with at least 1 Uppercase and 1 special character"
-    //    }
+  const handleChange = (e) => {
+    const name = e.target.name
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value
+    setFormInput({
+      ...formInput,
+      [name]: value
 
-    //    if (formInput.confirmPassword !== formInput.password) {
-    //      errorsInput.confirmPassword = "Passwords do not match"
-    //    }
-
-
-    console.log(errorsInput)
+    })
   }
+
+  // submit if no errors
+  const handlesubmit = (e) => {
+    console.log(errorsInput.length)
+    if (errorsInput.length === 0) {
+      signup(e)
+    }
+  }
+
+  // //check input changes
+  // const handleChange = (e) => {
+  //   const name = e.target.name
+  //   const value =
+  //     e.target.type === "checkbox" ? e.target.checked : e.target.value
+  //   setFormInput({
+  //     ...formInput,
+  //     [name]: value
+  //   })
+
+  //   // check validity of inputs    
+  //   if (!formInput.username) {
+  //     errorsInput.username = "Username is required"
+  //   }
+
+  //   if (!formInput.email) {
+  //     errorsInput.email = "Email is required"
+  //   }
+
+  //   if (!formInput.password) {
+  //     errorsInput.password = "Password is required"
+  //   }
+
+  //   if (formInput.confirmPassword  != formInput.password) {
+  //     errorsInput.confirmPassword = "Password confirmation is required"
+  //   }
+  //   //   if (formInput.username.length < 5) {
+  //   //   errorsInput.username = "Username must be at least 5 characters long"
+  //   //   }
+  //   //   const emailRegex = /^[a-zA-Z0-9.!#$%&"*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+  //   //   if (!emailRegex.test(formInput.email)) {
+  //   //      errorsInput.email = "Email is invalid"
+  //   //    }
+  //   //    const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
+  //   //    if (!passwordRegex.test(formInput.password)) {
+  //   //      errorsInput.password = "Password must be 6 characters long with at least 1 Uppercase and 1 special character"
+  //   //    }
+
+  //   //    if (formInput.confirmPassword !== formInput.password) {
+  //   //      errorsInput.confirmPassword = "Passwords do not match"
+  //   //    }
+  // }
 
 
   return (
     <div id="signup">
-      <h2>Sign Up</h2>
-      <p>
-        Already registered ?<NavLink to="/login">login</NavLink>
-      </p>
 
-      <form onSubmit={signup}>
+      <form onSubmit={handlesubmit}>
+
+        <h2>Sign Up</h2>
+        <p>
+          Already registered ?<NavLink to="/login">login</NavLink>
+        </p>
+
         <input
           type="text"
           name="username"
@@ -128,8 +157,7 @@ function SignUp() {
           value={formInput.username}
           onChange={handleChange}
         />
-        <span className="form-error-msg">{errorsInput.username}</span>
-        <br />
+        <span className="form-error-msg">{errorsInput.username}</span><br />
 
         <input
           type="text"
@@ -138,8 +166,7 @@ function SignUp() {
           value={formInput.email}
           onChange={handleChange}
         />
-        <span className="form-error-msg">{errorsInput.email}</span>
-        <br />
+        <span className="form-error-msg">{errorsInput.email}</span><br />
 
         <input
           type="password"
@@ -148,8 +175,7 @@ function SignUp() {
           value={formInput.password}
           onChange={handleChange}
         />
-        <span className="form-error-msg">{errorsInput.password}</span>
-        <br />
+        <span className="form-error-msg">{errorsInput.password}</span><br />
 
         <input
           type="Password"
@@ -158,8 +184,7 @@ function SignUp() {
           value={formInput.confirmPassword}
           onChange={handleChange}
         />
-        <span className="form-error-msg">{errorsInput.confirmPassword}</span>
-        <br />
+        <span className="form-error-msg">{errorsInput.confirmPassword}</span><br />
 
         <button type="submit">Sign Up</button>
       </form>

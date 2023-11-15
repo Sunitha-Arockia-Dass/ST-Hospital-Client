@@ -244,96 +244,35 @@ button {
 
 /*
 * ----------------------
-* Playground
+* LinkssssssssSSSSSSSS
 * ----------------------
 */
 
 a {
-  color: var(--foreground);
-  padding: 5px 10px;
-  margin-right: 5px;
+  color: var(--clr-blue);
+  font-weight: 600;
+  padding: 0.25rem .5rem;
   border-radius: 0.5rem;
   transition: var(--timing03) ease-in-out;
 
   &:visited {
-    color: var(--foreground);
+    color: var(--clr-blue);
   }
-  
+
   &:hover {
-    color: var(--clr-dark);
-    background-color: var(--clr-green);
-    box-shadow: var(--shadow-elevation-low);
-  }  
+    color: var(--clr-green);
+    transform: scale(1.05);
+    text-shadow: 1px 1px 2px var(--clr-dark);
+  }
 }
 
-.active {
+a.active, a:active {
   color: var(--clr-green-medium);
-
-  &:visited {
-    color: var(--clr-green-medium);
-  }
-
-  &:hover {
-    color: var(--clr-dark);
-  }
-}
-
-
-.test {
-  width: 25%;
-  height: 5rem;
-  margin: 10px;
-  display: inline-block;
-  text-align: center;
-  box-shadow: var(--shadow-elevation-medium);
-}
-
-span {
-  color: var(--clr-medium);
-}
-
-div.one {
-  background-color: var(--clr-light);
-}
-div.two {
-  background-color: var(--clr-medium);
-}
-div.three {
-  background-color: var(--clr-dark);
-}
-
-
-div.four {
-  background-color: var(--clr-blue-medium);
-}
-div.five {
-  background-color: var(--clr-blue);
-}
-
-div.eleven {
-  background-color: var(--clr-green-medium);
-}
-div.twelve {
-  background-color: var(--clr-green);
-}
-
-
-div.seven {
-  background-color: var(--info-msg);
-}
-div.height {
-  background-color: var(--ok-msg);
-}
-div.nine {
-  background-color: var(--careful-msg);
-}
-div.ten {
-  background-color: var(--danger-msg);
 }
 
 /*
 * ----------------------
-* Main Button
+* ButtonssssssssSSSSSSSS
 * ----------------------
 */
 
@@ -354,29 +293,31 @@ form button {
   cursor: pointer;
   color: var(--clr-dark);
   font-size: 1.5rem;
+  text-align: center;
+  text-indent: 0rem;
   font-weight: bold;
   width: 40%;
   padding: 0.5rem 1rem;
   border-radius: 25rem;
   margin: 1.5rem 0 1.5rem 40%;
-
+  text-shadow: 0px 0px 3px var(--clr-light);
   animation: spin 3s infinite linear paused;
   border: 0.25rem solid transparent;
   background: linear-gradient(
         to left,
-        var(--green-primary) 0%,
-        var(--green-primary) 49.5%,
-        var(--blue-primary) 50%,
-        var(--green-primary) 50.5%,
-        var(--green-primary) 100%
+        var(--clr-green) 0%,
+        var(--clr-green) 50%,
+
+        var(--clr-green) 50%,
+        var(--clr-green) 100%
       )
       padding-box,
     conic-gradient(
         from var(--bg-angle) at 50% 50%,
-        var(--blue-secondary) 0%,
-        var(--blue-primary) 50%,
-        var(--blue-secondary) 50%,
-        var(--blue-primary) 100%
+        var(--clr-blue-medium) 0%,
+        var(--clr-blue) 50%,
+        var(--clr-blue-medium) 50%,
+        var(--clr-blue) 100%
       )
       border-box;
   box-shadow: inset 2px 2px 6px var(--clr-light),
@@ -386,12 +327,15 @@ form button {
   &:hover {
     animation-play-state: running;
     transform: scale(1.05);
-    box-shadow: inset 2px 2px 3px var(--clr-light),
-      inset -2px -2px 3px var(--clr-dark),
-      0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.48),
-      1px 1.5px 1.9px -1px hsl(var(--shadow-color) / 0.44),
-      2.8px 4px 5.1px -2px hsl(var(--shadow-color) / 0.4),
-      7.1px 10.3px 13.1px -3px hsl(var(--shadow-color) / 0.36);
+    box-shadow: inset 2.1px 2.1px 6.3px var(--clr-light),
+      inset -2.1px -2.1px 6.3px var(--clr-dark),
+      var(--shadow-elevation-high);
+  }
+
+  &:active {
+    box-shadow: inset 2.1px 2.1px 6.3px var(--clr-dark),
+      inset -1px -1px 4px var(--clr-light), var(--shadow-elevation-high);
+    text-shadow: 0px 0px 3px var(--clr-light), 2.1px 2.1px 6.3px var(--clr-dark);
   }
 }
 
@@ -403,6 +347,15 @@ form button {
 
 form {
   width: 50%;
+  text-indent: .5rem;
+}
+
+form h2 {
+  font-size: 2rem;  
+}
+
+form p {
+  font-size: 1rem;
 }
 
 form,
@@ -423,13 +376,30 @@ label {
 input,
 select,
 textarea,
-optgroup {
+optgroup { 
   width: 80%;
   padding: 0.5rem 1rem;
-  border: 0.125rem solid var(--blue-primary);
+  border: 0.125rem solid var(--clr-blue);
+  margin-top: .5rem;
 
   &:focus {
     outline: transparent;
-    border: 0.125rem solid var(--blue-third);
+    border: 0.125rem solid var(--clr-blue-medium);
   }
+}
+
+input::placeholder {  
+  color: #909090;
+  transform: translate3d(0, 0, 0);
+  transition: all var(--timing03) ease-in-out;
+}
+
+input:focus::placeholder {
+  opacity: 0;
+  transform: translate3d(0, -2rem, 0);
+}
+
+form span.form-error-msg {
+  color: var(--danger-msg);
+  padding-left: 1rem;
 }
