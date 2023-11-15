@@ -12,10 +12,7 @@
 
         },
         "homepage":{
-            "headings": "Home is the best place on earth",
-            "div": {
-                "test": "Some text to test the colors"
-            }
+            
         }
     },
 
@@ -33,10 +30,7 @@
 
         },
         "homepage":{
-            "headings": "Maison c'est là ou se trouve notre coeur",
-            "div": {
-                "test": "Du texte pour tester les couleurs"
-            }
+            
         }
     }
 }

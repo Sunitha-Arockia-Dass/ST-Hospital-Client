@@ -20,21 +20,22 @@ function Navbar() {
     <header>
       <nav className="navbar">
         <ul>
-          <NavLink to="/">{strings.navbar.links.home}</NavLink>
-          <NavLink to="/departments">{strings.navbar.links.departments}</NavLink>
+          <li><NavLink to="/">{strings.navbar.links.home}</NavLink></li>
 
-          {!user &&<NavLink to="/signup">{strings.navbar.links.signup}</NavLink>}
+          <li><NavLink to="/departments">{strings.navbar.links.departments}</NavLink></li>
 
-          {!user && <NavLink to="/login">{strings.navbar.links.login}</NavLink>}
+          <li>{!user &&<NavLink to="/signup">{strings.navbar.links.signup}</NavLink>}</li>
 
-          {user &&<NavLink to="/account">{strings.navbar.links.account}</NavLink>}
+          <li>{!user && <NavLink to="/login">{strings.navbar.links.login}</NavLink>}</li>
 
-          {user &&<NavLink to="/editaccount">
+          <li>{user &&<NavLink to="/account">{strings.navbar.links.account}</NavLink>}</li>
+
+          <li>{user &&<NavLink to="/editaccount">
             {strings.navbar.links.editaccount}
-          </NavLink>}
-          <span>{user && user.username}</span>
-          {user && user.role==="admin" && <NavLink to="/admin">Admin Page</NavLink>}
-          {user && <button onClick={logOutUser}>Logout</button>}
+          </NavLink>}</li>
+          <li><span>{user && user.username}</span></li>
+          <li>{user && user.role==="admin" && <NavLink to="/admin">Admin Page</NavLink>}</li>
+          <li>{user && <button onClick={logOutUser}>Logout</button>}</li>
         </ul>
       </nav>
 

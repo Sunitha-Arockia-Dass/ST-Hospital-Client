@@ -38,6 +38,14 @@ a:hover {
   outline: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: help;
+}
+
 img,
 picture,
 video,
@@ -250,9 +258,7 @@ button {
 
 a {
   color: var(--clr-blue);
-  font-weight: 600;
-  padding: 0.25rem .5rem;
-  border-radius: 0.5rem;
+  padding: 0.125rem .5rem;
   transition: var(--timing03) ease-in-out;
 
   &:visited {
@@ -260,14 +266,32 @@ a {
   }
 
   &:hover {
-    color: var(--clr-green);
-    transform: scale(1.05);
-    text-shadow: 1px 1px 2px var(--clr-dark);
+    border-radius: .75rem;
+    border-bottom: .25rem solid var(--clr-blue);
+  }
+
+  &::after{
+    content:'*';
+    color: transparent;
+  }
+  &:hover::after {
+    content:'*';
+    color: var(--clr-blue);
   }
 }
 
 a.active, a:active {
   color: var(--clr-green-medium);
+  
+  &:hover{
+    border-bottom: .25rem solid var(--clr-green-medium);
+  }
+  
+
+  &::after {
+    color: var(--clr-green-medium);
+    content:'*';
+  }
 }
 
 /*
@@ -402,4 +426,14 @@ input:focus::placeholder {
 form span.form-error-msg {
   color: var(--danger-msg);
   padding-left: 1rem;
+}
+
+/*
+* ----------------------
+* Navbar
+* ----------------------
+*/
+nav ul {
+  display: flex;
+  gap: 1rem;
 }
