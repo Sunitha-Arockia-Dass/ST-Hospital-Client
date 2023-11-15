@@ -433,3 +433,7 @@ optgroup {
     border: 0.125rem solid var(--blue-third);
   }
 }
+.calendar-container {
+  height: 20%; /* Adjust as needed */
+  width: 100%; /* Adjust as needed */
+}
