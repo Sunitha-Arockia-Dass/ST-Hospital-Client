@@ -1,62 +1,65 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
+import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import "../CalendarComponent.css"; // Import your CSS file for custom styles
 
 const CalendarComponent = () => {
-  const [events, setEvents] = useState([
-    {
-      title: 'Event 1',
-      start: '2023-11-15',
-      description: 'Description for Event 1',
-      color: 'blue'
-    },
-    {
-      title: 'Event 2',
-      start: '2023-11-16',
-      description: 'Description for Event 2',
-      color: 'green'
-    },
-    // Add more events as needed
-  ]);
-
-  const calendarRef = useRef(null);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [showTimeGrid, setShowTimeGrid] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
-  useEffect(() => {
-    if (calendarRef.current) {
-      const calendar = calendarRef.current.getApi();
+  const handleDateClick = (info) => {
+    setSelectedDate(info.dateStr);
+    setSelectedSlot(info.dateStr);
+    setShowTimeGrid(true);
+  };
 
-      calendar.on("dateClick", (info) => {
-        console.log("Date clicked:", info.dateStr);
-        setSelectedDate(info.dateStr);
-      });
-    }
-  }, []);
+  const handleSlotClick = (info) => {
+    console.log('slotClick',info.date)
+    console.log("handleSlotClick", new Date(info.dateStr).toISOString());
+    setSelectedSlot(new Date(info.dateStr).toISOString());
+    };
+
+  const handleBackToMonth = () => {
+    setShowTimeGrid(false);
+    setSelectedSlot(null);
+  };
 
   return (
     <div>
-      <FullCalendar
-        ref={calendarRef}
-        plugins={[dayGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        events={events}
-        eventContent={(eventInfo) => {
-    return (
-      <>
-        <p>{eventInfo.event.title}</p>
-        <p>Description: {eventInfo.event.extendedProps.description}</p>
-        <p>Color: {eventInfo.event.extendedProps.color}</p>
-      </>
-    );
-  }}
-
-        // Other props as needed
-      />
-      {selectedDate && (
+      {!showTimeGrid ? (
+        <FullCalendar
+          plugins={[dayGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          dateClick={handleDateClick}
+          // Other props as needed
+        />
+      ) : (
         <div>
-          <h2>Time Info for {selectedDate}</h2>
-          {/* Display time-related information or chart here */}
+          <button onClick={handleBackToMonth}>Back to Month</button>
+          <FullCalendar
+            plugins={[timeGridPlugin, interactionPlugin]}
+            initialView="timeGridDay"
+            initialDate={selectedDate}
+            slotMinTime="08:00:00"
+            slotMaxTime="17:00:00"
+            slotDuration="00:20:00"
+            slotLabelInterval="00:20:00"
+            slotLabelFormat={{
+              hour: "numeric",
+              minute: "2-digit",
+              hour12: true,
+              omitZeroMinute: true,
+            }}
+            slotEventOverlap={false}
+            dateClick={handleSlotClick}
+            selectable= {true}
+
+            // Other props as needed
+            
+          />
         </div>
       )}
     </div>
