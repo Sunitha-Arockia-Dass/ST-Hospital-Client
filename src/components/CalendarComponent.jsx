@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import axios from "axios";
+import { AuthContext } from "../context/auth.context";
+import URL from "../links/links.json";
 
-const CalendarComponent = () => {
+const CalendarComponent = ({ doctor, selectedDept }) => {
+  const { user } = useContext(AuthContext);
+
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [showTimeGrid, setShowTimeGrid] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -16,19 +21,38 @@ const CalendarComponent = () => {
   };
 
   const handleSlotClick = (info) => {
-    console.log('slotClick',info.date)
-    console.log("handleSlotClick", new Date(info.dateStr).toISOString());
+    // console.log('slotClick',info.date)
+    // console.log("handleSlotClick", new Date(info.dateStr).toISOString());
     setSelectedSlot(new Date(info.dateStr).toISOString());
-    };
+  };
 
   const handleBackToMonth = () => {
     setShowTimeGrid(false);
     setSelectedSlot(null);
   };
+  function creatAppt() {
+    const apptDetails = {
+      user: (user._id),
+      department: selectedDept._id,
+      doctor: doctor._id,
+      start: selectedSlot,
+    };
+    console.log(apptDetails)
+    axios.post(URL.createAppointment,apptDetails).then((response) => {
+      console.log(response.data);
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+  }
 
   return (
     <div>
-      {!showTimeGrid ? (
+{selectedSlot && (
+      <button onClick={creatAppt} disabled={!selectedSlot}>
+        Book an Appointment
+      </button>
+    )}      {!showTimeGrid ? (
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
@@ -54,10 +78,9 @@ const CalendarComponent = () => {
             }}
             slotEventOverlap={false}
             dateClick={handleSlotClick}
-            selectable= {true}
+            selectable={true}
 
             // Other props as needed
-            
           />
         </div>
       )}

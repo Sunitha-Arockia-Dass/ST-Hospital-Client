@@ -6,5 +6,6 @@
     "login": "http://localhost:5005/auth/login",
     "departments": "http://localhost:5005/departments",
     "doctors": "http://localhost:5005/doctors",
-  "patientUpdate":"http://localhost:5005/patient/update"
+  "patientUpdate":"http://localhost:5005/patient/update",
+  "createAppointment":"http://localhost:5005/appointment/create"
 }
