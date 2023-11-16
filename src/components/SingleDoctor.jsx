@@ -2,25 +2,25 @@
 // import { useEffect, useState } from "react";
 
 
-function SingleDoctor({doctor,selectedDept,setDoctor}){
-    
+function SingleDoctor({ doctor, selectedDept, setDoctor }) {
 
-   return(
+
+  return (
     <div>
-    <h1>Doctor Details</h1>
-     <h2>{doctor.firstname} {doctor.lastname}</h2>
-     <h3>Position:<strong>{doctor.position} of {selectedDept.name}</strong></h3>
-     <button
-            onClick={() => {
-              setDoctor(null);
-            }}
-          >
-            Back
-          </button>
+      <h3>Doctor Details</h3><img src={selectedDept.image} alt="Department icon"/>
+      <h4>{doctor.firstname} {doctor.lastname}</h4>
+      <h5>Position: <strong>{doctor.position} of {selectedDept.name}</strong></h5>
+      <button
+        onClick={() => {
+          setDoctor(null);
+        }}
+      >
+        Back
+      </button>
     </div>
-    
 
-   )
+
+  )
 
 }
 
