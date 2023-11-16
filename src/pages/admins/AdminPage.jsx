@@ -8,7 +8,7 @@ function AdminPage(){
     
 return(
     <div>
-        I am the ADMIN
+        No, I am the ADMIN !!!
     </div>
 )
 }

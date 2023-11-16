@@ -22,11 +22,11 @@ function DepartmentPage() {
 
   return (
     <div>
-    {!doctor && (
-        <h1>Department Page</h1>
+      {!doctor && (
+        <h3>Department Page</h3>
       )}
       {doctor ? (
-        <SingleDoctor doctor={doctor} selectedDept={selectedDept} setDoctor={setDoctor}/>
+        <SingleDoctor doctor={doctor} selectedDept={selectedDept} setDoctor={setDoctor} />
       ) : (
         <div>
           {selectedDept ? (
@@ -43,12 +43,15 @@ function DepartmentPage() {
                   key={department._id}
                   onClick={() => displayDept(department._id)}
                 >
-                  <h2>{department.name}</h2>
-                  <p>{department.description}</p>
+                  <fieldset>
+                    <legend><h4>{department.name}</h4></legend>
+                    <p>{department.description}</p>
+                    <img src={department.image} alt="Department icon"/>
+                  </fieldset>
                 </div>
               );
             })
-            
+
           )
           }
         </div>

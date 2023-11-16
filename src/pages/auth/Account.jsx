@@ -2,10 +2,8 @@ import { NavLink } from "react-router-dom"
 
 function Account() {
     return (
-        <>
-        <div id="account">
-            
-            <h2>Welcome to your Account</h2>
+        <div id="account">            
+            <h3>Welcome to your Account</h3>
             <p>We can display information here</p>
             
             <NavLink to="/editaccount">
@@ -14,7 +12,6 @@ function Account() {
             </form>
             </NavLink>
         </div>
-        </>
     )
 }
 

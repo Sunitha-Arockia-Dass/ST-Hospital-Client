@@ -142,12 +142,12 @@ function SignUp() {
 
   return (
     <div id="signup">
-
+    
       <form onSubmit={handlesubmit}>
 
-        <h2>Sign Up</h2>
+        <h3>Sign Up</h3>
         <p>
-          Already registered ?<NavLink to="/login">login</NavLink>
+          Already registered ?<NavLink to="/login" className="style-one">login</NavLink>
         </p>
 
         <input

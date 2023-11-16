@@ -37,9 +37,9 @@ function LogIn() {
     <div id="login">
 
       <form onSubmit={login}>
-        <h2>Log In</h2>
+        <h3>Log In</h3>
         <p>
-          Need an account first ?<NavLink to="/signup">signup</NavLink>
+          Need an account first ?<NavLink to="/signup" className="style-one">signup</NavLink>
         </p>
         
         <input type="username" name="username" placeholder="Enter Username" />
