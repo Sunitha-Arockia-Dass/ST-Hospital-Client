@@ -1,6 +1,7 @@
+import React from "react";
 
 
-function SingleDept({selectedDept,setSelectedDept,setDoctor}){
+const SingleDept=({selectedDept,setSelectedDept,setDoctor})=>{
     function displayDoctor(doctor) {
         setDoctor(doctor);
       }

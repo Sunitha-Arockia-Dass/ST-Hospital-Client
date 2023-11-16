@@ -1,15 +1,18 @@
-// import axios from "axios";
-// import { useEffect, useState } from "react";
-
+import CalendarComponent from "./CalendarComponent";
 
 function SingleDoctor({ doctor, selectedDept, setDoctor }) {
-
-
   return (
-    <div>
+    <div className="row">
+    <div className="col-3">
       <h3>Doctor Details</h3><img src={selectedDept.image} alt="Department icon"/>
-      <h4>{doctor.firstname} {doctor.lastname}</h4>
-      <h5>Position: <strong>{doctor.position} of {selectedDept.name}</strong></h5>
+      <h4>
+        {doctor.firstname} {doctor.lastname}
+      </h4>
+      <h5>
+        Position: <strong>
+          {doctor.position} Doctor of {selectedDept.name}
+        </strong>
+      </h5>
       <button
         onClick={() => {
           setDoctor(null);
@@ -17,11 +20,17 @@ function SingleDoctor({ doctor, selectedDept, setDoctor }) {
       >
         Back
       </button>
+      </div>
+        <div className="col-6">
+        <div className="calendar-container">
+          <CalendarComponent />
+        </div>
+                </div>
+      
+
+     <div></div>
     </div>
-
-
-  )
-
+  );
 }
 
-export default SingleDoctor
+export default SingleDoctor;
