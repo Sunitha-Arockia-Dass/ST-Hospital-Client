@@ -9,10 +9,9 @@ function SingleDoctor({ doctor, selectedDept, setDoctor }) {
         <h5>Position: <strong>{doctor.position} Doctor of {selectedDept.name}</strong></h5>
         <button onClick={() => { setDoctor(null); }}>Back</button>
       </div>
-
       <div className="col-6">
         <div className="calendar-container">
-          <CalendarComponent />
+          <CalendarComponent doctor={doctor} selectedDept={selectedDept}/>
         </div>
       </div>
 
