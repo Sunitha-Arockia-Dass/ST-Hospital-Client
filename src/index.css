@@ -262,7 +262,7 @@ button {
   height: 3.25rem;
   fill: var(--clr-light);
   background: var(--clr-dark);
-  border: 2px solid var(--clr-light);
+  border: 2px solid var(--foreground);
   border-top: transparent;
   border-radius: 0 0 1.5rem 1.5rem;
   transition: var(--timing05) ease-in;
