@@ -1,11 +1,31 @@
-import { NavLink } from "react-router-dom"
+import { NavLink,useNavigate } from "react-router-dom"
+import Patient from "../../components/Patient"
+import Doctor from "../../components/Doctor"
+import { AuthContext } from "../../context/auth.context";
+import { useContext, useState, useEffect } from "react";
+
+
 
 function Account() {
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate()
+
     return (
-        <div id="account">            
-            <h3>Welcome to your Account</h3>
-            <p>We can display information here</p>
+        <div id="account">  
+        {user.role==='patient' && 
+
+            <Patient />
+        }
+        {
+            user.role==='patient' && 
+
+            <Doctor />
+        }
+        {
+            user.role==='admin' && 
+navigate('/admin')
             
+        }
             <NavLink to="/editaccount">
             <form>
                 <button>Edit Account</button>

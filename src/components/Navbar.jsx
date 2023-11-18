@@ -32,7 +32,7 @@ function Navbar() {
 
           {user && <li><NavLink to="/editaccount">{strings.navbar.links.editaccount}</NavLink></li>}
 
-          {user && <li>{user.username}</li>}
+          {user && <li>{user.username} ({user.role})</li>}
 
           {user && user.role==="admin" && <li><NavLink to="/admin">Admin Page</NavLink></li>}
           

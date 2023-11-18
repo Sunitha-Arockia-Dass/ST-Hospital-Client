@@ -7,7 +7,7 @@ import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import URL from "../links/links.json";
 
-const CalendarComponent = ({ doctor, selectedDept }) => {
+const DoctorCalendarComponent = ({ doctor, selectedDept }) => {
   const { user } = useContext(AuthContext);
 
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -17,7 +17,6 @@ const CalendarComponent = ({ doctor, selectedDept }) => {
   const transformEvents = (externalEvents) => {
     return externalEvents.map((event) => ({
       title: event.user[0].username,
-      // description: event.description,
       start: event.start,
       end: event.end,
       color: "red",
@@ -27,7 +26,6 @@ const CalendarComponent = ({ doctor, selectedDept }) => {
   useEffect(() => {
     axios.get(`${URL.getDrAppointment}/${doctor._id}`).then((appts) => {
       console.log(appts.data);
-      // console.log('patient',appts.data[0].user[0].username)
       const transformedEvents = transformEvents(appts.data);
       console.log();
       setEvents(transformedEvents);
@@ -111,7 +109,7 @@ const CalendarComponent = ({ doctor, selectedDept }) => {
         <button onClick={creatAppt} disabled={!selectedSlot}>
           Book an Appointment
         </button>
-      )}{" "}
+      )}
       {!showTimeGrid ? (
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
@@ -120,6 +118,8 @@ const CalendarComponent = ({ doctor, selectedDept }) => {
           events={events}
           // eventBackgroundColor='red'
           eventContent={renderEventContent}
+          weekends={false} 
+  hiddenDays={[0, 6]} 
 
           // Other props as needed
         />
@@ -156,4 +156,4 @@ const CalendarComponent = ({ doctor, selectedDept }) => {
   );
 };
 
-export default CalendarComponent;
+export default DoctorCalendarComponent;
