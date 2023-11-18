@@ -7,18 +7,16 @@ import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import URL from "../links/links.json";
 
-const CalendarComponent = ({ doctor, selectedDept }) => {
+const DoctorCalendarComponent = ({ doctor, selectedDept }) => {
   const { user } = useContext(AuthContext);
 
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [showTimeGrid, setShowTimeGrid] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [appts, setAppts] = useState(null);
   const [events, setEvents] = useState([]);
   const transformEvents = (externalEvents) => {
     return externalEvents.map((event) => ({
       title: event.user[0].username,
-      // description: event.description,
       start: event.start,
       end: event.end,
       color: "red",
@@ -28,11 +26,9 @@ const CalendarComponent = ({ doctor, selectedDept }) => {
   useEffect(() => {
     axios.get(`${URL.getDrAppointment}/${doctor._id}`).then((appts) => {
       console.log(appts.data);
-      // console.log('patient',appts.data[0].user[0].username)
       const transformedEvents = transformEvents(appts.data);
       console.log();
       setEvents(transformedEvents);
-      setAppts(appts.data);
     });
   }, []);
 
@@ -42,13 +38,8 @@ const CalendarComponent = ({ doctor, selectedDept }) => {
     setShowTimeGrid(true);
   };
 
-  // const handleSlotClick = (info) => {
-  //   console.log(new Date(info.dateStr).toISOString())
-  //   console.log(info.dateStr)
-
-  //   setSelectedSlot(new Date(info.dateStr).toISOString());
-  // };
   const handleSlotClick = (info) => {
+    console.log(info.dateStr);
     const clickedTime = new Date(info.dateStr); // Get the clicked time
     const localOffset = clickedTime.getTimezoneOffset(); // Get local timezone offset in minutes
     const localTime = new Date(clickedTime.getTime() - localOffset * 60000); // Adjust the time to local timezone
@@ -63,51 +54,62 @@ const CalendarComponent = ({ doctor, selectedDept }) => {
     setSelectedSlot(null);
   };
   function creatAppt() {
-    const filteredAppts = appts?.filter((appt) => {
-      const startTime=new Date(appt.start).toISOString()
-      return startTime === selectedSlot;
-    });
-    console.log(filteredAppts);
-    // if (filteredAppts.length === 0) {
-    //   alert("slot already book");
-    // } else {
-      const slotStartTime = new Date(selectedSlot);
-      const slotEndTime = new Date(slotStartTime.getTime() + 20 * 60000);
-      const apptDetails = {
-        user: user._id,
-        department: selectedDept._id,
-        doctor: doctor._id,
-        start: slotStartTime.toISOString(),
-        end: slotEndTime.toISOString(),
-      };
-      console.log(apptDetails);
-      axios
-        .post(URL.createAppointment, apptDetails)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
+    const slotStartTime = new Date(selectedSlot);
+    const slotEndTime = new Date(slotStartTime.getTime() + 20 * 60000);
+    const apptDetails = {
+      user: user._id,
+      department: selectedDept._id,
+      doctor: doctor._id,
+      start: slotStartTime.toISOString(),
+      end: slotEndTime.toISOString(),
+    };
+    console.log(apptDetails);
+    axios
+      .post(URL.createAppointment, apptDetails)
+      .then((response) => {
+        axios.get(`${URL.getDrAppointment}/${doctor._id}`).then((appts) => {
+          const transformedEvents = transformEvents(appts.data);
+          console.log();
+          setEvents(transformedEvents);
+          setShowTimeGrid(false);
         });
-    // }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   const renderEventContent = (eventInfo) => {
     // console.log(eventInfo);
     return (
       <>
-        <p>TiTle:{eventInfo.event.title}</p>
+        {user.role === "doctor" && <p>TiTle:{eventInfo.event.title}</p>}
+
         {/* {/* <p>Description: {eventInfo.event.extendedProps.description}</p> */}
         {/* <p>Color: {eventInfo.event.extendedProps.color}</p>  */}
       </>
     );
   };
+  function convertTo12HourFormat(timestamp) {
+    const date = new Date(timestamp);
+    const localTime = new Date(
+      date.getTime() + date.getTimezoneOffset() * 60000
+    );
+
+    let hours = localTime.getHours();
+    const minutes = ("0" + localTime.getMinutes()).slice(-2);
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12;
+    const formattedTime = hours + ":" + minutes + " " + ampm;
+
+    return formattedTime;
+  }
   return (
     <div>
       {selectedSlot && (
         <button onClick={creatAppt} disabled={!selectedSlot}>
           Book an Appointment
         </button>
-      )}{" "}
+      )}
       {!showTimeGrid ? (
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
@@ -116,12 +118,15 @@ const CalendarComponent = ({ doctor, selectedDept }) => {
           events={events}
           // eventBackgroundColor='red'
           eventContent={renderEventContent}
+          weekends={false} 
+  hiddenDays={[0, 6]} 
 
           // Other props as needed
         />
       ) : (
         <div>
           <button onClick={handleBackToMonth}>Back to Month</button>
+          <h4>Selected Time:{convertTo12HourFormat(selectedSlot)}</h4>
           <FullCalendar
             plugins={[timeGridPlugin, interactionPlugin]}
             timeZone="UTC+2"
@@ -142,6 +147,7 @@ const CalendarComponent = ({ doctor, selectedDept }) => {
             selectable={true}
             events={events}
             eventContent={renderEventContent}
+            eventDisplay="block"
             // Other props as needed
           />
         </div>
@@ -150,4 +156,4 @@ const CalendarComponent = ({ doctor, selectedDept }) => {
   );
 };
 
-export default CalendarComponent;
+export default DoctorCalendarComponent;

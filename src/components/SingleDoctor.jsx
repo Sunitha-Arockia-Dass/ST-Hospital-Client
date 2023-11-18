@@ -1,4 +1,4 @@
-import CalendarComponent from "./CalendarComponent";
+import DoctorCalendarComponent from "./DoctorCalendarComponent";
 
 function SingleDoctor({ doctor, selectedDept, setDoctor }) {
   return (
@@ -11,7 +11,7 @@ function SingleDoctor({ doctor, selectedDept, setDoctor }) {
       </div>
       <div className="col-6">
         <div className="calendar-container">
-          <CalendarComponent doctor={doctor} selectedDept={selectedDept}/>
+          <DoctorCalendarComponent doctor={doctor} selectedDept={selectedDept}/>
         </div>
       </div>
 
