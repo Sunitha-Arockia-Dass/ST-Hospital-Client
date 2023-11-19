@@ -7,7 +7,7 @@ import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import URL from "../links/links.json";
 
-const DoctorCalendarComponent = ({ doctor, selectedDept }) => {
+const DoctorCalendarComponent = ({ details, doctor, selectedDept, update }) => {
   const { user } = useContext(AuthContext);
 
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -24,12 +24,19 @@ const DoctorCalendarComponent = ({ doctor, selectedDept }) => {
   };
 
   useEffect(() => {
-    axios.get(`${URL.getDrAppointment}/${doctor._id}`).then((appts) => {
-      console.log(appts.data);
-      const transformedEvents = transformEvents(appts.data);
-      console.log();
-      setEvents(transformedEvents);
-    });
+    if (!update) {
+      axios.get(`${URL.getDrAppointment}/${doctor._id}`).then((appts) => {
+        console.log(appts.data);
+        const transformedEvents = transformEvents(appts.data);
+        console.log();
+        setEvents(transformedEvents);
+      });
+    } else {
+      // Assuming details is an array of events or appointments
+      const transformedDetails = transformEvents(details); // Transform single event or array of events
+      console.log(transformedDetails);
+      setEvents(transformedDetails);
+    }
   }, []);
 
   const handleDateClick = (info) => {
@@ -118,8 +125,8 @@ const DoctorCalendarComponent = ({ doctor, selectedDept }) => {
           events={events}
           // eventBackgroundColor='red'
           eventContent={renderEventContent}
-          weekends={false} 
-  hiddenDays={[0, 6]} 
+          weekends={false}
+          hiddenDays={[0, 6]}
 
           // Other props as needed
         />

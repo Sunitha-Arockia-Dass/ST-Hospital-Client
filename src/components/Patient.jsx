@@ -2,27 +2,30 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
-import PatientCalendar from "./PatientCalendar";
+// import PatientCalendar from "./PatientCalendar";
+import DoctorCalendarComponent from "./DoctorCalendarComponent";
 import URL from "../links/links.json";
 
 function Patient() {
   const { user } = useContext(AuthContext);
-  const [viewAppt, setViewAppt] = useState(false);
-  const [updateAppt, setUpdateAppt] = useState(false);
   const [appts, setAppts] = useState();
-  const [details, setDetails] = useState([]);
-  const [detailView, setDetailView] = useState(false);
+  const [view, setView] = useState({
+    viewAppt: false,
+    updateViewAppt: false,
+    detailView: false,
+    details: [],
+  });
+
+  
   const getAppt = () => {
     console.log(user._id);
     axios.get(`${URL.getPatientAppointment}/${user._id}`).then((appts) => {
       console.log(appts.data);
       setAppts(appts.data);
-      setViewAppt(true)
-      setUpdateAppt(false)
-      setDetailView(false)
-      // const transformedEvents = transformEvents(appts.data);
-      console.log();
-      // setEvents(transformedEvents);
+      setView((prevState) => ({
+        ...prevState,
+        viewAppt: true,
+      }));
     });
   };
   function convertTo12HourFormat(timestamp) {
@@ -40,66 +43,130 @@ function Patient() {
     return formattedTime;
   }
   function viewDetail(id) {
-    console.log(id)
+    console.log(id);
+    console.log(view.details.start)
     const filteredAppt = appts.filter((appt) => {
       return appt._id === id;
     });
-    console.log('filteredAppt',filteredAppt)
-    setDetails(filteredAppt);
-    setDetailView(true)
-    setViewAppt(false)
+    console.log("filteredAppt", filteredAppt[0].doctor);
+
+    setView((prevState) => ({
+      ...prevState,
+      details: filteredAppt,
+      detailView: true,
+      viewAppt: false,
+    }));
+  }
+  const deleteappt = (id) => {
+    axios.delete(`${URL.patientDeleteAppt}/${id}`).then((response) => {
+      setView((prevState) => ({
+        ...prevState,
+        updateViewAppt: false,
+        detailView: false,
+        viewAppt: true,
+      }));
+      getAppt();
+      console.log(response);
+    });
+  };
+  function updateAppt() {
+    setView((prevState) => ({
+      ...prevState,
+      updateViewAppt: true,
+      viewAppt: false,
+    }));
   }
   return (
     <div>
       <h3>This is {user.username} Account</h3>
-        <button onClick={getAppt}>View All appointments</button>
-        <div>
-          {viewAppt ? appts.map((appt) => {
-            return (
-              <div key={appt.id}>
-                <h4>Appt Time:{convertTo12HourFormat(appt.start)}</h4>
-                {/* <h4>
-                  Doctor:{appt.doctor[0].firstname} {appt.doctor[0].lastname}
-                </h4> */}
-                <button
-                  onClick={() => {
-                    viewDetail(appt._id);
-                  }}
-                >
-                  View Details
-                </button>
-                <button onClick={() => {setUpdateAppt(true)
-                setViewAppt(false)}
-                }>
-                  Update your appointments
-                </button>
-                <button onClick={() => {setUpdateAppt(true)
-                setViewAppt(false)}
-                }>
-                  Delete your appointments
-                </button>
-              </div>
-            );
-          }):<></>}
-        </div>
+      <button onClick={getAppt}>View All appointments</button>
+      {view.viewAppt ? (
+        appts.map((appt) => {
+          return (
+            <div key={appt.id}>
+              <h4>Appt Time:{convertTo12HourFormat(appt.start)} on {new Date(appt.start).toDateString()}</h4>
+              <button
+                onClick={() => {
+                  viewDetail(appt._id);
+                }}
+              >
+                View Details
+              </button>
+              {/* <button
+                onClick={() => {
+                  updateAppt(view.details._id);
+                }}
+              >
+                Update your appointments
+              </button> */}
+              {/* <button
+                onClick={() => {
+                  deleteappt(appt._id);
+                }}
+              >
+                Cancel your appointments
+              </button>*/}
+            </div> 
+          );
+        })
+      ) : (
+        <></>
+      )}
 
-      {updateAppt ? <PatientCalendar /> :<></>}
-      {details && detailView?(
+      {view.updateViewAppt ? (
         <div>
-          <h4>Appt Time:{convertTo12HourFormat(details[0].start)}</h4>
-          <h4>
-            Doctor:{details[0].doctor[0].firstname} {details[0].doctor[0].lastname}
-          </h4>
-          <h4>
-            Department:{details[0].department[0].name} 
-          </h4>
-          <button onClick={() => {setUpdateAppt(true)
-                setViewAppt(false)}
-                }>
-                  Update your appointments
-                </button>
+          <button
+            onClick={() => {
+              setView((prevState) => ({
+                ...prevState,
+                detailView: true,
+                updateViewAppt: false,
+              }));
+            }}
+          >
+            Back
+          </button>
+          <DoctorCalendarComponent details={view.details[0]} doctor={view.details[0].doctor} selectedDept={view.details[0].department} updtae={true}/>
         </div>
-      ):<></>}
+      ) : (
+        <></>
+      )}
+      {view.details && view.detailView ? (
+        <div>
+        <h4>Appt Time:{convertTo12HourFormat(view.details[0].start)} on {new Date(view.details[0].start).toDateString()}</h4>          <h4>
+            Doctor:{view.details[0].doctor[0].firstname}
+            {view.details[0].doctor[0].lastname}
+          </h4>
+          <h4>Department:{view.details[0].department[0].name}</h4>
+          <button
+            onClick={() => {
+              updateAppt(view.details._id);
+            }}
+          >
+            Change your appointments
+          </button>
+          <button
+                onClick={() => {
+                  deleteappt(view.details._id);
+                }}
+              >
+                Cancel your appointments
+              </button>
+          <button
+            onClick={() => {
+              setView((prevState) => ({
+                ...prevState,
+                viewAppt: true,
+                detailView: false,
+              }));
+            }}
+          >
+            Back
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

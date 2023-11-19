@@ -11,7 +11,7 @@ function SingleDoctor({ doctor, selectedDept, setDoctor }) {
       </div>
       <div className="col-6">
         <div className="calendar-container">
-          <DoctorCalendarComponent doctor={doctor} selectedDept={selectedDept}/>
+          <DoctorCalendarComponent doctor={doctor} selectedDept={selectedDept} update={false}/>
         </div>
       </div>
 
