@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom"
+import BurgerMenu from "./BurgerMenu"
 
-/*Languages context*/
+/*Languages and Auth context*/
 import { useContext } from "react"
 import { AuthContext } from "../context/auth.context"
 import { LanguageContext } from "../context/language.context"
@@ -18,7 +19,8 @@ function Navbar() {
 
   return (
     <header className="full">
-      <nav className="navbar ">
+      <BurgerMenu/>
+      <nav className="navbar">
         <ul>
           <li><NavLink to="/">{strings.navbar.links.home}</NavLink></li>
 
@@ -42,9 +44,7 @@ function Navbar() {
 
       <div className="containerToggle lang">
         {/* <!-- Languages button --> */}
-        <button id="languageBtn" onClick={changeLanguage}>
-          {lang}
-        </button>
+        <button id="languageBtn" onClick={changeLanguage}>{lang}</button>
       </div>
     </header>
   )

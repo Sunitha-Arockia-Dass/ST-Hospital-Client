@@ -27,8 +27,10 @@ function App() {
   return (
     <>
       <Navbar />
-
+      <main className="container full">
       <Routes>
+      
+      
         {/*   HomePage  */}
         <Route path="/" element={<HomePage />} />
 
@@ -81,7 +83,9 @@ function App() {
         />
         {/*Department List Page */}
         <Route path="/departments" element={<DepartmentPage />} />
+        
       </Routes>
+      </main>
     </>
   );
 }
