@@ -16,7 +16,6 @@ function Patient() {
     details: [],
   });
 
-  
   const getAppt = () => {
     console.log(user._id);
     axios.get(`${URL.getPatientAppointment}/${user._id}`).then((appts) => {
@@ -43,12 +42,11 @@ function Patient() {
     return formattedTime;
   }
   function viewDetail(id) {
-    console.log(id);
-    console.log(view.details.start)
+    console.log(view.details.start);
     const filteredAppt = appts.filter((appt) => {
       return appt._id === id;
     });
-    console.log("filteredAppt", filteredAppt[0].doctor);
+    console.log("filteredAppt", filteredAppt[0]);
 
     setView((prevState) => ({
       ...prevState,
@@ -70,6 +68,8 @@ function Patient() {
     });
   };
   function updateAppt() {
+    console.log(view.details[0]);
+
     setView((prevState) => ({
       ...prevState,
       updateViewAppt: true,
@@ -84,7 +84,10 @@ function Patient() {
         appts.map((appt) => {
           return (
             <div key={appt.id}>
-              <h4>Appt Time:{convertTo12HourFormat(appt.start)} on {new Date(appt.start).toDateString()}</h4>
+              <h4>
+                Appt Time:{convertTo12HourFormat(appt.start)} on{" "}
+                {new Date(appt.start).toDateString()}
+              </h4>
               <button
                 onClick={() => {
                   viewDetail(appt._id);
@@ -106,13 +109,52 @@ function Patient() {
               >
                 Cancel your appointments
               </button>*/}
-            </div> 
+            </div>
           );
         })
       ) : (
         <></>
       )}
-
+      {view.details && view.detailView ? (
+        <div>
+          <h4>
+            Appt Time:{convertTo12HourFormat(view.details[0].start)} on{" "}
+            {new Date(view.details[0].start).toDateString()}
+          </h4>{" "}
+          <h4>
+            Doctor:{view.details[0].doctor[0].firstname}
+            {view.details[0].doctor[0].lastname}
+          </h4>
+          <h4>Department:{view.details[0].department[0].name}</h4>
+          <button
+            onClick={() => {
+              updateAppt(view.details._id);
+            }}
+          >
+            Change your appointments
+          </button>
+          <button
+            onClick={() => {
+              deleteappt(view.details._id);
+            }}
+          >
+            Cancel your appointments
+          </button>
+          <button
+            onClick={() => {
+              setView((prevState) => ({
+                ...prevState,
+                viewAppt: true,
+                detailView: false,
+              }));
+            }}
+          >
+            Back
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
       {view.updateViewAppt ? (
         <div>
           <button
@@ -126,43 +168,12 @@ function Patient() {
           >
             Back
           </button>
-          <DoctorCalendarComponent details={view.details[0]} doctor={view.details[0].doctor} selectedDept={view.details[0].department} updtae={true}/>
-        </div>
-      ) : (
-        <></>
-      )}
-      {view.details && view.detailView ? (
-        <div>
-        <h4>Appt Time:{convertTo12HourFormat(view.details[0].start)} on {new Date(view.details[0].start).toDateString()}</h4>          <h4>
-            Doctor:{view.details[0].doctor[0].firstname}
-            {view.details[0].doctor[0].lastname}
-          </h4>
-          <h4>Department:{view.details[0].department[0].name}</h4>
-          <button
-            onClick={() => {
-              updateAppt(view.details._id);
-            }}
-          >
-            Change your appointments
-          </button>
-          <button
-                onClick={() => {
-                  deleteappt(view.details._id);
-                }}
-              >
-                Cancel your appointments
-              </button>
-          <button
-            onClick={() => {
-              setView((prevState) => ({
-                ...prevState,
-                viewAppt: true,
-                detailView: false,
-              }));
-            }}
-          >
-            Back
-          </button>
+          <DoctorCalendarComponent
+            details={view.details[0]}
+            doctor={view.details[0].doctor[0]}
+            selectedDept={view.details[0].department[0]}
+            update={true}
+          />
         </div>
       ) : (
         <></>
