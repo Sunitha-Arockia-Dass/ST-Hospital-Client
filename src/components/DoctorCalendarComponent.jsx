@@ -7,10 +7,9 @@ import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import URL from "../links/links.json";
 
-const DoctorCalendarComponent = ({ details, doctor, selectedDept, update }) => {
-  console.log(details._id);
+const DoctorCalendarComponent = ({setView,updateCallback, details, doctor, selectedDept, update }) => {
   console.log(update);
-  const apptId=details._id
+  const apptId = details?._id;
   const { user } = useContext(AuthContext);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [showTimeGrid, setShowTimeGrid] = useState(false);
@@ -59,7 +58,6 @@ const DoctorCalendarComponent = ({ details, doctor, selectedDept, update }) => {
     const localOffset = clickedTime.getTimezoneOffset(); // Get local timezone offset in minutes
     const localTime = new Date(clickedTime.getTime() - localOffset * 60000); // Adjust the time to local timezone
 
-
     setSelectedSlot(localTime.toISOString());
   };
 
@@ -93,10 +91,22 @@ const DoctorCalendarComponent = ({ details, doctor, selectedDept, update }) => {
   function editAppt() {
     const slotStartTime = new Date(selectedSlot);
     const slotEndTime = new Date(slotStartTime.getTime() + 20 * 60000);
-
     axios
-      .patch(`${URL.patientUpdateAppt}/${apptId}`, {slotStartTime,slotEndTime})
-
+      .patch(`${URL.patientUpdateAppt}/${apptId}`, {
+        slotStartTime,
+        slotEndTime,
+      })
+      .then((response) => {
+        setShowTimeGrid(false);
+        if (updateCallback) {
+          updateCallback();
+        }
+        setView((prevState) => ({
+          ...prevState,
+          detailView: false,
+          updateViewAppt: false,
+        }));
+      })
       .catch((error) => {
         console.log(error);
       });

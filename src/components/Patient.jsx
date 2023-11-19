@@ -146,6 +146,7 @@ function Patient() {
                 ...prevState,
                 viewAppt: true,
                 detailView: false,
+                updateViewAppt: false,
               }));
             }}
           >
@@ -173,6 +174,8 @@ function Patient() {
             doctor={view.details[0].doctor[0]}
             selectedDept={view.details[0].department[0]}
             update={true}
+            updateCallback={getAppt}
+            setView={setView}
           />
         </div>
       ) : (
