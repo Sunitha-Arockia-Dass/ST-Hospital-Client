@@ -1,36 +1,31 @@
 {
-    "EN": {
-        "navbar":{
-            "links":{
-                "home":"Home",
-                "signup":"Signup",
-                "login":"Login",
-                "account": "Account",
-                "editaccount": "Edit Account",
-                "departments":"Departments"
-            }
-
-        },
-        "homepage":{
-            
-        }
+  "EN": {
+    "navbar": {
+      "links": {
+        "home": "Home",
+        "signup": "Signup",
+        "login": "Login",
+        "account": "Account",
+        "editaccount": "Edit Account",
+        "departments": "Departments",
+        "gpractice": "General Practices"
+      }
     },
+    "homepage": {}
+  },
 
-    "FR": {
-        "navbar":{
-            "links":{
-                "home":"Accueil",
-                "signup":"S'enregistrer",
-                "login":"Se connecter",
-                "account": "Compte",
-                "editaccount": "Editer Compte",
-                "departments":"départements"
-
-            }
-
-        },
-        "homepage":{
-            
-        }
-    }
+  "FR": {
+    "navbar": {
+      "links": {
+        "home": "Accueil",
+        "signup": "S'enregistrer",
+        "login": "Se connecter",
+        "account": "Compte",
+        "editaccount": "Editer Compte",
+        "departments": "départements",
+        "gpractice": "Pratiques générales"
+      }
+    },
+    "homepage": {}
+  }
 }

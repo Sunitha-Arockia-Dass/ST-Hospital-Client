@@ -14,7 +14,7 @@ import LogIn from "./pages/auth/LogIn";
 import Account from "./pages/auth/Account";
 import EditAccount from "./pages/auth/EditAccount";
 import AdminPage from "./pages/admins/AdminPage";
-
+import GPractice from "./pages/GPractice"
 import DepartmentPage from "./pages/DepartmentPage";
 
 /* error Pages */
@@ -65,6 +65,14 @@ function App() {
             <IsPrivate>
               <EditAccount />
             </IsPrivate>
+          }
+        />
+        <Route
+          path="/gpractice"
+          element={
+            
+              <GPractice />
+            
           }
         />
 

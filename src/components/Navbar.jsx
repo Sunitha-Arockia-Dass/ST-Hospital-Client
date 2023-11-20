@@ -32,7 +32,7 @@ function Navbar() {
 
           {user && <li><NavLink to="/account">{strings.navbar.links.account}</NavLink></li>}
 
-          {user && <li><NavLink to="/editaccount">{strings.navbar.links.editaccount}</NavLink></li>}
+          {user && <li><NavLink to="/gpractice">{strings.navbar.links.gpractice}</NavLink></li>}
 
           {user && <li>{user.username} ({user.role})</li>}
 
