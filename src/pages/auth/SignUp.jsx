@@ -21,13 +21,20 @@ function SignUp() {
       name: e.target.username.value,
       email: e.target.email.value,
       password: e.target.password.value,
-      firstname:e.target.firstname.value  ,
-      lastname:e.target.lastname.value ,
-      patientDetails:{
-        dateOfBirth:e.target.dateOfBirth.value,
-        gp:e.target.gp.value,
-        contactNumber:e.target.phone.value
-      }
+      firstname: e.target.firstname.value,
+      lastname: e.target.lastname.value,
+      patientDetails: {
+        dateOfBirth: e.target.dateOfBirth.value,
+        gp: e.target.gp.value,
+        contactNumber: e.target.phone.value,
+        address: {
+          houseNumber: e.target.houseNumber.value,
+          streetName: e.target.street.value,
+          city: e.target.city.value,
+          country: e.target.country.value,
+          postalCode: e.target.postalCode.value,
+        },
+      },
     };
     console.log(data);
     axios
@@ -221,7 +228,7 @@ function SignUp() {
         <select name="gp">
           <option value="" disabled hidden>
             Select a General Practice
-          </option>{" "}
+          </option>
           {gpData?.map((gp) => {
             return (
               <option key={gp._id} value={gp._id}>
@@ -230,6 +237,25 @@ function SignUp() {
             );
           })}
         </select>
+        <br />
+        <input
+          type="text"
+          name="houseNumber"
+          placeholder="Enter your house number"
+        />
+        <br />
+        <input type="text" name="street" placeholder="Enter your street name" />
+        <br />
+        <input
+          type="text"
+          name="postalCode"
+          placeholder="Enter your post code"
+        />
+        <br />
+        <input type="text" name="city" placeholder="Enter your city" />
+        <br />
+        <input type="text" name="country" placeholder="Enter your country" />
+        <br />
         <button type="submit">Sign Up</button>
       </form>
 
