@@ -6,7 +6,7 @@ import { AuthContext } from "../context/auth.context";
 import DoctorCalendarComponent from "./DoctorCalendarComponent";
 import URL from "../links/links.json";
 
-function Patient() {
+function PatientApptDetails() {
   const { user } = useContext(AuthContext);
   const [appts, setAppts] = useState();
   const [view, setView] = useState({
@@ -20,6 +20,7 @@ function Patient() {
     console.log(user._id);
     axios.get(`${URL.getPatientAppointment}/${user._id}`).then((appts) => {
       console.log(appts.data);
+
       setAppts(appts.data);
       setView((prevState) => ({
         ...prevState,
@@ -78,43 +79,42 @@ function Patient() {
   }
   return (
     <div>
-      <h3>This is {user.username} Account</h3>
-      <button onClick={getAppt}>View All appointments</button>
+      {!view.viewAppt && (
+        <button onClick={getAppt}>View All appointments</button>
+      )}
       {view.viewAppt ? (
-        appts.map((appt) => {
-          return (
-            <div key={appt.id}>
-              <h4>
-                Appt Time:{convertTo12HourFormat(appt.start)} on{" "}
-                {new Date(appt.start).toDateString()}
-              </h4>
-              <button
-                onClick={() => {
-                  viewDetail(appt._id);
-                }}
-              >
-                View Details
-              </button>
-              {/* <button
-                onClick={() => {
-                  updateAppt(view.details._id);
-                }}
-              >
-                Update your appointments
-              </button> */}
-              {/* <button
-                onClick={() => {
-                  deleteappt(appt._id);
-                }}
-              >
-                Cancel your appointments
-              </button>*/}
-            </div>
-          );
-        })
+        <div>
+          <button
+            onClick={() => {
+              setView((prevState) => ({
+                ...prevState,
+                viewAppt: false,
+              }));
+            }}
+          >
+            Back
+          </button>
+          {appts && appts.length > 0 ? (
+            appts.map((appt) => (
+              <div key={appt.id}>
+                <h4>
+                  Appt Time:{convertTo12HourFormat(appt.start)} on{" "}
+                  {new Date(appt.start).toDateString()}
+                </h4>
+                <button onClick={() => viewDetail(appt._id)}>
+                  View Details
+                </button>
+                {/* Other buttons */}
+              </div>
+            ))
+          ) : (
+            <p>No upcoming appointments at this time.</p>
+          )}
+        </div>
       ) : (
         <></>
       )}
+
       {view.details && view.detailView ? (
         <div>
           <h4>
@@ -185,4 +185,4 @@ function Patient() {
   );
 }
 
-export default Patient;
+export default PatientApptDetails;

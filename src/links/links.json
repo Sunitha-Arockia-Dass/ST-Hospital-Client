@@ -10,8 +10,8 @@
   "getDrAppointment": "http://localhost:5005/appointment/doctor",
   "getPatientAppointment": "http://localhost:5005/appointment/patient",
 "patientDeleteAppt":"http://localhost:5005/appointment/patient/delete",
-"patientUpdateAppt":"http://localhost:5005/appointment/patient/update"
-
+"patientUpdateAppt":"http://localhost:5005/appointment/patient/update",
+"gPractice":"http://localhost:5005/gPractice/"
 
 
 }

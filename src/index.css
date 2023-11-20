@@ -607,3 +607,11 @@ main {
     background-position: 100% 50%;
   }
 }
+.patient-detail{
+  display: flex;
+  justify-content: space-around;
+}
+.gp-detail{
+  border: 1px solid black;
+  text-align: center;
+}
