@@ -2,7 +2,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
-// import PatientCalendar from "./PatientCalendar";
 import DoctorCalendarComponent from "./DoctorCalendarComponent";
 import URL from "../links/links.json";
 
@@ -80,7 +79,10 @@ function PatientApptDetails() {
   return (
     <div>
       {!view.viewAppt && (
+       
+
         <button onClick={getAppt}>View All appointments</button>
+       
       )}
       {view.viewAppt ? (
         <div>

@@ -18,7 +18,7 @@ const DoctorCalendarComponent = ({setView,updateCallback, details, doctor, selec
   const transformEvents = (externalEvents) => {
     if (!update) {
       return externalEvents.map((event) => ({
-        title: event.user[0].username,
+        title: event.user[0]?.username,
         start: event.start,
         end: event.end,
         color: "red",
@@ -28,7 +28,7 @@ const DoctorCalendarComponent = ({setView,updateCallback, details, doctor, selec
       if (event) {
         return [
           {
-            title: event.user[0].username,
+            title: event.user[0]?.username,
             start: event.start,
             end: event.end,
             color: "red",
@@ -115,7 +115,7 @@ const DoctorCalendarComponent = ({setView,updateCallback, details, doctor, selec
     return (
       <>
         {user.role === "doctor" && <p>TiTle:{eventInfo.event.title}</p>}
-        {update ? <p style={{ color: "purple" }}>Your Appointment</p> : <></>}
+        {update ? <p style={{ color: "purple"}}>Your Appointment</p> : <></>}
       </>
     );
   };

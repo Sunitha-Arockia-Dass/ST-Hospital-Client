@@ -7,7 +7,6 @@ import URL from "../links/links.json";
 function PatientGPracticeDetails() {
   const [gp, setGP] = useState();
   const { user } = useContext(AuthContext);
-  console.log(user.patientDetails.gp[0]._id);
 
   useEffect(() => {
     axios

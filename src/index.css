@@ -609,9 +609,12 @@ main {
 }
 .patient-detail{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  /* flex-wrap: wrap; */
+
+
 }
-.gp-detail{
+.gp-detail, .user-detail{
   border: 1px solid black;
   text-align: center;
 }
@@ -626,6 +629,7 @@ main {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
 
 /* display: flex;
 flex-wrap: wrap; */

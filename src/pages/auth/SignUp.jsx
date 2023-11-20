@@ -29,7 +29,7 @@ function SignUp() {
         contactNumber: e.target.phone.value,
         address: {
           houseNumber: e.target.houseNumber.value,
-          streetName: e.target.street.value,
+          street: e.target.street.value,
           city: e.target.city.value,
           country: e.target.country.value,
           postalCode: e.target.postalCode.value,
