@@ -49,7 +49,8 @@ function App() {
   useLayoutEffect(() => {
 
     let ctx = gsap.context(() => {
-      // hamburger-menu
+
+      // hamburger-menu Gsap Animation //////////////////////////////////////////
       let hamburgerMenu = document.querySelector(".hamburger-menu")
 
       hamburgerMenu.addEventListener("click", () => {
@@ -80,6 +81,14 @@ function App() {
 
       hamburgerMenu.addEventListener("click", () => tlHamburgerClick.reversed() ? tlHamburgerClick.play() : closeMenu())
       circleMenu.addEventListener("click", () => {tlHamburgerClick.timeScale(5); tlHamburgerClick.reverse()})
+
+      // home-page Gsap Animation //////////////////////////////////////////
+      const tlHomePage = gsap.timeline({ defaults: { duration: .25, ease: "power1.out" } })
+      tlHomePage
+        .to(".home-page h1", {x: "0" ,opacity: 1, stagger:0.1, delay:.8})
+        .to(".home-page h2", {x: "0" ,opacity: 1, stagger:0.1, delay:.2})
+        .to(".home-page button", {y: "0" ,opacity: 1})
+
 
     }, app);
 

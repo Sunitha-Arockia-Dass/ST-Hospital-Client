@@ -8,7 +8,7 @@ function HomePage() {
     return (
         <div className="home-page">
 
-            <h1>Sunitha</h1>
+            <h1 className='my-text'>Sunitha</h1>
             <h1>Thomas</h1>
             <h1>Hospital</h1>
             <h2>More than Health !</h2>

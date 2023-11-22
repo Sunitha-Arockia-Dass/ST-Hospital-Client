@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import BurgerMenu from "./BurgerMenu"
 
 /*Languages and Auth context*/
@@ -18,6 +18,7 @@ function Navbar() {
     })
   }
 
+  // change the icon menu status even if the icone is not clicked
   const animate = () => {
     const button = document.querySelector(".hamburger-menu")
     const currentState = button.getAttribute("data-state")
@@ -35,6 +36,7 @@ function Navbar() {
   return (
     <header className="full">
       <BurgerMenu />
+      <button className="logo">S.T. Hospital</button>
 
       <div className="circle-menu" onClick={animate}>
       <nav className="navbar">
