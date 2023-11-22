@@ -34,7 +34,7 @@ import LogIn from "./pages/auth/LogIn";
 import Account from "./pages/auth/Account";
 import EditAccount from "./pages/auth/EditAccount";
 import AdminPage from "./pages/admins/AdminPage";
-
+import GPractice from "./pages/GPractice"
 import DepartmentPage from "./pages/DepartmentPage";
 
 /* error Pages */
@@ -98,39 +98,47 @@ function App() {
           {/*   HomePage  */}
           <Route path="/" element={<HomePage />} />
 
-          {/* Auth Pages */}
-          <Route
-            path="/signup"
-            element={
-              <IsAnon>
-                <SignUp />
-              </IsAnon>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <IsAnon>
-                <LogIn />
-              </IsAnon>
-            }
-          />
-          <Route
-            path="/account"
-            element={
-              <IsPrivate>
-                <Account />
-              </IsPrivate>
-            }
-          />
-          <Route
-            path="/editaccount"
-            element={
-              <IsPrivate>
-                <EditAccount />
-              </IsPrivate>
-            }
-          />
+        {/* Auth Pages */}
+        <Route
+          path="/signup"
+          element={
+            <IsAnon>
+              <SignUp />
+            </IsAnon>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <IsAnon>
+              <LogIn />
+            </IsAnon>
+          }
+        />
+        <Route
+          path="/account"
+          element={
+            <IsPrivate>
+              <Account />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/editaccount"
+          element={
+            <IsPrivate>
+              <EditAccount />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/gpractice"
+          element={
+            
+              <GPractice />
+            
+          }
+        />
 
           {/* Error Pages */}
           <Route path="/500" element={<Error />} />

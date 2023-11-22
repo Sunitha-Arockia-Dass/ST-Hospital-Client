@@ -5,8 +5,11 @@
   "login": "http://localhost:5005/auth/login",
   "departments": "http://localhost:5005/departments",
   "doctors": "http://localhost:5005/doctors",
-  "patientUpdate": "http://localhost:5005/patient/update",
+  "patientUpdate": "http://localhost:5005/auth/update",
   "createAppointment": "http://localhost:5005/appointment/create",
   "getDrAppointment": "http://localhost:5005/appointment/doctor",
-  "getPatientAppointment": "http://localhost:5005/appointment/patient"
+  "getPatientAppointment": "http://localhost:5005/appointment/patient",
+  "patientDeleteAppt": "http://localhost:5005/appointment/patient/delete",
+  "patientUpdateAppt": "http://localhost:5005/appointment/patient/update",
+  "gPractice": "http://localhost:5005/gPractice/"
 }

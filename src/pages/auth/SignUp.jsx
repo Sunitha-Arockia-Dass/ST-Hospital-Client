@@ -1,36 +1,57 @@
-import { NavLink, useNavigate } from "react-router-dom"
-import axios from "axios"
-import URL from '../../links/links.json'
-import { useEffect, useState } from "react"
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
+import URL from "../../links/links.json";
+import { useEffect, useState } from "react";
 
 function SignUp() {
   //   const [user, setUser] = useState()
-  const [errorMessage, setErrorMessage] = useState(undefined)
-  const navigate = useNavigate()
+  const [errorMessage, setErrorMessage] = useState(undefined);
+  const [formInput, setFormInput] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [gpData, setGPData] = useState();
+  const navigate = useNavigate();
 
   const signup = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     let data = {
       name: e.target.username.value,
       email: e.target.email.value,
       password: e.target.password.value,
-    }
-    console.log(data)
+      firstname: e.target.firstname.value,
+      lastname: e.target.lastname.value,
+      patientDetails: {
+        dateOfBirth: e.target.dateOfBirth.value,
+        gp: e.target.gp.value,
+        contactNumber: e.target.phone.value,
+        address: {
+          houseNumber: e.target.houseNumber.value,
+          street: e.target.street.value,
+          city: e.target.city.value,
+          country: e.target.country.value,
+          postalCode: e.target.postalCode.value,
+        },
+      },
+    };
+    console.log(data);
     axios
       .post(URL.signup, data)
       .then((response) => {
-        console.log("Signed up successfully")
-        console.log(response.data.data)
-        navigate("/login")
+        console.log("Signed up successfully");
+        console.log(response.data.data);
+        navigate("/login");
       })
       .catch((error) => {
-        console.log(error)
-        setErrorMessage(error)
-      })
-  }
+        console.log(error);
+        setErrorMessage(error);
+      });
+  };
   // const addAdmin = () => {
   //   let data = {
-  //     name: "admins",
+  //     name: "admin",
   //     email: "admin@admin.com",
   //     password: "sthospital123",
   //     role: "admin",
@@ -48,12 +69,6 @@ function SignUp() {
   // }
 
   // Inputs Validation and user error messages
-  const [formInput, setFormInput] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  })
 
   //store error messages
   const [errorsInput, setErrorsInput] = useState({
@@ -61,40 +76,40 @@ function SignUp() {
     email: "",
     password: "",
     confirmPassword: "",
-  })
+  });
 
-
-
-
+  useEffect(() => {
+    axios.get(URL.gPractice).then((response) => {
+      setGPData(response.data);
+    });
+  }, []);
 
   useEffect(() => {
     if (!formInput.username) {
-      errorsInput.username = "Username is required"
+      errorsInput.username = "Username is required";
     }
     if (formInput.username) {
-      errorsInput.username = ""
+      errorsInput.username = "";
     }
-
-  }, [formInput.username])
+  }, [formInput.username]);
 
   const handleChange = (e) => {
-    const name = e.target.name
+    const name = e.target.name;
     const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setFormInput({
       ...formInput,
-      [name]: value
-
-    })
-  }
+      [name]: value,
+    });
+  };
 
   // submit if no errors
   const handlesubmit = (e) => {
-    console.log(errorsInput.length)
+    console.log(errorsInput.length);
     if (errorsInput.length === 0) {
-      signup(e)
+      signup(e);
     }
-  }
+  };
 
   // //check input changes
   // const handleChange = (e) => {
@@ -106,7 +121,7 @@ function SignUp() {
   //     [name]: value
   //   })
 
-  //   // check validity of inputs    
+  //   // check validity of inputs
   //   if (!formInput.username) {
   //     errorsInput.username = "Username is required"
   //   }
@@ -139,15 +154,15 @@ function SignUp() {
   //   //    }
   // }
 
-
   return (
     <div id="signup">
-    
-      <form onSubmit={handlesubmit}>
-
+      <form onSubmit={signup}>
         <h3>Sign Up</h3>
         <p>
-          Already registered ?<NavLink to="/login" className="style-one">login</NavLink>
+          Already registered ?
+          <NavLink to="/login" className="style-one">
+            login
+          </NavLink>
         </p>
 
         <input
@@ -157,7 +172,8 @@ function SignUp() {
           value={formInput.username}
           onChange={handleChange}
         />
-        <span className="form-error-msg">{errorsInput.username}</span><br />
+        <span className="form-error-msg">{errorsInput.username}</span>
+        <br />
 
         <input
           type="text"
@@ -166,7 +182,8 @@ function SignUp() {
           value={formInput.email}
           onChange={handleChange}
         />
-        <span className="form-error-msg">{errorsInput.email}</span><br />
+        <span className="form-error-msg">{errorsInput.email}</span>
+        <br />
 
         <input
           type="password"
@@ -175,7 +192,8 @@ function SignUp() {
           value={formInput.password}
           onChange={handleChange}
         />
-        <span className="form-error-msg">{errorsInput.password}</span><br />
+        <span className="form-error-msg">{errorsInput.password}</span>
+        <br />
 
         <input
           type="Password"
@@ -184,15 +202,66 @@ function SignUp() {
           value={formInput.confirmPassword}
           onChange={handleChange}
         />
-        <span className="form-error-msg">{errorsInput.confirmPassword}</span><br />
-
+        <span className="form-error-msg">{errorsInput.confirmPassword}</span>
+        <br />
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Enter your phone number"
+          pattern="[0-9]{10}"
+        />
+        <br />
+        <input
+          type="date"
+          name="dateOfBirth"
+          placeholder="Enter your date of birth"
+        />
+        <br />
+        <input
+          type="text"
+          name="firstname"
+          placeholder="Enter your First Name"
+        />
+        <br />
+        <input type="text" name="lastname" placeholder="Enter your Last Name" />
+        <br />
+        <select name="gp">
+          <option value="" disabled hidden>
+            Select a General Practice
+          </option>
+          {gpData?.map((gp) => {
+            return (
+              <option key={gp._id} value={gp._id}>
+                {gp.name}, {gp.address.city}
+              </option>
+            );
+          })}
+        </select>
+        <br />
+        <input
+          type="text"
+          name="houseNumber"
+          placeholder="Enter your house number"
+        />
+        <br />
+        <input type="text" name="street" placeholder="Enter your street name" />
+        <br />
+        <input
+          type="text"
+          name="postalCode"
+          placeholder="Enter your post code"
+        />
+        <br />
+        <input type="text" name="city" placeholder="Enter your city" />
+        <br />
+        <input type="text" name="country" placeholder="Enter your country" />
+        <br />
         <button type="submit">Sign Up</button>
       </form>
 
       {errorMessage && <p className="server-error-message">{errorMessage}</p>}
-
     </div>
-  )
+  );
 }
 
-export default SignUp
+export default SignUp;

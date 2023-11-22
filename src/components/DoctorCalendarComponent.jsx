@@ -7,27 +7,42 @@ import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import URL from "../links/links.json";
 
-const DoctorCalendarComponent = ({ doctor, selectedDept }) => {
+const DoctorCalendarComponent = ({setView,updateCallback, details, doctor, selectedDept, update }) => {
+  console.log(update);
+  const apptId = details?._id;
   const { user } = useContext(AuthContext);
-
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [showTimeGrid, setShowTimeGrid] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [events, setEvents] = useState([]);
   const transformEvents = (externalEvents) => {
-    return externalEvents.map((event) => ({
-      title: event.user[0].username,
-      start: event.start,
-      end: event.end,
-      color: "red",
-    }));
+    if (!update) {
+      return externalEvents.map((event) => ({
+        title: event.user[0]?.username,
+        start: event.start,
+        end: event.end,
+        color: "red",
+      }));
+    } else {
+      const event = externalEvents[0];
+      if (event) {
+        return [
+          {
+            title: event.user[0]?.username,
+            start: event.start,
+            end: event.end,
+            color: "red",
+          },
+        ];
+      }
+      return [];
+    }
   };
 
   useEffect(() => {
     axios.get(`${URL.getDrAppointment}/${doctor._id}`).then((appts) => {
-      console.log(appts.data);
+      // console.log(appts.data);
       const transformedEvents = transformEvents(appts.data);
-      console.log();
       setEvents(transformedEvents);
     });
   }, []);
@@ -39,12 +54,9 @@ const DoctorCalendarComponent = ({ doctor, selectedDept }) => {
   };
 
   const handleSlotClick = (info) => {
-    console.log(info.dateStr);
     const clickedTime = new Date(info.dateStr); // Get the clicked time
     const localOffset = clickedTime.getTimezoneOffset(); // Get local timezone offset in minutes
     const localTime = new Date(clickedTime.getTime() - localOffset * 60000); // Adjust the time to local timezone
-
-    console.log(localTime.toISOString()); // Log the adjusted time
 
     setSelectedSlot(localTime.toISOString());
   };
@@ -63,13 +75,11 @@ const DoctorCalendarComponent = ({ doctor, selectedDept }) => {
       start: slotStartTime.toISOString(),
       end: slotEndTime.toISOString(),
     };
-    console.log(apptDetails);
     axios
       .post(URL.createAppointment, apptDetails)
       .then((response) => {
         axios.get(`${URL.getDrAppointment}/${doctor._id}`).then((appts) => {
           const transformedEvents = transformEvents(appts.data);
-          console.log();
           setEvents(transformedEvents);
           setShowTimeGrid(false);
         });
@@ -78,14 +88,42 @@ const DoctorCalendarComponent = ({ doctor, selectedDept }) => {
         console.log(error);
       });
   }
-  const renderEventContent = (eventInfo) => {
-    // console.log(eventInfo);
+  function editAppt() {
+    const slotStartTime = new Date(selectedSlot);
+    const slotEndTime = new Date(slotStartTime.getTime() + 20 * 60000);
+    axios
+      .patch(`${URL.patientUpdateAppt}/${apptId}`, {
+        slotStartTime,
+        slotEndTime,
+      })
+      .then((response) => {
+        setShowTimeGrid(false);
+        if (updateCallback) {
+          updateCallback();
+        }
+        setView((prevState) => ({
+          ...prevState,
+          detailView: false,
+          updateViewAppt: false,
+        }));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  const renderDateEventContent = (eventInfo) => {
     return (
       <>
         {user.role === "doctor" && <p>TiTle:{eventInfo.event.title}</p>}
-
-        {/* {/* <p>Description: {eventInfo.event.extendedProps.description}</p> */}
-        {/* <p>Color: {eventInfo.event.extendedProps.color}</p>  */}
+        {update ? <p style={{ color: "purple"}}>Your Appointment</p> : <></>}
+      </>
+    );
+  };
+  const renderTimeEventContent = (eventInfo) => {
+    return (
+      <>
+        {user.role === "doctor" && <p>TiTle:{eventInfo.event.title}</p>}
+        {update ? <>Your Appointment</> : <></>}
       </>
     );
   };
@@ -105,11 +143,17 @@ const DoctorCalendarComponent = ({ doctor, selectedDept }) => {
   }
   return (
     <div>
-      {selectedSlot && (
-        <button onClick={creatAppt} disabled={!selectedSlot}>
-          Book an Appointment
-        </button>
-      )}
+      {update
+        ? selectedSlot && (
+            <button onClick={editAppt} disabled={!selectedSlot}>
+              Change the Appointment
+            </button>
+          )
+        : selectedSlot && (
+            <button onClick={creatAppt} disabled={!selectedSlot}>
+              Book an Appointment
+            </button>
+          )}
       {!showTimeGrid ? (
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
@@ -117,9 +161,9 @@ const DoctorCalendarComponent = ({ doctor, selectedDept }) => {
           dateClick={handleDateClick}
           events={events}
           // eventBackgroundColor='red'
-          eventContent={renderEventContent}
-          weekends={false} 
-  hiddenDays={[0, 6]} 
+          eventContent={renderDateEventContent}
+          weekends={false}
+          hiddenDays={[0, 6]}
 
           // Other props as needed
         />
@@ -146,7 +190,7 @@ const DoctorCalendarComponent = ({ doctor, selectedDept }) => {
             dateClick={handleSlotClick}
             selectable={true}
             events={events}
-            eventContent={renderEventContent}
+            eventContent={renderTimeEventContent}
             eventDisplay="block"
             // Other props as needed
           />

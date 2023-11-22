@@ -49,7 +49,9 @@ function Navbar() {
 
           {user && <li><NavLink to="/account"><h3  className={"neonText"}>{strings.navbar.links.account}</h3></NavLink></li>}
 
-          {user && <li><NavLink to="/editaccount"><h3 className={"neonText"}>{strings.navbar.links.editaccount}</h3></NavLink></li>}
+        
+
+          {user && <li><NavLink to="/gpractice"><h3 className={"neonText"}>{strings.navbar.links.gpractice}</h3></NavLink></li>}
 
           {user && <li><h3 className={"neonText"}>{user.username} ({user.role})</h3></li>}
 

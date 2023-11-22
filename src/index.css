@@ -664,3 +664,29 @@ main {
   min-height: calc(100vh - var(--header-height));
 }
 
+.patient-detail{
+  display: flex;
+  justify-content: space-between;
+  /* flex-wrap: wrap; */
+
+
+}
+.gp-detail, .user-detail{
+  border: 1px solid black;
+  text-align: center;
+}
+.gp-details{
+  border: 1px solid black;
+  text-align: center;
+  width: 30%;
+  margin:10px;
+}
+.gp-details-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+/* display: flex;
+flex-wrap: wrap; */
