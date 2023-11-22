@@ -91,7 +91,7 @@ function App() {
   return (
     <div className="useLayoutGsap container" ref={app}>
       <Navbar />
-      <main className="full">
+      <main className="container full">
         <Routes>
 
 

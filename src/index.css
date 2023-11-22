@@ -87,6 +87,7 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
+  margin: 0;
 }
 
 /* Create a root stacking context (React)*/
@@ -173,8 +174,11 @@ h4,
 h5,
 h6 {
   font-family: var(--ft-Headings);
-  font-size: var(--fs-900);
   line-height: 1.05;
+}
+
+h1 {
+  font-size: var(--fs-900);
 }
 
 h2 {
@@ -263,7 +267,7 @@ button {
 }
 
 .containerToggle {
-  position: absolute;
+  position: fixed;
   top: -2.5rem;
   z-index: 100;
   width: 2.5rem;
@@ -335,6 +339,36 @@ button {
 
 #sun {
   display: none;
+}
+
+/*/////////////////////////////////
+Overflow and scrollbar */
+.scroll-ok {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* width */
+::-webkit-scrollbar {
+  border-radius: 100rem;
+  width: .5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {  
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 100rem;
+  background: var(--clr-blue-medium);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  box-shadow: inset -.125rem -.125rem .125rem var(--clr-blue-medium);
+  background: var(--clr-blue);
 }
 
 /*
@@ -537,9 +571,11 @@ form span.form-error-msg {
 */
 /* Header */
 header {
+  position: fixed;
   width: 100%;
   height: var(--header-height);
   z-index: 100;
+  backdrop-filter: blur(1rem);
 }
 
 nav {
@@ -661,8 +697,122 @@ ul {
 */
 
 main {
+  margin-top: var(--header-height);
   min-height: calc(100vh - var(--header-height));
 }
+
+.home-page {
+margin: auto 0;
+height: 200vh;
+}
+
+.home-page h1 {
+  font-size: calc(var(--fs-900)*1.5);
+  line-height: .85;
+}
+
+.home-page h1:first-of-type {
+  margin-top: 10rem;
+}
+
+.home-page h2:first-of-type {
+  margin-top: 1rem;
+}
+
+.home-page button.scroll-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .5rem;
+  border-radius: 500px;
+  border: solid .125rem;
+  padding: .75rem 3rem;
+  margin-top: 2rem;
+  cursor: n-resize;
+  background-color: transparent;
+
+  &:hover {
+    border: solid .125rem var(--clr-blue);
+  }
+
+  &:active {
+    border: solid .125rem var(--clr-green);
+  }
+}
+
+.scroll-down2{
+  width: 1.5rem;
+  height: 2.5rem;
+  border: 2px solid var(--clr-blue-medium);
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+
+
+  &:before{
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: .75rem;
+      width: .375rem;
+      height: .375rem;
+      border-radius: 100%;
+    
+      background:var(--clr-blue);
+      animation: scrollDown2 1.5s ease infinite;
+  }
+  &:after{
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: .125rem;
+      width: .375rem;
+      height: .75rem;
+      border-radius: .5rem;
+      transform: translateX(-50%);
+      background: var(--clr-blue-medium);
+  }
+}
+
+@keyframes scrollDown2{
+  0%{
+      transform: translate(-50%, 0px);
+      opacity: 0;
+  }
+  50%{
+      transform: translate(-50%, 8px);
+      opacity: 1;
+  }
+  100%{
+      transform: translate(-50%, 16px);
+      opacity: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .patient-detail{
   display: flex;

@@ -7,12 +7,16 @@ function HomePage() {
 
     return (
         <div className="home-page">
-        <h1>Did you take a me time ?! :D </h1>
-        <button>YES</button>
-        <button disabled>NO</button>
-        <br/>
-        no is not an option ^^
-            
+
+            <h1>Sunitha</h1>
+            <h1>Thomas</h1>
+            <h1>Hospital</h1>
+            <h2>More than Health !</h2>
+            <h2>We give you well-being</h2>
+            <button className="scroll-btn">
+                <h4>Scroll</h4>
+                <div className="scroll-down2"></div>
+            </button>
         </div>
     )
 }
