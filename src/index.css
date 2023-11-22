@@ -107,17 +107,17 @@ h6 {
   --ft-Texte: "Poppins", sans-serif;
 
   --fs-300: clamp(0.75rem, calc(0.75rem + 0.08vw), 0.875rem);
-  --fs-400: clamp(1rem, calc(.75rem + 0.24vw), 1.375rem);
+  --fs-400: clamp(1rem, calc(0.75rem + 0.24vw), 1.375rem);
   --fs-500: clamp(1.25rem, calc(1rem + 0.69vw), 1.75rem);
-  --fs-600: clamp(1.50rem, calc(1.25rem + 1.24vw), 2rem);
-  --fs-700: clamp(1.75rem, calc(1.50rem + 2.03vw), 3rem);
+  --fs-600: clamp(1.5rem, calc(1.25rem + 1.24vw), 2rem);
+  --fs-700: clamp(1.75rem, calc(1.5rem + 2.03vw), 3rem);
   --fs-800: clamp(2rem, calc(1.75rem + 3.15vw), 4rem);
   --fs-900: clamp(3rem, calc(2rem + 4.74vw), 5rem);
 
   /* Colors */
   --clr-light: hsl(220 10% 95%);
   --clr-medium: hsl(220 10% 30%);
-  --clr-dark: hsl(220 10% 12%) ;
+  --clr-dark: hsl(220 10% 12%);
 
   --clr-blue: hsl(193 90% 50%);
   --clr-blue-medium: hsl(193 90% 23%);
@@ -141,6 +141,8 @@ h6 {
   /* Animations */
   --timing03: 300ms;
   --timing05: 500ms;
+  --timing06: 600ms;
+  --timing09: 900ms;
   --timing1: 1s;
 
   /* Shadows */
@@ -175,24 +177,25 @@ h6 {
   line-height: 1.05;
 }
 
-h2{
+h2 {
   font-size: var(--fs-800);
 }
 
-h3{
+h3 {
   font-size: var(--fs-700);
   margin-block: 2rem;
 }
 
-h4{
+h4 {
   font-size: var(--fs-600);
 }
 
-h5{
+h5 {
   font-weight: bold;
 }
 
-h5, h6 {
+h5,
+h6 {
   font-size: var(--fs-500);
 }
 
@@ -200,7 +203,7 @@ button {
   font-family: var(--ft-Headings);
 }
 
-.center{
+.center {
   display: flex;
   justify-content: center;
 }
@@ -265,11 +268,10 @@ button {
   z-index: 100;
   width: 2.5rem;
   height: 2.5rem;
-  fill: var(--background);
-  background: var(--foreground);
-  border-top: transparent;
-  border-radius: 1.5rem 1.5rem;
-  transition: var(--timing05) ease-in;
+  fill: var(--foreground);
+  background: var(--background);
+  border-radius: 1.5rem 0 1.5rem 1.5rem;
+  transition: var(--timing05) ease-in-out;
 
   &:hover {
     box-shadow: var(--shadow-elevation-medium);
@@ -277,24 +279,25 @@ button {
 }
 
 .containerToggle.DM {
-  right: 1rem;
-  animation: onglet-animation var(--timing05) linear calc(var(--timing05) * 1.5)
+  right: 0.5rem;
+  animation: onglet-animation var(--timing05) linear calc(var(--timing05) * 2.5)
     forwards;
 }
 
 .containerToggle.lang {
-  right: 4rem;
-  animation: onglet-animation var(--timing05) linear var(--timing05) forwards;
+  right: 3.5rem;
+  animation: onglet-animation var(--timing05) linear calc(var(--timing05) * 2)
+    forwards;
 }
 
 @keyframes onglet-animation {
   75%,
   90% {
     transform: translateY(3.25rem);
-    border-radius: 1.5rem 1.5rem 1.375rem 1.375rem;
+    border-radius: 1.5rem 0rem 1.375rem 1.375rem;
   }
   80% {
-    border-radius: 1.5rem 1.5rem 1.125rem 1.125rem;
+    border-radius: 1.5rem 0rem 1.125rem 1.125rem;
   }
 
   80%,
@@ -307,30 +310,27 @@ button {
 #languageBtn {
   cursor: pointer;
   display: block;
-  color: var(--background);
+  color: var(--foreground);
   width: 100%;
   height: 100%;
   font-size: 1.5rem;
   line-height: 1;
   background: transparent;
-  border-radius:1.5rem;
   border: none;
-  border-radius: 0 0 1.5rem 1.5rem;
-  transition: var(--timing03) ease-in;
+  border-radius: 1.5rem 0 1.5rem 1.5rem;
+  transition: var(--timing03) ease-in-out;
   padding: 0.125rem;
-  margin:0;
+  margin: 0;
   &:hover {
     transform: scale(1.1);
-    filter: drop-shadow(0 0 0.15rem var(--clr-light));
+    color: var(--background);
+    fill: var(--background);
+    background: var(--foreground);
   }
 }
 
 #languageBtn {
   margin-top: 0.0625rem;
-
-  &:hover {
-    filter: none;
-  }
 }
 
 #sun {
@@ -344,8 +344,29 @@ button {
 */
 
 /*navbar links*/
+a .neonText {
+  color: var(--background);
+  text-shadow: 0 0 7px var(--foreground),
+    0 0 21px var(--clr-blue), 0 0 41px var(--clr-blue);
 
-/*classic*/ 
+  &:hover {
+    text-shadow: none;
+  }
+
+  &:active {
+    color: var(--clr-blue);
+  }
+}
+
+a.active .neonText::before,
+a.active .neonText::after {
+  content: " ✱ ";
+  color: var(--clr-blue);
+  font-size: x-large;
+  vertical-align: middle;
+}
+
+/*classic*/
 a.style-one {
   color: var(--clr-blue);
   padding: 0.125rem 0.5rem;
@@ -437,7 +458,7 @@ form button {
       border-box;
   box-shadow: inset 2px 2px 6px var(--clr-light),
     inset -2px -2px 6px var(--clr-dark);
-  transition: var(--timing03) ease-in;
+  transition: var(--timing03) ease-in-out;
 
   &:hover {
     animation-play-state: running;
@@ -515,9 +536,14 @@ form span.form-error-msg {
 * ----------------------
 */
 /* Header */
-header, nav {
+header {
   width: 100%;
   height: var(--header-height);
+  z-index: 100;
+}
+
+nav {
+  height: 100%;
 }
 
 ul {
@@ -525,7 +551,7 @@ ul {
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -536,54 +562,96 @@ ul {
   padding: 0;
   margin: 0;
   position: absolute;
-  top: var(--hamburger-margin);
-  left : var(--hamburger-margin);
-  width: max-content;
+  top: -2.5rem;
+  left: 0.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
   z-index: 100;
   cursor: pointer;
-  transition: calc(var(--timing03) * 2);
+  border: none;
+  background-color: transparent;
+  border-radius: 0 50% 50%;
+  transition: var(--timing03) ease-in;
+  animation: onglet-animation var(--timing05) linear var(--timing05) forwards;
+  fill: var(--foreground);
 }
 
-.hamburger-menu input {
-  appearance: none;
-  padding: 0;
-  margin: 0;
-  pointer-events: none;
-  border: none;
-  border-radius: none;
-  background-color: transparent;
+.hamburger {
+  height: var(--hamburger-width);
+  width: var(--hamburger-width);
 }
 
 .hamburger-menu .line {
-  transition: fill var(--timing03) 300ms, rotate var(--timing03),
-    rx var(--timing03) 300ms, y var(--timing03) 300ms;
+  transition: y 300ms ease-in 300ms, rotate 300ms ease-in, rx 300ms ease-in,
+    fill 300ms ease-in;
   transform-origin: center;
+  fill: var(--foreground);
 }
 
 .hamburger-menu .hamburger-middle {
   opacity: 0.5;
 }
 
-.hamburger-menu:has(input:checked) .line {
-  transition: fill var(--timing03), y var(--timing03), rx var(--timing03) 300ms,
-    rotate var(--timing03) 300ms;
+.hamburger-menu[aria-expanded="true"] .line {
+  transition: y 300ms ease-in, rotate 300ms ease-in 300ms, rx 300ms ease-in,
+    fill 300ms ease-in;
+  fill: var(--background);
   rx: 0;
 }
 
-.hamburger-menu:has(input:checked) :is(.hamburger-top, .hamburger-bottom) {
+.hamburger-menu[aria-expanded="true"] :is(.hamburger-top, .hamburger-bottom) {
   y: 45;
 }
 
-.hamburger-menu:has(input:checked) .hamburger-top {
-  rotate: 210deg;
+.hamburger-menu[aria-expanded="true"] .hamburger-top {
+  rotate: 205deg;
 }
 
-.hamburger-menu:has(input:checked) .hamburger-middle {
+.hamburger-menu[aria-expanded="true"] .hamburger-middle {
   rotate: 270deg;
 }
 
-.hamburger-menu:has(input:checked) .hamburger-bottom {
-  rotate: 340deg;
+.hamburger-menu[aria-expanded="true"] .hamburger-bottom {
+  rotate: 335deg;
+}
+
+.hamburger-menu:hover {
+  background-color: var(--foreground);
+}
+
+.hamburger-menu:hover .line {
+  fill: var(--background);
+  scale: 1.1;
+}
+
+.hamburger-menu:hover .hamburger-middle {
+  animation: hamburger-animation calc(var(--timing1) * 2) linear forwards;
+}
+
+@keyframes hamburger-animation {
+  25%,
+  50%,
+  75% {
+    scale: 1;
+  }
+
+  33%,
+  66% {
+    scale: 1.1;
+  }
+}
+
+/* background zoom to menu */
+.circle-menu {
+  background-color: transparent;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  border-radius: 0 50% 50%;
+  height: 3rem;
+  width: 3rem;
+  z-index: 99;
+  transition: var(--timing06) ease-in-out;
 }
 
 /*
@@ -593,17 +661,6 @@ ul {
 */
 
 main {
-  height: calc(100vh - var(--header-height));
- background: linear-gradient(300deg,var(--clr-blue),var(--clr-green));
-  background-size: 200%;
-  animation: gradient-animation 12s ease infinite;
+  min-height: calc(100vh - var(--header-height));
 }
 
-@keyframes gradient-animation {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
