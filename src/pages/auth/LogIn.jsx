@@ -34,7 +34,8 @@ function LogIn() {
   }
 
   return (
-    <div id="login">
+    <div id="login" className="full center-frame">
+    <div className="half-frame">
 
       <form onSubmit={login}>
         <h3>Log In</h3>
@@ -54,6 +55,7 @@ function LogIn() {
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
+    </div>
     </div>
   )
 }

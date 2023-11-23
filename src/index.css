@@ -87,12 +87,29 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
+  margin: 0;
 }
 
 /* Create a root stacking context (React)*/
 #root,
 #__next {
   isolation: isolate;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /*
@@ -107,22 +124,22 @@ h6 {
   --ft-Texte: "Poppins", sans-serif;
 
   --fs-300: clamp(0.75rem, calc(0.75rem + 0.08vw), 0.875rem);
-  --fs-400: clamp(1rem, calc(.75rem + 0.24vw), 1.375rem);
+  --fs-400: clamp(1rem, calc(0.75rem + 0.24vw), 1.375rem);
   --fs-500: clamp(1.25rem, calc(1rem + 0.69vw), 1.75rem);
-  --fs-600: clamp(1.50rem, calc(1.25rem + 1.24vw), 2rem);
-  --fs-700: clamp(1.75rem, calc(1.50rem + 2.03vw), 3rem);
+  --fs-600: clamp(1.5rem, calc(1.25rem + 1.24vw), 2rem);
+  --fs-700: clamp(1.75rem, calc(1.5rem + 2.03vw), 3rem);
   --fs-800: clamp(2rem, calc(1.75rem + 3.15vw), 4rem);
   --fs-900: clamp(3rem, calc(2rem + 4.74vw), 5rem);
 
   /* Colors */
   --clr-light: hsl(220 10% 95%);
   --clr-medium: hsl(220 10% 30%);
-  --clr-dark: hsl(220 10% 12%) ;
+  --clr-dark: hsl(220 10% 12%);
 
-  --clr-blue: hsl(193 90% 50%);
+  --clr-blue: hsl(193 90% 45%);
   --clr-blue-medium: hsl(193 90% 23%);
 
-  --clr-green: hsl(157 95% 50%);
+  --clr-green: hsl(157 95% 45%);
   --clr-green-medium: hsl(157 95% 23%);
 
   --info-msg: hsl(290 55% 50%);
@@ -141,6 +158,8 @@ h6 {
   /* Animations */
   --timing03: 300ms;
   --timing05: 500ms;
+  --timing06: 600ms;
+  --timing09: 900ms;
   --timing1: 1s;
 
   /* Shadows */
@@ -171,38 +190,37 @@ h4,
 h5,
 h6 {
   font-family: var(--ft-Headings);
-  font-size: var(--fs-900);
   line-height: 1.05;
 }
 
-h2{
+h1 {
+  font-size: var(--fs-900);
+}
+
+h2 {
   font-size: var(--fs-800);
 }
 
-h3{
+h3 {
   font-size: var(--fs-700);
   margin-block: 2rem;
 }
 
-h4{
+h4 {
   font-size: var(--fs-600);
 }
 
-h5{
+h5 {
   font-weight: bold;
 }
 
-h5, h6 {
+h5,
+h6 {
   font-size: var(--fs-500);
 }
 
 button {
   font-family: var(--ft-Headings);
-}
-
-.center{
-  display: flex;
-  justify-content: center;
 }
 
 /*
@@ -260,16 +278,15 @@ button {
 }
 
 .containerToggle {
-  position: absolute;
+  position: fixed;
   top: -2.5rem;
   z-index: 100;
   width: 2.5rem;
   height: 2.5rem;
-  fill: var(--background);
-  background: var(--foreground);
-  border-top: transparent;
-  border-radius: 1.5rem 1.5rem;
-  transition: var(--timing05) ease-in;
+  fill: var(--foreground);
+  background: var(--background);
+  border-radius: 1.5rem 0 1.5rem 1.5rem;
+  transition: var(--timing05) ease-in-out;
 
   &:hover {
     box-shadow: var(--shadow-elevation-medium);
@@ -277,24 +294,25 @@ button {
 }
 
 .containerToggle.DM {
-  right: 1rem;
-  animation: onglet-animation var(--timing05) linear calc(var(--timing05) * 1.5)
+  right: 0.5rem;
+  animation: onglet-animation var(--timing05) linear calc(var(--timing05) * 2.5)
     forwards;
 }
 
 .containerToggle.lang {
-  right: 4rem;
-  animation: onglet-animation var(--timing05) linear var(--timing05) forwards;
+  right: 3.5rem;
+  animation: onglet-animation var(--timing05) linear calc(var(--timing05) * 2)
+    forwards;
 }
 
 @keyframes onglet-animation {
   75%,
   90% {
     transform: translateY(3.25rem);
-    border-radius: 1.5rem 1.5rem 1.375rem 1.375rem;
+    border-radius: 1.5rem 0rem 1.375rem 1.375rem;
   }
   80% {
-    border-radius: 1.5rem 1.5rem 1.125rem 1.125rem;
+    border-radius: 1.5rem 0rem 1.125rem 1.125rem;
   }
 
   80%,
@@ -307,34 +325,73 @@ button {
 #languageBtn {
   cursor: pointer;
   display: block;
-  color: var(--background);
+  color: var(--foreground);
   width: 100%;
   height: 100%;
   font-size: 1.5rem;
   line-height: 1;
   background: transparent;
-  border-radius:1.5rem;
   border: none;
-  border-radius: 0 0 1.5rem 1.5rem;
-  transition: var(--timing03) ease-in;
+  border-radius: 1.5rem 0 1.5rem 1.5rem;
+  transition: var(--timing03) ease-in-out;
   padding: 0.125rem;
-  margin:0;
+  margin: 0;
+
   &:hover {
     transform: scale(1.1);
-    filter: drop-shadow(0 0 0.15rem var(--clr-light));
+    color: var(--background);
+    fill: var(--background);
+    background: var(--foreground);
+    border: 0.125rem solid var(--background);
   }
 }
 
 #languageBtn {
   margin-top: 0.0625rem;
-
-  &:hover {
-    filter: none;
-  }
 }
 
 #sun {
   display: none;
+}
+
+/*/////////////////////////////////
+Overflow and scrollbar */
+.scroll-ok {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 100rem;
+  background: var(--clr-blue-medium);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  box-shadow: inset -0.125rem -0.125rem 0.125rem var(--clr-blue-medium);
+  background: var(--clr-blue);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 /*
@@ -344,8 +401,30 @@ button {
 */
 
 /*navbar links*/
+.neonText {
+  margin: 2rem 0 0;
+  color: var(--background);
+  text-shadow: 0 0 5px var(--foreground), 0 0 10px var(--clr-blue),
+    0 0 25px var(--clr-blue);
 
-/*classic*/ 
+  &:hover {
+    text-shadow: none;
+  }
+
+  &:active {
+    color: var(--clr-blue);
+  }
+}
+
+a.active .neonText::before,
+a.active .neonText::after {
+  content: " ✱ ";
+  color: var(--clr-blue);
+  font-size: x-large;
+  vertical-align: middle;
+}
+
+/*classic*/
 a.style-one {
   color: var(--clr-blue);
   padding: 0.125rem 0.5rem;
@@ -405,7 +484,7 @@ a.style-one:active {
 
 form button {
   cursor: pointer;
-  color: var(--clr-dark);
+  color: var(--clr-light);
   font-size: var(--fs-500);
   text-align: center;
   text-indent: 0rem;
@@ -415,17 +494,10 @@ form button {
   border-radius: 25rem;
   float: right;
   margin: 1.5rem 0 1.5rem;
-  text-shadow: 0px 0px 3px var(--clr-light);
+  text-shadow: 0px 0px 3px var(--clr-dark);
   animation: spin 3s infinite linear paused;
   border: 0.25rem solid transparent;
-  background: linear-gradient(
-        to left,
-        var(--clr-green) 0%,
-        var(--clr-green) 50%,
-
-        var(--clr-green) 50%,
-        var(--clr-green) 100%
-      )
+  background: linear-gradient(to left, var(--clr-blue) 0%, var(--clr-blue) 49.5%, var(--clr-blue-medium) 50%, var(--clr-blue) 50.5%, var(--clr-blue) 100%)
       padding-box,
     conic-gradient(
         from var(--bg-angle) at 50% 50%,
@@ -437,7 +509,7 @@ form button {
       border-box;
   box-shadow: inset 2px 2px 6px var(--clr-light),
     inset -2px -2px 6px var(--clr-dark);
-  transition: var(--timing03) ease-in;
+  transition: var(--timing03) ease-in-out;
 
   &:hover {
     animation-play-state: running;
@@ -461,9 +533,10 @@ form button {
 form {
   width: clamp(200px, 100%, 750px);
   text-indent: 0.5rem;
+  padding: 1rem;
+  margin: 0 auto;
 }
 
-form,
 label,
 input,
 select,
@@ -515,20 +588,43 @@ form span.form-error-msg {
 * ----------------------
 */
 /* Header */
-header, nav {
+header {
+  position: fixed;
   width: 100%;
   height: var(--header-height);
+  z-index: 100;
+  backdrop-filter: blur(1rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-ul {
+header .logo {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--clr-blue);
+  background-color: transparent;
+  border: none;
+  pointer-events: none;
+}
+
+header nav {
+  height: 100%;
+}
+
+header ul {
   height: 100%;
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+ul .user-infos {
+  color: var(--background);
 }
 
 /* Burger Menu */
@@ -536,93 +632,348 @@ ul {
   padding: 0;
   margin: 0;
   position: absolute;
-  top: var(--hamburger-margin);
-  left : var(--hamburger-margin);
-  width: max-content;
+  top: -2.5rem;
+  left: 0.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
   z-index: 100;
   cursor: pointer;
-  transition: calc(var(--timing03) * 2);
+  border: none;
+  background-color: transparent;
+  border-radius: 0 50% 50%;
+  transition: var(--timing03) ease-in;
+  animation: onglet-animation var(--timing05) linear var(--timing05) forwards;
+  fill: var(--foreground);
 }
 
-.hamburger-menu input {
-  appearance: none;
-  padding: 0;
-  margin: 0;
-  pointer-events: none;
-  border: none;
-  border-radius: none;
-  background-color: transparent;
+.hamburger {
+  height: var(--hamburger-width);
+  width: var(--hamburger-width);
 }
 
 .hamburger-menu .line {
-  transition: fill var(--timing03) 300ms, rotate var(--timing03),
-    rx var(--timing03) 300ms, y var(--timing03) 300ms;
+  transition: y 300ms ease-in 300ms, rotate 300ms ease-in, rx 300ms ease-in,
+    fill 300ms ease-in;
   transform-origin: center;
+  fill: var(--foreground);
 }
 
 .hamburger-menu .hamburger-middle {
   opacity: 0.5;
 }
 
-.hamburger-menu:has(input:checked) .line {
-  transition: fill var(--timing03), y var(--timing03), rx var(--timing03) 300ms,
-    rotate var(--timing03) 300ms;
+.hamburger-menu[aria-expanded="true"] .line {
+  transition: y 300ms ease-in, rotate 300ms ease-in 300ms, rx 300ms ease-in,
+    fill 300ms ease-in;
+  fill: var(--background);
   rx: 0;
 }
 
-.hamburger-menu:has(input:checked) :is(.hamburger-top, .hamburger-bottom) {
+.hamburger-menu[aria-expanded="true"] :is(.hamburger-top, .hamburger-bottom) {
   y: 45;
 }
 
-.hamburger-menu:has(input:checked) .hamburger-top {
-  rotate: 210deg;
+.hamburger-menu[aria-expanded="true"] .hamburger-top {
+  rotate: 205deg;
 }
 
-.hamburger-menu:has(input:checked) .hamburger-middle {
+.hamburger-menu[aria-expanded="true"] .hamburger-middle {
   rotate: 270deg;
 }
 
-.hamburger-menu:has(input:checked) .hamburger-bottom {
-  rotate: 340deg;
+.hamburger-menu[aria-expanded="true"] .hamburger-bottom {
+  rotate: 335deg;
+}
+
+.hamburger-menu:hover {
+  background-color: var(--foreground);
+}
+
+.hamburger-menu:hover .line {
+  fill: var(--background);
+  scale: 1.1;
+}
+
+.hamburger-menu:hover .hamburger-middle {
+  animation: hamburger-animation calc(var(--timing1) * 2) linear forwards;
+}
+
+@keyframes hamburger-animation {
+  25%,
+  50%,
+  75% {
+    scale: 1;
+  }
+
+  33%,
+  66% {
+    scale: 1.1;
+  }
+}
+
+/* background zoom to menu */
+.circle-menu {
+  background-color: transparent;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  border-radius: 0 50% 50%;
+  height: 3rem;
+  width: 3rem;
+  z-index: 99;
+  transition: var(--timing06) ease-in-out;
+}
+
+.logout {
+  margin-top: 4rem;
+  padding: 1rem 2rem;
+  background-color: transparent;
+  border: 0.125rem solid var(--background);
+  border-radius: 0 1.5rem 1.5rem 1.5rem;
+  box-shadow: 0 0 5px var(--foreground), 0 0 10px var(--clr-blue),
+    0 0 25px var(--clr-blue), inset 0 0 5px var(--foreground),
+    inset 0 0 10px var(--clr-blue), inset 0 0 25px var(--clr-blue);
+
+  &:hover {
+    box-shadow: none;
+  }
+
+  &:active {
+    color: var(--clr-blue);
+    border: 0.125rem solid var(--clr-blue);
+  }
+}
+
+.logout .neonText {
+  margin: 0;
+}
+
+/*
+* ----------------------------------------------------------------------------
+* Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main 
+* ----------------------------------------------------------------------------
+*/
+
+main {
+  position: relative;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+}
+
+.center-frame {
+  /* border: 2px red solid; */
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.half-frame {
+  /* border: 1px solid black; */
+  margin: 0 auto;
+  width: clamp(350px, 50%, 1000px);
+}
+
+.quarter-frame {
+  margin: 0 auto;
+  width: clamp(175px, 25%, 500px);
 }
 
 /*
 * ----------------------
-* Main
+* Signup & Login Page
 * ----------------------
 */
 
-main {
-  height: calc(100vh - var(--header-height));
- background: linear-gradient(300deg,var(--clr-blue),var(--clr-green));
-  background-size: 200%;
-  animation: gradient-animation 12s ease infinite;
+#home-page {
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
 }
 
-@keyframes gradient-animation {
-  0%, 100% {
-    background-position: 0% 50%;
+#home-page h1 {
+  font-size: calc(var(--fs-900) * 1.5);
+  line-height: 0.85;
+}
+
+#home-page h2:first-of-type {
+  margin-top: 1.25rem;
+}
+
+#home-page button.scroll-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 500px;
+  border: solid 0.125rem;
+  padding: 0.75rem 3rem;
+  margin: 2.5rem 0 1rem;
+  cursor: n-resize;
+  background-color: transparent;
+
+  &:hover {
+    border: solid 0.125rem var(--clr-blue);
   }
-  50% {
-    background-position: 100% 50%;
+
+  &:active {
+    border: solid 0.125rem var(--clr-green);
   }
 }
-.patient-detail{
+
+.scroll-down2 {
+  width: 1.5rem;
+  height: 2.5rem;
+  border: 2px solid var(--clr-blue-medium);
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0.75rem;
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 100%;
+
+    background: var(--clr-blue);
+    animation: scrollDown2 1.5s ease infinite;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0.125rem;
+    width: 0.375rem;
+    height: 0.75rem;
+    border-radius: 0.5rem;
+    transform: translateX(-50%);
+    background: var(--clr-blue-medium);
+  }
+}
+
+@keyframes scrollDown2 {
+  0% {
+    transform: translate(-50%, 0px);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, 8px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 16px);
+    opacity: 0;
+  }
+}
+
+/*
+* ----------------------
+* Signup & Login Page
+* ----------------------
+*/
+
+#signup, #login {
+  margin-top: 4rem;
+}
+
+#login .half-frame, #signup .half-frame {
+  height: max-content;
+  border: 1px solid var(--foreground);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-elevation-medium);
+}
+
+/*
+* ----------------------
+* Department Page
+* ----------------------
+*/
+
+.dpt-page {
+  padding-top: var(--header-height);
+}
+
+.dpt-page h3 {
+  margin: 0 0 2rem;
+}
+
+.all-dpt {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, clamp(350px, 20%, 500px));
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.one-dpt {
+  position: relative;
+  cursor: pointer;
+}
+
+.one-dpt fieldset {
+  border: 0.125rem solid var(--foreground);
+  height: 8rem;
+  transition: var(--timing03) ease-in-out;
+  box-shadow: var(--shadow-elevation-low);
+
+  &:hover {
+    color: var(--clr-blue);
+    background-color: hsl(220 10% 12% / .05);
+  }
+
+  &:active {
+    color: var(--clr-green);
+    border: 0.125rem solid var(--clr-green);
+  }
+}
+
+.one-dpt p {
+  color: var(--foreground);
+  padding-right: 2.5rem;
+}
+
+.one-dpt .dpt-img {
+  position: absolute;
+  top: 0;
+  right: -.5rem;
+  height: 4rem;
+  width: 4rem;
+  padding: 0.125rem;
+  border-radius: 10rem 0 10rem 10rem;
+  border: 0.125rem solid var(--foreground);
+  background-color: white;
+}
+
+.one-dpt img {
+  background-color: white;
+  object-fit: cover;
+  border-radius: 10rem 0 10rem 10rem;
+}
+
+/*************** sunitha *******************/
+.patient-detail {
   display: flex;
   justify-content: space-between;
   /* flex-wrap: wrap; */
-
-
 }
-.gp-detail, .user-detail{
+.gp-detail,
+.user-detail {
   border: 1px solid black;
   text-align: center;
 }
-.gp-details{
+.gp-details {
   border: 1px solid black;
   text-align: center;
   width: 30%;
-  margin:10px;
+  margin: 10px;
 }
 .gp-details-container {
   display: flex;
@@ -635,7 +986,6 @@ main {
   width: 40%;
   margin: 10px;
 }
-
 
 /* display: flex;
 flex-wrap: wrap; */

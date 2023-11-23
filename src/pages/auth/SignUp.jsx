@@ -155,111 +155,113 @@ function SignUp() {
   // }
 
   return (
-    <div id="signup">
-      <form onSubmit={signup}>
-        <h3>Sign Up</h3>
-        <p>
-          Already registered ?
-          <NavLink to="/login" className="style-one">
-            login
-          </NavLink>
-        </p>
+    <div id="signup" className="full center-frame">
+      <div className="half-frame">
+        <form onSubmit={signup}>
+          <h3>Sign Up</h3>
+          <p>
+            Already registered ?
+            <NavLink to="/login" className="style-one">
+              login
+            </NavLink>
+          </p>
 
-        <input
-          type="text"
-          name="username"
-          placeholder="Enter Username"
-          value={formInput.username}
-          onChange={handleChange}
-        />
-        <span className="form-error-msg">{errorsInput.username}</span>
-        <br />
+          <input
+            type="text"
+            name="username"
+            placeholder="Enter Username"
+            value={formInput.username}
+            onChange={handleChange}
+          />
+          <span className="form-error-msg">{errorsInput.username}</span>
+          <br />
 
-        <input
-          type="text"
-          name="email"
-          placeholder="Enter Email"
-          value={formInput.email}
-          onChange={handleChange}
-        />
-        <span className="form-error-msg">{errorsInput.email}</span>
-        <br />
+          <input
+            type="text"
+            name="email"
+            placeholder="Enter Email"
+            value={formInput.email}
+            onChange={handleChange}
+          />
+          <span className="form-error-msg">{errorsInput.email}</span>
+          <br />
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter Password"
-          value={formInput.password}
-          onChange={handleChange}
-        />
-        <span className="form-error-msg">{errorsInput.password}</span>
-        <br />
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            value={formInput.password}
+            onChange={handleChange}
+          />
+          <span className="form-error-msg">{errorsInput.password}</span>
+          <br />
 
-        <input
-          type="Password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          value={formInput.confirmPassword}
-          onChange={handleChange}
-        />
-        <span className="form-error-msg">{errorsInput.confirmPassword}</span>
-        <br />
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Enter your phone number"
-          pattern="[0-9]{10}"
-        />
-        <br />
-        <input
-          type="date"
-          name="dateOfBirth"
-          placeholder="Enter your date of birth"
-        />
-        <br />
-        <input
-          type="text"
-          name="firstname"
-          placeholder="Enter your First Name"
-        />
-        <br />
-        <input type="text" name="lastname" placeholder="Enter your Last Name" />
-        <br />
-        <select name="gp">
-          <option value="" disabled hidden>
-            Select a General Practice
-          </option>
-          {gpData?.map((gp) => {
-            return (
-              <option key={gp._id} value={gp._id}>
-                {gp.name}, {gp.address.city}
-              </option>
-            );
-          })}
-        </select>
-        <br />
-        <input
-          type="text"
-          name="houseNumber"
-          placeholder="Enter your house number"
-        />
-        <br />
-        <input type="text" name="street" placeholder="Enter your street name" />
-        <br />
-        <input
-          type="text"
-          name="postalCode"
-          placeholder="Enter your post code"
-        />
-        <br />
-        <input type="text" name="city" placeholder="Enter your city" />
-        <br />
-        <input type="text" name="country" placeholder="Enter your country" />
-        <br />
-        <button type="submit">Sign Up</button>
-      </form>
+          <input
+            type="Password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={formInput.confirmPassword}
+            onChange={handleChange}
+          />
+          <span className="form-error-msg">{errorsInput.confirmPassword}</span>
+          <br />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Enter your phone number"
+            pattern="[0-9]{10}"
+          />
+          <br />
+          <input
+            type="date"
+            name="dateOfBirth"
+            placeholder="Enter your date of birth"
+          />
+          <br />
+          <input
+            type="text"
+            name="firstname"
+            placeholder="Enter your First Name"
+          />
+          <br />
+          <input type="text" name="lastname" placeholder="Enter your Last Name" />
+          <br />
+          <select name="gp">
+            <option value="" disabled hidden>
+              Select a General Practice
+            </option>
+            {gpData?.map((gp) => {
+              return (
+                <option key={gp._id} value={gp._id}>
+                  {gp.name}, {gp.address.city}
+                </option>
+              );
+            })}
+          </select>
+          <br />
+          <input
+            type="text"
+            name="houseNumber"
+            placeholder="Enter your house number"
+          />
+          <br />
+          <input type="text" name="street" placeholder="Enter your street name" />
+          <br />
+          <input
+            type="text"
+            name="postalCode"
+            placeholder="Enter your post code"
+          />
+          <br />
+          <input type="text" name="city" placeholder="Enter your city" />
+          <br />
+          <input type="text" name="country" placeholder="Enter your country" />
+          <br />
+          <button type="submit">Sign Up</button>
+        </form>
 
-      {errorMessage && <p className="server-error-message">{errorMessage}</p>}
+        {errorMessage && <p className="server-error-message">{errorMessage}</p>}
+      </div>
     </div>
   );
 }
