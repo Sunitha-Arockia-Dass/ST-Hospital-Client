@@ -37,29 +37,32 @@ function Navbar() {
     <header className="full">
       <BurgerMenu />
       <button className="logo">S.T. Hospital</button>
+      
 
       <div className="circle-menu" onClick={animate}>
       <nav className="navbar">
         <ul>
-          <li><NavLink to="/"><h3  className={"neonText"}>{strings.navbar.links.home}</h3></NavLink></li>
+          {user && <li className="user-infos"><h3>Welcome {user.username} ({user.role})</h3></li>}
+          
+          <li><NavLink to="/"><h3 className="neonText">{strings.navbar.links.home}</h3></NavLink></li>
 
-          <li><NavLink to="/departments"><h3 className={"neonText"}>{strings.navbar.links.departments}</h3></NavLink></li>
+          <li><NavLink to="/departments"><h3 className="neonText">{strings.navbar.links.departments}</h3></NavLink></li>
 
-          {!user && <li><NavLink to="/signup"><h3  className={"neonText"}>{strings.navbar.links.signup}</h3></NavLink></li>}
+          {!user && <li><NavLink to="/signup"><h3  className="neonText">{strings.navbar.links.signup}</h3></NavLink></li>}
 
-          {!user && <li><NavLink to="/login"><h3  className={"neonText"}>{strings.navbar.links.login}</h3></NavLink></li>}
+          {!user && <li><NavLink to="/login"><h3  className="neonText">{strings.navbar.links.login}</h3></NavLink></li>}
 
-          {user && <li><NavLink to="/account"><h3  className={"neonText"}>{strings.navbar.links.account}</h3></NavLink></li>}
+          {user && <li><NavLink to="/account"><h3  className="neonText">{strings.navbar.links.account}</h3></NavLink></li>}
 
         
 
-          {user && <li><NavLink to="/gpractice"><h3 className={"neonText"}>{strings.navbar.links.gpractice}</h3></NavLink></li>}
+          {user && <li><NavLink to="/gpractice"><h3 className="neonText">{strings.navbar.links.gpractice}</h3></NavLink></li>}
 
-          {user && <li><h3 className={"neonText"}>{user.username} ({user.role})</h3></li>}
+          
 
-          {user && user.role === "admin" && <li><NavLink to="/admin"><h3  className={"neonText"}>Admin Page</h3></NavLink></li>}
+          {user && user.role === "admin" && <li><NavLink to="/admin"><h3  className="neonText">Admin Page</h3></NavLink></li>}
 
-          {user && <li><button onClick={logOutUser}><h3 className={"neonText"}>Logout</h3></button></li>}
+          {user && <li><button className="logout" onClick={logOutUser}><h3 className="neonText">Logout</h3></button></li>}
         </ul>
       </nav>
       </div>

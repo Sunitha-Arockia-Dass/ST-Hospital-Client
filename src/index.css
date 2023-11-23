@@ -96,6 +96,22 @@ h6 {
   isolation: isolate;
 }
 
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /*
 * ----------------------
 * Project Settings
@@ -205,11 +221,6 @@ h6 {
 
 button {
   font-family: var(--ft-Headings);
-}
-
-.center {
-  display: flex;
-  justify-content: center;
 }
 
 /*
@@ -325,11 +336,13 @@ button {
   transition: var(--timing03) ease-in-out;
   padding: 0.125rem;
   margin: 0;
+
   &:hover {
     transform: scale(1.1);
     color: var(--background);
     fill: var(--background);
     background: var(--foreground);
+    border: 0.125rem solid var(--background);
   }
 }
 
@@ -388,10 +401,11 @@ body {
 */
 
 /*navbar links*/
-a .neonText {
+.neonText {
+  margin: 2rem 0 0;
   color: var(--background);
   text-shadow: 0 0 5px var(--foreground), 0 0 10px var(--clr-blue),
-  0 0 25px var(--clr-blue);
+    0 0 25px var(--clr-blue);
 
   &:hover {
     text-shadow: none;
@@ -470,7 +484,7 @@ a.style-one:active {
 
 form button {
   cursor: pointer;
-  color: var(--clr-dark);
+  color: var(--clr-light);
   font-size: var(--fs-500);
   text-align: center;
   text-indent: 0rem;
@@ -480,17 +494,10 @@ form button {
   border-radius: 25rem;
   float: right;
   margin: 1.5rem 0 1.5rem;
-  text-shadow: 0px 0px 3px var(--clr-light);
+  text-shadow: 0px 0px 3px var(--background);
   animation: spin 3s infinite linear paused;
   border: 0.25rem solid transparent;
-  background: linear-gradient(
-        to left,
-        var(--clr-green) 0%,
-        var(--clr-green) 50%,
-
-        var(--clr-green) 50%,
-        var(--clr-green) 100%
-      )
+  background: linear-gradient(to left, var(--clr-blue) 0%, var(--clr-blue) 100%)
       padding-box,
     conic-gradient(
         from var(--bg-angle) at 50% 50%,
@@ -528,7 +535,6 @@ form {
   text-indent: 0.5rem;
 }
 
-form,
 label,
 input,
 select,
@@ -600,11 +606,11 @@ header .logo {
   pointer-events: none;
 }
 
-nav {
+header nav {
   height: 100%;
 }
 
-ul {
+header ul {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -613,6 +619,10 @@ ul {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+ul .user-infos {
+  color: var(--background);
 }
 
 /* Burger Menu */
@@ -712,6 +722,30 @@ ul {
   transition: var(--timing06) ease-in-out;
 }
 
+.logout {
+  margin-top: 4rem;
+  padding: 1rem 2rem;
+  background-color: transparent;
+  border: 0.125rem solid var(--background);
+  border-radius: 0 1.5rem 1.5rem 1.5rem;
+  box-shadow: 0 0 5px var(--foreground), 0 0 10px var(--clr-blue),
+    0 0 25px var(--clr-blue), inset 0 0 5px var(--foreground),
+    inset 0 0 10px var(--clr-blue), inset 0 0 25px var(--clr-blue);
+
+  &:hover {
+    box-shadow: none;
+  }
+
+  &:active {
+    color: var(--clr-blue);
+    border: 0.125rem solid var(--clr-blue);
+  }
+}
+
+.logout .neonText {
+  margin: 0;
+}
+
 /*
 * ----------------------
 * Main
@@ -719,33 +753,51 @@ ul {
 */
 
 main {
-  margin-top: var(--header-height);
-  min-height: calc(100vh - var(--header-height));
+  position: relative;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+}
+
+.center-frame {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border: 2px red solid;
+  padding: 0.5rem;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.half-frame {
+  width: clamp(350px, 50%, 1000px);
+  border: 1px solid black;
+  padding: 0 0.5rem;
+}
+
+.quarter-frame {
+  width: clamp(175px, 25%, 500px);
+  padding: 0 0.5rem;
 }
 
 .home-page {
-  margin: auto 0;
-  height: 200vh;
+  overflow: hidden;
 }
 
 .home-page h1 {
   font-size: calc(var(--fs-900) * 1.5);
   line-height: 0.85;
-  opacity: 0;
-  transform: translateX(-100%);
 }
 
 .home-page h1:first-of-type {
-  margin-top: 10rem;
-}
-
-.home-page h2 {
-  opacity: 0;
-  transform: translateX(+100%);
+  margin-top: 1rem;
 }
 
 .home-page h2:first-of-type {
-  margin-top: 1rem;
+  margin-top: 1.25rem;
 }
 
 .home-page button.scroll-btn {
@@ -756,11 +808,9 @@ main {
   border-radius: 500px;
   border: solid 0.125rem;
   padding: 0.75rem 3rem;
-  margin-top: 2rem;
+  margin: 2.5rem 0 1rem;
   cursor: n-resize;
   background-color: transparent;
-  opacity: 0;
-  transform: translateY(50vh);
 
   &:hover {
     border: solid 0.125rem var(--clr-blue);
@@ -819,6 +869,74 @@ main {
   }
 }
 
+/*
+* ----------------------
+* Department Page
+* ----------------------
+*/
+
+.dpt-page {
+  padding-top: var(--header-height);
+}
+
+.dpt-page h3 {
+  margin: 0 0 2rem;
+}
+
+.all-dpt {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, clamp(350px, 20%, 500px));
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.one-dpt {
+  position: relative;
+  cursor: pointer;
+}
+
+.one-dpt fieldset {
+  border: 0.125rem solid var(--foreground);
+  height: 8rem;
+  transition: var(--timing03) ease-in-out;
+  box-shadow: var(--shadow-elevation-low);
+
+  &:hover {
+    color: var(--clr-blue);
+    background-color: hsl(220 10% 12% / .05);
+  }
+
+  &:active {
+    color: var(--clr-green);
+    border: 0.125rem solid var(--clr-green);
+  }
+}
+
+.one-dpt p {
+  color: var(--foreground);
+  padding-right: 2.5rem;
+}
+
+.one-dpt .dpt-img {
+  position: absolute;
+  top: 0;
+  right: -.5rem;
+  height: 4rem;
+  width: 4rem;
+  padding: 0.125rem;
+  border-radius: 10rem 0 10rem 10rem;
+  border: 0.125rem solid var(--foreground);
+  background-color: white;
+}
+
+.one-dpt img {
+  background-color: white;
+  object-fit: cover;
+  border-radius: 10rem 0 10rem 10rem;
+}
+
+/*************** sunitha *******************/
 .patient-detail {
   display: flex;
   justify-content: space-between;

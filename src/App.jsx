@@ -83,11 +83,11 @@ function App() {
       circleMenu.addEventListener("click", () => {tlHamburgerClick.timeScale(5); tlHamburgerClick.reverse()})
 
       // home-page Gsap Animation //////////////////////////////////////////
-      const tlHomePage = gsap.timeline({ defaults: { duration: .25, ease: "power1.out" } })
+      const tlHomePage = gsap.timeline({ defaults: { duration: .3, ease: "power1.out" } })
       tlHomePage
-        .to(".home-page h1", {x: "0" ,opacity: 1, stagger:0.1, delay:.8})
-        .to(".home-page h2", {x: "0" ,opacity: 1, stagger:0.1, delay:.2})
-        .to(".home-page button", {y: "0" ,opacity: 1})
+        .fromTo(".home-page h1", {x: "-100" ,opacity: 0}, {x: "0" ,opacity: 1, stagger:0.2, delay:.8})
+        .fromTo(".home-page h2", {x: "100" ,opacity: 0}, {x: "0" ,opacity: 1, stagger:0.2, delay:.2})
+        .fromTo(".home-page button", {y: "150" ,opacity: 0}, {y: "0" ,opacity: 1})
 
 
     }, app);
@@ -98,7 +98,7 @@ function App() {
 
 
   return (
-    <div className="useLayoutGsap container" ref={app}>
+    <div className="useLayoutGsap" ref={app}>
       <Navbar />
       <main className="container full">
         <Routes>

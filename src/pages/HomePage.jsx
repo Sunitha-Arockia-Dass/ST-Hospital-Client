@@ -6,6 +6,8 @@ function HomePage() {
     const { lang, strings, setLang } = useContext(LanguageContext)
 
     return (
+        <div className='center-frame breakout'>
+        <div className='half-frame'>
         <div className="home-page">
 
             <h1 className='my-text'>Sunitha</h1>
@@ -17,6 +19,9 @@ function HomePage() {
                 <h4>Scroll</h4>
                 <div className="scroll-down2"></div>
             </button>
+        </div>
+        </div>
+        <div className='half-frame'></div>
         </div>
     )
 }

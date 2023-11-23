@@ -21,14 +21,14 @@ function DepartmentPage() {
   };
 
   return (
-    <div>
+    <div className="dpt-page breakout">
       {!doctor && (
         <h3>Department Page</h3>
       )}
       {doctor ? (
         <SingleDoctor doctor={doctor} selectedDept={selectedDept} setDoctor={setDoctor} />
       ) : (
-        <div>
+        <div className="all-dpt">
           {selectedDept ? (
             <SingleDept
               selectedDept={selectedDept}
@@ -39,14 +39,16 @@ function DepartmentPage() {
 
             departments?.map((department) => {
               return (
-                <div
+                <div className="one-dpt"
                   key={department._id}
                   onClick={() => displayDept(department._id)}
                 >
                   <fieldset>
                     <legend><h4>{department.name}</h4></legend>
                     <p>{department.description}</p>
-                    <img src={department.image} alt="Department icon"/>
+                    <div className="dpt-img">
+                      <img src={department.image} alt="Department icon" />
+                    </div>
                   </fieldset>
                 </div>
               );
