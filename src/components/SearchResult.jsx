@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function SearchResult({ searchOutput }) {
+function SearchResult({ searchOutput,setSearchOutput }) {
   const { doctors, department, gPractice } = searchOutput;
   const [result, setResult] = useState(null);
 
@@ -29,6 +29,7 @@ function SearchResult({ searchOutput }) {
                 doctor: result.data,
                 department: result.data.department[0],
               }}
+              onClick={()=>{setSearchOutput(null)}}
             >
                 {result.data.firstname} {result.data.lastname}  </Link>}
            
@@ -37,13 +38,14 @@ function SearchResult({ searchOutput }) {
               <Link
                 to={`/departments/${result.data._id}`}
                 state={{ department: result.data }}
+                onClick={()=>{setSearchOutput(null)}}
               >
                 {result.data.name}
               </Link>
             )}
 
             {result.type === "gPractice" && (
-              <Link to={`/gpractice`}>{result.data.name} </Link>
+              <Link to={`/gpractice`} onClick={()=>{setSearchOutput(null)}}>{result.data.name} </Link>
             )}
           </h1>
         </div>

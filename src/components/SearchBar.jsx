@@ -27,7 +27,7 @@ const search=(e)=>{
       <button >Search</button>
    </form>
    
-    {searchOutput ? <SearchResult searchOutput={searchOutput}/>  :<></>}
+    {searchOutput ? <SearchResult searchOutput={searchOutput} setSearchOutput={setSearchOutput}/>  :<></>}
     </div>
   );
 }
