@@ -25,6 +25,8 @@ function Navbar() {
           <li><NavLink to="/">{strings.navbar.links.home}</NavLink></li>
 
           <li><NavLink to="/departments">{strings.navbar.links.departments}</NavLink></li>
+          
+          <li><NavLink to="/gpractice">{strings.navbar.links.gpractice}</NavLink></li>
 
           {!user && <li><NavLink to="/signup">{strings.navbar.links.signup}</NavLink></li>}
 
@@ -32,7 +34,6 @@ function Navbar() {
 
           {user && <li><NavLink to="/account">{strings.navbar.links.account}</NavLink></li>}
 
-          {user && <li><NavLink to="/gpractice">{strings.navbar.links.gpractice}</NavLink></li>}
 
           {user && <li>{user.username} ({user.role})</li>}
 

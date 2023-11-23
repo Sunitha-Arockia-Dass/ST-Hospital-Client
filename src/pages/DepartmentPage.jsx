@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import SingleDoctor from "../components/SingleDoctor";
-import SingleDept from "../components/SingleDept";
-import URL from '../links/links.json'
+import URL from "../links/links.json";
+import { Link } from 'react-router-dom';
+
 function DepartmentPage() {
   const [departments, setDepartments] = useState();
   const [selectedDept, setSelectedDept] = useState(null);
@@ -13,20 +13,20 @@ function DepartmentPage() {
     });
   }, []);
   const displayDept = (id) => {
-    axios
-      .get(`${URL.departments}/${id}`)
-      .then((foundDepartments) => {
-        setSelectedDept(foundDepartments.data);
-      });
+    axios.get(`${URL.departments}/${id}`).then((foundDepartments) => {
+      setSelectedDept(foundDepartments.data);
+    });
   };
 
   return (
     <div>
-      {!doctor && (
-        <h3>Department Page</h3>
-      )}
-      {doctor ? (
-        <SingleDoctor doctor={doctor} selectedDept={selectedDept} setDoctor={setDoctor} />
+      {!doctor && <h3>Department Page</h3>}
+      {/* {doctor ? (
+        <SingleDoctor
+          doctor={doctor}
+          selectedDept={selectedDept}
+          setDoctor={setDoctor}
+        />
       ) : (
         <div>
           {selectedDept ? (
@@ -36,26 +36,48 @@ function DepartmentPage() {
               setDoctor={setDoctor}
             />
           ) : (
-
             departments?.map((department) => {
               return (
-                <div
+                <Link
                   key={department._id}
-                  onClick={() => displayDept(department._id)}
+                  to={`/department/${department._id}`}
+                  state={{ department }}
                 >
-                  <fieldset>
-                    <legend><h4>{department.name}</h4></legend>
-                    <p>{department.description}</p>
-                    <img src={department.image} alt="Department icon"/>
-                  </fieldset>
-                </div>
+                  <div onClick={() => displayDept(department._id)}>
+                    <fieldset>
+                      <legend>
+                        <h4>{department.name}</h4>
+                      </legend>
+                      <p>{department.description}</p>
+                      <img src={department.image} alt="Department icon" />
+                    </fieldset>
+                  </div>
+                </Link>
               );
             })
-
-          )
-          }
+          )}
         </div>
-      )}
+      )} */}
+
+      {departments?.map((department) => {
+              return (
+                <Link
+                  key={department._id}
+                  to={`/departments/${department._id}`}
+                  state={{ department }}
+                >
+                  <div onClick={() => displayDept(department._id)}>
+                    <fieldset>
+                      <legend>
+                        <h4>{department.name}</h4>
+                      </legend>
+                      <p>{department.description}</p>
+                      <img src={department.image} alt="Department icon" />
+                    </fieldset>
+                  </div>
+                </Link>
+              );
+            })}
     </div>
   );
 }
