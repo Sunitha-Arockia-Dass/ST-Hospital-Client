@@ -980,6 +980,12 @@ main {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+.search-result{
+  border: 1px solid black;
+  text-align: center;
+  width: 40%;
+  margin: 10px;
+}
 
 /* display: flex;
 flex-wrap: wrap; */
