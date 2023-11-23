@@ -85,9 +85,9 @@ function App() {
       // home-page Gsap Animation //////////////////////////////////////////
       const tlHomePage = gsap.timeline({ defaults: { duration: .3, ease: "power1.out" } })
       tlHomePage
-        .fromTo(".home-page h1", {x: "-100" ,opacity: 0}, {x: "0" ,opacity: 1, stagger:0.2, delay:.8})
-        .fromTo(".home-page h2", {x: "100" ,opacity: 0}, {x: "0" ,opacity: 1, stagger:0.2, delay:.2})
-        .fromTo(".home-page button", {y: "150" ,opacity: 0}, {y: "0" ,opacity: 1})
+        .fromTo("#home-page h1", {x: "-100" ,opacity: 0}, {x: "0" ,opacity: 1, stagger:0.2, delay:.8})
+        .fromTo("#home-page h2", {x: "100" ,opacity: 0}, {x: "0" ,opacity: 1, stagger:0.2, delay:.2})
+        .fromTo("#home-page button", {y: "150" ,opacity: 0}, {y: "0" ,opacity: 1})
 
 
     }, app);

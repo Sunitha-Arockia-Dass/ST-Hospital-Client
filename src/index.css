@@ -494,10 +494,10 @@ form button {
   border-radius: 25rem;
   float: right;
   margin: 1.5rem 0 1.5rem;
-  text-shadow: 0px 0px 3px var(--background);
+  text-shadow: 0px 0px 3px var(--clr-dark);
   animation: spin 3s infinite linear paused;
   border: 0.25rem solid transparent;
-  background: linear-gradient(to left, var(--clr-blue) 0%, var(--clr-blue) 100%)
+  background: linear-gradient(to left, var(--clr-blue) 0%, var(--clr-blue) 49.5%, var(--clr-blue-medium) 50%, var(--clr-blue) 50.5%, var(--clr-blue) 100%)
       padding-box,
     conic-gradient(
         from var(--bg-angle) at 50% 50%,
@@ -533,6 +533,8 @@ form button {
 form {
   width: clamp(200px, 100%, 750px);
   text-indent: 0.5rem;
+  padding: 1rem;
+  margin: 0 auto;
 }
 
 label,
@@ -747,9 +749,9 @@ ul .user-infos {
 }
 
 /*
-* ----------------------
-* Main
-* ----------------------
+* ----------------------------------------------------------------------------
+* Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main 
+* ----------------------------------------------------------------------------
 */
 
 main {
@@ -759,12 +761,11 @@ main {
 }
 
 .center-frame {
+  /* border: 2px red solid; */
   height: 100%;
-  width: 100%;
+  width: 100vw;
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  border: 2px red solid;
   padding: 0.5rem;
 }
 
@@ -773,34 +774,38 @@ main {
 }
 
 .half-frame {
+  /* border: 1px solid black; */
+  margin: 0 auto;
   width: clamp(350px, 50%, 1000px);
-  border: 1px solid black;
-  padding: 0 0.5rem;
 }
 
 .quarter-frame {
+  margin: 0 auto;
   width: clamp(175px, 25%, 500px);
-  padding: 0 0.5rem;
 }
 
-.home-page {
+/*
+* ----------------------
+* Signup & Login Page
+* ----------------------
+*/
+
+#home-page {
   overflow: hidden;
+  justify-content: center;
+  align-items: center;
 }
 
-.home-page h1 {
+#home-page h1 {
   font-size: calc(var(--fs-900) * 1.5);
   line-height: 0.85;
 }
 
-.home-page h1:first-of-type {
-  margin-top: 1rem;
-}
-
-.home-page h2:first-of-type {
+#home-page h2:first-of-type {
   margin-top: 1.25rem;
 }
 
-.home-page button.scroll-btn {
+#home-page button.scroll-btn {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -867,6 +872,23 @@ main {
     transform: translate(-50%, 16px);
     opacity: 0;
   }
+}
+
+/*
+* ----------------------
+* Signup & Login Page
+* ----------------------
+*/
+
+#signup, #login {
+  margin-top: 4rem;
+}
+
+#login .half-frame, #signup .half-frame {
+  height: max-content;
+  border: 1px solid var(--foreground);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-elevation-medium);
 }
 
 /*

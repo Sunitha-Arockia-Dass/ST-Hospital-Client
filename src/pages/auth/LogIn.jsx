@@ -34,7 +34,7 @@ function LogIn() {
   }
 
   return (
-    <div id="login" className="center-frame">
+    <div id="login" className="full center-frame">
     <div className="half-frame">
 
       <form onSubmit={login}>

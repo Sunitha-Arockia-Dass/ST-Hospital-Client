@@ -155,7 +155,7 @@ function SignUp() {
   // }
 
   return (
-    <div id="signup" className="center-frame">
+    <div id="signup" className="full center-frame">
       <div className="half-frame">
         <form onSubmit={signup}>
           <h3>Sign Up</h3>
