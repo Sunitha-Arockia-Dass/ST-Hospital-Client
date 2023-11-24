@@ -223,6 +223,10 @@ button {
   font-family: var(--ft-Headings);
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 /*
 * ----------------------
 * Layout
@@ -295,13 +299,13 @@ button {
 
 .containerToggle.DM {
   right: 0.5rem;
-  animation: onglet-animation var(--timing05) linear calc(var(--timing05) * 2.5)
+  animation: onglet-animation var(--timing05) linear calc(var(--timing1) * 1.5)
     forwards;
 }
 
 .containerToggle.lang {
   right: 3.5rem;
-  animation: onglet-animation var(--timing05) linear calc(var(--timing05) * 2)
+  animation: onglet-animation var(--timing05) linear calc(var(--timing1))
     forwards;
 }
 
@@ -401,7 +405,7 @@ body {
 */
 
 /*navbar links*/
-.neonText {
+.neonText, .neonText:visited {
   margin: 2rem 0 0;
   color: var(--background);
   text-shadow: 0 0 5px var(--foreground), 0 0 10px var(--clr-blue),
@@ -482,7 +486,7 @@ a.style-one:active {
   }
 }
 
-form button {
+form button.form {
   cursor: pointer;
   color: var(--clr-light);
   font-size: var(--fs-500);
@@ -497,7 +501,14 @@ form button {
   text-shadow: 0px 0px 3px var(--clr-dark);
   animation: spin 3s infinite linear paused;
   border: 0.25rem solid transparent;
-  background: linear-gradient(to left, var(--clr-blue) 0%, var(--clr-blue) 49.5%, var(--clr-blue-medium) 50%, var(--clr-blue) 50.5%, var(--clr-blue) 100%)
+  background: linear-gradient(
+        to left,
+        var(--clr-blue) 0%,
+        var(--clr-blue) 49.5%,
+        var(--clr-blue-medium) 50%,
+        var(--clr-blue) 50.5%,
+        var(--clr-blue) 100%
+      )
       padding-box,
     conic-gradient(
         from var(--bg-angle) at 50% 50%,
@@ -582,6 +593,29 @@ form span.form-error-msg {
   padding-left: 1rem;
 }
 
+div.password {
+  position:relative;
+}
+
+svg.eye {
+  fill: var(--foreground);
+  position: absolute;
+  top: 20%;
+  right: 1rem;
+  opacity: .5;
+  cursor: pointer;
+  height: 1.75rem;
+
+  &:hover {
+    fill: var(--foreground);
+    opacity: 1;
+  }
+
+  &:active {
+    fill: var(--clr-green);
+  }
+}
+
 /*
 * ----------------------
 * Navbar
@@ -600,12 +634,18 @@ header {
 }
 
 header .logo {
+  text-transform: uppercase;
   font-size: 3rem;
   font-weight: bold;
-  color: var(--clr-blue);
   background-color: transparent;
   border: none;
   pointer-events: none;
+  /*3D effect*/
+  text-shadow: 1px 1px 1px var(--clr-blue), 1px 1px 1px var(--clr-blue),
+    1px 2px 1px var(--clr-blue), 1px 2px 1px var(--clr-blue),
+    1px 3px 1px var(--clr-blue), 1px 6px 3px hsl(220 10% 12% / 0.4),
+    1px 8px 5px hsl(220 10% 12% / 0.2), 1px 10px 17px hsl(220 10% 12% / 0.2),
+    1px 12px 30px hsl(220 10% 12% / 0.4);
 }
 
 header nav {
@@ -748,6 +788,117 @@ ul .user-infos {
   margin: 0;
 }
 
+/* Search Bar */
+.search-trigger{
+  position: absolute;
+  top: -2.25rem;
+  left: 4rem;
+  margin: 0;
+  padding: .125rem;
+  right: 2.5%;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: transparent;
+  transition: var(--timing03) ease-in;
+  animation: onglet-animation var(--timing05) linear calc(var(--timing05)*1.5) forwards;  
+}
+
+.search-trigger svg {
+  transition: var(--timing03) ease-in-out;
+  fill: var(--foreground);
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+
+  &:hover {
+    transform: matrix(-1.1, 0, 0, 1.1, 0, 0) scale(1.1);
+    fill: var(--clr-blue)
+  }
+  &:active {
+    transform: matrix(1, 0, 0, 1, 0, 0) scale(1.1);
+    fill: var(--clr-green)
+  }
+}
+
+.search-bar {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  transition: var(--timing05) ease-in-out;
+  
+}
+
+@keyframes searchAnimation {
+  0% {
+    clip-path: polygon(0 0, 0 0, 100% 0, 100% 0);
+  }
+  100% {
+    clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%);
+  }
+}
+
+.search-bar form {
+  position: relative;
+  width: 65%;
+  padding: 0;
+  margin-top: .25rem;
+  
+}
+
+.search-bar input{
+ margin: 0 auto;
+ box-shadow: var(--shadow-elevation-medium);
+}
+
+.search-bar .submit {
+  position: absolute;
+  top: 0.375rem;
+  margin: 0;
+  padding: .125rem;
+  right: 2.5%;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: transparent;
+}
+
+.search-bar .submit svg {
+  fill: var(--clr-blue);
+}
+
+/* Search Results */
+.search-result {
+  position: absolute;
+  top:3.25rem;
+  left:17.5%;
+  padding: 1rem;
+  background-color: white;
+  border-radius:.5rem;
+  width: 65%;
+  box-shadow: var(--shadow-elevation-medium);
+}
+
+.result {
+  height: 100%;
+  width: 100%;
+}
+
+.result a, .result a:visited {
+  color: var(--clr-blue);
+
+  &:hover {
+    font-weight: bold;
+  }
+
+  &:active {
+    color: var(--clr-green);
+  }
+}
+
+
+
+
+
 /*
 * ----------------------------------------------------------------------------
 * Main Main Main Main Main Main Main Main Main Main Main Main Main Main Main 
@@ -879,12 +1030,13 @@ main {
 * Signup & Login Page
 * ----------------------
 */
-
-#signup, #login {
-  margin-top: 4rem;
+#login.center-frame,
+#signup.center-frame {
+  padding-top: var(--header-height);
 }
 
-#login .half-frame, #signup .half-frame {
+#login .half-frame,
+#signup .half-frame {
   height: max-content;
   border: 1px solid var(--foreground);
   border-radius: 1rem;
@@ -926,7 +1078,7 @@ main {
 
   &:hover {
     color: var(--clr-blue);
-    background-color: hsl(220 10% 12% / .05);
+    background-color: hsl(220 10% 12% / 0.05);
   }
 
   &:active {
@@ -943,7 +1095,7 @@ main {
 .one-dpt .dpt-img {
   position: absolute;
   top: 0;
-  right: -.5rem;
+  right: -0.5rem;
   height: 4rem;
   width: 4rem;
   padding: 0.125rem;
@@ -957,6 +1109,8 @@ main {
   object-fit: cover;
   border-radius: 10rem 0 10rem 10rem;
 }
+
+
 
 /*************** sunitha *******************/
 .patient-detail {
@@ -980,11 +1134,41 @@ main {
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.search-result{
-  border: 1px solid black;
-  text-align: center;
-  width: 40%;
-  margin: 10px;
+
+
+/* test navbar for devs*/
+.test-navbar {
+  z-index: 100;
+}
+
+.test-navbar ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.test-navbar li {
+  font-size: 1rem;
+  color: var(--clr-blue);
+}
+
+.test-navbar a {
+  color: var(--clr-blue);
+
+  &:hover {
+    color: var(--clr-blue);
+  }
+
+  &:active {
+    color: var(--clr-blue);
+  }
+
+  &:visited {
+    color: var(--clr-blue);
+  }
+
+  &.active {
+    color: var(--clr-blue);
+  }
 }
 
 /* display: flex;

@@ -53,19 +53,7 @@ function App() {
     let ctx = gsap.context(() => {
 
       // hamburger-menu Gsap Animation //////////////////////////////////////////
-      let hamburgerMenu = document.querySelector(".hamburger-menu")
-
-      hamburgerMenu.addEventListener("click", () => {
-        const currentState = hamburgerMenu.getAttribute("data-state")
-    
-        if (!currentState || currentState === "closed") {
-          hamburgerMenu.setAttribute("data-state", "opened")
-          hamburgerMenu.setAttribute("aria-expanded", "true")
-        } else {
-          hamburgerMenu.setAttribute("data-state", "closed")
-          hamburgerMenu.setAttribute("aria-expanded", "false")
-        }
-      })
+      let hamburgerMenu = document.querySelector(".hamburger-menu")      
 
       let circleMenu = document.querySelector(".circle-menu")
 
@@ -79,7 +67,7 @@ function App() {
       tlHamburgerClick.paused(true).reversed(true)
         .to(".circle-menu", { display: "block", backgroundColor: "var(--foreground)",  top: 0, left: 0, duration: .5, height: " 100vh", width: "100vw", borderRadius: 0 })
         .fromTo(".navbar", {display: "none"}, {display: "block"})
-        .from("ul", { opacity: "0", stagger: .5, ease:"bounce.out", delay: .5, repeat: 2, yoyo: true })
+        .from(".navbar-ul", { opacity: "0", stagger: .5, ease:"bounce.out", delay: .5, repeat: 2, yoyo: true })
 
       hamburgerMenu.addEventListener("click", () => tlHamburgerClick.reversed() ? tlHamburgerClick.play() : closeMenu())
       circleMenu.addEventListener("click", () => {tlHamburgerClick.timeScale(5); tlHamburgerClick.reverse()})
