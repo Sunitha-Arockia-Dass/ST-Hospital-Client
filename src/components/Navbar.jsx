@@ -80,7 +80,8 @@ function Navbar() {
 
           {user && <li><NavLink to="/account"><h3  className="neonText">{strings.navbar.links.account}</h3></NavLink></li>}
 
-        
+          {user && <li><NavLink to="/account">{strings.navbar.links.account}</NavLink></li>}
+
 
           {user && <li><NavLink to="/gpractice"><h3 className="neonText">{strings.navbar.links.gpractice}</h3></NavLink></li>}
 
