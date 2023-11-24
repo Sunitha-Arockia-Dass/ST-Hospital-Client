@@ -299,13 +299,13 @@ button {
 
 .containerToggle.DM {
   right: 0.5rem;
-  animation: onglet-animation var(--timing05) linear calc(var(--timing05) * 2.5)
+  animation: onglet-animation var(--timing05) linear calc(var(--timing1) * 1.5)
     forwards;
 }
 
 .containerToggle.lang {
   right: 3.5rem;
-  animation: onglet-animation var(--timing05) linear calc(var(--timing05) * 2)
+  animation: onglet-animation var(--timing05) linear calc(var(--timing1))
     forwards;
 }
 
@@ -791,7 +791,7 @@ ul .user-infos {
 /* Search Bar */
 .search-trigger{
   position: absolute;
-  top: .75rem;
+  top: -2.25rem;
   left: 4rem;
   margin: 0;
   padding: .125rem;
@@ -799,7 +799,9 @@ ul .user-infos {
   width: 2rem;
   height: 2rem;
   border: none;
-  background: transparent;  
+  background: transparent;
+  transition: var(--timing03) ease-in;
+  animation: onglet-animation var(--timing05) linear calc(var(--timing05)*1.5) forwards;  
 }
 
 .search-trigger svg {
@@ -808,7 +810,7 @@ ul .user-infos {
   transform: matrix(-1, 0, 0, 1, 0, 0);
 
   &:hover {
-    transform: matrix(1, 0, 0, 1, 0, 0) scale(1.1);
+    transform: matrix(-1.1, 0, 0, 1.1, 0, 0) scale(1.1);
     fill: var(--clr-blue)
   }
   &:active {
