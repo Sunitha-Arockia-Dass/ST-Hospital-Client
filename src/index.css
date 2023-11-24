@@ -593,6 +593,29 @@ form span.form-error-msg {
   padding-left: 1rem;
 }
 
+div.password {
+  position:relative;
+}
+
+svg.eye {
+  fill: var(--foreground);
+  position: absolute;
+  top: 20%;
+  right: 1rem;
+  opacity: .5;
+  cursor: pointer;
+  height: 1.75rem;
+
+  &:hover {
+    fill: var(--foreground);
+    opacity: 1;
+  }
+
+  &:active {
+    fill: var(--clr-green);
+  }
+}
+
 /*
 * ----------------------
 * Navbar
