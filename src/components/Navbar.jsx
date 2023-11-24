@@ -37,12 +37,38 @@ function Navbar() {
     <header className="full">
       <BurgerMenu />
       <button className="logo">S.T. Hospital</button>
+
+      <div className="test-navbar">
+        <ul>
+          {user && <li className="user-infos">{strings.navbar.links.welcome} <span className="capitalize">{user.username}</span> ({user.role})</li>}
+          
+          <li><NavLink to="/">{strings.navbar.links.home}</NavLink></li>
+
+          <li><NavLink to="/departments">{strings.navbar.links.departments}</NavLink></li>
+
+          {!user && <li><NavLink to="/signup">{strings.navbar.links.signup}</NavLink></li>}
+
+          {!user && <li><NavLink to="/login">{strings.navbar.links.login}</NavLink></li>}
+
+          {user && <li><NavLink to="/account">{strings.navbar.links.account}</NavLink></li>}
+
+        
+
+          {user && <li><NavLink to="/gpractice">{strings.navbar.links.gpractice}</NavLink></li>}
+
+          
+
+          {user && user.role === "admin" && <li><NavLink to="/admin">Admin Page</NavLink></li>}
+
+          {user && <li><button onClick={logOutUser}>Logout</button></li>}
+        </ul>
+      </div>
       
 
       <div className="circle-menu" onClick={animate}>
       <nav className="navbar">
         <ul>
-          {user && <li className="user-infos"><h3>Welcome {user.username} ({user.role})</h3></li>}
+          {user && <li className="user-infos"><h3>{strings.navbar.links.welcome} <span className="capitalize">{user.username}</span> ({user.role})</h3></li>}
           
           <li><NavLink to="/"><h3 className="neonText">{strings.navbar.links.home}</h3></NavLink></li>
 

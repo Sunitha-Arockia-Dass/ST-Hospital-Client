@@ -223,6 +223,10 @@ button {
   font-family: var(--ft-Headings);
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 /*
 * ----------------------
 * Layout
@@ -497,7 +501,14 @@ form button {
   text-shadow: 0px 0px 3px var(--clr-dark);
   animation: spin 3s infinite linear paused;
   border: 0.25rem solid transparent;
-  background: linear-gradient(to left, var(--clr-blue) 0%, var(--clr-blue) 49.5%, var(--clr-blue-medium) 50%, var(--clr-blue) 50.5%, var(--clr-blue) 100%)
+  background: linear-gradient(
+        to left,
+        var(--clr-blue) 0%,
+        var(--clr-blue) 49.5%,
+        var(--clr-blue-medium) 50%,
+        var(--clr-blue) 50.5%,
+        var(--clr-blue) 100%
+      )
       padding-box,
     conic-gradient(
         from var(--bg-angle) at 50% 50%,
@@ -600,12 +611,22 @@ header {
 }
 
 header .logo {
+  text-transform: uppercase;
   font-size: 3rem;
   font-weight: bold;
-  color: var(--clr-blue);
   background-color: transparent;
   border: none;
   pointer-events: none;
+  /*3D effect*/
+  text-shadow: 1px 1px 1px var(--clr-blue),
+        1px 1px 1px var(--clr-blue),
+        1px 2px 1px var(--clr-blue),
+        1px 2px 1px var(--clr-blue),
+        1px 3px 1px var(--clr-blue),
+    1px 6px 3px hsl(220 10% 12% / 0.4),
+    1px 8px 5px hsl(220 10% 12% / 0.2),
+    1px 10px 17px hsl(220 10% 12% / 0.2),
+    1px 12px 30px hsl(220 10% 12% / 0.4);
 }
 
 header nav {
@@ -880,11 +901,13 @@ main {
 * ----------------------
 */
 
-#signup, #login {
-  margin-top: 4rem;
+#signup,
+#login {
+
 }
 
-#login .half-frame, #signup .half-frame {
+#login .half-frame,
+#signup .half-frame {
   height: max-content;
   border: 1px solid var(--foreground);
   border-radius: 1rem;
@@ -926,7 +949,7 @@ main {
 
   &:hover {
     color: var(--clr-blue);
-    background-color: hsl(220 10% 12% / .05);
+    background-color: hsl(220 10% 12% / 0.05);
   }
 
   &:active {
@@ -943,7 +966,7 @@ main {
 .one-dpt .dpt-img {
   position: absolute;
   top: 0;
-  right: -.5rem;
+  right: -0.5rem;
   height: 4rem;
   width: 4rem;
   padding: 0.125rem;
@@ -979,6 +1002,15 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.test-navbar {
+  font-size: .75rem;
+}
+
+.test-navbar ul {
+  display: flex;
+  flex-direction: row;
 }
 
 /* display: flex;

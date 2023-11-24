@@ -2,6 +2,7 @@
   "EN": {
     "navbar": {
       "links": {
+        "welcome": "Welcome",
         "home": "Home",
         "signup": "Signup",
         "login": "Login",
@@ -17,13 +18,14 @@
   "FR": {
     "navbar": {
       "links": {
+        "welcome": "Bienvenue",
         "home": "Accueil",
         "signup": "S'enregistrer",
         "login": "Se connecter",
         "account": "Compte",
         "editaccount": "Editer Compte",
         "departments": "départements",
-        "gpractice": "Pratiques générales"
+        "gpractice": "Généralistes"
       }
     },
     "homepage": {}
