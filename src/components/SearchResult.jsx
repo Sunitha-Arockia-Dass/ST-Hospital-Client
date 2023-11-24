@@ -20,8 +20,8 @@ function SearchResult({ searchOutput,setSearchOutput }) {
   return (
     <div className="search-result">
       {result && (
-        <div>
-          <h1>
+        <div className="result">
+          <p>
             
               {result.type === "doctor" &&<Link
               to={`/doctor/${result.data._id}`}
@@ -47,7 +47,7 @@ function SearchResult({ searchOutput,setSearchOutput }) {
             {result.type === "gPractice" && (
               <Link to={`/gpractice`} onClick={()=>{setSearchOutput(null)}}>{result.data.name} </Link>
             )}
-          </h1>
+          </p>
         </div>
       )}
     </div>

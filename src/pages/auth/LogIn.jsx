@@ -35,8 +35,7 @@ function LogIn() {
 
   return (
     <div id="login" className="full center-frame">
-    <div className="half-frame">
-
+    <div className="half-frame">   
       <form onSubmit={login}>
         <h3>Log In</h3>
         <p>
@@ -50,11 +49,10 @@ function LogIn() {
         <input type="password" name="password" placeholder="Enter Password" />
         <span className="form-error-msg"></span><br />
 
-        <button id="login" type="submit">Log In</button>
+        <button id="login" className="form" type="submit">Log In</button>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-
     </div>
     </div>
   )

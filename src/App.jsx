@@ -53,9 +53,7 @@ function App() {
     let ctx = gsap.context(() => {
 
       // hamburger-menu Gsap Animation //////////////////////////////////////////
-      let hamburgerMenu = document.querySelector(".hamburger-menu")
-
-      
+      let hamburgerMenu = document.querySelector(".hamburger-menu")      
 
       let circleMenu = document.querySelector(".circle-menu")
 

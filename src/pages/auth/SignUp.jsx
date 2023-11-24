@@ -258,7 +258,7 @@ function SignUp() {
           <br />
           <input type="text" name="country" placeholder="Enter your country" />
           <br />
-          <button type="submit">Sign Up</button>
+          <button className="form" type="submit">Sign Up</button>
         </form>
 
         {errorMessage && <p className="server-error-message">{errorMessage}</p>}
