@@ -55,7 +55,7 @@ function Navbar() {
 
       <div className="circle-menu" onClick={animate}>
       <nav className="navbar">
-        <ul>
+        <ul className="navbar-ul">
           {user && <li className="user-infos"><h3>{strings.navbar.links.welcome} <span className="capitalize">{user.username}</span> ({user.role})</h3></li>}
           
           <li><NavLink to="/"><h3 className="neonText">{strings.navbar.links.home}</h3></NavLink></li>
