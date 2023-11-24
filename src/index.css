@@ -1010,13 +1010,40 @@ main {
   margin: 10px;
 }
 
+
+/* test navbar for devs*/
 .test-navbar {
-  font-size: .75rem;
+  z-index: 100;
 }
 
 .test-navbar ul {
   display: flex;
   flex-direction: row;
+}
+
+.test-navbar li {
+  font-size: 1rem;
+  color: var(--clr-blue);
+}
+
+.test-navbar a {
+  color: var(--clr-blue);
+
+  &:hover {
+    color: var(--clr-blue);
+  }
+
+  &:active {
+    color: var(--clr-blue);
+  }
+
+  &:visited{
+    color: var(--clr-blue);
+  }
+
+  &.active {
+    color: var(--clr-blue);
+  }
 }
 
 /* display: flex;
