@@ -7,14 +7,21 @@ import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import URL from "../links/links.json";
 
-const DoctorCalendarComponent = ({setView,updateCallback, details, doctor, selectedDept, update }) => {
-  console.log(update);
+const DoctorCalendarComponent = ({
+  setView,
+  updateCallback,
+  details,
+  doctor,
+  selectedDept,
+  update,
+}) => {
   const apptId = details?._id;
   const { user } = useContext(AuthContext);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [showTimeGrid, setShowTimeGrid] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [events, setEvents] = useState([]);
+
   const transformEvents = (externalEvents) => {
     if (!update) {
       return externalEvents.map((event) => ({
@@ -89,9 +96,11 @@ const DoctorCalendarComponent = ({setView,updateCallback, details, doctor, selec
       .post(URL.createAppointment, apptDetails)
       .then((response) => {
         axios.get(`${URL.getDrAppointment}/${doctor._id}`).then((appts) => {
+          // try{
           const transformedEvents = transformEvents(appts.data);
           setEvents(transformedEvents);
           setShowTimeGrid(false);
+          sendEmail();
         });
       })
       .catch((error) => {
@@ -125,7 +134,7 @@ const DoctorCalendarComponent = ({setView,updateCallback, details, doctor, selec
     return (
       <>
         {user.role === "doctor" && <p>TiTle:{eventInfo.event.title}</p>}
-        {update ? <p style={{ color: "purple"}}>Your Appointment</p> : <></>}
+        {update ? <p style={{ color: "purple" }}>Your Appointment</p> : <></>}
       </>
     );
   };
