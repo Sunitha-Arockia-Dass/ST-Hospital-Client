@@ -48,6 +48,16 @@ const DoctorCalendarComponent = ({setView,updateCallback, details, doctor, selec
   }, []);
 
   const handleDateClick = (info) => {
+    const clickedDate = new Date(info.dateStr);
+  const currentDate = new Date(); // Get current date
+
+  // Check if the clicked date is in the past
+  if (clickedDate < currentDate) {
+    // Date is in the past, prevent selection
+    // You can show an error message or handle it as needed
+    console.log("Cannot select past dates for appointments");
+    return;
+  }
     setSelectedDate(info.dateStr);
     setSelectedSlot(info.dateStr);
     setShowTimeGrid(true);
