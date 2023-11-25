@@ -6,8 +6,6 @@ import interactionPlugin from "@fullcalendar/interaction";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import URL from "../links/links.json";
-import { SMTPClient } from 'emailjs'
-import { TextEncoder, TextDecoder } from 'fastestsmallesttextencoderdecoder';
 
 const DoctorCalendarComponent = ({
   setView,
@@ -17,22 +15,13 @@ const DoctorCalendarComponent = ({
   selectedDept,
   update,
 }) => {
-  console.log(update);
   const apptId = details?._id;
   const { user } = useContext(AuthContext);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [showTimeGrid, setShowTimeGrid] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [events, setEvents] = useState([]);
-  useEffect(() => {
-    // Use TextEncoder and TextDecoder here or in other parts of your component
-    const encoder = new TextEncoder();
-    const decoder = new TextDecoder();
 
-    const encoded = encoder.encode('Your string to encode');
-    const decoded = decoder.decode(encoded);
-    console.log(decoded);
-  }, []);
   const transformEvents = (externalEvents) => {
     if (!update) {
       return externalEvents.map((event) => ({
@@ -96,41 +85,17 @@ const DoctorCalendarComponent = ({
     axios
       .post(URL.createAppointment, apptDetails)
       .then((response) => {
-        axios.get(`${URL.getDrAppointment}/${doctor._id}`).then(async(appts) => {
-          try{ const transformedEvents = transformEvents(appts.data);
+        axios.get(`${URL.getDrAppointment}/${doctor._id}`).then((appts) => {
+          // try{
+          const transformedEvents = transformEvents(appts.data);
           setEvents(transformedEvents);
           setShowTimeGrid(false);
-          const mailDetails = {
-            to_name: user.name,
-            email: user.email,
-            from_name: "ST Hospital",
-            message: "Hello",
-          };
-          const client = new SMTPClient({
-            user: 'ST Hospital',
-            password: import.meta.env.SERVICE_PWD,
-            host: 'smtp.sthospital01@gmail.com',
-            ssl: true,
-          });
-           const message = await client.sendAsync(
-            {
-              text: 'i hope this works',
-              from: 'you <sthospital01@gmail.com>',
-              to: `${user.username} <${user.email}>`,
-              cc: 'else <else@your-email.com>',
-              subject: 'testing emailjs',
-            })
-            console.log('message sent successfully',message)
-          }
-            catch(err)  {
-              console.error('Error sending message:', err);
-            }
-            
-          });
-        })
-        .catch((error) => {
-          console.log(error);
+          sendEmail();
         });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   function editAppt() {
     const slotStartTime = new Date(selectedSlot);
