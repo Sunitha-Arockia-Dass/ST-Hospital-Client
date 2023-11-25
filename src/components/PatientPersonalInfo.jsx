@@ -14,7 +14,7 @@ function PatientPersonalInfo(){
         axios
           .get(`${URL.gPractice}/${user.patientDetails.gp[0]._id}`)
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             setGP(response.data);
           })
           .catch((error) => console.log("error", error));
