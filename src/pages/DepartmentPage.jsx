@@ -19,36 +19,37 @@ function DepartmentPage() {
   // };
 
   return (
-    <div className="dpt-page breakout">
+    <div className="dpt-page full">
       {!doctor && (
-        <h3>Department Page</h3>
+        <div className="container breakout">
+          <h3>Department Page</h3>
+        </div>
       )}
       <div className="all-dpt">
-      {departments?.map((department) => {
-              return (
-                
-                <Link
-                  key={department._id}
-                  to={`/departments/${department._id}`}
-                  state={{ department }}
-                >
-                  <div className="one-dpt" onClick={() => displayDept(department._id)}>
-                    <fieldset>
-                      <img src={department.image} className="dpt-img" alt="Department icon" />
-                      <legend>
-                        <h4>{department.name}</h4>
-                      </legend>
-                      <p>{department.description}</p>
-                      <div className="dpt-img">
+        {departments?.map((department) => {
+          return (
 
-                      <img src={department.image} alt="Department icon" />
-                      </div>
-                    </fieldset>
+            <Link
+              key={department._id}
+              to={`/departments/${department._id}`}
+              state={{ department }}
+            >
+              <div className="one-dpt" onClick={() => displayDept(department._id)}>
+                <fieldset>
+                  <img src={department.image} className="dpt-img" alt="Department icon" />
+                  <legend>
+                    <h4>{department.name}</h4>
+                  </legend>
+                  <p>{department.description}</p>
+                  <div className="dpt-img">
+                    <img src={department.image} alt="Department icon" />
                   </div>
-                </Link>
-              );
-            })}
-            </div>
+                </fieldset>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }

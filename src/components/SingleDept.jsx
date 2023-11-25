@@ -13,10 +13,12 @@ const SingleDept=()=>{
     const department = location.state?.department
 
     return(
-        <div key={department._id}>
-          <h4>{department?.name}</h4><img src={department?.image} alt="Department icon"/>
-          <h5>{department?.description}</h5>
-          <h6>Doctors:</h6>
+        <div className="dpt-page single-dpt" key={department._id}>
+          <fieldset>
+          <legend><h3>{department?.name}</h3></legend>
+          <p>{department?.description}</p>
+          
+          <h4 className="doctors">Doctors:</h4>
             {department.doctors?.map((doctor) => {
               return (
                 <Link
@@ -25,20 +27,23 @@ const SingleDept=()=>{
                   state={{ doctor :doctor,
                   department:department}}
                 >
-                <p >
-                  {doctor.position}: {doctor.firstname} {doctor.lastname},
-                </p>
+                <p className="doctor">
+                  {doctor.position}: {doctor.firstname} {doctor.lastname} </p>
                 </Link>
               );
             })}
+          <div className="single-img">
+          <img src={department?.image} alt="Department icon"/>
+          </div>
+          </fieldset>
           
-          <button
+          <button className="back"
             onClick={() => {
               // setdepartment(null);
               navigate(-1)
             }}
           >
-            Back
+            ↩ Back
           </button>
         </div>
       ) 
