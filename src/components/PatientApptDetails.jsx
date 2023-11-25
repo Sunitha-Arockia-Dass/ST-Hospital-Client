@@ -46,7 +46,7 @@ function PatientApptDetails() {
     const filteredAppt = appts.filter((appt) => {
       return appt._id === id;
     });
-    console.log("filteredAppt", filteredAppt[0]);
+    console.log("filteredAppt", filteredAppt[0]._id);
 
     setView((prevState) => ({
       ...prevState,
@@ -56,6 +56,7 @@ function PatientApptDetails() {
     }));
   }
   const deleteappt = (id) => {
+    console.log('deleteappt',id)
     axios.delete(`${URL.patientDeleteAppt}/${id}`).then((response) => {
       setView((prevState) => ({
         ...prevState,
@@ -137,7 +138,8 @@ function PatientApptDetails() {
           </button>
           <button
             onClick={() => {
-              deleteappt(view.details._id);
+              console.log(view.details)
+              deleteappt(view.details[0]._id);
             }}
           >
             Cancel your appointments
