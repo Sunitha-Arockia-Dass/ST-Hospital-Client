@@ -14,7 +14,7 @@ const SingleDept=()=>{
 
     return(
         <div className="dpt-page single-dpt" key={department._id}>
-          <fieldset>
+          <fieldset className="fieldset">
           <legend><h3>{department?.name}</h3></legend>
           <p>{department?.description}</p>
           

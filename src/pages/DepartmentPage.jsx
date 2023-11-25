@@ -21,8 +21,8 @@ function DepartmentPage() {
   return (
     <div className="dpt-page full">
       {!doctor && (
-        <div className="container breakout">
-          <h3>Department Page</h3>
+        <div className="container">
+          <h3>Choose your department</h3>
         </div>
       )}
       <div className="all-dpt">
@@ -35,7 +35,7 @@ function DepartmentPage() {
               state={{ department }}
             >
               <div className="one-dpt" onClick={() => displayDept(department._id)}>
-                <fieldset>
+                <fieldset className="fieldset">
                   <img src={department.image} className="dpt-img" alt="Department icon" />
                   <legend>
                     <h4>{department.name}</h4>

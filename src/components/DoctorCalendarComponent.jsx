@@ -162,17 +162,6 @@ const DoctorCalendarComponent = ({
   }
   return (
     <div>
-      {update
-        ? selectedSlot && (
-            <button onClick={editAppt} disabled={!selectedSlot}>
-              Change the Appointment
-            </button>
-          )
-        : selectedSlot && (
-            <button onClick={creatAppt} disabled={!selectedSlot}>
-              Book an Appointment
-            </button>
-          )}
       {!showTimeGrid ? (
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
@@ -187,9 +176,8 @@ const DoctorCalendarComponent = ({
           // Other props as needed
         />
       ) : (
-        <div>
-          <button onClick={handleBackToMonth}>Back to Month</button>
-          <h4>Selected Time:{convertTo12HourFormat(selectedSlot)}</h4>
+        <div className="back-to-month">
+          {/*<h4>Selected Time:{convertTo12HourFormat(selectedSlot)}</h4>*/}
           <FullCalendar
             plugins={[timeGridPlugin, interactionPlugin]}
             timeZone="UTC+2"
@@ -215,6 +203,21 @@ const DoctorCalendarComponent = ({
           />
         </div>
       )}
+
+      {update
+        ? selectedSlot && (          
+            <button className="change-appointment back" onClick={editAppt} disabled={!selectedSlot}>
+              Change the Appointment
+            </button>         
+          )
+        : selectedSlot && (
+          <div>
+            <button className="book-appointment" onClick={creatAppt} disabled={!selectedSlot}>
+            <svg width="100px" height="100px" viewBox="0 0.75 24.00 24.00" fill="none"><path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke-width="1.5" stroke-linecap="round"></path> <path d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8" stroke-width="1.5" stroke-linecap="round"></path></svg>
+            </button>
+            <button className="back" onClick={handleBackToMonth}>Back to Month</button>
+          </div>
+          )}
     </div>
   );
 };
