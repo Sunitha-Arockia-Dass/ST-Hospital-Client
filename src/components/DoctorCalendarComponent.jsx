@@ -21,29 +21,54 @@ const DoctorCalendarComponent = ({
   const [showTimeGrid, setShowTimeGrid] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [events, setEvents] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  const currentDate = new Date();
+  const tomorrow = new Date(currentDate);
+  tomorrow.setDate(currentDate.getDate() + 1);
 
+  const threeMonthsLater = new Date(currentDate);
+  threeMonthsLater.setMonth(currentDate.getMonth() + 3);
+
+  const validRange = {
+    start: tomorrow.toISOString(),
+    end: threeMonthsLater.toISOString(),
+  };
+
+  // const transformEvents = (externalEvents) => {
+  //   if (!update) {
+  //     return externalEvents.map((event) => ({
+  //       title: event.user[0]?.username,
+  //       start: event.start,
+  //       end: event.end,
+  //       color: "red",
+  //     }));
+  //   } else {
+  //     const event = externalEvents[0];
+  //     if (event) {
+  //       return [
+  //         {
+  //           title: event.user[0]?.username,
+  //           start: event.start,
+  //           end: event.end,
+  //           color: "red",
+  //         },
+  //       ];
+  //     }
+  //     return [];
+  //   }
+  // };
   const transformEvents = (externalEvents) => {
-    if (!update) {
-      return externalEvents.map((event) => ({
+    return externalEvents.map((event) => {
+      const isUpdateAppointment = update && event._id === details?._id; // Check if it's the appointment being updated
+      const color = isUpdateAppointment ? "blue" : "red"; // Highlight the appointment being updated
+
+      return {
         title: event.user[0]?.username,
         start: event.start,
         end: event.end,
-        color: "red",
-      }));
-    } else {
-      const event = externalEvents[0];
-      if (event) {
-        return [
-          {
-            title: event.user[0]?.username,
-            start: event.start,
-            end: event.end,
-            color: "red",
-          },
-        ];
-      }
-      return [];
-    }
+        color,
+      };
+    });
   };
 
   useEffect(() => {
@@ -56,24 +81,24 @@ const DoctorCalendarComponent = ({
 
   const handleDateClick = (info) => {
     const clickedDate = new Date(info.dateStr);
-  const currentDate = new Date(); // Get current date
-
-  // Check if the clicked date is in the past
-  if (clickedDate < currentDate) {
-    // Date is in the past, prevent selection
-    // You can show an error message or handle it as needed
-    console.log("Cannot select past dates for appointments");
-    return;
-  }
+    const currentDate = new Date();
+    if (clickedDate < currentDate) {
+      setErrorMessage("Cannot select past dates for appointments");
+      return;
+    }
     setSelectedDate(info.dateStr);
     setSelectedSlot(info.dateStr);
     setShowTimeGrid(true);
+    setErrorMessage("");
+  };
+  const handleEventClick = (info) => {
+    alert("This slot is already booked.");
   };
 
   const handleSlotClick = (info) => {
-    const clickedTime = new Date(info.dateStr); // Get the clicked time
-    const localOffset = clickedTime.getTimezoneOffset(); // Get local timezone offset in minutes
-    const localTime = new Date(clickedTime.getTime() - localOffset * 60000); // Adjust the time to local timezone
+    const clickedTime = new Date(info.dateStr);
+    const localOffset = clickedTime.getTimezoneOffset();
+    const localTime = new Date(clickedTime.getTime() - localOffset * 60000);
 
     setSelectedSlot(localTime.toISOString());
   };
@@ -130,22 +155,45 @@ const DoctorCalendarComponent = ({
         console.log(error);
       });
   }
+
+  const areDatesEqual = (date1, date2) => {
+    const formattedDate1 = new Date(date1).toISOString();
+    const formattedDate2 = new Date(date2).toISOString();
+    return formattedDate1 === formattedDate2;
+  };
+
   const renderDateEventContent = (eventInfo) => {
+    console.log("eventInfo.event.start", eventInfo.event.start);
+    console.log("details.start", details.start);
     return (
       <>
-        {user.role === "doctor" && <p>TiTle:{eventInfo.event.title}</p>}
-        {update ? <p style={{ color: "purple" }}>Your Appointment</p> : <></>}
+        {user.role === "doctor" && <p>Title: {eventInfo.event.title}</p>}
+        {update &&
+        details &&
+        areDatesEqual(eventInfo.event.start, details.start) ? (
+          <p style={{ color: "purple" }}>Your Appointment</p>
+        ) : (
+          <></>
+        )}
       </>
     );
   };
+
   const renderTimeEventContent = (eventInfo) => {
     return (
       <>
-        {user.role === "doctor" && <p>TiTle:{eventInfo.event.title}</p>}
-        {update ? <>Your Appointment</> : <></>}
+        {user.role === "doctor" && <p>Title: {eventInfo.event.title}</p>}
+        {update &&
+        details &&
+        areDatesEqual(eventInfo.event.start, details.start) ? (
+          <p style={{ color: "purple" }}>Your Appointment</p>
+        ) : (
+          <></>
+        )}
       </>
     );
   };
+
   function convertTo12HourFormat(timestamp) {
     const date = new Date(timestamp);
     const localTime = new Date(
@@ -162,6 +210,19 @@ const DoctorCalendarComponent = ({
   }
   return (
     <div>
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+
+      {update
+        ? selectedSlot && (
+            <button onClick={editAppt} disabled={!selectedSlot}>
+              Change the Appointment
+            </button>
+          )
+        : selectedSlot && (
+            <button onClick={creatAppt} disabled={!selectedSlot}>
+              Book an Appointment
+            </button>
+          )}
       {!showTimeGrid ? (
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
@@ -172,6 +233,7 @@ const DoctorCalendarComponent = ({
           eventContent={renderDateEventContent}
           weekends={false}
           hiddenDays={[0, 6]}
+          validRange={validRange}
 
           // Other props as needed
         />
@@ -199,6 +261,7 @@ const DoctorCalendarComponent = ({
             events={events}
             eventContent={renderTimeEventContent}
             eventDisplay="block"
+            eventClick={handleEventClick}
             // Other props as needed
           />
         </div>
