@@ -603,6 +603,16 @@ optgroup {
   }
 }
 
+.two-inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+input[name="firstname"], input[name="lastname"] {
+  display: inline;
+  width: calc(50% - 0.5rem);
+}
+
 input::placeholder {
   color: #909090;
   transform: translate3d(0, 0, 0);
