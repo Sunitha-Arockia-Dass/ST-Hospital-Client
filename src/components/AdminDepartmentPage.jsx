@@ -9,7 +9,7 @@ function AdminDepartmentPage() {
   const [updateDept, setUpdateDept] = useState(null);
   const [departments, setDepartments] = useState([]);
   const [deptView, setDeptView] = useState(true);
-  const [deptId,setDeptId]=useState()
+  const [deptId, setDeptId] = useState()
   useEffect(() => {
     axios.get(URL.departments).then((foundDepartments) => {
       setDepartments(foundDepartments.data);
@@ -27,53 +27,60 @@ function AdminDepartmentPage() {
       .then((response) => {
         console.log("successfully deleted", response.data);
         setDepartments((prevDepartments) =>
-        prevDepartments.filter((department) => department._id !== id)
-      );
+          prevDepartments.filter((department) => department._id !== id)
+        );
       })
       .catch((error) => {
         console.log("error", error);
       });
   };
   return (
-    <div>
-      <h1>Admin Department Page</h1>
-      <button
+    <div className="dpt-page full">
+    <div className="container">
+      <h4 className="admin">Admin Department Page</h4>
+      </div>
+      <div className="all-dpt">
+      
+      <button className="back"
         onClick={() => {
           setCreateDept(true), setDeptView(false);
         }}
       >
-        Add
+        <h4>Add +</h4>
       </button>
       {deptView &&
         departments?.map((department) => {
           return (
-            <div key={department._id}>
-              <fieldset>
+            <div className="admin one-dpt" key={department._id}>
+              <fieldset className="fieldset">                
                 <legend>
                   <h4>{department.name}</h4>
                 </legend>
                 <p>{department.description}</p>
-                <img src={department.image} alt="Department icon" />
-                <button
+                <div className="dpt-img">
+                    <img src={department.image} alt="Department icon" />
+                  </div>
+              </fieldset>
+                <button className="back"
                   onClick={() => {
                     updateDepartment(department._id);
                   }}
                 >
                   Update
                 </button>
-                <button
+                <button className="back"
                   onClick={() => {
                     deleteDept(department._id);
                   }}
                 >
                   Delete
                 </button>
-              </fieldset>
             </div>
           );
         })}
       {createDept && <CreateDepartment create={true} setDeptView={setDeptView} setCreateDept={setCreateDept} id={""} />}
       {updateDept && <CreateDepartment create={false} setDeptView={setDeptView} setCreateDept={setUpdateDept} id={deptId} />}
+    </div>
     </div>
   );
 }
