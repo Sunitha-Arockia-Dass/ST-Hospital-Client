@@ -1213,6 +1213,14 @@ main {
   background-color: white;
 }
 
+
+/*General Parcticien GP */
+
+.one-gp fieldset {
+  height: 13rem;
+
+}
+
 /*
 * ----------------------
 * AGENDA FullCalendar
