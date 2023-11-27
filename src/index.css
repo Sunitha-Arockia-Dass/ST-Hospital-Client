@@ -635,6 +635,28 @@ svg.eye {
 
 /*
 * ----------------------
+* React fullcalendar
+* ----------------------
+*/
+
+:root {
+  --fc-page-bg-color: var(--background);
+  --fc-border-color: var(--clr-medium);
+  --fc-button-text-color: var(--clr-light);
+  --fc-button-bg-color: var(--clr-blue);
+  --fc-button-border-color: var(--clr-blue-medium);
+  --fc-button-hover-bg-color: var(--clr-blue-medium);
+  --fc-button-hover-border-color: var(--clr-blue);
+  --fc-button-active-bg-color: var(--clr-green);
+  --fc-button-active-border-color: var(--clr-green-medium);
+  --fc-event-bg-color: var(--clr-blue);
+  --fc-event-border-color: var(--clr-blue-medium);
+  --fc-list-event-hover-bg-color: var(--clr-blue);
+}
+
+
+/*
+* ----------------------
 * Navbar
 * ----------------------
 */
@@ -1084,11 +1106,14 @@ main {
   cursor: pointer;
 }
 
-.one-dpt fieldset {
+.fieldset {
   border: 0.125rem solid var(--foreground);
   border-radius: 0.5rem;
-  height: 8rem;
   transition: var(--timing03) ease-in-out;
+}
+
+.one-dpt .fieldset {
+  height: 8rem;
   box-shadow: var(--shadow-elevation-low);
 
   &:hover {
@@ -1134,11 +1159,6 @@ main {
   margin: 0;
 }
 
-.single-dpt fieldset {
-  border: 0.125rem solid var(--foreground);
-  border-radius: 0.5rem;
-  transition: var(--timing03) ease-in-out;
-}
 
 .single-dpt p {
   padding-right: 8rem;
@@ -1182,6 +1202,59 @@ main {
   height: 100%;
   border-radius: 10rem 0 10rem 10rem;
 }
+
+.single-doc-img {
+  position: absolute;
+  top:0;
+  right: -0.5rem;
+  padding: 0.125rem;
+  border-radius: 10rem 0 10rem 10rem;
+  border: 0.125rem solid var(--foreground);
+  background-color: white;
+}
+
+
+/*General Parcticien GP */
+
+.one-gp fieldset {
+  height: 13rem;
+
+}
+
+/*
+* ----------------------
+* AGENDA FullCalendar
+* ----------------------
+*/
+.calendar-container {
+  position: relative;
+}
+
+button.book-appointment {
+  position: absolute;
+  bottom: 4.5rem;
+  right: 1rem;
+  height: 6rem;
+  border: none;
+ 
+  z-index:100;
+  background: transparent;  
+}
+
+button.book-appointment svg {
+  stroke: var(--clr-blue);
+  fill: var(--background);
+  border-radius: 1rem;
+}
+
+
+
+
+
+
+
+
+
 
 /*************** sunitha *******************/
 .patient-detail {
