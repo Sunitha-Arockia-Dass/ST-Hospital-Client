@@ -212,17 +212,6 @@ const DoctorCalendarComponent = ({
     <div>
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
-      {update
-        ? selectedSlot && (
-            <button onClick={editAppt} disabled={!selectedSlot}>
-              Change the Appointment
-            </button>
-          )
-        : selectedSlot && (
-            <button onClick={creatAppt} disabled={!selectedSlot}>
-              Book an Appointment
-            </button>
-          )}
       {!showTimeGrid ? (
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
