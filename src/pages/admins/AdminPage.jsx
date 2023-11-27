@@ -16,10 +16,12 @@ function AdminPage() {
   }
 
   return (
-    <div>
-      No, I am the ADMIN !!! Hello
-      <button onClick={viewDoctor}>Doctors</button>
-      <button onClick={viewDepartment}>Departments</button>
+    <div className="dpt-page">
+      <h3>Administration Page</h3>
+      <h5>Great master, what do you want to update?</h5>
+
+      <button className="back" onClick={viewDoctor}>Doctors</button>
+      <button className="back" onClick={viewDepartment}>Departments</button>
       {doctorView && <AdminDoctorPage setDoctorView={setDoctorView}/>}
       {departmentView && <AdminDepartmentPage setDepartmentView={setDepartmentView}/>}
     </div>

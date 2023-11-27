@@ -32,7 +32,6 @@ function DepartmentPage() {
             >
               <div className="one-dpt" onClick={() => displayDept(department._id)}>
                 <fieldset className="fieldset">
-                  <img src={department.image} className="dpt-img" alt="Department icon" />
                   <legend>
                     <h4>{department.name}</h4>
                   </legend>

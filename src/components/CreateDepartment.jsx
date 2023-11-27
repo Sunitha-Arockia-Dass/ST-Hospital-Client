@@ -56,28 +56,27 @@ axios.post(URL.addDepartment,deptData)
 
     {create ? (
     <div>
-      <h1>Create Department</h1>
+      <h4>Create Department</h4>
       <form onSubmit={createDept}>
-        <input type="text" name="name" />
+        <input type="text" name="name" placeholder="department's name"/>
 
-        <input type="text" name="image" />
+        <input type="text" name="image" placeholder="department's image"/>
 
-        <label>Description:</label>
-        <textarea name="description" />
+        <textarea name="description" placeholder="department's description"/>
 
-        <button type="submit">Create</button>
+        <button className="form" type="submit">Create</button>
       </form>
     </div>): (<div>
-      <h1>Update Department</h1>
+      <h4>Update Department</h4>
       <form onSubmit={updateDept}>
-        <input type="text" name="name" defaultValue={deptToUpdate.name}/>
+        <input type="text" name="name" placeholder="department's name" defaultValue={deptToUpdate.name}/>
 
-        <input type="text" name="image" defaultValue={deptToUpdate.image}/>
+        <input type="text" name="image" placeholder="department's image" defaultValue={deptToUpdate.image}/>
 
         <label>Description:</label>
-        <textarea name="description" defaultValue={deptToUpdate.description}/>
+        <textarea name="description" placeholder="department's description" defaultValue={deptToUpdate.description}/>
 
-        <button type="submit">Update</button>
+        <button className="form" type="submit">Update</button>
       </form>
     </div>)}
     </div>

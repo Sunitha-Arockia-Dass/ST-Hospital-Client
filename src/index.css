@@ -483,11 +483,20 @@ a.style-one:active {
 */
 
 /* Back Buttons */
-.back {
+.back, .back:visited {
   margin: 0.5rem 0;
+  margin-right: .5rem;
   border-radius: 0.5rem;
   padding: 0.25rem 0.5rem;
   border: 1px solid var(--foreground);
+
+  &:hover {
+    border: 1px solid var(--clr-blue);
+  }
+
+  &:active {
+    border: 1px solid var(--clr-green);
+  }
 }
 
 /* Form Button */
@@ -592,6 +601,16 @@ optgroup {
     outline: transparent;
     border: 0.125rem solid var(--clr-blue-medium);
   }
+}
+
+.two-inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+input[name="firstname"], input[name="lastname"] {
+  display: inline;
+  width: calc(50% - 0.5rem);
 }
 
 input::placeholder {
@@ -1127,6 +1146,25 @@ main {
   }
 }
 
+.admin .fieldset {
+  box-shadow: none;
+  cursor: auto;
+
+  &:hover {
+    color: var(--foreground);
+    background-color: transparent;
+  }
+
+  &:active {
+    color: var(--foreground);
+    border: 0.125rem solid var(--foreground);
+  }
+}
+
+h4.admin {
+  padding-bottom: 2rem;
+}
+
 .one-dpt p {
   color: var(--foreground);
   padding-right: 2.5rem;
@@ -1175,9 +1213,8 @@ main {
   transition: var(--timing03) ease-in-out;
 
   &:hover::after {
-    content: ' (Click to set an appointment)';
+    content: ' *';
     color: var(--clr-blue);
-    font-size: var(--fs-300);
     vertical-align: middle;
   }
 
