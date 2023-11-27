@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/auth.context";
 import { Navigate } from "react-router-dom";
-import CreateDepartment from '../../components/CreateDepartment'
+import AdminDoctorPage from '../../components/AdminDoctorPage'
 import AdminDepartmentPage from '../../components/AdminDepartmentPage'
 
 
@@ -20,8 +20,8 @@ function AdminPage() {
       No, I am the ADMIN !!! Hello
       <button onClick={viewDoctor}>Doctors</button>
       <button onClick={viewDepartment}>Departments</button>
-      {/* {doctorView && <CreateDoctor />} */}
-      {departmentView && <AdminDepartmentPage />}
+      {doctorView && <AdminDoctorPage setDoctorView={setDoctorView}/>}
+      {departmentView && <AdminDepartmentPage setDepartmentView={setDepartmentView}/>}
     </div>
   );
 }

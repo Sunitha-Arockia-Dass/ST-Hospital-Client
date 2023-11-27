@@ -12,11 +12,7 @@ function DepartmentPage() {
       setDepartments(foundDepartments.data);
     });
   }, []);
-  // const displayDept = (id) => {
-  //   axios.get(`${URL.departments}/${id}`).then((foundDepartments) => {
-  //     setSelectedDept(foundDepartments.data);
-  //   });
-  // };
+ 
 
   return (
     <div className="dpt-page full">
