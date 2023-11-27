@@ -9,14 +9,17 @@ function PatientGPracticeDetails() {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    axios
-      .get(`${URL.gPractice}/${user.patientDetails.gp[0]._id}`)
+    if(user.patientDetails){
+
+      axios
+      .get(`${URL.gPractice}/${user.patientDetails.gp[0]?._id}`)
       .then((response) => {
         // console.log(response.data);
         setGP(response.data);
       })
       .catch((error) => console.log("error", error));
-  }, []);
+    }
+  }, [user.patientDetails]);
 
   return (
     <div >

@@ -163,8 +163,6 @@ const DoctorCalendarComponent = ({
   };
 
   const renderDateEventContent = (eventInfo) => {
-    console.log("eventInfo.event.start", eventInfo.event.start);
-    console.log("details.start", details.start);
     return (
       <>
         {user.role === "doctor" && <p>Title: {eventInfo.event.title}</p>}

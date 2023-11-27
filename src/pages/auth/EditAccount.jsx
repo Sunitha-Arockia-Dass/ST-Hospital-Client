@@ -18,6 +18,7 @@ function EditAccount() {
     });
   }, []);
   useEffect(() => {
+    if(user.patientDetails){
     axios
       .get(`${URL.gPractice}/${user.patientDetails.gp[0]._id}`)
       .then((response) => {
@@ -25,7 +26,8 @@ function EditAccount() {
         setMyGPData(response.data);
       })
       .catch((error) => console.log("error", error));
-  }, []);
+    }
+  }, [user.patientDetails]);
   const updateUser = (e) => {
     e.preventDefault();
     let data = {
@@ -36,24 +38,35 @@ function EditAccount() {
       role: user.role,
       firstname: e.target.firstname.value,
       lastname: e.target.lastname.value,
-      patientDetails: {
-        dateOfBirth: e.target.dateOfBirth.value,
-        gp: e.target.gp.value,
-        contactNumber: e.target.phone.value,
-        address: {
-          houseNumber: e.target.houseNumber.value,
-          street: e.target.street.value,
-          city: e.target.city.value,
-          country: e.target.country.value,
-          postalCode: e.target.postalCode.value,
-        },
-      },
-    };
+    }
+    if(e.target.dateOfBirth.value.trim()!== ''){
+      data.patientDetails.dateOfBirth=e.target.dateOfBirth.value
+    }
+    if(e.target.gp.value.trim()!== ''){
+      data.patientDetails.gp=e.target.gp.value
+    }
+    if(e.target.phone.value.trim()!== ''){
+      data.patientDetails.contactNumber=e.target.phone.value
+    }
+    if(e.target.houseNumber.value.trim()!== ''){
+      data.patientDetails.houseNumber=e.target.houseNumber.value
+    }
+    if(e.target.street.value.trim()!== ''){
+      data.patientDetails.street=e.target.street.value
+    }
+    if(e.target.city.value.trim()!== ''){
+      data.patientDetails.city=e.target.city.value
+    }
+    if(e.target.country.value.trim()!== ''){
+      data.patientDetails.country=e.target.country.value
+    }
+    if(e.target.postalCode.value.trim()!== ''){
+      data.patientDetails.postalCode=e.target.postalCode.value
+    }  
     console.log("data", data);
     axios
       .put(`${URL.patientUpdate}/${user._id}`, data)
       .then((response) => {
-        console.log(response.data.data);
         logOutUser();
         navigate("/login");
       })
@@ -111,7 +124,7 @@ function EditAccount() {
         <input
           type="tel"
           name="phone"
-          defaultValue={user.patientDetails.contactNumber}
+          defaultValue={user.patientDetails?.contactNumber}
           placeholder="Enter your phone number"
           pattern="[0-9]{10}"
         />
@@ -119,7 +132,7 @@ function EditAccount() {
         <input
           type="date"
           name="dateOfBirth"
-          defaultValue={user.patientDetails.dateOfBirth}
+          defaultValue={user.patientDetails?.dateOfBirth}
           placeholder="Enter your date of birth"
         />
         <br />
@@ -154,35 +167,35 @@ function EditAccount() {
         <input
           type="text"
           name="houseNumber"
-          defaultValue={user.patientDetails.address.houseNumber}
+          defaultValue={user.patientDetails?.address.houseNumber}
           placeholder="Enter your house number"
         />
         <br />
         <input
           type="text"
           name="street"
-          defaultValue={user.patientDetails.address.street}
+          defaultValue={user.patientDetails?.address.street}
           placeholder="Enter your street name"
         />
         <br />
         <input
           type="text"
           name="postalCode"
-          defaultValue={user.patientDetails.address.postalCode}
+          defaultValue={user.patientDetails?.address.postalCode}
           placeholder="Enter your post code"
         />
         <br />
         <input
           type="text"
           name="city"
-          defaultValue={user.patientDetails.address.city}
+          defaultValue={user.patientDetails?.address.city}
           placeholder="Enter your city"
         />
         <br />
         <input
           type="text"
           name="country"
-          defaultValue={user.patientDetails.address.country}
+          defaultValue={user.patientDetails?.address.country}
           placeholder="Enter your country"
         />
         <br />

@@ -23,18 +23,18 @@ function SignUp() {
       password: e.target.password.value,
       firstname: e.target.firstname.value,
       lastname: e.target.lastname.value,
-      patientDetails: {
-        dateOfBirth: e.target.dateOfBirth.value,
-        gp: e.target.gp.value,
-        contactNumber: e.target.phone.value,
-        address: {
-          houseNumber: e.target.houseNumber.value,
-          street: e.target.street.value,
-          city: e.target.city.value,
-          country: e.target.country.value,
-          postalCode: e.target.postalCode.value,
-        },
-      },
+      // patientDetails: {
+      //   dateOfBirth: e.target.dateOfBirth.value,
+      //   gp: e.target.gp.value,
+      //   contactNumber: e.target.phone.value,
+      //   address: {
+      //     houseNumber: e.target.houseNumber.value,
+      //     street: e.target.street.value,
+      //     city: e.target.city.value,
+      //     country: e.target.country.value,
+      //     postalCode: e.target.postalCode.value,
+      //   },
+      // },
     };
     console.log(data);
     axios
@@ -222,19 +222,7 @@ function SignUp() {
           />
           <span className="form-error-msg">{errorsInput.confirmPassword}</span>
           <br />
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Enter your phone number"
-            pattern="[0-9]{10}"
-          />
-          <br />
-          <input
-            type="date"
-            name="dateOfBirth"
-            placeholder="Enter your date of birth"
-          />
-          <br />
+         
           <input
             type="text"
             name="firstname"
@@ -243,37 +231,7 @@ function SignUp() {
           <br />
           <input type="text" name="lastname" placeholder="Enter your Last Name" />
           <br />
-          <select name="gp">
-            <option value="" disabled hidden>
-              Select a General Practice
-            </option>
-            {gpData?.map((gp) => {
-              return (
-                <option key={gp._id} value={gp._id}>
-                  {gp.name}, {gp.address.city}
-                </option>
-              );
-            })}
-          </select>
-          <br />
-          <input
-            type="text"
-            name="houseNumber"
-            placeholder="Enter your house number"
-          />
-          <br />
-          <input type="text" name="street" placeholder="Enter your street name" />
-          <br />
-          <input
-            type="text"
-            name="postalCode"
-            placeholder="Enter your post code"
-          />
-          <br />
-          <input type="text" name="city" placeholder="Enter your city" />
-          <br />
-          <input type="text" name="country" placeholder="Enter your country" />
-          <br />
+          
           <button className="form" type="submit">Sign Up</button>
         </form>
 
