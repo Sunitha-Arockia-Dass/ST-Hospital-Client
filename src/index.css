@@ -635,6 +635,28 @@ svg.eye {
 
 /*
 * ----------------------
+* React fullcalendar
+* ----------------------
+*/
+
+:root {
+  --fc-page-bg-color: var(--background);
+  --fc-border-color: var(--clr-medium);
+  --fc-button-text-color: var(--clr-light);
+  --fc-button-bg-color: var(--clr-blue);
+  --fc-button-border-color: var(--clr-blue-medium);
+  --fc-button-hover-bg-color: var(--clr-blue-medium);
+  --fc-button-hover-border-color: var(--clr-blue);
+  --fc-button-active-bg-color: var(--clr-green);
+  --fc-button-active-border-color: var(--clr-green-medium);
+  --fc-event-bg-color: var(--clr-blue);
+  --fc-event-border-color: var(--clr-blue-medium);
+  --fc-list-event-hover-bg-color: var(--clr-blue);
+}
+
+
+/*
+* ----------------------
 * Navbar
 * ----------------------
 */
@@ -1193,7 +1215,7 @@ main {
 
 /*
 * ----------------------
-* AGENDA
+* AGENDA FullCalendar
 * ----------------------
 */
 .calendar-container {
@@ -1206,11 +1228,18 @@ button.book-appointment {
   right: 1rem;
   height: 6rem;
   border: none;
-  stroke: var(--clr-blue);
+ 
   z-index:100;
-  border-radius: 1.5rem;
-  background: var(--background);
+  background: transparent;  
 }
+
+button.book-appointment svg {
+  stroke: var(--clr-blue);
+  fill: var(--background);
+  border-radius: 1rem;
+}
+
+
 
 
 
