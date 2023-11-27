@@ -8,11 +8,24 @@ import AdminDepartmentPage from '../../components/AdminDepartmentPage'
 function AdminPage() {
   const [doctorView, setDoctorView] = useState(false);
   const [departmentView, setDepartmentView] = useState(false);
+  const [selectDrView,setSelectDrView] = useState(false);
   function viewDoctor() {
     setDoctorView(true);
+    setDepartmentView(false);
+    setSelectDrView(false);
+
   }
   function viewDepartment() {
     setDepartmentView(true);
+    setDoctorView(false);
+    setSelectDrView(false);
+
+  }
+  function addDrCredentials() {
+    setSelectDrView(true);
+    setDepartmentView(false);
+    setDoctorView(false);
+
   }
 
   return (
@@ -22,10 +35,11 @@ function AdminPage() {
 
       <button className="back" onClick={viewDoctor}>Doctors</button>
       <button className="back" onClick={viewDepartment}>Departments</button>
-      {doctorView && <AdminDoctorPage setDoctorView={setDoctorView}/>}
+      <button className="back" onClick={addDrCredentials}>Create Doctor Credentials</button>
+      {doctorView && <AdminDoctorPage createCredentials={false} setDoctorView={setDoctorView}/>}
+      {selectDrView && <AdminDoctorPage createCredentials={true} setDoctorView={setDoctorView}/>}
       {departmentView && <AdminDepartmentPage setDepartmentView={setDepartmentView}/>}
     </div>
   );
 }
-
 export default AdminPage;
