@@ -17,6 +17,7 @@ function HomePage() {
                  .fromTo("#home-page h1", { x: "-100", opacity: 0 }, { x: "0", opacity: 1, stagger: 0.2, delay: 1 })
                  .fromTo("#home-page h2", { x: "100", opacity: 0 }, { x: "0", opacity: 1, stagger: 0.2, delay: .2 })
                  .fromTo("#home-page button", { y: "150", opacity: 0 }, { y: "0", opacity: 1 })
+                 .fromTo(".wheel-w", { x: "100", opacity: 0 }, { x: "0", opacity: 1, stagger: 0.2, delay: .2 })
 
 
         }, hp);
@@ -38,7 +39,9 @@ function HomePage() {
                 </button>
             </div>
 
-            <div className='half-frame'></div>
+            <div className='half-frame circles'>
+                <img className="wheel-w" src="https://shcs.ucdavis.edu/sites/g/files/dgvnsk7846/files/inline-images/Wheel_0.png" height="90%" width="90%"/>      
+            </div>
 
         </div>
     )

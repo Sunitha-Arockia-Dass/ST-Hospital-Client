@@ -56,7 +56,7 @@ function Navbar() {
       </button>
 
       {/* LOGO */}
-      <button className="logo">S.T. Hospital</button>
+      <NavLink to="/"><button className="logo">S.T. Hospital</button></NavLink>
 
       {/* only to facilitate development */}
       <nav className="test-navbar">
@@ -89,12 +89,7 @@ function Navbar() {
 
             {user && <li><NavLink to="/account"><h3 className="neonText">{strings.navbar.links.account}</h3></NavLink></li>}
 
-            {user && <li><NavLink to="/account">{strings.navbar.links.account}</NavLink></li>}
-
-
             {user && <li><NavLink to="/gpractice"><h3 className="neonText">{strings.navbar.links.gpractice}</h3></NavLink></li>}
-
-
 
             {user && user.role === "admin" && <li><NavLink to="/admin"><h3 className="neonText">Admin Page</h3></NavLink></li>}
 
