@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import URL from "../links/links.json";
 import CreateDepartment from "./CreateDepartment";
 
-function AdminDepartmentPage() {
+function AdminDepartmentPage({setDepartmentView}) {
   const [createDept, setCreateDept] = useState(null);
   const [updateDept, setUpdateDept] = useState(null);
   const [departments, setDepartments] = useState([]);
@@ -41,6 +41,7 @@ function AdminDepartmentPage() {
       </div>
       <div className="all-dpt">
       
+      <button onClick={()=>{setDepartmentView(false)}} >Go Back</button>
       <button className="back"
         onClick={() => {
           setCreateDept(true), setDeptView(false);

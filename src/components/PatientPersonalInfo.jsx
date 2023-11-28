@@ -41,7 +41,7 @@ return(
       <p>{user.patientDetails.address.country}</p></div>}
       <NavLink to="/editaccount">
         
-        <button>Edit Account</button>
+        <button>Edit Account/Add Additional Information</button>
       
     </NavLink>
       

@@ -32,7 +32,7 @@ function PatientGPracticeDetails() {
       <p>{gp.address.postalCode} {gp.address.city} </p>
       <p>{gp.address.country}</p>
       
-      </div>):<></>}
+      </div>):<>Your Gp information is not updated</>}
     </div>
   );
 }

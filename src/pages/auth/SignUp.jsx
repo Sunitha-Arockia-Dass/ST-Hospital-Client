@@ -23,18 +23,7 @@ function SignUp() {
       password: e.target.password.value,
       firstname: e.target.firstname.value,
       lastname: e.target.lastname.value,
-      // patientDetails: {
-      //   dateOfBirth: e.target.dateOfBirth.value,
-      //   gp: e.target.gp.value,
-      //   contactNumber: e.target.phone.value,
-      //   address: {
-      //     houseNumber: e.target.houseNumber.value,
-      //     street: e.target.street.value,
-      //     city: e.target.city.value,
-      //     country: e.target.country.value,
-      //     postalCode: e.target.postalCode.value,
-      //   },
-      // },
+      
     };
     console.log(data);
     axios
