@@ -11,21 +11,32 @@ function Account() {
   const navigate = useNavigate();
 
   return (
-    <div id="account">
+    <div id="account" className="full center-frame dpt-page">
+    
       {user.role === "patient" && (
-        <div>
-        <h1>This is {user.firstname} {user.lastname} Account</h1>
+        <>
+        <div className="container">
+        <h3>{user.firstname} {user.lastname}, Welcome to your account.</h3>        
+        </div>
+        
+
+
+        <div className="half-frame">
         <div className="patient-detail">
           <PatientApptDetails />
           <PatientGPracticeDetails />
           <PatientPersonalInfo />
         </div>
         </div>
+        </>
       )}
+      <div className="half-frame">
       {user.role === "patient" && <Doctor />}
       {user.role === "admin" && navigate("/admin")}
+      </div>
       
     </div>
+    
   );
 }
 

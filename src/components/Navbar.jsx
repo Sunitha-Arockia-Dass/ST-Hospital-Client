@@ -68,7 +68,7 @@ function Navbar() {
           {user && <li><NavLink to="/account">{strings.navbar.links.account}</NavLink></li>}
           {user && <li><NavLink to="/gpractice">{strings.navbar.links.gpractice}</NavLink></li>}
           {user && user.role === "admin" && <li><NavLink to="/admin">Admin Page</NavLink></li>}
-          {user && <li><button onClick={logOutUser}>Logout</button></li>}
+          {user && <li><button className="back" onClick={logOutUser}>Logout</button></li>}
         </ul>
       </nav>
 

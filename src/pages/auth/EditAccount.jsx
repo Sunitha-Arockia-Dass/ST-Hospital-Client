@@ -77,7 +77,7 @@ function EditAccount() {
   };
 
   return (
-    <div id="editaccount" className="center">
+    <div id="editaccount" className="full center-frame dpt-page">
       <form onSubmit={updateUser}>
         <h3>Edit Account</h3>
         <p>
@@ -87,6 +87,23 @@ function EditAccount() {
             account
           </NavLink>
         </p>
+
+        <div className="two-inputs">
+        <input
+          type="text"
+          name="firstname"
+          defaultValue={user.firstname}
+          placeholder="Enter your First Name"
+        />
+        <br />
+        <input
+          type="text"
+          name="lastname"
+          defaultValue={user.lastname}
+          placeholder="Enter your Last Name"
+        />
+        </div>
+        <br />
 
         <input
           type="text"
@@ -134,20 +151,6 @@ function EditAccount() {
           name="dateOfBirth"
           defaultValue={user.patientDetails?.dateOfBirth}
           placeholder="Enter your date of birth"
-        />
-        <br />
-        <input
-          type="text"
-          name="firstname"
-          defaultValue={user.firstname}
-          placeholder="Enter your First Name"
-        />
-        <br />
-        <input
-          type="text"
-          name="lastname"
-          defaultValue={user.lastname}
-          placeholder="Enter your Last Name"
         />
         <br />
         <select name="gp">
