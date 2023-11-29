@@ -3,7 +3,7 @@ import axios from "axios";
 import URL from "../links/links.json";
 import { useEffect, useState } from "react";
 
-function CreateCrendtials({ selectedDoctor,setDoctorView,setFormView }) {
+function CreateCrendtials({ selectedDoctor,setDoctorView,setFormView,setSelectDrView,createCredentials }) {
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [formInput, setFormInput] = useState({
     username: selectedDoctor?.firstname,
@@ -28,8 +28,11 @@ function CreateCrendtials({ selectedDoctor,setDoctorView,setFormView }) {
     axios
       .post(URL.signup, data)
       .then((response) => {
-        setDoctorView(true)
+        // createCredentials=false
+        // console.log(createCredentials)
+        // setDoctorView(false)
         setFormView(false)
+        // setSelectDrView(false)
       })
       .catch((error) => {
         console.log(error);

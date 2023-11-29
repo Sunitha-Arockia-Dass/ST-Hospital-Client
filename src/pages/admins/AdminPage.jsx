@@ -36,8 +36,8 @@ function AdminPage() {
       <button className="back" onClick={viewDoctor}>Doctors</button>
       <button className="back" onClick={viewDepartment}>Departments</button>
       <button className="back" onClick={addDrCredentials}>Create Doctor Credentials</button>
-      {doctorView && <AdminDoctorPage createCredentials={false} setDoctorView={setDoctorView}/>}
-      {selectDrView && <AdminDoctorPage createCredentials={true} setDoctorView={setDoctorView}/>}
+      {doctorView && <AdminDoctorPage createCredentials={false} setDoctorView={setDoctorView} setSelectDrView={setSelectDrView}/>}
+      {selectDrView && <AdminDoctorPage createCredentials={true} setDoctorView={setDoctorView} setSelectDrView={setSelectDrView}/>}
       {departmentView && <AdminDepartmentPage setDepartmentView={setDepartmentView}/>}
     </div>
   );

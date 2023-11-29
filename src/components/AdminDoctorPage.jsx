@@ -4,7 +4,7 @@ import URL from "../links/links.json";
 import CreateDoctor from "./CreateDoctor";
 import CreateCredentials from "./CreateCredentials";
 
-function AdminDoctorPage({ setDoctorView, createCredentials }) {
+function AdminDoctorPage({ setDoctorView, createCredentials,setSelectDrView }) {
   const [createDoctor, setCreateDoctor] = useState(null);
   const [updateDr, setUpdateDr] = useState(null);
   const [doctors, setDoctors] = useState([]);
@@ -145,6 +145,8 @@ function AdminDoctorPage({ setDoctorView, createCredentials }) {
           selectedDoctor={selectedDoctor}
           setDoctorView={setDoctorView}
           setFormView={setFormView}
+          setSelectDrView={setSelectDrView}
+          createCredentials={createCredentials}
         />
       )}
     </div>
