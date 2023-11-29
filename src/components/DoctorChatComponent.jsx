@@ -1,56 +1,103 @@
 import { useEffect, useState, useContext } from "react";
 import io from "socket.io-client";
 import { AuthContext } from "../context/auth.context";
+import axios from "axios";
+import URL from "../links/links.json";
 
 const DoctorChatComponent = () => {
   const { user } = useContext(AuthContext);
-  const [doctor, setDoctor] = useState(null);
-  const [msg, setMsg] = useState("");
+  const [isDoctor, setIsDoctor] = useState(null);
+  const [doctors, setDoctors] = useState(null);
+  const [receivingDrId, setReceivingDrId] = useState(null);
+  const [outgoingMsg, setOutgoingMsg] = useState("");
+  const [incomingMsgs, setIncomingMsgs] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(URL.users)
+      .then((response) => {
+        setDoctors(response.data);
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
+  }, []);
   useEffect(() => {
     if (user?.role === "doctor") {
-      setDoctor(true);
+      setIsDoctor(true);
     }
   }, [user]);
-  useEffect(() => {
-    const socket = io("http://localhost:5005"); // Replace with your server URL
 
-    // Example: Sending a message from one doctor to another
-    
+  useEffect(() => {
+    const socket = io("http://localhost:5005");
+    console.log("Attaching listener for doctorMessage");
+
     // Listen for incoming messages
-    socket.on("doctorMessage", (message) => {
-      // Handle received messages here
-      console.log("Received message:", message);
+    socket.on("testMessage", (receivingMessage) => {
+      console.log("receiving messages 2");
+      console.log("Received message:", receivingMessage);
+      setIncomingMsgs((prevMessages) => [...prevMessages, receivingMessage]);
     });
 
-    return () => {
-      socket.disconnect(); // Disconnect the socket when component unmounts
-    };
-  }, [msg]);
+    // return () => {
+    //   socket.off("doctorMessage"); // Clean up the listener when component unmounts
+    //   socket.disconnect(); // Disconnect the socket when component unmounts
+    // };
+  }, []);
+  const socket = io("http://localhost:5005");
+
   const sendMessage = () => {
-    const socket = io("http://localhost:5005")
-    const message = msg;
-    socket.emit("doctorMessage", message);
+    console.log("send message function called");
+    const messageData = {
+      recipientId: receivingDrId,
+      message: outgoingMsg,
+      userId: user._id,
+    };
+    console.log(messageData.message);
+    console.log(messageData.recipientId);
+    console.log(messageData.userId);
+    socket.emit("privateMessage", messageData);
   };
 
   function getMsg(e) {
-    setMsg(e.target.value);
+    setOutgoingMsg(e.target.value);
   }
   function handleSubmit(e) {
     e.preventDefault();
-    if (msg.trim() !== "") {
+    if (outgoingMsg.trim() !== "") {
       sendMessage();
     }
   }
+  function handleDoctorChange(e) {
+    const selectedDoctorId =
+      e.target.options[e.target.selectedIndex].getAttribute("data-doctor-id");
+    setReceivingDrId(selectedDoctorId);
+  }
+
   return (
     <div className="chat-component">
       {doctor && (
         <form onSubmit={handleSubmit}>
           <input
             name="message"
-            value={msg}
+            value={outgoingMsg}
             onChange={getMsg}
             placeholder="Type your message..."
           />
+          <select name="receivingDr" onChange={(e) => handleDoctorChange(e)}>
+            {doctors?.map((doctor) => {
+              return (
+                <option
+                  data-doctor-id={doctor._id}
+                  value={doctor.name}
+                  key={doctor._id}
+                >
+                  {doctor.firstname} {doctor.lastname}
+                </option>
+              );
+            })}
+          </select>
+          <input value={`The other one:${incomingMsgs}`} />
           <button type="submit">Send</button>
         </form>
       )}
