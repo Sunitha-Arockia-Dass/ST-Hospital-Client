@@ -1,5 +1,6 @@
 {
   " API_URL": "http://localhost:5005",
+  "users":"http://localhost:5005/auth",
   "signup": "http://localhost:5005/auth/signup",
   "verify": "http://localhost:5005/auth/verify",
   "login": "http://localhost:5005/auth/login",

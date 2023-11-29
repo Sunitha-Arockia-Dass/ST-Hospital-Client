@@ -69,6 +69,8 @@ function Navbar() {
           {user && <li><NavLink to="/gpractice">{strings.navbar.links.gpractice}</NavLink></li>}
           {user && user.role === "admin" && <li><NavLink to="/admin">Admin Page</NavLink></li>}
           {user && <li><button className="back" onClick={logOutUser}>Logout</button></li>}
+          {user && <li > <span className="capitalize">{user.username}</span> ({user.role})</li>}
+
         </ul>
       </nav>
 
