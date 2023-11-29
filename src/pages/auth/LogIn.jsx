@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useEffect, useState, useContext } from "react"
 import URL from '../../links/links.json'
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import { AuthContext } from "./../../context/auth.context"
 
 // const API_URL = "http://localhost:5005"
@@ -15,19 +15,19 @@ function LogIn() {
 
   /*  UPDATE - get authenticateUser from the context */
   const { storeToken, authenticateUser } = useContext(AuthContext)
-  useEffect(() => {
-    const newSocket = io("http://localhost:5005");
-    setSocket(newSocket);
+  // useEffect(() => {
+  //   const newSocket = io("http://localhost:5005");
+  //   setSocket(newSocket);
 
-    // return () => {
-    //   newSocket.disconnect();
-    // };
-  }, []);
+  //   // return () => {
+  //   //   newSocket.disconnect();
+  //   // };
+  // }, []);
   const handleLogin = (userId) => {
     console.log('userId',userId)
-    if (socket) {
-      socket.emit("login", userId);
-    }
+    // if (socket) {
+    //   socket.emit("login", userId);
+    // }
   };
 
   const login = (e) => {

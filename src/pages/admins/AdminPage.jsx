@@ -9,24 +9,35 @@ function AdminPage() {
   const [doctorView, setDoctorView] = useState(false);
   const [departmentView, setDepartmentView] = useState(false);
   const [selectDrView,setSelectDrView] = useState(false);
+  const [createAdmin,setCreateAdmin] =useState(false)
   function viewDoctor() {
     setDoctorView(true);
     setDepartmentView(false);
     setSelectDrView(false);
+    setCreateAdmin(false)
 
   }
   function viewDepartment() {
     setDepartmentView(true);
     setDoctorView(false);
     setSelectDrView(false);
+    setCreateAdmin(false)
 
   }
   function addDrCredentials() {
     setSelectDrView(true);
     setDepartmentView(false);
     setDoctorView(false);
-
+    setCreateAdmin(false)
   }
+
+function addAdminCredentials(){
+  setCreateAdmin(true)
+  setDepartmentView(false);
+  setDoctorView(false);
+  setSelectDrView(false);
+
+}
 
   return (
     <div className="dpt-page">
@@ -36,6 +47,7 @@ function AdminPage() {
       <button className="back" onClick={viewDoctor}>Doctors</button>
       <button className="back" onClick={viewDepartment}>Departments</button>
       <button className="back" onClick={addDrCredentials}>Create Doctor Credentials</button>
+      <button className="back" onClick={addAdminCredentials}>Create Admin Credentials</button>
       {doctorView && <AdminDoctorPage createCredentials={false} setDoctorView={setDoctorView} setSelectDrView={setSelectDrView}/>}
       {selectDrView && <AdminDoctorPage createCredentials={true} setDoctorView={setDoctorView} setSelectDrView={setSelectDrView}/>}
       {departmentView && <AdminDepartmentPage setDepartmentView={setDepartmentView}/>}

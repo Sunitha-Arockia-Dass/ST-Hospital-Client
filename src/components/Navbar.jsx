@@ -67,7 +67,6 @@ function Navbar() {
           {!user && <li><NavLink to="/login">{strings.navbar.links.login}</NavLink></li>}
           {user && <li><NavLink to="/account">{strings.navbar.links.account}</NavLink></li>}
           {user && <li><NavLink to="/gpractice">{strings.navbar.links.gpractice}</NavLink></li>}
-          {user && user.role === "admin" && <li><NavLink to="/admin">Admin Page</NavLink></li>}
           {user && <li><button className="back" onClick={logOutUser}>Logout</button></li>}
           {user && <li > <span className="capitalize">{user.username}</span> ({user.role})</li>}
 
@@ -92,8 +91,6 @@ function Navbar() {
             {user && <li><NavLink to="/account"><h3 className="neonText">{strings.navbar.links.account}</h3></NavLink></li>}
 
             {user && <li><NavLink to="/gpractice"><h3 className="neonText">{strings.navbar.links.gpractice}</h3></NavLink></li>}
-
-            {user && user.role === "admin" && <li><NavLink to="/admin"><h3 className="neonText">Admin Page</h3></NavLink></li>}
 
             {user && <li><button className="logout" onClick={logOutUser}><h3 className="neonText">Logout</h3></button></li>}
           </ul>
