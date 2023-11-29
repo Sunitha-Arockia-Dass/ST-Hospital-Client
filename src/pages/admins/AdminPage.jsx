@@ -3,6 +3,7 @@ import { AuthContext } from "../../context/auth.context";
 import { Navigate } from "react-router-dom";
 import AdminDoctorPage from '../../components/AdminDoctorPage'
 import AdminDepartmentPage from '../../components/AdminDepartmentPage'
+import CreateAdmin from '../../components/CreateAdmin'
 
 
 function AdminPage() {
@@ -51,6 +52,7 @@ function addAdminCredentials(){
       {doctorView && <AdminDoctorPage createCredentials={false} setDoctorView={setDoctorView} setSelectDrView={setSelectDrView}/>}
       {selectDrView && <AdminDoctorPage createCredentials={true} setDoctorView={setDoctorView} setSelectDrView={setSelectDrView}/>}
       {departmentView && <AdminDepartmentPage setDepartmentView={setDepartmentView}/>}
+      {createAdmin && <CreateAdmin setCreateAdmin={setCreateAdmin}/>}
     </div>
   );
 }
