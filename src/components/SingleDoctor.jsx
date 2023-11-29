@@ -14,7 +14,7 @@ function SingleDoctor() {
 
 
       <div className="single-dpt">
-        <fieldset className="fieldset">
+        <fieldset className="fieldset gradient-bg">
           <legend><h3>{doctor.firstname} {doctor.lastname}</h3></legend>
           <div className="single-doc-img">
             <img src={department.image} alt="Department icon" />
