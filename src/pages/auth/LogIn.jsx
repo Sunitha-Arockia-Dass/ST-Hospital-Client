@@ -5,7 +5,7 @@ import URL from '../../links/links.json'
 import io from "socket.io-client";
 import { AuthContext } from "./../../context/auth.context"
 
-const API_URL = "http://localhost:5005"
+// const API_URL = "http://localhost:5005"
 
 function LogIn() {
   const [errorMessage, setErrorMessage] = useState(undefined)
@@ -19,9 +19,9 @@ function LogIn() {
     const newSocket = io("http://localhost:5005");
     setSocket(newSocket);
 
-    return () => {
-      newSocket.disconnect();
-    };
+    // return () => {
+    //   newSocket.disconnect();
+    // };
   }, []);
   const handleLogin = (userId) => {
     console.log('userId',userId)

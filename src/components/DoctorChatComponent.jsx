@@ -11,7 +11,7 @@ const DoctorChatComponent = () => {
   const [receivingDrId, setReceivingDrId] = useState(null);
   const [outgoingMsg, setOutgoingMsg] = useState("");
   const [incomingMsgs, setIncomingMsgs] = useState([]);
-
+  const socket = io("http://localhost:5005");
   useEffect(() => {
     axios
       .get(URL.users)
@@ -29,7 +29,7 @@ const DoctorChatComponent = () => {
   }, [user]);
 
   useEffect(() => {
-    const socket = io("http://localhost:5005");
+    // const socket = io("http://localhost:5005");
     console.log("Attaching listener for doctorMessage");
 
     // Listen for incoming messages
@@ -44,7 +44,7 @@ const DoctorChatComponent = () => {
     //   socket.disconnect(); // Disconnect the socket when component unmounts
     // };
   }, []);
-  const socket = io("http://localhost:5005");
+  // const socket = io("http://localhost:5005");
 
   const sendMessage = () => {
     console.log("send message function called");
@@ -78,12 +78,7 @@ const DoctorChatComponent = () => {
     <div>
       {isDoctor && (
         <form onSubmit={handleSubmit}>
-          <input
-            name="message"
-            value={outgoingMsg}
-            onChange={getMsg}
-            placeholder="Type your message..."
-          />
+          
           <select name="receivingDr" onChange={(e) => handleDoctorChange(e)}>
             {doctors?.map((doctor) => {
               return (
@@ -97,7 +92,13 @@ const DoctorChatComponent = () => {
               );
             })}
           </select>
-          <input value={`The other one:${incomingMsgs}`} />
+          <input
+            name="message"
+            value={outgoingMsg}
+            onChange={getMsg}
+            placeholder="Type your message..."
+          />
+          {/* <input value={`The other one:${incomingMsgs}`} /> */}
           <button type="submit">Send</button>
         </form>
       )}
