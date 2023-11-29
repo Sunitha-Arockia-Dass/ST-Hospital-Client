@@ -85,25 +85,14 @@ function PatientApptDetails() {
       </legend>
       
       {view.viewAppt ? (
-        <div>
-          <button className="back"
-            onClick={() => {
-              setView((prevState) => ({
-                ...prevState,
-                viewAppt: false,
-              }));
-            }}
-          >
-            Back
-          </button>
+        <div className="appt-view">
           {appts && appts.length > 0 ? (
             appts.map((appt) => (
               <div key={appt.id}>
                 <h4>
-                  Appt Time:{convertTo12HourFormat(appt.start)} on{" "}
-                  {new Date(appt.start).toDateString()}
+                  {new Date(appt.start).toDateString()}, {convertTo12HourFormat(appt.start)}
                 </h4>
-                <button className="back" onClick={() => viewDetail(appt._id)}>
+                <button className="back view-detail" onClick={() => viewDetail(appt._id)}>
                   View Details
                 </button>
                 {/* Other buttons */}
@@ -112,6 +101,16 @@ function PatientApptDetails() {
           ) : (
             <p>No upcoming appointments at this time.</p>
           )}
+          {/* <button className="back"
+            onClick={() => {
+              setView((prevState) => ({
+                ...prevState,
+                viewAppt: false,
+              }));
+            }}>
+            ↩ Back
+          </button> */}
+
         </div>
       ) : (
         <></>
@@ -128,21 +127,22 @@ function PatientApptDetails() {
             {view.details[0].doctor[0].lastname}
           </h4>
           <h4>Department:{view.details[0].department[0].name}</h4>
-          <button className="back"
+          <button className="back view-detail"
             onClick={() => {
               updateAppt(view.details._id);
             }}
           >
-            Change your appointments
+            Edit your appointments
           </button>
-          <button className="back"
+          <button className="back view-detail"
             onClick={() => {
               console.log(view.details)
               deleteappt(view.details[0]._id);
             }}
           >
-            Cancel your appointments
+          Cancel your appointments
           </button>
+          <br/>
           <button className="back"
             onClick={() => {
               setView((prevState) => ({
@@ -153,7 +153,7 @@ function PatientApptDetails() {
               }));
             }}
           >
-            Back
+            ↩ Back to Appointments
           </button>
         </div>
       ) : (
@@ -170,7 +170,7 @@ function PatientApptDetails() {
               }));
             }}
           >
-            Back
+            ↩ Back to this Appointment
           </button>
           <DoctorCalendarComponent
             details={view.details[0]}
@@ -186,11 +186,8 @@ function PatientApptDetails() {
       )}
     </fieldset>
     
-    {!view.viewAppt && (
-     
-    
-      <button className="back" onClick={getAppt}>View All appointments</button>
-     
+    {!view.viewAppt && (    
+          <button className="back" onClick={getAppt}>View All appointments</button>
     )} 
     </div>
   );

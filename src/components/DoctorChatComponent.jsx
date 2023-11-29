@@ -75,8 +75,8 @@ const DoctorChatComponent = () => {
   }
 
   return (
-    <div>
-      {isDoctor && (
+    <div className="chat-component">
+      {doctor && (
         <form onSubmit={handleSubmit}>
           
           <select name="receivingDr" onChange={(e) => handleDoctorChange(e)}>
