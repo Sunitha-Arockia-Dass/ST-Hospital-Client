@@ -276,7 +276,7 @@ button {
 .darkmode {
   --foreground: var(--clr-medium);
   --background: var(--clr-dark);
-  --clr-medium: hsl(220, 10%, 77%);
+  --clr-medium: hsl(220, 10%, 87%);
   --clr-blue-medium: hsl(193, 90%, 77%);
   --clr-green-medium: hsl(157, 95%, 77%);
 }
@@ -698,6 +698,7 @@ header {
 }
 
 header .logo {
+  color: var(--foreground);
   text-transform: uppercase;
   font-size: var(--fs-700);
   font-weight: bold;
@@ -935,8 +936,10 @@ ul .user-infos {
   top: 3.25rem;
   left: 17.5%;
   padding: 1rem;
-  background-color: white;
+  color: var(--foreground);
+  background-color: var(--background);
   border-radius: 0.5rem;
+  border: 0.125rem solid var(--clr-blue);
   width: 65%;
   box-shadow: var(--shadow-elevation-medium);
 }
@@ -973,7 +976,7 @@ main {
 
 .center-frame {
   /* border: 2px red solid; */
-  height: 100%;
+  min-height: calc(100vh - var(--header-height));
   width: 100vw;
   display: flex;
   flex-wrap: wrap;
@@ -1322,12 +1325,28 @@ h4.admin {
   border: 0.125rem solid var(--foreground);
   border-radius: 0.5rem;
   min-height: 10rem;
+  background: var(--background);
 }
 
 .user-detail legend,
 .gp-detail legend, 
 .appt-details legend {
   color: var(--clr-blue);
+}
+
+.appt-view {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 0;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+button.view-detail {
+  background: transparent;
+  width: 100%;
+  margin-bottom: 1.5rem;
 }
 
 /*
@@ -1345,7 +1364,6 @@ button.book-appointment {
   right: 1rem;
   height: 6rem;
   border: none;
-
   z-index: 100;
   background: transparent;
 }
@@ -1355,6 +1373,42 @@ button.book-appointment svg {
   fill: var(--background);
   border-radius: 1rem;
 }
+
+.fullcalendar-DCC {
+  position: relative;
+}
+
+button.change-appointment {
+  position: absolute;
+  bottom: 2rem;
+  right: 1rem;
+  height: 6rem;
+  border: none;
+  z-index: 100;
+  background: transparent;
+}
+
+button.change-appointment svg {
+  border: .5rem solid var(--clr-blue);
+  stroke: var(--clr-blue);
+  fill: var(--clr-green);
+  border-radius: 1rem;
+  background: var(--background);
+}
+
+/*
+* ----------------------
+* Chat Component
+* ----------------------
+*/
+
+.chat-component {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+
 
 /* test navbar for devs*/
 .test-navbar {

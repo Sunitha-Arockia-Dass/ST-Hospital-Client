@@ -13,9 +13,6 @@ function SearchBar() {
         console.log(response.data)
         setSearchOutput(response.data)
       })
-
-
-
   }
 
   return (    

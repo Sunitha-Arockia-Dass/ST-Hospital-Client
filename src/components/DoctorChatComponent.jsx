@@ -42,7 +42,7 @@ const DoctorChatComponent = () => {
     }
   }
   return (
-    <div>
+    <div className="chat-component">
       {doctor && (
         <form onSubmit={handleSubmit}>
           <input
