@@ -226,7 +226,7 @@ const DoctorCalendarComponent = ({
         />
       ) : (
         <div className="back-to-month">
-          {/*<h4>Selected Time:{convertTo12HourFormat(selectedSlot)}</h4>*/}
+          <h4>Selected Time: {convertTo12HourFormat(selectedSlot)}</h4>
           <FullCalendar
             plugins={[timeGridPlugin, interactionPlugin]}
             timeZone="UTC+2"

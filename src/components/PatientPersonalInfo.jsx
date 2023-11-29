@@ -25,28 +25,33 @@ function PatientPersonalInfo(){
     
 
 return(
-    <div >
-      <h4>Patient Details</h4>
-      
-      {user? (<div className="user-detail">
-      <h5>First Name:{user.firstname}</h5>
-      <h5>Last Name:{user.lastname}</h5>
-      <h6>Username:{user.username}</h6>
-      <h6>Email:{user.email}</h6>
-      {user.patientDetails && <div><h6>DOB:{user.patientDetails.dateOfBirth}</h6>
-      <h6>Phone:{user.patientDetails.contactNumber}</h6>
-      <h6>General Practice:{gp?.name}</h6>
-      <p>Address:{user.patientDetails.address.street} {user.patientDetails.address.houseNumber} </p>
-      <p>{user.patientDetails.address.postalCode} {user.patientDetails.address.city} </p>
-      <p>{user.patientDetails.address.country}</p></div>}
-      <NavLink to="/editaccount">
-        
-        <button>Edit Account/Add Additional Information</button>
-      
-    </NavLink>
+    <div className="user-detail">
       
       
-      </div>):<></>}
+      {user? (<div>
+      <fieldset>
+      <legend>
+      <h4>Your Details</h4>
+      </legend>      
+      <h5>{user.firstname} {user.lastname}</h5>   
+      <p>Username: {user.username}</p>
+      <p>{user.email}</p>
+      {user.patientDetails && <>
+      <p>{user.patientDetails.dateOfBirth}</p>
+      <p>{user.patientDetails.contactNumber}</p>      
+      <p>Address:{user.patientDetails.address.street} {user.patientDetails.address.houseNumber}</p>
+      <p>{user.patientDetails.address.postalCode} {user.patientDetails.address.city}</p>
+      <p>{user.patientDetails.address.country}</p>
+      </>
+      }
+      </fieldset>
+
+      <NavLink to="/editaccount"> 
+        <button className="back">Edit Account</button>
+      </NavLink>      
+      
+      </div>
+      ):<></>}
       
     </div>
   );

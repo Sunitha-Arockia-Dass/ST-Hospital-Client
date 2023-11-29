@@ -24,7 +24,7 @@ function GPractice() {
         {gps?.map((gp) => {
           return (
             <div key={gp._id} className="one-gp" >
-              <fieldset className="fieldset">
+              <fieldset className="fieldset gradient-bg">
                 <legend>
                   <h4>{gp.name}</h4>
                 </legend>

@@ -31,7 +31,7 @@ function DepartmentPage() {
               state={{ department }}
             >
               <div className="one-dpt" onClick={() => displayDept(department._id)}>
-                <fieldset className="fieldset">
+                <fieldset className="fieldset gradient-bg">
                   <legend>
                     <h4>{department.name}</h4>
                   </legend>

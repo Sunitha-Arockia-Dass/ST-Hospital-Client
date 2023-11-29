@@ -19,10 +19,12 @@ function SearchResult({ searchOutput,setSearchOutput }) {
   console.log(searchOutput);
   return (
     <div className="search-result">
+     <p><i>Click on the result</i></p>
+     {!result && <p>This request return no result,</p>}
       {result && (
         <div className="result">
           <p>
-            
+           
               {result.type === "doctor" &&<Link
               to={`/doctor/${result.data._id}`}
               state={{

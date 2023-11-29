@@ -604,17 +604,16 @@ optgroup {
   }
 }
 
-.two-inputs, .twothird-inputs{
+.two-inputs,
+.twothird-inputs {
   display: flex;
   justify-content: space-between;
-  gap: .25rem;
+  gap: 0.25rem;
 }
 
-.twothird-inputs input:first-of-type{
+.twothird-inputs input:first-of-type {
   width: 25%;
 }
-
-
 
 input::placeholder {
   color: #909090;
@@ -674,6 +673,11 @@ svg.eye {
   --fc-event-bg-color: var(--clr-blue);
   --fc-event-border-color: var(--clr-blue-medium);
   --fc-list-event-hover-bg-color: var(--clr-blue);
+}
+
+.calendar-container {
+  margin: 0 auto;
+  width: clamp(350px, 100%, 1000px);
 }
 
 /*
@@ -1081,6 +1085,10 @@ main {
   }
 }
 
+/* .circles {
+
+} */
+
 /*
 * ----------------------
 * Signup & Login Page
@@ -1141,7 +1149,7 @@ main {
 
   &:hover {
     color: var(--clr-blue);
-    background-color: hsl(220 10% 12% / 0.05);
+    background-color: hsl(220 10% 12% / 0.15);
   }
 
   &:active {
@@ -1187,7 +1195,8 @@ h4.admin {
   box-shadow: var(--shadow-elevation-low);
 }
 
-.one-dpt img, .single-doc-img img {
+.one-dpt img,
+.single-doc-img img {
   object-fit: cover;
   border-radius: 10rem 0 10rem 10rem;
 }
@@ -1249,7 +1258,7 @@ h4.admin {
   right: -0.5rem;
   padding: 0.125rem;
   height: 4rem;
-  width:4rem;
+  width: 4rem;
   border-radius: 10rem 0 10rem 10rem;
   border: 0.125rem solid var(--clr-green);
   background-color: white;
@@ -1260,6 +1269,65 @@ h4.admin {
 
 .one-gp fieldset {
   height: 13rem;
+}
+
+/*
+* ----------------------
+* Account Page
+* ----------------------
+*/
+.gradient-bg {
+  background: linear-gradient(
+    0deg,
+    hsl(157 95% 45% / 0.2) 0%,
+    hsl(193 90% 45% / 0.2) 100%
+  );
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+  background-attachment: fixed;
+}
+
+@keyframes gradient {
+  0%,
+  100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+}
+
+.first-block, .second-block {
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-elevation-medium);
+  padding: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.first-block {
+  display: flex;
+  gap: 1rem;
+}
+
+
+.user-detail, .gp-detail {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.user-detail fieldset,
+.gp-detail fieldset, 
+.appt-details fieldset {
+  border: 0.125rem solid var(--foreground);
+  border-radius: 0.5rem;
+  min-height: 10rem;
+}
+
+.user-detail legend,
+.gp-detail legend, 
+.appt-details legend {
+  color: var(--clr-blue);
 }
 
 /*
@@ -1286,29 +1354,6 @@ button.book-appointment svg {
   stroke: var(--clr-blue);
   fill: var(--background);
   border-radius: 1rem;
-}
-
-/*************** sunitha *******************/
-.patient-detail {
-  display: flex;
-  justify-content: space-between;
-  /* flex-wrap: wrap; */
-}
-.gp-detail,
-.user-detail {
-  border: 1px solid black;
-  text-align: center;
-}
-.gp-details {
-  border: 1px solid black;
-  text-align: center;
-  width: 30%;
-  margin: 10px;
-}
-.gp-details-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 /* test navbar for devs*/
@@ -1345,6 +1390,3 @@ button.book-appointment svg {
     color: var(--clr-blue);
   }
 }
-
-/* display: flex;
-flex-wrap: wrap; */

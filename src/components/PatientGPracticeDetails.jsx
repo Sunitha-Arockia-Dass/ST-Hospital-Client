@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom"
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import URL from "../links/links.json";
@@ -22,17 +23,24 @@ function PatientGPracticeDetails() {
   }, [user.patientDetails]);
 
   return (
-    <div >
-      <h4>Patient GPractice Details</h4>
-      {gp? (<div className="gp-detail">
+    <div className="gp-detail">
+      <fieldset>
+      <legend>
+      <h4>Your Doctor</h4>
+      </legend>
+      {gp? (<div>
       <h5>{gp.name}</h5>
-      <h6>{gp.email}</h6>
-      <h6>{gp.phoneNumber}</h6>
+      <p>{gp.email}</p>
+      <p>{gp.phoneNumber}</p>
       <p>{gp.address.street} {gp.address.houseNumber} </p>
       <p>{gp.address.postalCode} {gp.address.city} </p>
       <p>{gp.address.country}</p>
       
-      </div>):<>Your Gp information is not updated</>}
+      </div>):<p>Please update your General Practitioner</p>}
+      </fieldset>
+      <NavLink to="/editaccount"> 
+        <button className="back">Edit General Practitioner</button>
+      </NavLink>
     </div>
   );
 }
