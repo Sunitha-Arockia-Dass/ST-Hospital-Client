@@ -143,4 +143,6 @@ contain the javascript code for DOM manipulations
 
 <h2>Axios</h2> to handle and fetch API.
 
-<h2>ChartJS</h2> to display BMI and nutrition graph.
+<h2>emailJS</h2> to display BMI and nutrition graph.
+
+tchatjs
