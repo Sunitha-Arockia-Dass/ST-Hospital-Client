@@ -60,7 +60,7 @@ const DoctorCalendarComponent = ({
   const transformEvents = (externalEvents) => {
     return externalEvents.map((event) => {
       const isUpdateAppointment = update && event._id === details?._id; // Check if it's the appointment being updated
-      const color = isUpdateAppointment ? "blue" : "red"; // Highlight the appointment being updated
+      const color = isUpdateAppointment ? "red" : "blue"; // Highlight the appointment being updated
 
       return {
         title: event.user[0]?.username,

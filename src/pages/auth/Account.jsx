@@ -32,7 +32,7 @@ function Account() {
         </>
       )}
       <div className="">
-        {user.role === "patient" && <Doctor />}
+        {user.role === "doctor" && <Doctor />}
         {user.role === "admin" && <AdminPage />}
       </div>
 
