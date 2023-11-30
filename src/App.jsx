@@ -93,7 +93,7 @@ function App() {
       <Navbar />
       <main className="container full">
         <SearchBar />
-        {/* <DoctorChatComponent /> */}
+        <DoctorChatComponent />
         <Routes>
           {/*   HomePage  */}
           <Route path="/" element={<HomePage />} />

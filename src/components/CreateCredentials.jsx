@@ -23,6 +23,7 @@ function CreateCrendtials({ selectedDoctor,setDoctorView,setFormView,setSelectDr
       firstname: formInput.firstname,
       lastname: formInput.lastname,
       role: formInput.role,
+      doctor:selectedDoctor?._id
     };
     console.log(data);
     axios

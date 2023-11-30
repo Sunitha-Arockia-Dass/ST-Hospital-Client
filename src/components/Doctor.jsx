@@ -1,16 +1,26 @@
-import { useContext, useState, useEffect } from "react"
-import { AuthContext } from "../../context/auth.context"
-
-function Doctor(){
-    const { user } = useContext(AuthContext)
-
-
-    return(
-        <div>
-            <h1>Dr.{user.firstname} {user.lastname}</h1>
-        </div>
-    )
-
+import { useContext, useState, useEffect } from "react";
+import { AuthContext } from "../context/auth.context";
+import DoctorCalendarComponent from "./DoctorCalendarComponent";
+function Doctor() {
+  const { user } = useContext(AuthContext);
+console.log('user',user)
+  return (
+    <div>
+      <h1>
+        Welcome Dr.{user.firstname} {user.lastname}
+      </h1>
+      <DoctorCalendarComponent doctor={user.doctor} />
+    </div>
+  );
 }
 
-export default Doctor
+// {
+//     setView,
+//     updateCallback,
+//     details,
+//     doctor,
+//     selectedDept,
+//     update,
+//   }
+
+export default Doctor;
