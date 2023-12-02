@@ -1,10 +1,10 @@
-import { useContext, useState, useLayoutEffect } from "react";
-import { AuthContext } from "../../context/auth.context";
-import { Navigate } from "react-router-dom";
+import { useContext, useState, useLayoutEffect } from "react"
+import { AuthContext } from "../../context/auth.context"
+import { Navigate } from "react-router-dom"
 import AdminDoctorPage from '../../components/AdminDoctorPage'
 import AdminDepartmentPage from '../../components/AdminDepartmentPage'
 import CreateAdmin from '../../components/CreateAdmin'
-import gsap from "gsap";
+import gsap from "gsap"
 
 
 function AdminPage() {

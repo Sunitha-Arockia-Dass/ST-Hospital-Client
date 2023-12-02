@@ -22,10 +22,10 @@ function DepartmentPage() {
     if(delayLayout){     
       const tlOneDpt = gsap.timeline({ defaults: { duration: .3, ease: "power1.out" } })
       tlOneDpt
-      .fromTo("#dpt-main h3", {opacity: 0 }, {opacity: 1})
-      .fromTo("#dpt-main .one-dpt", { x:-100, opacity: 0 }, { x:0, opacity: 1, stagger: 0.025, duration: .15},"<")
-      .fromTo("#dpt-main legend", { y:-25, opacity: 0 }, { y:0, opacity: 1, stagger: 0.025, ease:"bounce"})
-      .fromTo("#dpt-main .dpt-img", { scale: .5, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.025, ease:"bounce"})
+      .fromTo("#dpt-main h3", {x:-20 }, {x:0})
+      .fromTo("#dpt-main .one-dpt", { x:-100, opacity: 0 }, { x:0, opacity: 1, stagger: 0.05},"<")
+      .fromTo("#dpt-main legend", { y:-25, opacity: 0 }, { y:0, opacity: 1, stagger: 0.05, ease:"bounce"}, .75)
+      .fromTo("#dpt-main .dpt-img", { scale: .5, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.05, ease:"bounce"}, "<")
   } 
  
 
