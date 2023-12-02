@@ -38,15 +38,16 @@ function AdminDepartmentPage({ setDepartmentView }) {
     <div className="dpt-page">     
         <h4 className="admin">Admin Department Page</h4>
       <div className="all-dpt">
-
-        <button className="back" onClick={() => { setDepartmentView(false) }} >↩ Back</button>
-        <button className="back"
+      <div className="admin one-dpt">
+        <button className="back admin" onClick={() => { setDepartmentView(false) }} >↩ Back</button>
+        <button className="back admin"
           onClick={() => {
             setCreateDept(true), setDeptView(false);
           }}
         >
-          <h4>Add +</h4>
+          <b>Add +</b>
         </button>
+        </div>
         {deptView &&
           departments?.map((department) => {
             return (
@@ -74,6 +75,7 @@ function AdminDepartmentPage({ setDepartmentView }) {
                 >
                   Delete
                 </button>
+                
               </div>
             );
           })}

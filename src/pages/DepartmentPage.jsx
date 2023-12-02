@@ -20,11 +20,12 @@ function DepartmentPage() {
 
     // GPractice Animation //////////////////////////////////////////
     if(delayLayout){     
-      const tlOneDpt = gsap.timeline({ defaults: { duration: .5, ease: "power1.out" } })
+      const tlOneDpt = gsap.timeline({ defaults: { duration: .3, ease: "power1.out" } })
       tlOneDpt
-      .fromTo(".one-dpt", { x:-100, opacity: 0 }, { x:0, opacity: 1, stagger: 0.05,})
-      .fromTo(".dpt-img", { scale: .5, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.025, ease:"bounce"})
-      .fromTo(".fieldset legend", { y:-25, opacity: 0 }, { y:0, opacity: 1, stagger: 0.025, ease:"bounce"},"<")
+      .fromTo("#dpt-main h3", {opacity: 0 }, {opacity: 1, duration: .1})
+      .fromTo("#dpt-main .one-dpt", { x:-100, opacity: 0 }, { x:0, opacity: 1, stagger: 0.025, duration: .1},"<")
+      .fromTo("#dpt-main .dpt-img", { scale: .5, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.025, ease:"bounce"})
+      .fromTo("#dpt-main legend", { y:-25, opacity: 0 }, { y:0, opacity: 1, stagger: 0.025, ease:"bounce"},"<")
   } 
  
 

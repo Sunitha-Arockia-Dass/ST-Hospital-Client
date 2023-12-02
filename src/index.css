@@ -500,6 +500,11 @@ a.style-one:active {
   }
 }
 
+button.admin {
+  height: 100%;
+  width: 45%;
+}
+
 /* Form Button */
 @property --bg-angle {
   inherits: false;

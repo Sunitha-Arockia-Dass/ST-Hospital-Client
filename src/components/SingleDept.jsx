@@ -1,19 +1,17 @@
-import React from "react";
-import { useNavigate ,useLocation, Link} from "react-router-dom";
+import { useNavigate ,useLocation, Link} from "react-router-dom"
 
 
 const SingleDept=()=>{
   const location = useLocation();
-
   const navigate=useNavigate()
-  
+
   // function displayDoctor(doctor) {
-    //       setDoctor(doctor);
-    //     }
-    const department = location.state?.department
+  //       setDoctor(doctor);
+  //     }
+  const department = location.state?.department 
 
     return(
-        <div className="dpt-page single-dpt" key={department._id}>
+        <div id="single-dep" className="dpt-page single-dpt" key={department._id}>
           <fieldset className="fieldset gradient-bg">
           <legend><h3>{department?.name}</h3></legend>
           <p>{department?.description}</p>
