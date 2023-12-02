@@ -103,6 +103,15 @@ function EditAccount() {
           </p>
 
           <div className="two-inputs">
+
+            <select name="gender" id="gender">
+              <option value="" disabled selected>Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+            <br />
+
             <input
               type="text"
               name="firstname"

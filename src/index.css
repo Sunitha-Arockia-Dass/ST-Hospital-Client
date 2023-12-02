@@ -654,6 +654,10 @@ svg.eye {
   }
 }
 
+#gender {
+  width: 50%;
+}
+
 /*
 * ----------------------
 * React fullcalendar

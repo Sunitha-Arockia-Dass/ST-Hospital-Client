@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react"
-import { AuthContext } from "../../context/auth.context"
+import { AuthContext } from "../context/auth.context";
 
 function Doctor(){
     const { user } = useContext(AuthContext)
