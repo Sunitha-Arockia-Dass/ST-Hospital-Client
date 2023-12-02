@@ -1,9 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useLayoutEffect } from "react";
 import { AuthContext } from "../../context/auth.context";
 import { Navigate } from "react-router-dom";
 import AdminDoctorPage from '../../components/AdminDoctorPage'
 import AdminDepartmentPage from '../../components/AdminDepartmentPage'
 import CreateAdmin from '../../components/CreateAdmin'
+import gsap from "gsap";
 
 
 function AdminPage() {
@@ -37,8 +38,18 @@ function addAdminCredentials(){
   setDepartmentView(false);
   setDoctorView(false);
   setSelectDrView(false);
-
 }
+
+ // AccountAdmin Gsap Animation //////////////////////////////////////////
+ useLayoutEffect(() => {
+  const tlAccountAdmin = gsap.timeline({ defaults: { duration: .25, ease: "power1.out" } })
+  tlAccountAdmin
+  .fromTo("#account h3", {opacity: 0 }, {opacity: 1, ease:"bounce"})
+  .fromTo("#account .first-block", { x: "-50px" }, { x: 0, duration:.1})
+    .fromTo(".first-block button", { opacity: 0, rotateY: -90 }, { opacity: 1, rotateY: 0}, "<")
+    .fromTo("#account .second-block", { opacity: 0, y: 50 }, { opacity: 1, y: 0})
+    .fromTo(".second-block button", { opacity: 0, rotateY: -90 }, { opacity: 1, rotateY: 0})
+  })
 
   return (
     <div id="account" className="dpt-page">
