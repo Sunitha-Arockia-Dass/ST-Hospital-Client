@@ -1,19 +1,30 @@
-import React from "react";
-import { useNavigate ,useLocation, Link} from "react-router-dom";
+import { useNavigate ,useLocation, Link} from "react-router-dom"
+import { useLayoutEffect } from "react";
+import gsap from "gsap"
 
 
 const SingleDept=()=>{
   const location = useLocation();
-
   const navigate=useNavigate()
-  
+
   // function displayDoctor(doctor) {
-    //       setDoctor(doctor);
-    //     }
-    const department = location.state?.department
+  //       setDoctor(doctor);
+  //     }
+  const department = location.state?.department 
+
+  // singletDpt Gsap Animation //////////////////////////////////////////
+ useLayoutEffect(() => {
+  const tlsingletDpt = gsap.timeline({ defaults: { duration: .25, ease: "power1.out" } })
+  tlsingletDpt
+  .fromTo("#single-dep", {opacity: 0, x:-20 }, {opacity: 1, x:0})
+  .fromTo("#single-dep h4", {opacity: 0, x:-20 }, {opacity: 1, x:0})
+  .fromTo("#single-dep p", {opacity: 0, x:20 }, {opacity: 1, x:0}, "<")
+  .fromTo("#single-dep legend", { y:-25, opacity: 0 }, { y:0, opacity: 1, stagger: 0.025, ease:"bounce"})
+  .fromTo("#single-dep .single-img", { scale: .5, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.025, ease:"bounce"})
+  })
 
     return(
-        <div className="dpt-page single-dpt" key={department._id}>
+        <div id="single-dep" className="dpt-page single-dpt" key={department._id}>
           <fieldset className="fieldset gradient-bg">
           <legend><h3>{department?.name}</h3></legend>
           <p>{department?.description}</p>

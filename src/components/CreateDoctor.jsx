@@ -80,15 +80,16 @@ console.log(selectedDepartmentId)
       });
   }
   return (
-    <div>
+    <div className='manage-dpt'>
       {create ? (
         <div>
-          <h1>Create Doctor</h1>
+          <h5>Create Doctor</h5>
           <form onSubmit={createDr}>
-            <input type="text" name="firstname" />
-            <input type="text" name="lastname" />
-            <input type="text" name="image" />
+            <input type="text" placeholder="Enter Firstname" name="firstname" />
+            <input type="text" placeholder="Enter Lastname" name="lastname" />
+            <input type="text" placeholder="Enter Image" name="image" />
             <select name="department"  onChange={(e) => handleDepartmentChange(e)}>
+            <option value="" disabled selected >Select Department</option>
               {dept.map((department) => {
                 return (
                   <option
@@ -102,21 +103,22 @@ console.log(selectedDepartmentId)
               })}
             </select>
             <select name="position">
+            <option value="" disabled selected >Position</option>
               <option>Chief</option>
               <option>Attending</option>
               <option>General</option>
             </select>
 
-            <button type="submit">Create</button>
+            <button className="form" type="submit">Create</button>
           </form>
         </div>
       ) : (
         <div>
-          <h1>Update Doctor</h1>
+          <h5>Update Doctor</h5>
           <form onSubmit={updateDr}>
-            <input type="text" name="firstname" defaultValue={drToUpdate.firstname}/>
-            <input type="text" name="lastname" defaultValue={drToUpdate.lastname}/>
-            <input type="text" name="image" defaultValue={drToUpdate.image}/>
+            <input type="text" placeholder="Enter Firstname" name="firstname" defaultValue={drToUpdate.firstname}/>
+            <input type="text" placeholder="Enter Lastname" name="lastname" defaultValue={drToUpdate.lastname}/>
+            <input type="text" placeholder="Enter Image" name="image" defaultValue={drToUpdate.image}/>
             <select name="department"  onChange={(e) => handleDepartmentChange(e)}>
             <option value={deptToUpdate.id} disabled selected> {deptToUpdate.name}</option>
 
@@ -139,7 +141,7 @@ console.log(selectedDepartmentId)
               <option>General</option>
             </select>
 
-            <button type="submit">Update the Docto Info</button>
+            <button className="form" type="submit">Update Doctor</button>
           </form>
         </div>
       )}{" "}

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import URL from "../links/links.json";
 import CreateDepartment from "./CreateDepartment";
 
-function AdminDepartmentPage({setDepartmentView}) {
+function AdminDepartmentPage({ setDepartmentView }) {
   const [createDept, setCreateDept] = useState(null);
   const [updateDept, setUpdateDept] = useState(null);
   const [departments, setDepartments] = useState([]);
@@ -35,33 +35,32 @@ function AdminDepartmentPage({setDepartmentView}) {
       });
   };
   return (
-    <div className="dpt-page full">
-    <div className="container">
-      <h4 className="admin">Admin Department Page</h4>
-      </div>
+    <div className="dpt-page">     
+        <h4 className="admin">Admin Department Page</h4>
       <div className="all-dpt">
-      
-      <button onClick={()=>{setDepartmentView(false)}} >Go Back</button>
-      <button className="back"
-        onClick={() => {
-          setCreateDept(true), setDeptView(false);
-        }}
-      >
-        <h4>Add +</h4>
-      </button>
-      {deptView &&
-        departments?.map((department) => {
-          return (
-            <div className="admin one-dpt" key={department._id}>
-              <fieldset className="fieldset">                
-                <legend>
-                  <h4>{department.name}</h4>
-                </legend>
-                <p>{department.description}</p>
-                <div className="dpt-img">
+      <div className="admin one-dpt">
+        <button className="back admin" onClick={() => { setDepartmentView(false) }} >↩ Back</button>
+        <button className="back admin"
+          onClick={() => {
+            setCreateDept(true), setDeptView(false);
+          }}
+        >
+          <b>Add +</b>
+        </button>
+        </div>
+        {deptView &&
+          departments?.map((department) => {
+            return (
+              <div className="admin one-dpt" key={department._id}>
+                <fieldset className="fieldset">
+                  <legend>
+                    <h4>{department.name}</h4>
+                  </legend>
+                  <p>{department.description}</p>
+                  <div className="dpt-img">
                     <img src={department.image} alt="Department icon" />
                   </div>
-              </fieldset>
+                </fieldset>
                 <button className="back"
                   onClick={() => {
                     updateDepartment(department._id);
@@ -76,12 +75,13 @@ function AdminDepartmentPage({setDepartmentView}) {
                 >
                   Delete
                 </button>
-            </div>
-          );
-        })}
-      {createDept && <CreateDepartment create={true} setDeptView={setDeptView} setCreateDept={setCreateDept} id={""} />}
-      {updateDept && <CreateDepartment create={false} setDeptView={setDeptView} setCreateDept={setUpdateDept} id={deptId} />}
-    </div>
+                
+              </div>
+            );
+          })}
+        {createDept && <CreateDepartment create={true} setDeptView={setDeptView} setCreateDept={setCreateDept} id={""} />}
+        {updateDept && <CreateDepartment create={false} setDeptView={setDeptView} setCreateDept={setUpdateDept} id={deptId} />}
+      </div>
     </div>
   );
 }

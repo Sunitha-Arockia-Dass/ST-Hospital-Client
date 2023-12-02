@@ -500,6 +500,11 @@ a.style-one:active {
   }
 }
 
+button.admin {
+  height: 100%;
+  width: 45%;
+}
+
 /* Form Button */
 @property --bg-angle {
   inherits: false;
@@ -652,6 +657,10 @@ svg.eye {
   &:active {
     fill: var(--clr-green);
   }
+}
+
+#gender {
+  width: 50%;
 }
 
 /*
@@ -1140,6 +1149,11 @@ main {
   cursor: pointer;
 }
 
+/* GSAP Animation */
+#dpt-main .one-dpt, .one-gp {
+  opacity: 0;
+}
+
 .fieldset {
   border: 0.125rem solid var(--clr-blue);
   border-radius: 0.5rem;
@@ -1268,8 +1282,12 @@ h4.admin {
   box-shadow: var(--shadow-elevation-low);
 }
 
-/*General Parcticien GP */
+/* manage dpt*/
+.manage-dpt {
+  grid-column: span 2
+}
 
+/*General Parcticien GP */
 .one-gp fieldset {
   height: 13rem;
 }

@@ -1,16 +1,32 @@
 import axios from "axios"
-import { useState, useEffect } from "react"
+import { useState, useEffect} from "react"
+import { gsap } from "gsap/dist/gsap"
 import URL from "../links/links.json"
 
 function GPractice() {
   const [gps, setGPs] = useState()
+  const [delayLayout, setDelayLayout] = useState(false)
 
   useEffect(() => {
     axios.get(URL.gPractice).then((response) => {
       console.log(response.data)
       setGPs(response.data)
     })
+    setDelayLayout(true)
   }, [])
+
+
+  // GPractice Animation //////////////////////////////////////////
+     if(delayLayout){     
+      const tlGeneralPractitien = gsap.timeline({ defaults: { duration: .5, ease: "power1.out" } })
+      tlGeneralPractitien
+      .fromTo(".dpt-page h3", {x:-20 }, {x:0})
+      .fromTo(".one-gp", { x:-100, opacity: 0 }, { x:0, opacity: 1, stagger: 0.05, }, "<")
+      .fromTo(".fieldset legend", { y:-25, opacity: 0 }, { y:0, opacity: 1, stagger: 0.025, ease:"bounce"}, .5)
+  } 
+
+
+
   return (
     <div className="dpt-page full">
       <div className="container">

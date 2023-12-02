@@ -68,7 +68,7 @@ function Navbar() {
           {user && <li><NavLink to="/account">{strings.navbar.links.account}</NavLink></li>}
           {user && <li><NavLink to="/gpractice">{strings.navbar.links.gpractice}</NavLink></li>}
           {user && <li><button className="back" onClick={logOutUser}>Logout</button></li>}
-          {user && <li > <span className="capitalize">{user.username}</span> ({user.role})</li>}
+          {/* {user && <li > <span className="capitalize">{user.username}</span> ({user.role})</li>} */}
 
         </ul>
       </nav>
@@ -78,7 +78,7 @@ function Navbar() {
       <div className="circle-menu" onClick={animate}>
         <nav className="navbar">
           <ul className="navbar-ul">
-            {user && <li className="user-infos"><h3>{strings.navbar.links.welcome} <span className="capitalize">{user.username}</span> ({user.role})</h3></li>}
+            {user && <li className="user-infos"><h3>{strings.navbar.links.welcome} {user.role} <span className="capitalize">{user.username}</span></h3></li>}
 
             <li><NavLink to="/"><h3 className="neonText">{strings.navbar.links.home}</h3></NavLink></li>
 

@@ -52,11 +52,11 @@ axios.post(URL.addDepartment,deptData)
   }
 
   return (
-    <div>
+    <div className='manage-dpt'>
 
     {create ? (
     <div>
-      <h4>Create Department</h4>
+      <h5>Create Department</h5>
       <form onSubmit={createDept}>
         <input type="text" name="name" placeholder="department's name"/>
 
@@ -67,7 +67,7 @@ axios.post(URL.addDepartment,deptData)
         <button className="form" type="submit">Create</button>
       </form>
     </div>): (<div>
-      <h4>Update Department</h4>
+      <h5>Update Department</h5>
       <form onSubmit={updateDept}>
         <input type="text" name="name" placeholder="department's name" defaultValue={deptToUpdate.name}/>
 

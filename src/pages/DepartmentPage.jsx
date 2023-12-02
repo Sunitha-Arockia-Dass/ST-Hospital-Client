@@ -2,20 +2,35 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import URL from "../links/links.json";
 import { Link } from 'react-router-dom';
+import { gsap } from "gsap/dist/gsap"
 
 function DepartmentPage() {
   const [departments, setDepartments] = useState();
   const [selectedDept, setSelectedDept] = useState(null);
   const [doctor, setDoctor] = useState(null);
+  const [delayLayout, setDelayLayout] = useState(false)
+
   useEffect(() => {
     axios.get(URL.departments).then((foundDepartments) => {
       setDepartments(foundDepartments.data);
     });
+    setDelayLayout(true)
   }, []);
+
+
+    // GPractice Animation //////////////////////////////////////////
+    if(delayLayout){     
+      const tlOneDpt = gsap.timeline({ defaults: { duration: .3, ease: "power1.out" } })
+      tlOneDpt
+      .fromTo("#dpt-main h3", {x:-20 }, {x:0})
+      .fromTo("#dpt-main .one-dpt", { x:-100, opacity: 0 }, { x:0, opacity: 1, stagger: 0.05},"<")
+      .fromTo("#dpt-main legend", { y:-25, opacity: 0 }, { y:0, opacity: 1, stagger: 0.05, ease:"bounce"}, .75)
+      .fromTo("#dpt-main .dpt-img", { scale: .5, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.05, ease:"bounce"}, "<")
+  } 
  
 
   return (
-    <div className="dpt-page full">
+    <div id="dpt-main" className="dpt-page full">
       {!doctor && (
         <div className="container">
           <h3>Choose your department</h3>

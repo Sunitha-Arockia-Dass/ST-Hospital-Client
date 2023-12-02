@@ -1,5 +1,7 @@
 import DoctorCalendarComponent from "./DoctorCalendarComponent";
 import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useLayoutEffect } from "react";
+import gsap from "gsap"
 
 
 function SingleDoctor() {
@@ -8,6 +10,18 @@ function SingleDoctor() {
   const doctor = location.state?.doctor
   const department = location.state?.department
   // console.log(doctor.department)
+
+    // singletDoctor Gsap Animation //////////////////////////////////////////
+ useLayoutEffect(() => {
+  const tlsingleDoctor = gsap.timeline({ defaults: { duration: .25, ease: "power1.out" } })
+  tlsingleDoctor
+  .fromTo(".single-dpt", {opacity: 0, x:-20 }, {opacity: 1, x:0})
+  .fromTo(".single-dpt legend", { y:-25, opacity: 0 }, { y:0, opacity: 1, stagger: 0.025, ease:"bounce"})
+  .fromTo(".single-dpt .single-doc-img", { scale: .5, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.025, ease:"bounce"})
+  .fromTo(".single-dpt h6", {opacity: 0, x:20 }, {opacity: 1, x:0}, "<")
+  .fromTo(".calendar-container", {opacity: 0, x:20 }, {opacity: 1, x:0})
+  .fromTo(".single-dpt button", {opacity: 0, x:20 }, {opacity: 1, x:0})
+  })
 
   return (
     <div className="single-doctor dpt-page">

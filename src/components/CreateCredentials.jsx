@@ -67,10 +67,11 @@ function CreateCrendtials({ selectedDoctor,setDoctorView,setFormView,setSelectDr
   };
 
   return (
-    <div id="signup" className="full center-frame">
-      <div className="half-frame">
+    <div className="manage-dpt">
+       
+  
+      
         <form onSubmit={createDrDetails}>
-          <h3>Create Doctor Crendtials</h3>
 
           <div className="two-inputs">
             <input
@@ -176,8 +177,8 @@ function CreateCrendtials({ selectedDoctor,setDoctorView,setFormView,setSelectDr
         </form>
 
         {errorMessage && <p className="server-error-message">{errorMessage}</p>}
-      </div>
-    </div>
+        </div>
+
   );
 }
 
