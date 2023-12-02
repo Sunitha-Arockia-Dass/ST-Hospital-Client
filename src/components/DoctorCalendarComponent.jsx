@@ -3,6 +3,7 @@ import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import CreatePatientRecord from './CreatePatientRecord'
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import URL from "../links/links.json";
@@ -22,8 +23,15 @@ const DoctorCalendarComponent = ({
   const [selectedDate, setSelectedDate] = useState(null);
   const [events, setEvents] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [complaints, setComplaints] = useState("");
+  const [patientDetailsView, setPatientDetailsView] = useState(false);
+  const [allAppts, setAllAppts] = useState();
+  const [createPRecords,setCreatePRecords]=useState(null)
+  const [viewPRecords,setViewPRecords]=useState(null)
+const [selectedAppt,setSelectedAppt]=useState(null)
   const currentDate = new Date();
   const tomorrow = new Date(currentDate);
+
   tomorrow.setDate(currentDate.getDate() + 1);
 
   const threeMonthsLater = new Date(currentDate);
@@ -63,7 +71,7 @@ const DoctorCalendarComponent = ({
       const color = isUpdateAppointment ? "red" : "blue"; // Highlight the appointment being updated
 
       return {
-        title: event.user[0]?.username,
+        title: event.complaints,
         start: event.start,
         end: event.end,
         color,
@@ -74,6 +82,7 @@ const DoctorCalendarComponent = ({
   useEffect(() => {
     axios.get(`${URL.getDrAppointment}/${doctor._id}`).then((appts) => {
       // console.log(appts.data);
+      setAllAppts(appts.data);
       const transformedEvents = transformEvents(appts.data);
       setEvents(transformedEvents);
     });
@@ -92,7 +101,28 @@ const DoctorCalendarComponent = ({
     setErrorMessage("");
   };
   const handleEventClick = (info) => {
-    alert("This slot is already booked.");
+    const startTime = info.event.start;
+    const dateObject = new Date(startTime);
+    const isoString = dateObject.toISOString();
+    // console.log("eventId", isoString);
+    // console.log(allAppts[0].start);
+    const selectedAppt=allAppts.filter(appt=>{
+      return appt.start===isoString
+    })
+    // console.log('selectedAppt',selectedAppt)
+    if (user.role === "doctor") {
+      // Fetch patient details based on the event data (event.id or event.otherUniqueIdentifier)
+      // Display the patient details to the doctor
+      // You might use a modal or another component to show the patient details
+      // Example: Show patient name, complaints, etc.
+      setPatientDetailsView(true);
+      setShowTimeGrid(false)
+      setSelectedAppt(selectedAppt)
+      // alert("Doctor: Display patient details here");
+    } else {
+      // For other roles (e.g., patient or admin), show a message or handle differently
+      alert("This slot is already booked.");
+    }
   };
 
   const handleSlotClick = (info) => {
@@ -116,16 +146,22 @@ const DoctorCalendarComponent = ({
       doctor: doctor._id,
       start: slotStartTime.toISOString(),
       end: slotEndTime.toISOString(),
+      complaints: complaints,
     };
+    if (complaints === "") {
+      alert("Enter a complaint to book an appointment");
+    }
+    console.log(complaints);
     axios
       .post(URL.createAppointment, apptDetails)
       .then((response) => {
+        console.log(response.data);
         axios.get(`${URL.getDrAppointment}/${doctor._id}`).then((appts) => {
           // try{
           const transformedEvents = transformEvents(appts.data);
           setEvents(transformedEvents);
           setShowTimeGrid(false);
-          sendEmail();
+          // sendEmail();
         });
       })
       .catch((error) => {
@@ -163,7 +199,7 @@ const DoctorCalendarComponent = ({
   };
 
   const renderDateEventContent = (eventInfo) => {
-    console.log(eventInfo.event.title)
+    console.log(eventInfo.event.title);
     return (
       <>
         {user.role === "doctor" && <p>Title: {eventInfo.event.title}</p>}
@@ -207,11 +243,21 @@ const DoctorCalendarComponent = ({
 
     return formattedTime;
   }
+  function viewRecords(){
+    setViewPRecords(true)
+    
+  }
+  function createRecords(){
+    setCreatePRecords(true)
+
+  }
   return (
     <div className="fullcalendar-DCC">
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
-      {!showTimeGrid ? (
+      {patientDetailsView ? (<div>
+      <button onClick={viewRecords}>View Past Records</button> 
+      <button onClick={createRecords}>Create a new Record</button>  <button onClick={()=>{setPatientDetailsView(false)}}>Back to Calendar</button></div>) :(!showTimeGrid ? (
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
@@ -227,7 +273,14 @@ const DoctorCalendarComponent = ({
         />
       ) : (
         <div className="back-to-month">
-        <input name='complaints'  />
+          {user.role === "patient" && (
+            <input
+              name="complaints"
+              onChange={(e) => {
+                setComplaints(e.target.value);
+              }}
+            />
+          )}
           <h4>Selected Time: {convertTo12HourFormat(selectedSlot)}</h4>
           <FullCalendar
             plugins={[timeGridPlugin, interactionPlugin]}
@@ -254,21 +307,68 @@ const DoctorCalendarComponent = ({
             // Other props as needed
           />
         </div>
-      )}
-
+      ))
+}
       {update
-        ? selectedSlot && (          
-            <button className="change-appointment" onClick={editAppt} disabled={!selectedSlot}>
-            <svg width="100px" height="100px" viewBox="0 0 24 24" fill="none"><path d="M13 21H21" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M20.0651 7.39423L7.09967 20.4114C6.72438 20.7882 6.21446 21 5.68265 21H4.00383C3.44943 21 3 20.5466 3 19.9922V18.2987C3 17.7696 3.20962 17.2621 3.58297 16.8873L16.5517 3.86681C19.5632 1.34721 22.5747 4.87462 20.0651 7.39423Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15.3097 5.30981L18.7274 8.72755" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            </button>         
+        ? selectedSlot && (
+            <button
+              className="change-appointment"
+              onClick={editAppt}
+              disabled={!selectedSlot}
+            >
+              <svg width="100px" height="100px" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M13 21H21"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M20.0651 7.39423L7.09967 20.4114C6.72438 20.7882 6.21446 21 5.68265 21H4.00383C3.44943 21 3 20.5466 3 19.9922V18.2987C3 17.7696 3.20962 17.2621 3.58297 16.8873L16.5517 3.86681C19.5632 1.34721 22.5747 4.87462 20.0651 7.39423Z"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M15.3097 5.30981L18.7274 8.72755"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </button>
           )
         : selectedSlot && (
-          <div>
-            <button className="book-appointment" onClick={creatAppt} disabled={!selectedSlot}>
-            <svg width="100px" height="100px" viewBox="0 0 24 24" fill="none"><path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke-width="1.5"></path> <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke-width="1.5" stroke-linecap="round"></path></svg>
-            </button>
-            <button className="back" onClick={handleBackToMonth}>Back to Month</button>
-          </div>
+            <div>
+              {user.role === "patient" && (
+                <button
+                  className="book-appointment"
+                  onClick={creatAppt}
+                  disabled={!selectedSlot}
+                >
+                  <svg
+                    width="100px"
+                    height="100px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z"
+                      stroke-width="1.5"
+                    ></path>{" "}
+                    <path
+                      d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    ></path>
+                  </svg>
+                </button>
+              )}
+              {createPRecords && <CreatePatientRecord setPatientDetailsView={setPatientDetailsView} setCreatePRecords={setCreatePRecords} selectedAppt={selectedAppt}/>}
+              {!patientDetailsView && <button className="back" onClick={handleBackToMonth}>
+                Back to Month
+              </button>}
+            </div>
           )}
     </div>
   );

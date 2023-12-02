@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import axios from "axios";
 import URL from '../links/links.json'
 import {socket} from '../Socket'

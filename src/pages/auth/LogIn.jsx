@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useEffect, useState, useContext } from "react"
 import URL from '../../links/links.json'
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import { AuthContext } from "./../../context/auth.context"
 import {socket} from '../../Socket'
 

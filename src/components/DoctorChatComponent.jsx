@@ -76,7 +76,7 @@ const DoctorChatComponent = () => {
   const sendMessage = () => {
     console.log("send message function called");
     const messageData = {
-      recipientId: receivingDrId,
+      recipientId:receivingDrId ,
       message: outgoingMsg,
       userId: user._id,
     };
@@ -132,7 +132,7 @@ const DoctorChatComponent = () => {
             onChange={getMsg}
             placeholder="Type your message..."
           />
-          {/* <input value={`The other one:${incomingMsgs}`} /> */}
+          <input value={`The other one:${incomingMsgs}`} />
           <button type="submit">Send</button>
         </form>
       )}

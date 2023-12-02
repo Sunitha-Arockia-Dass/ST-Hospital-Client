@@ -30,7 +30,7 @@ function DepartmentPage() {
               to={`/departments/${department._id}`}
               state={{ department }}
             >
-              <div className="one-dpt" onClick={() => displayDept(department._id)}>
+              <div className="one-dpt" >
                 <fieldset className="fieldset gradient-bg">
                   <legend>
                     <h4>{department.name}</h4>
