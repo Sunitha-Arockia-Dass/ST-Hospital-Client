@@ -48,36 +48,27 @@ function AdminDoctorPage({ setDoctorView, createCredentials,setSelectDrView }) {
   }
 
   return (
-    <div>
-      {createCredentials ? <h1>Select A Doctor</h1> : <h1>Doctors List</h1>}
-      <button
-        onClick={() => {
+    <div className="dpt-page">
+      {createCredentials ? <h4 className="admin">Change doctor&apos;s credentials</h4> : <h4 className="admin">Manage doctor&apos;s datas</h4>}
+    <div className="all-dpt">
+
+      <button className="back" onClick={() => {
           setDoctorView(false);
           setFormView(false);
           setDrView(true);
+        }}>↩ Back</button>
+      <button className="back" onClick={() => {setCreateDoctor(true), setDrView(false);}}><h4>Add +</h4></button>
 
-
-        }}
-      >
-        Go Back
-      </button>
-      <button
-        onClick={() => {
-          setCreateDoctor(true), setDrView(false);
-        }}
-      >
-        Add
-      </button>
       {drView &&
         doctors?.map((doctor) => {
           return createCredentials ? (
-            <div
+            <div className="admin one-dpt"
               key={doctor._id}
               onClick={() => {
                 showForm(doctor);
               }}
             >
-              <fieldset>
+              <fieldset className="fieldset">
                 <legend>
                   <h4>
                     {doctor.firstname} {doctor.lastname}
@@ -91,8 +82,8 @@ function AdminDoctorPage({ setDoctorView, createCredentials,setSelectDrView }) {
               </fieldset>
             </div>
           ) : (
-            <div key={doctor._id}>
-              <fieldset>
+            <div className="admin one-dpt" key={doctor._id}>
+              <fieldset className="fieldset">
                 <legend>
                   <h4>
                     {doctor.firstname} {doctor.lastname}
@@ -103,25 +94,26 @@ function AdminDoctorPage({ setDoctorView, createCredentials,setSelectDrView }) {
                   {doctor.department[0].name}
                 </h6>
                 {/* <img src={doctor.image} alt="Doctor icon" /> */}
-                <button
+              </fieldset>
+                <button className="back"
                   onClick={() => {
                     updateDoctor(doctor._id);
                   }}
                 >
                   Update
                 </button>
-                <button
+                <button className="back"
                   onClick={() => {
                     deleteDoctor(doctor._id);
                   }}
                 >
                   Delete
                 </button>
-              </fieldset>
             </div>
+           
           );
         })}
-
+      
       {createDoctor && (
         <CreateDoctor
           create={true}
@@ -149,7 +141,9 @@ function AdminDoctorPage({ setDoctorView, createCredentials,setSelectDrView }) {
           createCredentials={createCredentials}
         />
       )}
+      </div>
     </div>
+    
   );
 }
 

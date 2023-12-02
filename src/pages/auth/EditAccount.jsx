@@ -95,17 +95,13 @@ function EditAccount() {
         <form onSubmit={updateUser}>
           <h3>Edit Account</h3>
           <p>
-            Wanna go back ?
-            <NavLink to="/account" className="style-one">
-              {" "}
-              account
-            </NavLink>
+            Wanna go back to<NavLink to="/account" className="style-one">account</NavLink>
           </p>
 
           <div className="two-inputs">
 
             <select name="gender" id="gender">
-              <option value="" disabled selected>Gender</option>
+              <option value="" disabled selected >Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>

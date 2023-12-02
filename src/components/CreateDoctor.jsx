@@ -80,10 +80,10 @@ console.log(selectedDepartmentId)
       });
   }
   return (
-    <div>
+    <div className='manage-dpt'>
       {create ? (
         <div>
-          <h1>Create Doctor</h1>
+          <h5>Create Doctor</h5>
           <form onSubmit={createDr}>
             <input type="text" name="firstname" />
             <input type="text" name="lastname" />
@@ -107,12 +107,12 @@ console.log(selectedDepartmentId)
               <option>General</option>
             </select>
 
-            <button type="submit">Create</button>
+            <button className="form" type="submit">Create</button>
           </form>
         </div>
       ) : (
         <div>
-          <h1>Update Doctor</h1>
+          <h5>Update Doctor</h5>
           <form onSubmit={updateDr}>
             <input type="text" name="firstname" defaultValue={drToUpdate.firstname}/>
             <input type="text" name="lastname" defaultValue={drToUpdate.lastname}/>
@@ -139,7 +139,7 @@ console.log(selectedDepartmentId)
               <option>General</option>
             </select>
 
-            <button type="submit">Update the Docto Info</button>
+            <button className="form" type="submit">Update Doctor</button>
           </form>
         </div>
       )}{" "}
