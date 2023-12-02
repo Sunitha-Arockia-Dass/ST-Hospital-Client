@@ -163,6 +163,7 @@ const DoctorCalendarComponent = ({
   };
 
   const renderDateEventContent = (eventInfo) => {
+    console.log(eventInfo.event.title)
     return (
       <>
         {user.role === "doctor" && <p>Title: {eventInfo.event.title}</p>}
@@ -226,6 +227,7 @@ const DoctorCalendarComponent = ({
         />
       ) : (
         <div className="back-to-month">
+        <input name='complaints'  />
           <h4>Selected Time: {convertTo12HourFormat(selectedSlot)}</h4>
           <FullCalendar
             plugins={[timeGridPlugin, interactionPlugin]}

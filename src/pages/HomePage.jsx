@@ -36,7 +36,7 @@ function HomePage() {
             </div>
 
             <div className='half-frame circles'>
-                <img className="wheel-w" src="https://shcs.ucdavis.edu/sites/g/files/dgvnsk7846/files/inline-images/Wheel_0.png" height="90%" width="90%"/>      
+                {/* <img className="wheel-w" src="https://shcs.ucdavis.edu/sites/g/files/dgvnsk7846/files/inline-images/Wheel_0.png" height="90%" width="90%"/>       */}
             </div>
 
         </div>

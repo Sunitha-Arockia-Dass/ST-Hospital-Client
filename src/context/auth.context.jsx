@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
-
+import io from "socket.io-client";
 import axios from "axios";
 import URL from '../links/links.json'
+import {socket} from '../Socket'
 
 const AuthContext = React.createContext();
 
@@ -12,8 +13,16 @@ function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
+  // const [socket,setSocket] = useState(null)
   const navigate = useNavigate()
+  // useEffect(() => {
+  //   const newSocket = io("http://localhost:5005");
+  //   setSocket(newSocket);
 
+  //   // return () => {
+  //   //   newSocket.disconnect();
+  //   // };
+  // }, []);
   const storeToken = (token) => {
 
     localStorage.setItem("authToken", token);
@@ -61,6 +70,9 @@ function AuthProviderWrapper(props) {
   const logOutUser = () => {
     removeToken();
     authenticateUser();
+    // if (socket) {
+    //   socket.emit("disconnect");
+    // }
     localStorage.removeItem("userDetails");
     navigate("/")
 
