@@ -1,20 +1,20 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
-import URL from "../links/links.json";
-
-function ViewPatientRecord({
-  setPatientDetailsView,
-  setViewPRecords,
-  selectedAppt,
-}) {
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/auth.context";
+import URL from '../links/links.json'
+function PatientRecords() {
+  const { user } = useContext(AuthContext);
+  const userId = user?._id;
+  console.log('userId',userId)
   const [records, setRecords] = useState();
   const [singleRecordView, setSingleRecordView] = useState(false);
   const [singleRecord, setSingleRecord] = useState(null);
-  const userId = selectedAppt[0]?.user[0]?._id;
+
   useEffect(() => {
     axios
       .get(`${URL.viewPatientRecord}/${userId}`)
       .then((response) => {
+        // console.log(response.data);
         setRecords(response.data);
       })
       .catch((error) => {
@@ -46,10 +46,9 @@ function ViewPatientRecord({
       return { color: 'red' };
     }
   }
-
   return (
     <div>
-      <h1>PATIENT RECORD PAGE</h1>
+      <h4>Patient Records</h4>
       {singleRecordView ? (
         <>
         <button onClick={()=>{setSingleRecordView(false)}}>Back</button>
@@ -89,4 +88,4 @@ function ViewPatientRecord({
   );
 }
 
-export default ViewPatientRecord;
+export default PatientRecords;
