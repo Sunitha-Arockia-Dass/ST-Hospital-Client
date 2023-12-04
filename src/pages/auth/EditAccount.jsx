@@ -22,7 +22,11 @@ function EditAccount() {
   const { user, logOutUser } = useContext(AuthContext);
   const [gpData, setGPData] = useState();
   const [myGPData, setMyGPData] = useState();
-
+  // const defaultChangedGpId = myGPData?._id;
+  
+  const [changedGpId, setChangedGpId] = useState(myGPData?._id);
+  // console.log("myGPData?._id",myGPData?._id);
+// console.log('changedGpId',changedGpId)
   const [errorMessage, setErrorMessage] = useState(undefined);
   const navigate = useNavigate();
   useEffect(() => {
@@ -43,6 +47,8 @@ function EditAccount() {
   }, [user.patientDetails]);
   const updateUser = (e) => {
     e.preventDefault();
+    console.log(e.target.dateOfBirth.value)
+    console.log(e.target.gp.value)
     let data = {
       name: e.target.username.value,
       email: e.target.email.value,
@@ -51,30 +57,44 @@ function EditAccount() {
       role: user.role,
       firstname: e.target.firstname.value,
       lastname: e.target.lastname.value,
+      patientDetails:{
+        gender:user.patientDetails.gender,
+        dateOfBirth:user.patientDetails.dateOfBirth,
+        gp:myGPData._id,
+        contactNumber:user.patientDetails.contactNumber,
+        address:{
+          houseNumber: user.patientDetails.address.houseNumber,
+          street:user.patientDetails.address.street,
+          city: user.patientDetails.address.city,
+          postalCode: user.patientDetails.address.postalCode,
+          country: user.patientDetails.address.country,
+        }
+      }
     }
     if (e.target.dateOfBirth.value.trim() !== '') {
       data.patientDetails.dateOfBirth = e.target.dateOfBirth.value
     }
-    if (e.target.gp.value.trim() !== '') {
-      data.patientDetails.gp = e.target.gp.value
+    if (e.target.gender.value.trim() !== '') {
+      data.patientDetails.gender = e.target.gender.value
     }
+    
     if (e.target.phone.value.trim() !== '') {
       data.patientDetails.contactNumber = e.target.phone.value
     }
     if (e.target.houseNumber.value.trim() !== '') {
-      data.patientDetails.houseNumber = e.target.houseNumber.value
+      data.patientDetails.address.houseNumber = e.target.houseNumber.value
     }
     if (e.target.street.value.trim() !== '') {
-      data.patientDetails.street = e.target.street.value
+      data.patientDetails.address.street = e.target.street.value
     }
     if (e.target.city.value.trim() !== '') {
-      data.patientDetails.city = e.target.city.value
+      data.patientDetails.address.city = e.target.city.value
     }
     if (e.target.country.value.trim() !== '') {
-      data.patientDetails.country = e.target.country.value
+      data.patientDetails.address.country = e.target.country.value
     }
     if (e.target.postalCode.value.trim() !== '') {
-      data.patientDetails.postalCode = e.target.postalCode.value
+      data.patientDetails.address.postalCode = e.target.postalCode.value
     }
     console.log("data", data);
     axios
@@ -88,6 +108,13 @@ function EditAccount() {
         setErrorMessage(error);
       });
   };
+  function handleGpChange(e) {
+    const selectedGpId =
+      e.target.options[e.target.selectedIndex].getAttribute("data-gp-id");
+      console.log('selectedGpId',selectedGpId)
+      setChangedGpId(selectedGpId);
+  }
+  
 
   return (
     <div id="editaccount" className="full center-frame">
@@ -162,14 +189,14 @@ function EditAccount() {
 
           </div>
           <br />
-          <select name="gp">
+          <select name="gp" onClick={handleGpChange}>
             <option value="" disabled selected>
               {myGPData?.name || "Select General Practitioner"}
             </option>
 
             {gpData?.map((gp) => {
               return (
-                <option key={gp._id} value={gp._id}>
+                <option key={gp._id}  data-gp-id={gp._id} value={gp._id}>
                   {gp.name}, {gp.address.city}
                 </option>
               );

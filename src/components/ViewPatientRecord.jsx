@@ -4,11 +4,15 @@ import URL from '../links/links.json'
 
 function ViewPatientRecord({setPatientDetailsView,setViewPRecords,selectedAppt}) {
   const [records, setRecords] = useState();
+  const userId=selectedAppt[0]?.user[0]?._id
   useEffect(() => {
-    axios.get(`${URL.viewPatientRecord}/${selectedAppt[0]?.user[0]?._id}`)
+    axios.get(URL.viewPatientRecord)
       .then((response) => {
-        console.log(response.data);
-        setRecords(response.data);
+        const filteredRecord=response.data.filter(record=>{
+          return record.user===userId;
+        })
+        console.log(filteredRecord[0]);
+        setRecords(filteredRecord[0]);
       })
       .catch((error) => {
         console.log("error", error);
@@ -17,6 +21,7 @@ function ViewPatientRecord({setPatientDetailsView,setViewPRecords,selectedAppt})
 
   return (
   <div>
+
 PATIENT RECORD PAGE
   </div>
   );
