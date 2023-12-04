@@ -20,6 +20,7 @@
   "patientUpdateAppt": "http://localhost:5005/appointment/patient/update",
   "gPractice": "http://localhost:5005/gPractice/",
   "search":"http://localhost:5005/search/",
-  "patientRecordCreate":"http://localhost:5005/patientRecord/create"
+  "patientRecordCreate":"http://localhost:5005/patientRecord/create",
+  "viewPatientRecord":"http://localhost:5005/patientRecord"
 
 }

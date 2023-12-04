@@ -3,11 +3,12 @@ import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import CreatePatientRecord from './CreatePatientRecord'
+import CreatePatientRecord from "./CreatePatientRecord";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import URL from "../links/links.json";
-
+import ViewPatientRecord from "./ViewPatientRecord";
+import PatientInfo from "./PatientInfo";
 const DoctorCalendarComponent = ({
   setView,
   updateCallback,
@@ -26,9 +27,10 @@ const DoctorCalendarComponent = ({
   const [complaints, setComplaints] = useState("");
   const [patientDetailsView, setPatientDetailsView] = useState(false);
   const [allAppts, setAllAppts] = useState();
-  const [createPRecords,setCreatePRecords]=useState(null)
-  const [viewPRecords,setViewPRecords]=useState(null)
-const [selectedAppt,setSelectedAppt]=useState(null)
+  const [createPRecords, setCreatePRecords] = useState(null);
+  const [viewPRecords, setViewPRecords] = useState(null);
+  const [selectedAppt, setSelectedAppt] = useState(null);
+  const [patientInfoView, setPatientInfoView] = useState(null);
   const currentDate = new Date();
   const tomorrow = new Date(currentDate);
 
@@ -106,9 +108,9 @@ const [selectedAppt,setSelectedAppt]=useState(null)
     const isoString = dateObject.toISOString();
     // console.log("eventId", isoString);
     // console.log(allAppts[0].start);
-    const selectedAppt=allAppts.filter(appt=>{
-      return appt.start===isoString
-    })
+    const selectedAppt = allAppts.filter((appt) => {
+      return appt.start === isoString;
+    });
     // console.log('selectedAppt',selectedAppt)
     if (user.role === "doctor") {
       // Fetch patient details based on the event data (event.id or event.otherUniqueIdentifier)
@@ -116,8 +118,8 @@ const [selectedAppt,setSelectedAppt]=useState(null)
       // You might use a modal or another component to show the patient details
       // Example: Show patient name, complaints, etc.
       setPatientDetailsView(true);
-      setShowTimeGrid(false)
-      setSelectedAppt(selectedAppt)
+      setShowTimeGrid(false);
+      setSelectedAppt(selectedAppt);
       // alert("Doctor: Display patient details here");
     } else {
       // For other roles (e.g., patient or admin), show a message or handle differently
@@ -136,6 +138,9 @@ const [selectedAppt,setSelectedAppt]=useState(null)
   const handleBackToMonth = () => {
     setShowTimeGrid(false);
     setSelectedSlot(null);
+    setPatientInfoView(false);
+    setViewPRecords(false)
+    setCreatePRecords(false)
   };
   function creatAppt() {
     const slotStartTime = new Date(selectedSlot);
@@ -243,21 +248,40 @@ const [selectedAppt,setSelectedAppt]=useState(null)
 
     return formattedTime;
   }
-  function viewRecords(){
-    setViewPRecords(true)
-    
+  function viewRecords() {
+    setViewPRecords(true);
+    setPatientInfoView(false)
+    setCreatePRecords(false)
   }
-  function createRecords(){
-    setCreatePRecords(true)
+  function createRecords() {
+    setCreatePRecords(true);
+    setViewPRecords(false)
+    setPatientInfoView(false)
+  }
+  function viewPatientInfo() {
+    setPatientInfoView(true);
+    setViewPRecords(false)
+    setCreatePRecords(false)
 
   }
   return (
     <div className="fullcalendar-DCC">
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
-      {patientDetailsView ? (<div>
-      <button onClick={viewRecords}>View Past Records</button> 
-      <button onClick={createRecords}>Create a new Record</button>  <button onClick={()=>{setPatientDetailsView(false)}}>Back to Calendar</button></div>) :(!showTimeGrid ? (
+      {patientDetailsView ? (
+        <div>
+          <button onClick={viewRecords}>View Past Records</button>
+          <button onClick={createRecords}>Create a new Record</button>
+          <button onClick={viewPatientInfo}>View Patient Details</button>
+          <button
+            onClick={() => {
+              setPatientDetailsView(false);
+            }}
+          >
+            Back to Calendar
+          </button>
+        </div>
+      ) : !showTimeGrid ? (
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
@@ -307,8 +331,7 @@ const [selectedAppt,setSelectedAppt]=useState(null)
             // Other props as needed
           />
         </div>
-      ))
-}
+      )}
       {update
         ? selectedSlot && (
             <button
@@ -364,10 +387,31 @@ const [selectedAppt,setSelectedAppt]=useState(null)
                   </svg>
                 </button>
               )}
-              {createPRecords && <CreatePatientRecord setPatientDetailsView={setPatientDetailsView} setCreatePRecords={setCreatePRecords} selectedAppt={selectedAppt}/>}
-              {!patientDetailsView && <button className="back" onClick={handleBackToMonth}>
-                Back to Month
-              </button>}
+              {patientDetailsView && createPRecords && (
+                <CreatePatientRecord
+                  setPatientDetailsView={setPatientDetailsView}
+                  setCreatePRecords={setCreatePRecords}
+                  selectedAppt={selectedAppt}
+                />
+              )}
+              {patientDetailsView && viewPRecords && (
+                <ViewPatientRecord
+                  setPatientDetailsView={setPatientDetailsView}
+                  setViewPRecords={setViewPRecords}
+                  selectedAppt={selectedAppt}
+                />
+              )}
+              {patientDetailsView && patientInfoView && (
+                <PatientInfo
+                  setPatientDetailsView={setPatientDetailsView}
+                  selectedAppt={selectedAppt}
+                />
+              )}
+              {!patientDetailsView && (
+                <button className="back" onClick={handleBackToMonth}>
+                  Back to Month
+                </button>
+              )}
             </div>
           )}
     </div>

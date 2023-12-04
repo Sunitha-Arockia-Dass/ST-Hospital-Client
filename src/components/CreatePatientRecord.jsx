@@ -11,27 +11,32 @@ function CreatePatientRecord({
 
   function handleSubmit(e) {
     e.preventDefault();
-    const patientRecord = {
-      user: selectedAppt[0]?.user[0]?._id,
-      record: {
-        doctor: selectedAppt[0]?.doctor[0]?._id,
-        appointment: selectedAppt[0]?._id,
-        complaints: e.target.complaints.value,
-        description: e.target.description.value,
-        prescribedMedications: e.target.prescribedMedications.value,
-      },
-    };
-    const patientVitals= {
-        temperature: { value: e.target.temperature.value, range: "" },
-        pulseRate: { value: e.target.pulseRate.value, range: "" },
-        bloodPressure: { value: e.target.bloodPressure.value, range: "" },
-        heartRate: { value: e.target.heartRate.value, range: "" },
-      }
-    console.log(patientRecord);
+    const user = selectedAppt[0]?.user[0]?._id;
+    const doctor = selectedAppt[0]?.doctor[0]?._id;
+    const appointment = selectedAppt[0]?._id;
+    const complaints = e.target.complaints.value;
+    const description = e.target.description.value;
+    const prescribedMedications = e.target.prescribedMedications.value;
+    const temperature = e.target.temperature.value;
+    const pulseRate = e.target.pulseRate.value;
+    const bloodPressure = e.target.bloodPressure.value;
+    const heartRate = e.target.heartRate.value;
+
     axios
-      .post(URL.patientRecordCreate, {patientRecord,patientVitals})
+      .post(URL.patientRecordCreate, {
+        user,
+        doctor,
+        appointment,
+        complaints,
+        description,
+        prescribedMedications,
+        temperature,
+        pulseRate,
+        bloodPressure,
+        heartRate,
+      })
       .then((response) => {
-        setPatientDetailsView(false);
+        // setPatientDetailsView(false);
         setCreatePRecords(false);
         console.log(response.data);
       })
