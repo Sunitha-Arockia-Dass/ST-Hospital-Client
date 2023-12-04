@@ -21,7 +21,8 @@ function CreatePatientRecord({
     const pulseRate = e.target.pulseRate.value;
     const bloodPressure = e.target.bloodPressure.value;
     const heartRate = e.target.heartRate.value;
-
+console.log('doctor',doctor)
+console.log('appointment',appointment)
     axios
       .post(URL.patientRecordCreate, {
         user,
