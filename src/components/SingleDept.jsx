@@ -1,5 +1,6 @@
 import { useNavigate ,useLocation, Link} from "react-router-dom"
 import { useLayoutEffect } from "react";
+import IsPrivate from './IsPrivate'
 import gsap from "gsap"
 
 

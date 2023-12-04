@@ -135,7 +135,7 @@ function App() {
           <Route path="/departments/:id" element={<SingleDept />} />
 
           {/*Doctor  Page*/}
-          <Route path="/doctor/:id" element={<SingleDoctor />} />
+          <Route path="/doctor/:id" element={<IsPrivate><SingleDoctor /></IsPrivate>} />
         </Routes>
 
       </main>
