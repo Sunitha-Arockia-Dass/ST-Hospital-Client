@@ -46,6 +46,7 @@ function PatientRecords() {
       return { color: 'red' };
     }
   }
+  console.log('start',records)
   return (
     <div>
       <h4>Patient Records</h4>
@@ -78,7 +79,7 @@ function PatientRecords() {
           {records?.record.map((record) => {
             return (
               <div key={record._id} onClick={()=>{showSingleRecord(record)}}>
-                <p>{formatDateTime(record.appointment.start)} </p>
+                {/* <p>{formatDateTime(record.appointment.start)} </p> */}
               </div>
             );
           })}

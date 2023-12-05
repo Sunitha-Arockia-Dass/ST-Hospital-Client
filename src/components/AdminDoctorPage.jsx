@@ -93,7 +93,7 @@ console.log('doctor',doctors[0])
                     </h4>
                   </legend>
                   <h6>{doctor.position} Doctor of </h6>
-                  <h6>{doctor.department[0].name}</h6>
+                  <h6>{doctor.department.name}</h6>
                   {/* <img src={doctor.image} alt="Doctor icon" /> */}
                 </fieldset>
                 <button className="back"
