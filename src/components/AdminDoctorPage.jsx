@@ -16,11 +16,15 @@ function AdminDoctorPage({
   const [drView, setDrView] = useState(true);
   const [doctorId, setDoctorId] = useState();
   const [formView, setFormView] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(undefined)
 
   useEffect(() => {
     axios.get(URL.doctors).then((foundDoctors) => {
       setDoctors(foundDoctors.data);
-    });
+    })
+    .catch((error) => {
+      setErrorMessage(error.response.data.message);
+    })
   }, [drView]);
   const updateDoctor = (id) => {
     setDrView(false);
@@ -38,8 +42,8 @@ function AdminDoctorPage({
         );
       })
       .catch((error) => {
-        console.log("error", error);
-      });
+        setErrorMessage(error.response.data.message);
+      })
   };
   function showForm(doctor) {
     console.log("div clicked");
@@ -165,6 +169,7 @@ function AdminDoctorPage({
           />
         )}
       </div>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 }

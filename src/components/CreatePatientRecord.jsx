@@ -7,7 +7,7 @@ function CreatePatientRecord({
   setCreatePRecords,
   selectedAppt,
 }) {
-    console.log('selectedAppt',selectedAppt)
+  const [errorMessage, setErrorMessage] = useState(undefined)
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -43,8 +43,8 @@ console.log('user',user)
         console.log(response.data);
       })
       .catch((error) => {
-        console.log("error", error);
-      });
+        setErrorMessage(error.response.data.message);
+      })
   }
 
   return (
@@ -83,6 +83,8 @@ console.log('user',user)
         </label>
         <button type="submit">Submit</button>
       </form>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
     </div>
   );
 }

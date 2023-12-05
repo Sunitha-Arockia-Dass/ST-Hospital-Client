@@ -5,11 +5,16 @@ import { useState,useEffect } from 'react'
 function CreateDepartment({create,id,setCreateDept,setDeptView}) {
     console.log(id,create)
     const [deptToUpdate,setDeptToUpdate]=useState({})
+      const [errorMessage, setErrorMessage] = useState(undefined)
+
     useEffect(() => {
         axios.get(`${URL.departments}/${id}`).then((foundDepartments) => {
             console.log(foundDepartments.data)
             setDeptToUpdate(foundDepartments.data)
-        });
+        })
+        .catch((error) => {
+          setErrorMessage(error.response.data.message);
+        })
       }, []);
 
   function createDept(e) {
@@ -25,10 +30,9 @@ axios.post(URL.addDepartment,deptData)
     setCreateDept(false)
     setDeptView(true)
 })
-.catch(error=>{
-    console.log(error);
+.catch((error) => {
+  setErrorMessage(error.response.data.message);
 })
-    console.log("hello", deptData);
     
   }
   function updateDept(e){
@@ -44,8 +48,8 @@ axios.post(URL.addDepartment,deptData)
         setCreateDept(false)
         setDeptView(true)
     })
-    .catch(error=>{
-        console.log('error',error)
+    .catch((error) => {
+      setErrorMessage(error.response.data.message);
     })
    
 
@@ -79,6 +83,7 @@ axios.post(URL.addDepartment,deptData)
         <button className="form" type="submit">Update</button>
       </form>
     </div>)}
+    {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 }

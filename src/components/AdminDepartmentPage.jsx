@@ -10,10 +10,15 @@ function AdminDepartmentPage({ setDepartmentView }) {
   const [departments, setDepartments] = useState([]);
   const [deptView, setDeptView] = useState(true);
   const [deptId, setDeptId] = useState()
+  const [errorMessage, setErrorMessage] = useState(undefined)
+
   useEffect(() => {
     axios.get(URL.departments).then((foundDepartments) => {
       setDepartments(foundDepartments.data);
-    });
+    })
+    .catch((error) => {
+      setErrorMessage(error.response.data.message);
+    })
   }, [deptView]);
   const updateDepartment = (id) => {
     setDeptView(false);
@@ -31,8 +36,8 @@ function AdminDepartmentPage({ setDepartmentView }) {
         );
       })
       .catch((error) => {
-        console.log("error", error);
-      });
+        setErrorMessage(error.response.data.message);
+      })
   };
   return (
     <div className="dpt-page">     
@@ -82,6 +87,8 @@ function AdminDepartmentPage({ setDepartmentView }) {
         {createDept && <CreateDepartment create={true} setDeptView={setDeptView} setCreateDept={setCreateDept} id={""} />}
         {updateDept && <CreateDepartment create={false} setDeptView={setDeptView} setCreateDept={setUpdateDept} id={deptId} />}
       </div>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
     </div>
   );
 }

@@ -14,13 +14,6 @@ console.log('user',user)
   );
 }
 
-// {
-//     setView,
-//     updateCallback,
-//     details,
-//     doctor,
-//     selectedDept,
-//     update,
-//   }
+
 
 export default Doctor;
