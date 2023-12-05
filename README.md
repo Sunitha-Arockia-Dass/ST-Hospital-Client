@@ -14,6 +14,7 @@
 
 
 <h1>Introduction</h1>
+This project is an hospital website that allow patient to take appointments, doctor can manage patient records and admin can create departments, patient, doctors.
 
 <h2>Technical Requirements</h2>
 Your full-stack application must meet the following technical requirements:
@@ -86,10 +87,10 @@ using react usecontext for french or english, just to show how it works on the n
 
 ## CRUD
 
-<h2>User</h2>
-User can sign up to create an account, he can acces to his data and update them.
+<h2>Patient</h2>
+Patient can sign up to create an account, he can acces to his data and update them.
 
-<h2>Members Profile</h2>
+<h2>Admin</h2>
 User can create members, each members can be updated, deleted and acces to 3 levels : details, agenda, healthify app.
 
 <h2>Agenda</h2>
