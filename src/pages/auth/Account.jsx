@@ -40,7 +40,7 @@ function Account() {
         { rotateY: 0 }
       )
       .fromTo("#account legend", { opacity: 0, y: -25 }, { opacity: 1, y: 0 })
-      .fromTo("#account div.health", { opacity: 0, y: 100 }, { opacity: 1, y: 0, ease: "bounce", duration: 2});
+      .fromTo("div.health", { opacity: 0, y: 100 }, { opacity: 1, y: 0, ease: "bounce", duration: 2});
   });
 
   return (
