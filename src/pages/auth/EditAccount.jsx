@@ -58,16 +58,16 @@ function EditAccount() {
       firstname: e.target.firstname.value,
       lastname: e.target.lastname.value,
       patientDetails:{
-        gender:user.patientDetails.gender,
-        dateOfBirth:user.patientDetails.dateOfBirth,
-        gp:myGPData._id,
-        contactNumber:user.patientDetails.contactNumber,
+        // gender:user.patientDetails.gender,
+        // dateOfBirth:user.patientDetails.dateOfBirth,
+        gp:changedGpId,
+        // contactNumber:user.patientDetails.contactNumber,
         address:{
-          houseNumber: user.patientDetails.address.houseNumber,
-          street:user.patientDetails.address.street,
-          city: user.patientDetails.address.city,
-          postalCode: user.patientDetails.address.postalCode,
-          country: user.patientDetails.address.country,
+          // houseNumber: user.patientDetails.address.houseNumber,
+          // street:user.patientDetails.address.street,
+          // city: user.patientDetails.address.city,
+          // postalCode: user.patientDetails.address.postalCode,
+          // country: user.patientDetails.address.country,
         }
       }
     }

@@ -9,10 +9,10 @@ function PatientInfo({ selectedAppt, setPatientDetailsView }) {
   console.log("selectedAppt[0]?.user[0]?._id", selectedAppt[0]?.user[0]?._id);
   useEffect(() => {
     axios.get(URL.users).then((response) => {
-      console.log(response.data);
       const fiteredUser = response.data.filter((user) => {
         return user._id === userId;
       });
+      console.log(fiteredUser);
       setUser(fiteredUser[0]);
     });
   }, []);
@@ -51,19 +51,19 @@ function calculateAge(birthDateString) {
             <strong>Name:</strong>
             {user.firstname} {user.lastname}
           </p>
-          {user.patientDetails.dateOfBirth &&  <p><strong>DOB:{formatDate(user.patientDetails.dateOfBirth) }</strong></p>}
-          {user.patientDetails.dateOfBirth && <p>
+          {user.patientDetails && user.patientDetails.dateOfBirth &&  <p><strong>DOB:{formatDate(user.patientDetails.dateOfBirth) }</strong></p>}
+          {user.patientDetails && user.patientDetails.dateOfBirth && <p>
             <strong>Age:</strong>
             {calculateAge(user.patientDetails.dateOfBirth) }
           </p>}
-          <p>
+          {user.patientDetails && user.patientDetails.gp && user.patientDetails.gp.length>0 && <p>
             <strong>GP:</strong>
             {user.patientDetails.gp[0]?.name}
-          </p>
-          <p>
+          </p>}
+          {user.patientDetails && user.patientDetails.gender && <p>
             <strong>Gender:</strong>
             {user.patientDetails.gender}
-          </p>
+          </p>}
           
         </div>
       )}

@@ -11,10 +11,12 @@ function ViewPatientRecord({
   const [singleRecordView, setSingleRecordView] = useState(false);
   const [singleRecord, setSingleRecord] = useState(null);
   const userId = selectedAppt[0]?.user[0]?._id;
+  console.log(userId)
   useEffect(() => {
     axios
       .get(`${URL.viewPatientRecord}/${userId}`)
       .then((response) => {
+        console.log('record',response.data)
         setRecords(response.data);
       })
       .catch((error) => {
@@ -46,7 +48,7 @@ function ViewPatientRecord({
       return { color: 'red' };
     }
   }
-
+// console.log('start',records[0].record.appointment.start)
   return (
     <div>
       <h1>PATIENT RECORD PAGE</h1>
@@ -73,6 +75,8 @@ function ViewPatientRecord({
           <p><strong>Complaints :</strong>{singleRecord.complaints}  </p>
           <p><strong>Description :</strong>{singleRecord.description}  </p>
           <p><strong>Prescribed Medications :</strong>{singleRecord.prescribedMedications}</p>
+                  <p><strong>Record Created By : Dr {singleRecord.doctor.firstname} {singleRecord.doctor.lastname} </strong></p>       
+
         </>
       ) : (
         <>

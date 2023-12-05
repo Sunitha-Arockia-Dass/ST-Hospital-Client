@@ -134,8 +134,7 @@ useEffect(()=>{
             {new Date(view.details[0].start).toDateString()}
           </h4>{" "}
           <h4>
-            Doctor:{view.details[0].doctor[0].firstname}
-            {view.details[0].doctor[0].lastname}
+            Doctor:{view.details[0].doctor[0].firstname} {view.details[0].doctor[0].lastname}
           </h4>
           <h4>Department:{view.details[0].department[0].name}</h4>
           <button className="back view-detail"
