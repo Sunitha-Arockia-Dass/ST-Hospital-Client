@@ -4,7 +4,11 @@ import URL from "../links/links.json";
 import CreateDoctor from "./CreateDoctor";
 import CreateCredentials from "./CreateCredentials";
 
-function AdminDoctorPage({ setDoctorView, createCredentials, setSelectDrView }) {
+function AdminDoctorPage({
+  setDoctorView,
+  createCredentials,
+  setSelectDrView,
+}) {
   const [createDoctor, setCreateDoctor] = useState(null);
   const [updateDr, setUpdateDr] = useState(null);
   const [doctors, setDoctors] = useState([]);
@@ -43,29 +47,46 @@ function AdminDoctorPage({ setDoctorView, createCredentials, setSelectDrView }) 
     setDrView(false);
     setDoctorView(false);
     setSelectedDoctor(doctor);
-    createCredentials = false
-
+    createCredentials = false;
   }
-console.log('doctor',doctors[0])
+  console.log("doctor", doctors[0]);
   return (
     <div className="dpt-page">
-      {createCredentials ? <h4 className="admin">Change doctor&apos;s credentials</h4> : <h4 className="admin">Manage doctor&apos;s datas</h4>}
+      {createCredentials ? (
+        <h4 className="admin">Change doctor&apos;s credentials</h4>
+      ) : (
+        <h4 className="admin">Manage doctor&apos;s datas</h4>
+      )}
       <div className="all-dpt">
-      <div className="admin one-dpt">
-        <button className="back admin" onClick={() => {
-          setDoctorView(false);
-          setFormView(false);
-          setDrView(true);
-          setSelectDrView(false);
-        }}>↩ Back</button>
-        
-        <button className="back admin" onClick={() => { setCreateDoctor(true), setDrView(false); }}><b>Add +</b></button>
+        <div className="admin one-dpt">
+          <button
+            className="back admin"
+            onClick={() => {
+              setDoctorView(false);
+              setFormView(false);
+              setDrView(true);
+              setSelectDrView(false);
+            }}
+          >
+            ↩ Back
+          </button>
+          {!drView && (
+            <button
+              className="back admin"
+              onClick={() => {
+                setCreateDoctor(true), setDrView(false);
+              }}
+            >
+              <b>Add +</b>
+            </button>
+          )}{" "}
         </div>
 
         {drView &&
           doctors?.map((doctor) => {
             return createCredentials ? (
-              <div className="admin one-dpt"
+              <div
+                className="admin one-dpt"
                 key={doctor._id}
                 onClick={() => {
                   showForm(doctor);
@@ -96,14 +117,16 @@ console.log('doctor',doctors[0])
                   <h6>{doctor.department.name}</h6>
                   {/* <img src={doctor.image} alt="Doctor icon" /> */}
                 </fieldset>
-                <button className="back"
+                <button
+                  className="back"
                   onClick={() => {
                     updateDoctor(doctor._id);
                   }}
                 >
                   Update
                 </button>
-                <button className="back"
+                <button
+                  className="back"
                   onClick={() => {
                     deleteDoctor(doctor._id);
                   }}
@@ -111,7 +134,6 @@ console.log('doctor',doctors[0])
                   Delete
                 </button>
               </div>
-
             );
           })}
 
@@ -144,7 +166,6 @@ console.log('doctor',doctors[0])
         )}
       </div>
     </div>
-
   );
 }
 
