@@ -1352,6 +1352,10 @@ h4.admin {
   color: var(--clr-blue);
 }
 
+.appt-details {
+  padding-bottom: 1.5rem;
+}
+
 .appt-view {
   display: flex;
   flex-direction: column;
@@ -1365,6 +1369,18 @@ button.view-detail {
   background: transparent;
   width: 100%;
   margin-bottom: 1.5rem;
+}
+
+.health {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 175px;
+  z-index: 90;
+}
+
+.health fieldset{
+  backdrop-filter: blur(1rem);
 }
 
 /*

@@ -48,11 +48,15 @@ function PatientRecords() {
   }
   console.log('start',records)
   return (
-    <div>
+    <div className="appt-details">
+     <fieldset>
+      <legend>
       <h4>Patient Records</h4>
+      </legend>
+      <div className="appt-view">
       {singleRecordView ? (
         <>
-        <button onClick={()=>{setSingleRecordView(false)}}>Back</button>
+        <button className="back" onClick={()=>{setSingleRecordView(false)}}>Back</button>
           <p><strong>Blood Pressure :</strong>
           <span style={getVitalsStyle(singleRecord.vitals.bloodPressure.range)}>
 
@@ -85,6 +89,8 @@ function PatientRecords() {
           })}
         </>
       )}
+      </div>
+      </fieldset>
     </div>
   );
 }
