@@ -14,7 +14,7 @@ function PatientRecords() {
     axios
       .get(`${URL.viewPatientRecord}/${userId}`)
       .then((response) => {
-        // console.log(response.data);
+        console.log('response.data',response.data);
         setRecords(response.data);
       })
       .catch((error) => {
@@ -73,13 +73,14 @@ function PatientRecords() {
           <p><strong>Complaints :</strong>{singleRecord.complaints}  </p>
           <p><strong>Description :</strong>{singleRecord.description}  </p>
           <p><strong>Prescribed Medications :</strong>{singleRecord.prescribedMedications}</p>
+          <p><strong>Record Created By : Dr {singleRecord.doctor.firstname} {singleRecord.doctor.lastname} </strong></p>       
         </>
       ) : (
         <>
           {records?.record.map((record) => {
             return (
               <div key={record._id} onClick={()=>{showSingleRecord(record)}}>
-                {/* <p>{formatDateTime(record.appointment.start)} </p> */}
+                <p>{formatDateTime(record.appointment.start)} </p>
               </div>
             );
           })}

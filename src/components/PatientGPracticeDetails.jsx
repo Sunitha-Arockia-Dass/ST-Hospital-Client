@@ -10,7 +10,7 @@ function PatientGPracticeDetails() {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    if(user.patientDetails){
+    if(user.patientDetails.gp.length>0){
 
       axios
       .get(`${URL.gPractice}/${user.patientDetails.gp[0]?._id}`)

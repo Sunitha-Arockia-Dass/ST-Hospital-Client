@@ -11,7 +11,7 @@ function PatientPersonalInfo(){
     const [gp, setGP] = useState(null);
 
     useEffect(() => {
-      if(user.patientDetails){
+      if(user.patientDetails.gp.length>0){
 
         axios
         .get(`${URL.gPractice}/${user.patientDetails.gp[0]._id}`)
@@ -45,11 +45,11 @@ return(
       <p>Username: {user.username}</p>
       <p>{user.email}</p>
       {user.patientDetails && <>
-      <p>{formatDate(user.patientDetails.dateOfBirth)}</p>
-      <p>{user.patientDetails.contactNumber}</p>      
-      <p>Address:{user.patientDetails.address.street} {user.patientDetails.address.houseNumber}</p>
+      {user.patientDetails.dateOfBirth && <p>DOB:{formatDate(user.patientDetails.dateOfBirth)}</p>}
+{  user.patientDetails.contactNumber && <p>Contact Number:{user.patientDetails.contactNumber}</p>      
+}     {user.patientDetails.address && <> <p>Address:{user.patientDetails.address.street} {user.patientDetails.address.houseNumber}</p>
       <p>{user.patientDetails.address.postalCode} {user.patientDetails.address.city}</p>
-      <p>{user.patientDetails.address.country}</p>
+      <p>{user.patientDetails.address.country}</p></>}
       </>
       }
       </fieldset>

@@ -7,7 +7,7 @@ function CreatePatientRecord({
   setCreatePRecords,
   selectedAppt,
 }) {
-  //   console.log('selectedAppt',selectedAppt)
+    console.log('selectedAppt',selectedAppt)
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -23,6 +23,7 @@ function CreatePatientRecord({
     const heartRate = e.target.heartRate.value;
 console.log('doctor',doctor)
 console.log('appointment',appointment)
+console.log('user',user)
     axios
       .post(URL.patientRecordCreate, {
         user,
