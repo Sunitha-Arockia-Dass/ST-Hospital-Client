@@ -63,10 +63,10 @@ function Navbar() {
         <ul>
           <li><NavLink to="/">{strings.navbar.links.home}</NavLink></li>
           <li><NavLink to="/departments">{strings.navbar.links.departments}</NavLink></li>
+           <li><NavLink to="/gpractice">{strings.navbar.links.gpractice}</NavLink></li>
           {!user && <li><NavLink to="/signup">{strings.navbar.links.signup}</NavLink></li>}
           {!user && <li><NavLink to="/login">{strings.navbar.links.login}</NavLink></li>}
           {user && <li><NavLink to="/account">{strings.navbar.links.account}</NavLink></li>}
-          {user && <li><NavLink to="/gpractice">{strings.navbar.links.gpractice}</NavLink></li>}
           {user && <li><button className="back" onClick={logOutUser}>Logout</button></li>}
           {/* {user && <li > <span className="capitalize">{user.username}</span> ({user.role})</li>} */}
 

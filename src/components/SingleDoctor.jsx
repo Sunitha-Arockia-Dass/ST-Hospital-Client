@@ -9,8 +9,8 @@ function SingleDoctor() {
   const navigate = useNavigate()
   const doctor = location.state?.doctor
   const department = location.state?.department
-  // console.log(doctor.department)
-
+console.log('doctor',doctor)
+console.log('department',department)
     // singletDoctor Gsap Animation //////////////////////////////////////////
  useLayoutEffect(() => {
   const tlsingleDoctor = gsap.timeline({ defaults: { duration: .25, ease: "power1.out" } })
@@ -29,11 +29,12 @@ function SingleDoctor() {
 
       <div className="single-dpt">
         <fieldset className="fieldset gradient-bg">
-          <legend><h3>{doctor.firstname} {doctor.lastname}</h3></legend>
+          <legend><h3>Dr.{doctor.firstname} {doctor.lastname}  {doctor?.education?.map(education=>(<>{education} </>))}</h3></legend>
           <div className="single-doc-img">
             <img src={department.image} alt="Department icon" />
           </div>
           <h6>{doctor.position} Doctor of {department.name}</h6>
+          <h6>To Book an Appointment:{doctor.phoneNumber}</h6>
         </fieldset>
         <button className="back" onClick={() => { navigate(-1) }}>↩ Back</button>
       </div>

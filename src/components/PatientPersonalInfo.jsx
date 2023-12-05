@@ -23,6 +23,14 @@ function PatientPersonalInfo(){
       }
       }, [user.patientDetails]);
     
+      function formatDate(inputDate) {
+        const date = new Date(inputDate);
+    
+        const options = { year: 'numeric', month: 'short', day: '2-digit' };
+        const formattedDate = date.toLocaleDateString('en-US', options);
+    
+        return formattedDate;
+    }
 
 return(
     <div className="user-detail">
@@ -37,7 +45,7 @@ return(
       <p>Username: {user.username}</p>
       <p>{user.email}</p>
       {user.patientDetails && <>
-      <p>{user.patientDetails.dateOfBirth}</p>
+      <p>{formatDate(user.patientDetails.dateOfBirth)}</p>
       <p>{user.patientDetails.contactNumber}</p>      
       <p>Address:{user.patientDetails.address.street} {user.patientDetails.address.houseNumber}</p>
       <p>{user.patientDetails.address.postalCode} {user.patientDetails.address.city}</p>

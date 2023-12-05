@@ -27,7 +27,6 @@ import IsAnon from "./components/IsAnon"
 import IsAdmin from "./components/IsAdmin"
 import SingleDept from "./components/SingleDept"
 import SingleDoctor from "./components/SingleDoctor"
-import DoctorChatComponent from './components/DoctorChatComponent'
 
 /* Pages */
 import HomePage from "./pages/HomePage"
@@ -79,7 +78,6 @@ function App() {
       <Navbar />
       <main className="container full">
         <SearchBar />
-        <DoctorChatComponent />
         <Routes>
           {/*   HomePage  */}
           <Route path="/" element={<HomePage />} />
@@ -137,7 +135,7 @@ function App() {
           <Route path="/departments/:id" element={<SingleDept />} />
 
           {/*Doctor  Page*/}
-          <Route path="/doctor/:id" element={<SingleDoctor />} />
+          <Route path="/doctor/:id" element={<IsPrivate><SingleDoctor /></IsPrivate>} />
         </Routes>
 
       </main>

@@ -29,7 +29,7 @@ function SearchResult({ searchOutput,setSearchOutput }) {
               to={`/doctor/${result.data._id}`}
               state={{
                 doctor: result.data,
-                department: result.data.department[0],
+                department: result.data.department,
               }}
               onClick={()=>{setSearchOutput(null)}}
             >
