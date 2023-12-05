@@ -620,13 +620,13 @@ optgroup {
   width: 25%;
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder {
   color: #909090;
   transform: translate3d(0, 0, 0);
   transition: all var(--timing03) ease-in-out;
 }
 
-input:focus::placeholder {
+input:focus::placeholder, textarea:focus::placeholder {
   opacity: 0;
   transform: translate3d(0, -2rem, 0);
 }
@@ -1392,6 +1392,21 @@ button.view-detail {
   position: relative;
 }
 
+.champ-rdv fieldset {
+  position: absolute;
+  bottom: 10rem;
+  right: 1rem;
+  border: none;
+  z-index: 100;
+  background: transparent;
+}
+.champ-rdv textarea {
+  height: 6rem;
+  border-width: .375rem;
+  border-color: var(--clr-blue);
+  border-radius: 1rem;
+}
+
 button.book-appointment {
   position: absolute;
   bottom: 4.5rem;
@@ -1429,6 +1444,8 @@ button.change-appointment svg {
   border-radius: 1rem;
   background: var(--background);
 }
+
+
 
 /*
 * ----------------------
