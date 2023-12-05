@@ -12,6 +12,7 @@ function SignUp() {
     password: "",
     confirmPassword: "",
   });
+
   const [gpData, setGPData] = useState();
   const navigate = useNavigate();
 
@@ -38,6 +39,7 @@ function SignUp() {
         setErrorMessage(error);
       });
   };
+
   // const addAdmin = () => {
   //   let data = {
   //     name: "admin",
@@ -76,7 +78,7 @@ function SignUp() {
 
   useEffect(() => {
     if (!formInput.username) {
-      errorsInput.username = "Username is required";
+      errorsInput.username = "";
     }
     if (formInput.username) {
       errorsInput.username = "";
@@ -93,15 +95,15 @@ function SignUp() {
     });
   };
 
-  // submit if no errors
-  const handlesubmit = (e) => {
-    console.log(errorsInput.length);
-    if (errorsInput.length === 0) {
-      signup(e);
-    }
-  };
-
+  
   // //check input changes
+  // submit if no errors
+  // const handlesubmit = (e) => {
+  //   console.log(errorsInput.length);
+  //   if (errorsInput.length === 0) {
+  //     signup(e);
+  //   }
+  // };
   // const handleChange = (e) => {
   //   const name = e.target.name
   //   const value =
