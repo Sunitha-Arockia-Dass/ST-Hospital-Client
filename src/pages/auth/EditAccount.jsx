@@ -32,7 +32,11 @@ function EditAccount() {
   useEffect(() => {
     axios.get(URL.gPractice).then((response) => {
       setGPData(response.data);
-    });
+    })
+    .catch((error) => {
+      console.log(error)
+      setErrorMessage(error.response.data.message);
+    })
   }, []);
   useEffect(() => {
     if (user.patientDetails) {
@@ -42,7 +46,9 @@ function EditAccount() {
           console.log(response.data);
           setMyGPData(response.data);
         })
-        .catch((error) => console.log("error", error));
+        .catch((error) =>{ console.log("error", error)
+        setErrorMessage(error.response.data.message);
+      });
     }
   }, [user.patientDetails]);
   const updateUser = (e) => {
@@ -105,7 +111,7 @@ function EditAccount() {
       })
       .catch((error) => {
         console.log(error);
-        setErrorMessage(error);
+        setErrorMessage(error.response.data.message);
       });
   };
   function handleGpChange(e) {
@@ -267,6 +273,7 @@ function EditAccount() {
           <br />
           <button className="form" type="submit">Edit Account</button>
         </form>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </div>
     </div>
   );

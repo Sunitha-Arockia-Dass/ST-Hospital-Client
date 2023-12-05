@@ -29,8 +29,7 @@ function LogIn() {
         navigate("/")
       })
       .catch((error) => {
-        console.log(error)
-        setErrorMessage(error)
+        setErrorMessage(error.response.data.message);
       })
   }
 

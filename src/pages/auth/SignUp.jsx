@@ -36,7 +36,7 @@ function SignUp() {
       })
       .catch((error) => {
         console.log(error);
-        setErrorMessage(error);
+        setErrorMessage(error.response.data.message);
       });
   };
 
@@ -73,7 +73,10 @@ function SignUp() {
     axios.get(URL.gPractice).then((response) => {
       setGPData(response.data);
       console.log(response.data)
-    });
+    })
+    .catch(error=>{
+      setErrorMessage(error.response.data.message);
+    })
   }, []);
 
   useEffect(() => {

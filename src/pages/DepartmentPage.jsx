@@ -9,11 +9,15 @@ function DepartmentPage() {
   const [selectedDept, setSelectedDept] = useState(null);
   const [doctor, setDoctor] = useState(null);
   const [delayLayout, setDelayLayout] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(undefined)
 
   useEffect(() => {
     axios.get(URL.departments).then((foundDepartments) => {
       setDepartments(foundDepartments.data);
-    });
+    })
+    .catch((error) => {
+      setErrorMessage(error.response.data.message);
+    })
     setDelayLayout(true)
   }, []);
 
@@ -59,6 +63,7 @@ function DepartmentPage() {
             </Link>
           );
         })}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </div>
     </div>
   );
