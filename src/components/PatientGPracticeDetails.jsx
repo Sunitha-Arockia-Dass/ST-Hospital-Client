@@ -7,7 +7,7 @@ import URL from "../links/links.json";
 
 function PatientGPracticeDetails() {
   const [gp, setGP] = useState();
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext)
 
   useEffect(() => {
     if(user.patientDetails &&  user.patientDetails.gp && user.patientDetails.gp.length>0){
