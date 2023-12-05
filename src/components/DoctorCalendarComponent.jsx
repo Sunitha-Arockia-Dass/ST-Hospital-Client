@@ -209,8 +209,8 @@ const DoctorCalendarComponent = ({
       <>
         {user.role === "doctor" && <p>Title: {eventInfo.event.title}</p>}
         {update &&
-        details &&
-        areDatesEqual(eventInfo.event.start, details.start) ? (
+          details &&
+          areDatesEqual(eventInfo.event.start, details.start) ? (
           <p style={{ color: "purple" }}>Your Appointment</p>
         ) : (
           <></>
@@ -224,8 +224,8 @@ const DoctorCalendarComponent = ({
       <>
         {user.role === "doctor" && <p>Title: {eventInfo.event.title}</p>}
         {update &&
-        details &&
-        areDatesEqual(eventInfo.event.start, details.start) ? (
+          details &&
+          areDatesEqual(eventInfo.event.start, details.start) ? (
           <p style={{ color: "purple" }}>Your Appointment</p>
         ) : (
           <></>
@@ -293,18 +293,11 @@ const DoctorCalendarComponent = ({
           hiddenDays={[0, 6]}
           validRange={validRange}
 
-          // Other props as needed
+        // Other props as needed
         />
       ) : (
         <div className="back-to-month">
-          {user.role === "patient" && (
-            <input
-              name="complaints"
-              onChange={(e) => {
-                setComplaints(e.target.value);
-              }}
-            />
-          )}
+
           <h4>Selected Time: {convertTo12HourFormat(selectedSlot)}</h4>
           <FullCalendar
             plugins={[timeGridPlugin, interactionPlugin]}
@@ -328,92 +321,103 @@ const DoctorCalendarComponent = ({
             eventContent={renderTimeEventContent}
             eventDisplay="block"
             eventClick={handleEventClick}
-            // Other props as needed
+          // Other props as needed
           />
         </div>
       )}
       {update
         ? selectedSlot && (
-            <button
-              className="change-appointment"
-              onClick={editAppt}
-              disabled={!selectedSlot}
-            >
-              <svg width="100px" height="100px" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M13 21H21"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-                <path
-                  d="M20.0651 7.39423L7.09967 20.4114C6.72438 20.7882 6.21446 21 5.68265 21H4.00383C3.44943 21 3 20.5466 3 19.9922V18.2987C3 17.7696 3.20962 17.2621 3.58297 16.8873L16.5517 3.86681C19.5632 1.34721 22.5747 4.87462 20.0651 7.39423Z"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-                <path
-                  d="M15.3097 5.30981L18.7274 8.72755"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </svg>
-            </button>
-          )
+          <button
+            className="change-appointment"
+            onClick={editAppt}
+            disabled={!selectedSlot}
+          >
+            <svg width="100px" height="100px" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M13 21H21"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M20.0651 7.39423L7.09967 20.4114C6.72438 20.7882 6.21446 21 5.68265 21H4.00383C3.44943 21 3 20.5466 3 19.9922V18.2987C3 17.7696 3.20962 17.2621 3.58297 16.8873L16.5517 3.86681C19.5632 1.34721 22.5747 4.87462 20.0651 7.39423Z"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M15.3097 5.30981L18.7274 8.72755"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+          </button>
+        )
         : selectedSlot && (
-            <div>
-              {user.role === "patient" && (
-                <button
-                  className="book-appointment"
-                  onClick={creatAppt}
-                  disabled={!selectedSlot}
+          <div className="champ-rdv">
+          <fieldset className="fieldset">
+                      {user.role === "patient" && (
+              <textarea placeholder="Write complaints"
+                name="complaints"
+                onChange={(e) => {
+                  setComplaints(e.target.value);
+                }}
+              />
+            )}
+            </fieldset>
+            
+            {user.role === "patient" && (
+              <button
+                className="book-appointment"
+                onClick={creatAppt}
+                disabled={!selectedSlot}
+              >
+                <svg
+                  width="100px"
+                  height="100px"
+                  viewBox="0 0 24 24"
+                  fill="none"
                 >
-                  <svg
-                    width="100px"
-                    height="100px"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <path
-                      d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z"
-                      stroke-width="1.5"
-                    ></path>{" "}
-                    <path
-                      d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                    ></path>
-                  </svg>
-                </button>
-              )}
-              {patientDetailsView && createPRecords && (
-                <CreatePatientRecord
-                  setPatientDetailsView={setPatientDetailsView}
-                  setCreatePRecords={setCreatePRecords}
-                  selectedAppt={selectedAppt}
-                />
-              )}
-              {patientDetailsView && viewPRecords && (
-                <ViewPatientRecord
-                  setPatientDetailsView={setPatientDetailsView}
-                  setViewPRecords={setViewPRecords}
-                  selectedAppt={selectedAppt}
-                />
-              )}
-              {patientDetailsView && patientInfoView && (
-                <PatientInfo
-                  setPatientDetailsView={setPatientDetailsView}
-                  selectedAppt={selectedAppt}
-                />
-              )}
-              {!patientDetailsView && (
-                <button className="back" onClick={handleBackToMonth}>
-                  Back to Month
-                </button>
-              )}
-            </div>
-          )}
+                  <path
+                    d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z"
+                    stroke-width="1.5"
+                  ></path>{" "}
+                  <path
+                    d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </button>
+            )}
+            {patientDetailsView && createPRecords && (
+              <CreatePatientRecord
+                setPatientDetailsView={setPatientDetailsView}
+                setCreatePRecords={setCreatePRecords}
+                selectedAppt={selectedAppt}
+              />
+            )}
+            {patientDetailsView && viewPRecords && (
+              <ViewPatientRecord
+                setPatientDetailsView={setPatientDetailsView}
+                setViewPRecords={setViewPRecords}
+                selectedAppt={selectedAppt}
+              />
+            )}
+            {patientDetailsView && patientInfoView && (
+              <PatientInfo
+                setPatientDetailsView={setPatientDetailsView}
+                selectedAppt={selectedAppt}
+              />
+            )}
+            {!patientDetailsView && (
+              <button className="back" onClick={handleBackToMonth}>
+                Back to Month
+              </button>
+            )}
+          </div>
+        )}
     </div>
   );
 };
