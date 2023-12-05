@@ -39,7 +39,8 @@ function Account() {
         { rotateY: -90, transformOrigin: "left" },
         { rotateY: 0 }
       )
-      .fromTo("#account legend", { opacity: 0, y: -25 }, { opacity: 1, y: 0 });
+      .fromTo("#account legend", { opacity: 0, y: -25 }, { opacity: 1, y: 0 })
+      .fromTo("#account div.health", { opacity: 0, y: 100 }, { opacity: 1, y: 0, ease: "bounce", duration: 2});
   });
 
   return (
@@ -56,13 +57,18 @@ function Account() {
               <PatientApptDetails />
               <PatientRecords />
             </div>
+
+            <div className="health">
+            <fieldset className="fieldset  gradient-bg">
+            <h5>H.E.A.L.T.H.</h5>
             <p>
-              Wanna keep track of weight and appointments of yourself and loved
-              ones? Try this
+            <br/>
+              Wanna keep track of weight and appointments of yourself and loved ones? 
             </p>
-            <Link to="https://kind-pink-iguana-gown.cyclic.app/">
-              H.E.A.L.T.H
-            </Link>
+            <a className="style-one" rel="noreferrer" href="https://kind-pink-iguana-gown.cyclic.app/" target="_blank">Try H.E.A.L.T.H</a>
+            </fieldset>
+            </div>
+
           </div>
         </>
       )}

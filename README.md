@@ -42,6 +42,10 @@ Students must submit the following deliverables in order for the project to be d
 - Your GitHub repos must have a README with the completed project documentation.
 - Present and demo your app during the Final Project presentations.
 
+<h2>Tools</h2>
+
+We used Ironlauncher --auth for the server, react vite for the client part, axios is used to get the datas from the server.
+
 
 ## UX/UI Choices
 
@@ -82,68 +86,87 @@ Colors :
 
 
 ## LANGUAGES
-using react usecontext for french or english, just to show how it works on the navbar and the homepage
+using react usecontext for french or english, just to show how it works on the navbar.
 
 
 ## CRUD
 
-<h2>Patient</h2>
-Patient can sign up to create an account, he can acces to his data and update them.
+<h2>User</h2>
+User can sign up to create an account, he can acces to his data and update them.
 
-<h2>Admin</h2>
-User can create members, each members can be updated, deleted and acces to 3 levels : details, agenda, healthify app.
+<h2>Appointments</h2>
+User can create an appointments, change his appointement, delete it.
 
-<h2>Agenda</h2>
-User can create appointments, each appointment can be updated, deleted or display to see details.
+<h2>Departements</h2>
+Admin can create, update, delete departements.
+
+<h2>Doctors</h2>
+Admin can create, update, delete doctors.
+
+<h2>General Practitioner (GP)</h2>
+Admin can create, update, delete GP.
+
+<h2>Patient Record</h2>
+doctor can create, update, delete doctors.
+
+
 
 
 ## MONGOOSE MODELS
-
 <ul>
   <li>User.model.js for user account with feedback</li>
-  <li>Profile.model.js for members profile with feedback</li>
-  <li>Agenda.model.js for appointments with feedback</li>
-  <li>Data.model.jsfor BMI calculator with feedback</li> 
+  <li>Appointment.model.js for react Fullcalendar Appointments with feedback</li>
+  <li>Department.model.js for hospital departements with feedback</li>
+  <li>Doctor.model.js for hospital doctors with feedback</li>
+  <li>GPractice.model.js for hospital General Practitioners with feedback</li>
+  <li>PatientRecord.model.js for hospital Patient Record with feedback</li>
 </ul>
 
 
-## Agenda
+## Departements
 
-all members can accès to the same agenda.
+All members can accès Departments, only admin car Create, Update, Delete.
 
+## General Practices
 
-## Healthify
+All members can accès General Practices, only admin car Create, Update, Delete.
 
-this the art of the app that allow you to calculate and follow your BMI, depending on it you will have acces to healthy lifestyle to gain or loss weight depending of the last BMI and adapted to the user diet Paleo, Vegan or Vegetarian.
+## Account Page
 
+All members can accès Account Page.
 
-## app.js
+Patient : 
+  - see his user date, edit them.
+  - see his GP, edit him.
+  - see his appointments, edit them.
+  - see his past appointments, and consult patient records.
 
-contain the app.use informations
+Doctor : 
+  - see his appointments.
+  - see his patient records.
 
-
-## routes folder
-
-contain all the routes to display all the pages and run the form
-
-
-## script.js
-
-contain the javascript code for DOM manipulations
+Admin : 
+  - CRUD Departments
+  - CRUD GP
+  - CRUD Doctors
+  - Update doctor or patient administration rigth
+  - Create Users (patient, doctors, admin)
 
 
 ## API used
 
 <h2>MongoDB & Mongo Atlas</h2> for the DB.
 
-<h2>Our own API</h2> for the recipies DB using a JSON server deployed on Cyclic.
+<h2>Mongoose</h2> for models.
 
-<h2>Cloudinary</h2> allow members to upload a profile picture.
+<h2>jwt</h2> to create secure token for auth.
 
 <h2>Bcrypt</h2> to crypt password and check them.
 
 <h2>Axios</h2> to handle and fetch API.
 
-<h2>emailJS</h2> to display BMI and nutrition graph.
+<h2>emailJS</h2> to send appointments data by email.
 
-tchatjs
+"tchatjs/socketIO WIP"
+
+<h2>GSAP</h2> to animate.

@@ -84,13 +84,13 @@ function Navbar() {
 
             <li><NavLink to="/departments"><h3 className="neonText">{strings.navbar.links.departments}</h3></NavLink></li>
 
+            <li><NavLink to="/gpractice"><h3 className="neonText">{strings.navbar.links.gpractice}</h3></NavLink></li>
+
             {!user && <li><NavLink to="/signup"><h3 className="neonText">{strings.navbar.links.signup}</h3></NavLink></li>}
 
             {!user && <li><NavLink to="/login"><h3 className="neonText">{strings.navbar.links.login}</h3></NavLink></li>}
 
             {user && <li><NavLink to="/account"><h3 className="neonText">{strings.navbar.links.account}</h3></NavLink></li>}
-
-            {user && <li><NavLink to="/gpractice"><h3 className="neonText">{strings.navbar.links.gpractice}</h3></NavLink></li>}
 
             {user && <li><button className="logout" onClick={logOutUser}><h3 className="neonText">Logout</h3></button></li>}
           </ul>

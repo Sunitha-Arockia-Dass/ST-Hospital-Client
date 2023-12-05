@@ -172,7 +172,7 @@ function CreateCrendtials({ selectedDoctor,setDoctorView,setFormView,setSelectDr
           <span className="form-error-msg">{errorsInput.confirmPassword}</span>
           <br />
           <button className="form" type="submit">
-            Create Crendtials
+            Create Credentials
           </button>
         </form>
 
