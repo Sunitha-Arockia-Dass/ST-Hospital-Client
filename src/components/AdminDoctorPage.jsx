@@ -46,7 +46,7 @@ function AdminDoctorPage({ setDoctorView, createCredentials, setSelectDrView }) 
     createCredentials = false
 
   }
-
+console.log('doctor',doctors[0])
   return (
     <div className="dpt-page">
       {createCredentials ? <h4 className="admin">Change doctor&apos;s credentials</h4> : <h4 className="admin">Manage doctor&apos;s datas</h4>}
@@ -79,7 +79,7 @@ function AdminDoctorPage({ setDoctorView, createCredentials, setSelectDrView }) 
                   </legend>
                   <h6>
                     Position: {doctor.position} Doctor of{" "}
-                    {doctor.department[0].name}
+                    {doctor.department.name}
                   </h6>
                   {/* <img src={doctor.image} alt="Doctor icon" /> */}
                 </fieldset>

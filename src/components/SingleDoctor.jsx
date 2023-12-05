@@ -9,7 +9,8 @@ function SingleDoctor() {
   const navigate = useNavigate()
   const doctor = location.state?.doctor
   const department = location.state?.department
-
+console.log('doctor',doctor)
+console.log('department',department)
     // singletDoctor Gsap Animation //////////////////////////////////////////
  useLayoutEffect(() => {
   const tlsingleDoctor = gsap.timeline({ defaults: { duration: .25, ease: "power1.out" } })
