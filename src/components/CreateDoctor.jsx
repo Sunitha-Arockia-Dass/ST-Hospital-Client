@@ -10,11 +10,12 @@ function CreateDoctor({ create, id, setCreateDoctor, setDrView,setUpdateDr }) {
     name:'',
     id:''
   })
+  console.log('id',id)
   useEffect(() => {
     axios.get(`${URL.doctors}/${id}`).then((foundDoctors) => {
-        console.log('foundDoctors.data',foundDoctors.data.department[0]._id)
+        console.log('foundDoctors.data',foundDoctors.data)
       setDrToUpdate(foundDoctors.data);
-      setDeptToUpdate({name:foundDoctors.data?.department[0].name,id:foundDoctors.data?.department[0]._id})
+      setDeptToUpdate({name:foundDoctors.data?.department.name,id:foundDoctors.data?.department._id})
     });
   }, [id]);
   useEffect(() => {
@@ -79,6 +80,7 @@ console.log(selectedDepartmentId)
         console.log("error", error);
       });
   }
+
   return (
     <div className='manage-dpt'>
       {create ? (

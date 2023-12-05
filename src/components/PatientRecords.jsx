@@ -63,15 +63,15 @@ function PatientRecords() {
           {singleRecord.vitals.bloodPressure.value} 
            ({singleRecord.vitals.bloodPressure.range}) </span></p>
           <p><strong>Heart Rate :</strong>
-          <span style={getVitalsStyle(singleRecord.vitals.bloodPressure.range)}>
+          <span style={getVitalsStyle(singleRecord.vitals.heartRate.range)}>
 
           {singleRecord.vitals.heartRate.value}  ({singleRecord.vitals.heartRate.range}) </span></p>
           <p><strong>Pulse rate :</strong>
-          <span style={getVitalsStyle(singleRecord.vitals.bloodPressure.range)}>
+          <span style={getVitalsStyle(singleRecord.vitals.pulseRate.range)}>
 
           {singleRecord.vitals.pulseRate.value}  ({singleRecord.vitals.pulseRate.range}) </span></p>
           <p><strong>Temperature :</strong>
-          <span style={getVitalsStyle(singleRecord.vitals.bloodPressure.range)}>
+          <span style={getVitalsStyle(singleRecord.vitals.temperature.range)}>
 
           {singleRecord.vitals.temperature.value}  ({singleRecord.vitals.temperature.range}) </span></p>
           <p><strong>Complaints :</strong>{singleRecord.complaints}  </p>

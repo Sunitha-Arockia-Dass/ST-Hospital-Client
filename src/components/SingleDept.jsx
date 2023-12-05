@@ -12,7 +12,7 @@ const SingleDept=()=>{
   //       setDoctor(doctor);
   //     }
   const department = location.state?.department 
-
+console.log(department.doctors)
   // singletDpt Gsap Animation //////////////////////////////////////////
  useLayoutEffect(() => {
   const tlsingletDpt = gsap.timeline({ defaults: { duration: .25, ease: "power1.out" } })

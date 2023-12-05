@@ -70,7 +70,7 @@ function AdminDoctorPage({
           >
             ↩ Back
           </button>
-          {!drView && (
+          {!createCredentials && drView && (
             <button
               className="back admin"
               onClick={() => {
