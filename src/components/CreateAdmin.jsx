@@ -174,7 +174,7 @@ function CreateAdmin({ setCreateAdmin }) {
         {/* <span className="form-error-msg">{errorsInput.confirmPassword}</span> */}
 
         <button className="form" type="submit">
-          Create Crendtials
+          Create Credentials
         </button>
       </form>
       {errorMessage && <p className="server-error-message">{errorMessage}</p>}
