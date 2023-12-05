@@ -14,7 +14,18 @@ function PatientApptDetails() {
     detailView: false,
     details: [],
   });
+useEffect(()=>{
+  axios.get(`${URL.getPatientAppointment}/${user._id}`).then((appts) => {
+    console.log(appts.data);
 
+    setAppts(appts.data);
+    // setView((prevState) => ({
+    //   ...prevState,
+    //   viewAppt: true,
+    // }));
+  });
+
+},[])
   const getAppt = () => {
     console.log(user._id);
     axios.get(`${URL.getPatientAppointment}/${user._id}`).then((appts) => {
@@ -81,10 +92,10 @@ function PatientApptDetails() {
     <div className="appt-details">
     <fieldset>
       <legend>
-        <h4>Your Appointments</h4>
+        <h4>Your Upcoming Appointments</h4>
       </legend>
       
-      {view.viewAppt ? (
+      {appts ? (
         <div className="appt-view">
           {appts && appts.length > 0 ? (
             appts.map((appt) => (
@@ -186,9 +197,9 @@ function PatientApptDetails() {
       )}
     </fieldset>
     
-    {!view.viewAppt && (    
+    {/* {!view.viewAppt && (    
           <button className="back" onClick={getAppt}>View All appointments</button>
-    )} 
+    )}  */}
     </div>
   );
 }

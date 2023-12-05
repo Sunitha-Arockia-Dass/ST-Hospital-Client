@@ -70,7 +70,7 @@ function SignUp() {
   useEffect(() => {
     axios.get(URL.gPractice).then((response) => {
       setGPData(response.data);
-      console(response.data)
+      console.log(response.data)
     });
   }, []);
 
