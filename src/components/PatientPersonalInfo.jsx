@@ -11,7 +11,7 @@ function PatientPersonalInfo(){
     const [gp, setGP] = useState(null);
 
     useEffect(() => {
-      if(user.patientDetails.gp.length>0){
+      if(user.patientDetails &&  user.patientDetails.gp && user.patientDetails.gp.length>0){
 
         axios
         .get(`${URL.gPractice}/${user.patientDetails.gp[0]._id}`)
