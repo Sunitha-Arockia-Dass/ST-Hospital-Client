@@ -84,7 +84,7 @@ function PatientRecords() {
           {records?.record.map((record) => {
             return (
               <div key={record._id} onClick={()=>{showSingleRecord(record)}}>
-                <p>{formatDateTime(record.appointment.start)} </p>
+                {record.appointment  && <p>{formatDateTime(record.appointment.start)} </p>}
               </div>
             );
           })}

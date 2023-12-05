@@ -5,15 +5,20 @@ import { useEffect, useState } from "react";
 
 function CreateCrendtials({ selectedDoctor,setDoctorView,setFormView,setSelectDrView,createCredentials }) {
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const generateEmail = (lastName) => {
+    const formattedLastName = lastName.replace(/\s+/g, '_'); // Replace spaces with underscores
+    return `dr${formattedLastName.toLowerCase()}@sthospital.com`;
+  };
   const [formInput, setFormInput] = useState({
     username: selectedDoctor?.firstname,
-    email: `dr${selectedDoctor?.lastname}@sthospital.com`,
+    email: generateEmail(selectedDoctor?.lastname),
     password: "sthospital123",
     confirmPassword: "sthospital123",
     role: "doctor",
     firstname: selectedDoctor?.firstname,
     lastname: selectedDoctor?.lastname,
   });
+  
   const createDrDetails = (e) => {
     e.preventDefault();
     let data = {
