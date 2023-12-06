@@ -11,7 +11,7 @@ function ViewPatientRecord({
   const [singleRecordView, setSingleRecordView] = useState(false);
   const [singleRecord, setSingleRecord] = useState(null);
   const userId = selectedAppt[0]?.user[0]?._id;
-  console.log(userId)
+  const [errorMessage, setErrorMessage] = useState(undefined)
   useEffect(() => {
     axios
       .get(`${URL.viewPatientRecord}/${userId}`)
@@ -20,7 +20,7 @@ function ViewPatientRecord({
         setRecords(response.data);
       })
       .catch((error) => {
-        console.log("error", error);
+        setErrorMessage(error.response.data.message);
       });
   }, []);
   function formatDateTime(dateTimeString) {
@@ -89,6 +89,7 @@ function ViewPatientRecord({
           })}
         </>
       )}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 }

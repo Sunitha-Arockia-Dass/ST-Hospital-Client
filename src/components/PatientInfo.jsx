@@ -6,6 +6,8 @@ function PatientInfo({ selectedAppt, setPatientDetailsView }) {
   console.log("selectedAppt", selectedAppt);
   const [user, setUser] = useState(null);
   const userId = selectedAppt[0]?.user[0]?._id;
+  const [errorMessage, setErrorMessage] = useState(undefined)
+
   console.log("selectedAppt[0]?.user[0]?._id", selectedAppt[0]?.user[0]?._id);
   useEffect(() => {
     axios.get(URL.users).then((response) => {
@@ -14,7 +16,11 @@ function PatientInfo({ selectedAppt, setPatientDetailsView }) {
       });
       console.log(fiteredUser);
       setUser(fiteredUser[0]);
-    });
+    })
+    .catch((error) => {
+      setErrorMessage(error.response.data.message);
+    })
+    
   }, []);
   function formatDate(inputDate) {
     const date = new Date(inputDate);
@@ -67,6 +73,8 @@ function calculateAge(birthDateString) {
           
         </div>
       )}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+ 
     </div>
   );
 }
