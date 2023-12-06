@@ -29,8 +29,7 @@ function LogIn() {
         navigate("/")
       })
       .catch((error) => {
-        console.log(error)
-        setErrorMessage(error)
+        setErrorMessage(error.response.data.message);
       })
   }
 
@@ -74,3 +73,14 @@ function LogIn() {
 }
 
 export default LogIn
+
+
+
+
+// const [errorMessage, setErrorMessage] = useState(undefined)
+
+// .catch((error) => {
+//   setErrorMessage(error.response.data.message);
+// })
+
+// {errorMessage && <p className="error-message">{errorMessage}</p>}

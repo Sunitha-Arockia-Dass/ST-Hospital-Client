@@ -36,8 +36,8 @@ function CreateAdmin({ setCreateAdmin }) {
         // setSelectDrView(false)
       })
       .catch((error) => {
-        console.log(error);
-      });
+        setErrorMessage(error.response.data.message);
+      })
   };
 
   //   const [errorsInput, setErrorsInput] = useState({

@@ -87,7 +87,9 @@ const DoctorCalendarComponent = ({
       setAllAppts(appts.data);
       const transformedEvents = transformEvents(appts.data);
       setEvents(transformedEvents);
-    });
+    }).catch((error) => {
+      setErrorMessage(error.response.data.message);
+    })
   }, []);
 
   const handleDateClick = (info) => {
@@ -167,11 +169,12 @@ const DoctorCalendarComponent = ({
           setEvents(transformedEvents);
           setShowTimeGrid(false);
           // sendEmail();
-        });
+        })
+        
       })
       .catch((error) => {
-        console.log(error);
-      });
+        setErrorMessage(error.response.data.message);
+      })
   }
   function editAppt() {
     const slotStartTime = new Date(selectedSlot);
@@ -193,8 +196,8 @@ const DoctorCalendarComponent = ({
         }));
       })
       .catch((error) => {
-        console.log(error);
-      });
+        setErrorMessage(error.response.data.message);
+      })
   }
 
   const areDatesEqual = (date1, date2) => {
@@ -418,6 +421,8 @@ const DoctorCalendarComponent = ({
             )}
           </div>
         )}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+
     </div>
   );
 };

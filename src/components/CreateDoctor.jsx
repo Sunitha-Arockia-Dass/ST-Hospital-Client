@@ -6,6 +6,7 @@ function CreateDoctor({ create, id, setCreateDoctor, setDrView,setUpdateDr }) {
   const [drToUpdate, setDrToUpdate] = useState({});
   const [dept, setDept] = useState([]);
   const [selectedDept,setSelectedDept]=useState(dept[0]?.name)
+  const [errorMessage, setErrorMessage] = useState(undefined)
   const [deptToUpdate,setDeptToUpdate]=useState({
     name:'',
     id:''
@@ -16,14 +17,20 @@ function CreateDoctor({ create, id, setCreateDoctor, setDrView,setUpdateDr }) {
         console.log('foundDoctors.data',foundDoctors.data)
       setDrToUpdate(foundDoctors.data);
       setDeptToUpdate({name:foundDoctors.data?.department.name,id:foundDoctors.data?.department._id})
-    });
+    })
+    .catch((error) => {
+      setErrorMessage(error.response.data.message);
+    })
   }, [id]);
   useEffect(() => {
     axios.get(URL.departments).then((foundDepartments) => {
       setDept(foundDepartments.data);
       setSelectedDept(foundDepartments.data[0]._id)
 
-    });
+    })
+    .catch((error) => {
+      setErrorMessage(error.response.data.message);
+    })
   }, []);
 
   function createDr(e) {
@@ -46,8 +53,8 @@ function CreateDoctor({ create, id, setCreateDoctor, setDrView,setUpdateDr }) {
             setDrView(true);
           })
           .catch((error) => {
-            console.log(error);
-          });
+            setErrorMessage(error.response.data.message);
+          })
 
   }
   function handleDepartmentChange(e) {
@@ -77,8 +84,8 @@ console.log(selectedDepartmentId)
         setUpdateDr(false)
       })
       .catch((error) => {
-        console.log("error", error);
-      });
+        setErrorMessage(error.response.data.message);
+      })
   }
 
   return (
@@ -146,7 +153,8 @@ console.log(selectedDepartmentId)
             <button className="form" type="submit">Update Doctor</button>
           </form>
         </div>
-      )}{" "}
+      )}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 }

@@ -6,11 +6,16 @@ import URL from "../links/links.json"
 function GPractice() {
   const [gps, setGPs] = useState()
   const [delayLayout, setDelayLayout] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(undefined)
+
 
   useEffect(() => {
     axios.get(URL.gPractice).then((response) => {
       console.log(response.data)
       setGPs(response.data)
+    })
+    .catch((error) => {
+      setErrorMessage(error.response.data.message);
     })
     setDelayLayout(true)
   }, [])
@@ -57,6 +62,7 @@ function GPractice() {
             </div>
           )
         })}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </div>
     </div>
   )

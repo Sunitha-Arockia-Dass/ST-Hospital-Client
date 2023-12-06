@@ -6,6 +6,7 @@ import DoctorCalendarComponent from "./DoctorCalendarComponent";
 import URL from "../links/links.json";
 
 function PatientApptDetails() {
+  const [errorMessage, setErrorMessage] = useState(undefined)
   const { user } = useContext(AuthContext);
   const [appts, setAppts] = useState();
   const [view, setView] = useState({
@@ -18,12 +19,15 @@ function PatientApptDetails() {
     axios.get(`${URL.getPatientAppointment}/${user._id}`).then((appts) => {
       console.log(appts.data);
 
-      setAppts(appts.data);
-      // setView((prevState) => ({
-      //   ...prevState,
-      //   viewAppt: true,
-      // }));
-    });
+    setAppts(appts.data);
+    // setView((prevState) => ({
+    //   ...prevState,
+    //   viewAppt: true,
+    // }));
+  })
+  .catch((error) => {
+    setErrorMessage(error.response.data.message);
+  })
 
   }, [])
   const getAppt = () => {
@@ -36,7 +40,10 @@ function PatientApptDetails() {
         ...prevState,
         viewAppt: true,
       }));
-    });
+    })
+    .catch((error) => {
+      setErrorMessage(error.response.data.message);
+    })
   };
   function convertTo12HourFormat(timestamp) {
     const date = new Date(timestamp);
@@ -74,7 +81,10 @@ function PatientApptDetails() {
         updateViewAppt: false,
         detailView: false,
         viewAppt: true,
-      }));
+      }))
+      .catch((error) => {
+        setErrorMessage(error.response.data.message);
+      })
       getAppt();
       console.log(response);
     });
@@ -203,6 +213,7 @@ function PatientApptDetails() {
           <></>
         )}
       </fieldset>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       {/* {!view.viewAppt && (    
           <button className="back" onClick={getAppt}>View All appointments</button>
