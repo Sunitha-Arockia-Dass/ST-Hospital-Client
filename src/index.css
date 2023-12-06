@@ -990,8 +990,10 @@ main {
 .center-frame {
   /* border: 2px red solid; */
   min-height: calc(100vh - var(--header-height));
-  width: 100vw;
+  width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   padding: 0.5rem;
 }
@@ -1018,7 +1020,6 @@ main {
 */
 
 #home-page {
-  overflow: hidden;
   justify-content: center;
   align-items: center;
 }
@@ -1101,9 +1102,20 @@ main {
   }
 }
 
-/* .circles {
+.circles {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-} */
+.wheel-w {
+  padding: .25rem;
+  border-radius: 5rem 0 5rem 5rem;
+  background-color: white;
+  border: .25rem solid var(--clr-green);
+  width: clamp(75px, 19%, 150px);
+}
 
 /*
 * ----------------------
@@ -1536,13 +1548,19 @@ button.change-appointment svg {
   transform: rotate(-22.5deg);
 
   & svg {
+    display: inline;
     height: 12px;
     padding-left: 60%;
     color: var(--background);
     stroke: var(--clr-blue);
-    transform-origin: center center;
     transform: rotate(-22.5deg);
   }
+}
+
+.wheel-w {
+  border-radius: 5rem 0 5rem 5rem;
+  background-color: white;
+  border: .25rem solid var(--clr-green);
 }
 
 
