@@ -1482,6 +1482,29 @@ button.change-appointment svg {
 }
 
 
+/*
+* ----------------------
+* Server Errors
+* ----------------------
+*/
+
+.error-message, .server-error-message {
+  padding: 1rem;
+  margin: 1rem;
+  color: var(--foreground);
+  width: 50%;
+
+  background: var(--danger-msg);
+  border: .125rem solid ;
+  border-radius: .5rem;
+  box-shadow: var(--shadow-elevation-low);
+
+  &::before {
+    content: '⚠ ';
+  }
+}
+
+
 
 /* test navbar for devs*/
 .test-navbar {
