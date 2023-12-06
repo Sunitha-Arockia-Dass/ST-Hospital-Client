@@ -72,26 +72,30 @@ function PatientRecords() {
               <p><strong>Temperature :</strong>
                 <span style={getVitalsStyle(singleRecord.vitals.temperature.range)}>
 
-          {singleRecord.vitals.temperature.value}  ({singleRecord.vitals.temperature.range}) </span></p>
-          <p><strong>Complaints :</strong>{singleRecord.complaints}  </p>
-          <p><strong>Description :</strong>{singleRecord.description}  </p>
-          <p><strong>Prescribed Medications :</strong>{singleRecord.prescribedMedications}</p>
-          <p><strong>Record Created By : Dr {singleRecord.doctor.firstname} {singleRecord.doctor.lastname} </strong></p>       
-        </>
-      ) : (
-        <>
-          {records?.record.map((record) => {
-            return (
-              <div key={record._id} onClick={()=>{showSingleRecord(record)}}>
-                {record.appointment  && <p>{formatDateTime(record.appointment.start)} </p>}
-              </div>
-            );
-          })}
-        </>
-      )}
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-      </div>
+                  {singleRecord.vitals.temperature.value}  ({singleRecord.vitals.temperature.range}) </span></p>
+              <p><strong>Complaints :</strong>{singleRecord.complaints}  </p>
+              <p><strong>Description :</strong>{singleRecord.description}  </p>
+              <p><strong>Prescribed Medications :</strong>{singleRecord.prescribedMedications}</p>
+              <p><strong>Record Created By : Dr {singleRecord.doctor.firstname} {singleRecord.doctor.lastname} </strong></p>
+              <button className="back" onClick={() => { setSingleRecordView(false) }}>
+                ↩ Back
+              </button>
+            </div>
+          ) : (
+            <>
+              {records?.record.map((record) => {
+                return (
+                  <button className="back one-appointment" key={record._id} onClick={() => { showSingleRecord(record) }}>
+                  {record.appointment  && <p>{formatDateTime(record.appointment.start)} </p>}
+                  </button>
+                );
+              })}
+            </>
+          )}
+        </div>
       </fieldset>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
     </div>
   );
 }
