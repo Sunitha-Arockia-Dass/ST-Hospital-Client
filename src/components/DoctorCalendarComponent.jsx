@@ -272,11 +272,11 @@ const DoctorCalendarComponent = ({
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
       {patientDetailsView ? (
-        <div>
-          <button onClick={viewRecords}>View Past Records</button>
-          <button onClick={createRecords}>Create a new Record</button>
-          <button onClick={viewPatientInfo}>View Patient Details</button>
-          <button
+        <div className="first-block gradient-bg">
+          <button className="inside-block back" onClick={viewRecords}><b>Past Records</b></button>
+          <button className="inside-block back" onClick={createRecords}><b>Create a Record</b></button>
+          <button className="inside-block back" onClick={viewPatientInfo}><b>Patient Details</b></button>
+          <button className="inside-block back"
             onClick={() => {
               setPatientDetailsView(false);
             }}
@@ -394,6 +394,7 @@ const DoctorCalendarComponent = ({
                 </svg>
               </button>
             )}
+            <div className="second-block gradient-bg">
             {patientDetailsView && createPRecords && (
               <CreatePatientRecord
                 setPatientDetailsView={setPatientDetailsView}
@@ -419,6 +420,7 @@ const DoctorCalendarComponent = ({
                 Back to Month
               </button>
             )}
+            </div>
           </div>
         )}
         {errorMessage && <p className="error-message">{errorMessage}</p>}

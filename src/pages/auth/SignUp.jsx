@@ -232,7 +232,7 @@ function SignUp() {
           <button className="form" type="submit">Sign Up</button>
         </form>
 
-        {errorMessage && <p className="server-error-message">{errorMessage}</p>}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </div>
     </div>
   );

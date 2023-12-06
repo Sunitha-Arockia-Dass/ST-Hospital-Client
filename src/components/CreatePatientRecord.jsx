@@ -21,9 +21,9 @@ function CreatePatientRecord({
     const pulseRate = e.target.pulseRate.value;
     const bloodPressure = e.target.bloodPressure.value;
     const heartRate = e.target.heartRate.value;
-console.log('doctor',doctor)
-console.log('appointment',appointment)
-console.log('user',user)
+    console.log('doctor', doctor)
+    console.log('appointment', appointment)
+    console.log('user', user)
     axios
       .post(URL.patientRecordCreate, {
         user,
@@ -48,40 +48,24 @@ console.log('user',user)
   }
 
   return (
-    <div>
+    <div className="second-block gradient-bg">
       <form onSubmit={handleSubmit}>
-        <label>
-          Blood Pressure Value:
-          <input type="text" name="bloodPressure" />
-        </label>
 
-        <label>
-          Heart Rate Value:
-          <input type="text" name="heartRate" />
-        </label>
+        <input type="text" name="bloodPressure" placeholder="Blood Pressure" />
 
-        <label>
-          Pulse Rate Value:
-          <input type="text" name="pulseRate" />
-        </label>
+        <input type="text" name="heartRate" placeholder="Heart Rate" />
 
-        <label>
-          Temperature:
-          <input type="text" name="temperature" />
-        </label>
-        <label>
-          Complaints:
-          <input type="text" name="complaints" />
-        </label>
-        <label>
-          Description:
-          <input type="text" name="description" />
-        </label>
-        <label>
-          Prescribed Medications:
-          <input type="text" name="prescribedMedications" />
-        </label>
-        <button type="submit">Submit</button>
+        <input type="text" name="pulseRate" placeholder="Pulse Rate" />
+
+        <input type="text" name="temperature" placeholder="Temperature" />
+
+        <input type="text" name="complaints" placeholder="Complaints" />
+
+        <input type="text" name="description" placeholder="Description" />
+
+        <input type="text" name="prescribedMedications" placeholder="Prescribed Medications" />
+
+        <button className="back" type="submit">Create</button>
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 

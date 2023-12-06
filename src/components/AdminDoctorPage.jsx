@@ -64,7 +64,7 @@ function AdminDoctorPage({
       <div className="all-dpt">
         <div className="admin one-dpt">
           <button
-            className="back admin"
+            className="back admin hundred"
             onClick={() => {
               setDoctorView(false);
               setFormView(false);

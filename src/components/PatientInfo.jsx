@@ -45,36 +45,40 @@ function calculateAge(birthDateString) {
   return age;
 }
   return (
-    <div>
-      <h1>Patient Basic Info</h1>
+    <div className="appt-details">   
+    <h4>Patient Info</h4>
+  <div className="appt-view">
+   
+
       {user && (
-        <div>
+        <div className="one-appointment2">
           <p>
-            <strong>Email:</strong>
+            <strong>Email: </strong>
             {user.email}
           </p>
           <p>
-            <strong>Name:</strong>
+            <strong>Name: </strong>
             {user.firstname} {user.lastname}
           </p>
-          {user.patientDetails && user.patientDetails.dateOfBirth &&  <p><strong>DOB:{formatDate(user.patientDetails.dateOfBirth) }</strong></p>}
+          {user.patientDetails && user.patientDetails.dateOfBirth &&  <p><strong>DOB: {formatDate(user.patientDetails.dateOfBirth) }</strong></p>}
           {user.patientDetails && user.patientDetails.dateOfBirth && <p>
-            <strong>Age:</strong>
+            <strong>Age: </strong>
             {calculateAge(user.patientDetails.dateOfBirth) }
           </p>}
           {user.patientDetails && user.patientDetails.gp && user.patientDetails.gp.length>0 && <p>
-            <strong>GP:</strong>
+            <strong>GP: </strong>
             {user.patientDetails.gp[0]?.name}
           </p>}
           {user.patientDetails && user.patientDetails.gender && <p>
-            <strong>Gender:</strong>
+            <strong>Gender: </strong>
             {user.patientDetails.gender}
           </p>}
+          <button className="back" onClick={()=>{setSingleRecordView(false)}}>↩ Back</button>
           
         </div>
       )}
       {errorMessage && <p className="error-message">{errorMessage}</p>}
- 
+      </div>
     </div>
   );
 }
