@@ -5,6 +5,7 @@ import SearchResult from './SearchResult'
 
 function SearchBar() {
   const [searchOutput, setSearchOutput] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(undefined)
   const search = (e) => {
     e.preventDefault()
     const searchInput = e.target.search.value
@@ -13,6 +14,10 @@ function SearchBar() {
         console.log(response.data)
         setSearchOutput(response.data)
       })
+      .catch((error) => {
+        setErrorMessage(error.response.data.message);
+      })
+      
   }
 
   return (    
@@ -25,6 +30,7 @@ function SearchBar() {
       </form>
 
       {searchOutput ? <SearchResult searchOutput={searchOutput} setSearchOutput={setSearchOutput} /> : <></>}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   )
 }

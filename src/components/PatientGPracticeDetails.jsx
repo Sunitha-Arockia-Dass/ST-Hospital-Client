@@ -8,6 +8,7 @@ import URL from "../links/links.json";
 function PatientGPracticeDetails() {
   const [gp, setGP] = useState();
   const { user } = useContext(AuthContext)
+  const [errorMessage, setErrorMessage] = useState(undefined)
 
   useEffect(() => {
     if(user.patientDetails &&  user.patientDetails.gp && user.patientDetails.gp.length>0){
@@ -18,8 +19,10 @@ function PatientGPracticeDetails() {
         // console.log(response.data);
         setGP(response.data);
       })
-      .catch((error) => console.log("error", error));
-    }
+      .catch((error) => {
+        setErrorMessage(error.response.data.message);
+      })
+        }
   }, [user.patientDetails]);
 
   return (
@@ -41,6 +44,7 @@ function PatientGPracticeDetails() {
       <NavLink to="/editaccount"> 
         <button className="back">Edit General Practitioner</button>
       </NavLink>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 }

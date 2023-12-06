@@ -77,10 +77,10 @@ export default LogIn
 
 
 
-// const [errorMessage, setErrorMessage] = useState(undefined)
+const [errorMessage, setErrorMessage] = useState(undefined)
 
-// .catch((error) => {
-//   setErrorMessage(error.response.data.message);
-// })
+.catch((error) => {
+  setErrorMessage(error.response.data.message);
+})
 
-// {errorMessage && <p className="error-message">{errorMessage}</p>}
+{errorMessage && <p className="error-message">{errorMessage}</p>}

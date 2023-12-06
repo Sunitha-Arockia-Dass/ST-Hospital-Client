@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 function SearchResult({ searchOutput, setSearchOutput }) {
   const { doctors, department, gPractice } = searchOutput;
   const [result, setResult] = useState(null);
-  console.log("searchOutput", searchOutput);
   useEffect(() => {
     if (doctors.length !== 0) {
       setResult({ type: "doctor", data: doctors });

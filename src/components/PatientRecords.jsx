@@ -5,10 +5,10 @@ import URL from '../links/links.json'
 function PatientRecords() {
   const { user } = useContext(AuthContext);
   const userId = user?._id;
-  console.log('userId',userId)
   const [records, setRecords] = useState();
   const [singleRecordView, setSingleRecordView] = useState(false);
   const [singleRecord, setSingleRecord] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(undefined)
 
   useEffect(() => {
     axios
@@ -18,7 +18,7 @@ function PatientRecords() {
         setRecords(response.data);
       })
       .catch((error) => {
-        console.log("error", error);
+        setErrorMessage(error.response.data.message);
       });
   }, []);
   function formatDateTime(dateTimeString) {
@@ -90,6 +90,7 @@ function PatientRecords() {
           })}
         </>
       )}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
       </div>
       </fieldset>
     </div>
