@@ -1515,6 +1515,36 @@ button.change-appointment svg {
 }
 
 
+/*
+* ----------------------
+* GSAP
+* ----------------------
+*/
+
+/* new cusor */
+.pill-cursor {
+  width: 45px;
+  height: 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50rem;
+  pointer-events: none;
+  background: var(--clr-green);
+  box-shadow: inset 2px 2px 4px var(--clr-light),
+    inset -2px -2px 4px var(--clr-dark);
+  transform: rotate(-22.5deg);
+
+  & svg {
+    height: 12px;
+    padding-left: 60%;
+    color: var(--background);
+    stroke: var(--clr-blue);
+    transform-origin: center center;
+    transform: rotate(-22.5deg);
+  }
+}
+
 
 /* test navbar for devs*/
 .test-navbar {
