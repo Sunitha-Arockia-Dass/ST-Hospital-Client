@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import BurgerMenu from "./BurgerMenu"
+import Logo from "/public/images/Logo.png"
 
 /*Languages and Auth context*/
 import { useContext } from "react"
@@ -37,13 +38,13 @@ function Navbar() {
   const searchTrigger = () => {
     const searchBar = document.querySelector(".search-bar")
 
-    if (searchBar.style.display === "block"){     
-        searchBar.style.display = "none"   
+    if (searchBar.style.display === "block") {
+      searchBar.style.display = "none"
     }
     else {
       searchBar.style.display = "block"
-      searchBar.style.animation= "searchAnimation var(--timing05) ease-in-out normal"
-    }     
+      searchBar.style.animation = "searchAnimation var(--timing05) ease-in-out normal"
+    }
   }
 
   return (
@@ -56,14 +57,22 @@ function Navbar() {
       </button>
 
       {/* LOGO */}
-      <NavLink to="/"><button className="logo">S.T. Hospital</button></NavLink>
+      <NavLink to="/">
+        <div className="logo-div">
+          <button className="logo">
+          s<span className="blue">.</span>t<span className="green">. </span>
+           H</button>
+           <img className="logo" src={Logo} alt="ST Hospital Logo" />
+          <button className="logo">spital</button>
+        </div>
+      </NavLink>
 
       {/* only to facilitate development */}
       <nav className="test-navbar">
         <ul>
           <li><NavLink to="/">{strings.navbar.links.home}</NavLink></li>
           <li><NavLink to="/departments">{strings.navbar.links.departments}</NavLink></li>
-           <li><NavLink to="/gpractice">{strings.navbar.links.gpractice}</NavLink></li>
+          <li><NavLink to="/gpractice">{strings.navbar.links.gpractice}</NavLink></li>
           {!user && <li><NavLink to="/signup">{strings.navbar.links.signup}</NavLink></li>}
           {!user && <li><NavLink to="/login">{strings.navbar.links.login}</NavLink></li>}
           {user && <li><NavLink to="/account">{strings.navbar.links.account}</NavLink></li>}

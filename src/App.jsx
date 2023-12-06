@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { useRef, useLayoutEffect } from "react";
+import Logo from "/public/images/Logo.png"
 
 /* Gsap */
 import { gsap } from "gsap/dist/gsap";
@@ -69,7 +70,7 @@ function App() {
     let ctx = gsap.context(() => {
 
       //cursor animation 
-      gsap.set(".pill-cursor", { xPercent: 75, yPercent: 75 });
+      gsap.set(".pill-cursor", { xPercent: 100, yPercent: 100 });
 
       let xTo = gsap.quickTo(".pill-cursor", "x", { duration: 0.6, ease: "power4.out" }),
         yTo = gsap.quickTo(".pill-cursor", "y", { duration: 0.6, ease: "power4.out" });
@@ -129,7 +130,8 @@ function App() {
   return (
     <div className="useLayoutGsap" ref={app}>
       <div className="pill-cursor">
-      <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="12" r="10" stroke="#ffffff" stroke-width="1.5"></circle> <path d="M9 16C9.85038 16.6303 10.8846 17 12 17C13.1154 17 14.1496 16.6303 15 16" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path> <path d="M16 10.5C16 11.3284 15.5523 12 15 12C14.4477 12 14 11.3284 14 10.5C14 9.67157 14.4477 9 15 9C15.5523 9 16 9.67157 16 10.5Z"></path> <ellipse cx="9" cy="10.5" rx="1" ry="1.5"></ellipse> </g></svg>
+      <img className="logo" src={Logo} alt="ST Hospital Logo"/>
+      {/* <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="12" r="10" stroke="#ffffff" stroke-width="1.5"></circle> <path d="M9 16C9.85038 16.6303 10.8846 17 12 17C13.1154 17 14.1496 16.6303 15 16" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path> <path d="M16 10.5C16 11.3284 15.5523 12 15 12C14.4477 12 14 11.3284 14 10.5C14 9.67157 14.4477 9 15 9C15.5523 9 16 9.67157 16 10.5Z"></path> <ellipse cx="9" cy="10.5" rx="1" ry="1.5"></ellipse> </g></svg> */}
         </div>
       <Navbar />
       <main className="container full">
