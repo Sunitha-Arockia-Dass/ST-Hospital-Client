@@ -14,7 +14,7 @@ function PatientRecords() {
     axios
       .get(`${URL.viewPatientRecord}/${userId}`)
       .then((response) => {
-        console.log('response.data',response.data);
+        console.log('response.data', response.data);
         setRecords(response.data);
       })
       .catch((error) => {
@@ -37,7 +37,7 @@ function PatientRecords() {
   function showSingleRecord(record) {
     setSingleRecordView(true);
     setSingleRecord(record)
-    console.log('record',record)
+    console.log('record', record)
   }
   function getVitalsStyle(range) {
     if (range === 'Normal') {
@@ -46,32 +46,31 @@ function PatientRecords() {
       return { color: 'red' };
     }
   }
-  console.log('start',records)
+  console.log('start', records)
   return (
     <div className="appt-details">
-     <fieldset>
-      <legend>
-      <h4>Patient Records</h4>
-      </legend>
-      <div className="appt-view">
-      {singleRecordView ? (
-        <>
-        <button className="back" onClick={()=>{setSingleRecordView(false)}}>Back</button>
-          <p><strong>Blood Pressure :</strong>
-          <span style={getVitalsStyle(singleRecord.vitals.bloodPressure.range)}>
+      <fieldset>
+        <legend>
+          <h4>Patient Records</h4>
+        </legend>
+        <div className="appt-view">
+          {singleRecordView ? (
+            <div className="one-appointment2">
+              <p><strong>Blood Pressure :</strong>
+                <span style={getVitalsStyle(singleRecord.vitals.bloodPressure.range)}>
 
-          {singleRecord.vitals.bloodPressure.value} 
-           ({singleRecord.vitals.bloodPressure.range}) </span></p>
-          <p><strong>Heart Rate :</strong>
-          <span style={getVitalsStyle(singleRecord.vitals.heartRate.range)}>
+                  {singleRecord.vitals.bloodPressure.value}
+                  ({singleRecord.vitals.bloodPressure.range}) </span></p>
+              <p><strong>Heart Rate :</strong>
+                <span style={getVitalsStyle(singleRecord.vitals.heartRate.range)}>
 
-          {singleRecord.vitals.heartRate.value}  ({singleRecord.vitals.heartRate.range}) </span></p>
-          <p><strong>Pulse rate :</strong>
-          <span style={getVitalsStyle(singleRecord.vitals.pulseRate.range)}>
+                  {singleRecord.vitals.heartRate.value}  ({singleRecord.vitals.heartRate.range}) </span></p>
+              <p><strong>Pulse rate :</strong>
+                <span style={getVitalsStyle(singleRecord.vitals.pulseRate.range)}>
 
-          {singleRecord.vitals.pulseRate.value}  ({singleRecord.vitals.pulseRate.range}) </span></p>
-          <p><strong>Temperature :</strong>
-          <span style={getVitalsStyle(singleRecord.vitals.temperature.range)}>
+                  {singleRecord.vitals.pulseRate.value}  ({singleRecord.vitals.pulseRate.range}) </span></p>
+              <p><strong>Temperature :</strong>
+                <span style={getVitalsStyle(singleRecord.vitals.temperature.range)}>
 
           {singleRecord.vitals.temperature.value}  ({singleRecord.vitals.temperature.range}) </span></p>
           <p><strong>Complaints :</strong>{singleRecord.complaints}  </p>

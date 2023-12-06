@@ -32,12 +32,14 @@ function PatientGPracticeDetails() {
       <h4>Your Doctor</h4>
       </legend>
       {gp? (<div>
+      <br/>
       <h5>{gp.name}</h5>
       <p>{gp.email}</p>
       <p>{gp.phoneNumber}</p>
       <p>{gp.address.street} {gp.address.houseNumber} </p>
       <p>{gp.address.postalCode} {gp.address.city} </p>
       <p>{gp.address.country}</p>
+     
       
       </div>):<p>Please update your General Practitioner</p>}
       </fieldset>
