@@ -505,6 +505,10 @@ button.admin {
   width: 45%;
 }
 
+button.admin.hundred {
+  width: 100%;
+}
+
 /* Form Button */
 @property --bg-angle {
   inherits: false;
@@ -1191,6 +1195,7 @@ main {
 }
 
 h4.admin {
+  padding-left: 2rem;
   padding-bottom: 2rem;
 }
 
@@ -1318,12 +1323,17 @@ h4.admin {
   }
 }
 
-.first-block, .second-block {
+.first-block, .second-block, .inside-block {
   border-radius: 0.5rem;
   box-shadow: var(--shadow-elevation-medium);
   padding: 1rem;
   width: 100%;
+  min-height: 10rem;
   margin-bottom: 1rem;
+}
+
+.inside-block {
+  width: 22.5%;
 }
 
 .first-block {
