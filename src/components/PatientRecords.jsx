@@ -5,7 +5,7 @@ import URL from '../links/links.json'
 function PatientRecords() {
   const { user } = useContext(AuthContext);
   const userId = user?._id;
-  console.log('userId',userId)
+  console.log('userId', userId)
   const [records, setRecords] = useState();
   const [singleRecordView, setSingleRecordView] = useState(false);
   const [singleRecord, setSingleRecord] = useState(null);
@@ -14,7 +14,7 @@ function PatientRecords() {
     axios
       .get(`${URL.viewPatientRecord}/${userId}`)
       .then((response) => {
-        console.log('response.data',response.data);
+        console.log('response.data', response.data);
         setRecords(response.data);
       })
       .catch((error) => {
@@ -37,7 +37,7 @@ function PatientRecords() {
   function showSingleRecord(record) {
     setSingleRecordView(true);
     setSingleRecord(record)
-    console.log('record',record)
+    console.log('record', record)
   }
   function getVitalsStyle(range) {
     if (range === 'Normal') {
@@ -46,51 +46,53 @@ function PatientRecords() {
       return { color: 'red' };
     }
   }
-  console.log('start',records)
+  console.log('start', records)
   return (
     <div className="appt-details">
-     <fieldset>
-      <legend>
-      <h4>Patient Records</h4>
-      </legend>
-      <div className="appt-view">
-      {singleRecordView ? (
-        <>
-        <button className="back" onClick={()=>{setSingleRecordView(false)}}>Back</button>
-          <p><strong>Blood Pressure :</strong>
-          <span style={getVitalsStyle(singleRecord.vitals.bloodPressure.range)}>
+      <fieldset>
+        <legend>
+          <h4>Patient Records</h4>
+        </legend>
+        <div className="appt-view">
+          {singleRecordView ? (
+            <div className="one-appointment2">
+              <p><strong>Blood Pressure :</strong>
+                <span style={getVitalsStyle(singleRecord.vitals.bloodPressure.range)}>
 
-          {singleRecord.vitals.bloodPressure.value} 
-           ({singleRecord.vitals.bloodPressure.range}) </span></p>
-          <p><strong>Heart Rate :</strong>
-          <span style={getVitalsStyle(singleRecord.vitals.heartRate.range)}>
+                  {singleRecord.vitals.bloodPressure.value}
+                  ({singleRecord.vitals.bloodPressure.range}) </span></p>
+              <p><strong>Heart Rate :</strong>
+                <span style={getVitalsStyle(singleRecord.vitals.heartRate.range)}>
 
-          {singleRecord.vitals.heartRate.value}  ({singleRecord.vitals.heartRate.range}) </span></p>
-          <p><strong>Pulse rate :</strong>
-          <span style={getVitalsStyle(singleRecord.vitals.pulseRate.range)}>
+                  {singleRecord.vitals.heartRate.value}  ({singleRecord.vitals.heartRate.range}) </span></p>
+              <p><strong>Pulse rate :</strong>
+                <span style={getVitalsStyle(singleRecord.vitals.pulseRate.range)}>
 
-          {singleRecord.vitals.pulseRate.value}  ({singleRecord.vitals.pulseRate.range}) </span></p>
-          <p><strong>Temperature :</strong>
-          <span style={getVitalsStyle(singleRecord.vitals.temperature.range)}>
+                  {singleRecord.vitals.pulseRate.value}  ({singleRecord.vitals.pulseRate.range}) </span></p>
+              <p><strong>Temperature :</strong>
+                <span style={getVitalsStyle(singleRecord.vitals.temperature.range)}>
 
-          {singleRecord.vitals.temperature.value}  ({singleRecord.vitals.temperature.range}) </span></p>
-          <p><strong>Complaints :</strong>{singleRecord.complaints}  </p>
-          <p><strong>Description :</strong>{singleRecord.description}  </p>
-          <p><strong>Prescribed Medications :</strong>{singleRecord.prescribedMedications}</p>
-          <p><strong>Record Created By : Dr {singleRecord.doctor.firstname} {singleRecord.doctor.lastname} </strong></p>       
-        </>
-      ) : (
-        <>
-          {records?.record.map((record) => {
-            return (
-              <div key={record._id} onClick={()=>{showSingleRecord(record)}}>
-                <p>{formatDateTime(record.appointment.start)} </p>
-              </div>
-            );
-          })}
-        </>
-      )}
-      </div>
+                  {singleRecord.vitals.temperature.value}  ({singleRecord.vitals.temperature.range}) </span></p>
+              <p><strong>Complaints :</strong>{singleRecord.complaints}  </p>
+              <p><strong>Description :</strong>{singleRecord.description}  </p>
+              <p><strong>Prescribed Medications :</strong>{singleRecord.prescribedMedications}</p>
+              <p><strong>Record Created By : Dr {singleRecord.doctor.firstname} {singleRecord.doctor.lastname} </strong></p>
+              <button className="back" onClick={() => { setSingleRecordView(false) }}>
+                ↩ Back
+              </button>
+            </div>
+          ) : (
+            <>
+              {records?.record.map((record) => {
+                return (
+                  <button className="back one-appointment" key={record._id} onClick={() => { showSingleRecord(record) }}>
+                    <p>{formatDateTime(record.appointment.start)} </p>
+                  </button>
+                );
+              })}
+            </>
+          )}
+        </div>
       </fieldset>
     </div>
   );

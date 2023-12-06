@@ -1328,13 +1328,15 @@ h4.admin {
 
 .first-block {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
+ height: max-content;
 }
 
 
 .user-detail, .gp-detail {
   margin: 0 auto;
-  width: 50%;
+  min-width: calc(50% - 1rem);
 }
 
 .user-detail fieldset,
@@ -1342,7 +1344,7 @@ h4.admin {
 .appt-details fieldset {
   border: 0.125rem solid var(--foreground);
   border-radius: 0.5rem;
-  min-height: 10rem;
+  min-height: 16rem;
   background: var(--background);
 }
 
@@ -1358,11 +1360,31 @@ h4.admin {
 
 .appt-view {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   padding: 1rem 1rem 0;
   width: 100%;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
+}
+
+.appt-specific {
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-elevation-medium);
+  background-color: hsl(220 10% 12% / 0.05);
+}
+
+.one-appointment {  
+  width: 23%;
+  padding: .5rem;
+  border-radius: .5rem;
+  box-shadow: var(--shadow-elevation-medium);
+}
+
+.one-appointment2 {
+  width: 90%;
 }
 
 button.view-detail {
@@ -1380,7 +1402,7 @@ button.view-detail {
 }
 
 .health fieldset{
-  backdrop-filter: blur(1rem);
+  background-color: var(--background);
 }
 
 /*
