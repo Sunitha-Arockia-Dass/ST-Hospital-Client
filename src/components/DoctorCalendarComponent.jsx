@@ -413,6 +413,7 @@ const DoctorCalendarComponent = ({
               <PatientInfo
                 setPatientDetailsView={setPatientDetailsView}
                 selectedAppt={selectedAppt}
+                setPatientInfoView={setPatientInfoView}
               />
             )}
             {!patientDetailsView && (

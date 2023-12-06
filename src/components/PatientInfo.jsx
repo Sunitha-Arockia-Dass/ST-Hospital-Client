@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import URL from "../links/links.json";
 
-function PatientInfo({ selectedAppt, setPatientDetailsView }) {
+function PatientInfo({ selectedAppt, setPatientDetailsView,setPatientInfoView }) {
   console.log("selectedAppt", selectedAppt);
   const [user, setUser] = useState(null);
   const userId = selectedAppt[0]?.user[0]?._id;
@@ -73,7 +73,7 @@ function calculateAge(birthDateString) {
             <strong>Gender: </strong>
             {user.patientDetails.gender}
           </p>}
-          <button className="back" onClick={()=>{setSingleRecordView(false)}}>↩ Back</button>
+          <button className="back" onClick={()=>{setPatientInfoView(false)}}>↩ Back</button>
           
         </div>
       )}
