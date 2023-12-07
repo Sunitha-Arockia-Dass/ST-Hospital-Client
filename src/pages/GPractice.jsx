@@ -26,7 +26,7 @@ function GPractice() {
     if (delayLayout) {
       const tlGeneralPractitien = gsap.timeline({ defaults: { duration: .5, ease: "power1.out" } })
       tlGeneralPractitien
-        .fromTo(".dpt-page h3", { x: -20 }, { x: 0 })
+        .fromTo(".dpt-page h3", { x: -20 }, { x: 0 , delay: .5})
         .fromTo(".one-gp", { x: -100, opacity: 0 }, { x: 0, opacity: 1, stagger: 0.05, }, "<")
         .fromTo(".fieldset legend", { y: -25, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.025, ease: "bounce" }, .5)
             }
