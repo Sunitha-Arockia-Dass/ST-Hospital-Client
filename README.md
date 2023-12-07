@@ -10,7 +10,9 @@
 
 <h3>Github Client repository : <a href="https://github.com/Sunitha-Arockia-Dass/ST-Hospital-Client.git" target="_blank" >Here</a></h3>
 
-<h3>App deployed with ?? : <a href="#" target="_blank"></a></h3>
+<h3>App Server deployed with adaptabe : <a href="https://st-hospital-server.adaptable.app/" target="_blank">Here</a></h3>
+
+<h3>App Client deployed with Netlify : <a href="https://st-hospital-server.adaptable.app/" target="_blank">Here</a></h3>
 
 
 <h1>Introduction</h1>

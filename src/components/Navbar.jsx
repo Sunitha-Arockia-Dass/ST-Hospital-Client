@@ -68,7 +68,7 @@ function Navbar() {
       </NavLink>
 
       {/* only to facilitate development */}
-      <nav className="test-navbar">
+      {/* <nav className="test-navbar">
         <ul>
           <li><NavLink to="/">{strings.navbar.links.home}</NavLink></li>
           <li><NavLink to="/departments">{strings.navbar.links.departments}</NavLink></li>
@@ -77,10 +77,10 @@ function Navbar() {
           {!user && <li><NavLink to="/login">{strings.navbar.links.login}</NavLink></li>}
           {user && <li><NavLink to="/account">{strings.navbar.links.account}</NavLink></li>}
           {user && <li><button className="back" onClick={logOutUser}>Logout</button></li>}
-          {/* {user && <li > <span className="capitalize">{user.username}</span> ({user.role})</li>} */}
+          {/* {user && <li > <span className="capitalize">{user.username}</span> ({user.role})</li>}
 
         </ul>
-      </nav>
+      </nav> */}
 
 
       {/* what appear when you click on the menu icon */}

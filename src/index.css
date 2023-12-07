@@ -513,10 +513,6 @@ button.admin {
   width: 45%;
 }
 
-button.admin.hundred {
-  width: 100%;
-}
-
 /* Form Button */
 @property --bg-angle {
   inherits: false;
@@ -1580,6 +1576,17 @@ button.change-appointment svg {
   border-radius: 5rem 0 5rem 5rem;
   background-color: white;
   border: 0.25rem solid var(--clr-green);
+  transition: var(--timing03) ease-in-out;
+}
+
+.contact-box {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  height: 300px;
+  width: 225px;
+  padding: 2.5rem;
+  border-radius: 50rem 0 50rem 50rem;
 }
 
 /* test navbar for devs*/

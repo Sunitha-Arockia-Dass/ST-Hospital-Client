@@ -29,6 +29,7 @@ function HomePage() {
                 .fromTo("#home-page h2", { x: "100", opacity: 0 }, { x: "0", opacity: 1, stagger: 0.2, delay: .2 })
                 .fromTo("#home-page button", { y: "150", opacity: 0 }, { y: "0", opacity: 1 })
                 .fromTo(".wheel-w", { x: "100", opacity: 0 }, { x: "0", opacity: 1, stagger: 0.05, delay: .2 })
+                .fromTo(".contact-box", { opacity: 0, y: 100 }, { opacity: 1, y: 0, ease: "bounce", duration: 2}, "<")
         }, hp)
         return () => ctx.revert()
 
@@ -50,7 +51,7 @@ function HomePage() {
                     </button>
                 </div>
 
-                <div className='half-frame'>
+                <div className="half-frame object" data-value="-2">
                     <div className='circles'>
                         <img className="wheel-w img1 object" data-value="-0.5" src="https://www.apollohospitals.com/wp-content/themes/apollohospitals/assets-v3/images/orthopaedic.svg" height="100px" width="100px" />
                         <img className="wheel-w img2 object" data-value="1.4" src="https://www.apollohospitals.com/wp-content/themes/apollohospitals/assets-v3/images/cardiology_icon.svg" height="100px" width="100px" />
@@ -86,6 +87,18 @@ function HomePage() {
             <div className='center-frame'>
                
                 
+            </div>
+
+            <div className="contact-box gradient-bg">
+                <h5>Contact:</h5>
+                <br/>
+                <p>🕿 0945454545</p>
+                <br/>
+                <p>ST Hospital<br/>
+                Paradise Island<br/>
+                Just where it should be<br/>
+                08018 ThisTown
+                </p>
             </div>
 
 

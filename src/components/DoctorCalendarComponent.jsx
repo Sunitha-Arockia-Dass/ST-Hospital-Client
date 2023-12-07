@@ -394,7 +394,7 @@ const DoctorCalendarComponent = ({
                 </svg>
               </button>
             )}
-            <div className="second-block gradient-bg">
+            
             {patientDetailsView && createPRecords && (
               <CreatePatientRecord
                 setPatientDetailsView={setPatientDetailsView}
@@ -421,7 +421,7 @@ const DoctorCalendarComponent = ({
               </button>
             )}
             </div>
-          </div>
+          
         )}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
