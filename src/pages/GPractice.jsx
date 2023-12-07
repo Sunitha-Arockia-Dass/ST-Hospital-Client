@@ -13,12 +13,12 @@ function GPractice() {
     axios.get(URL.gPractice).then((response) => {
       console.log(response.data)
       setGPs(response.data)
+      setDelayLayout(true)
     })
       .catch((error) => {
         setErrorMessage(error.response.data.message);
       })
-    setDelayLayout(true)
-  }, [])
+    }, [])
 
 
   // GPractice Animation //////////////////////////////////////////
@@ -30,15 +30,7 @@ function GPractice() {
         .fromTo(".one-gp", { x: -100, opacity: 0 }, { x: 0, opacity: 1, stagger: 0.05, }, "<")
         .fromTo(".fieldset legend", { y: -25, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.025, ease: "bounce" }, .5)
             }
-    })
-
-
-
-
-
-
-
-
+    },[delayLayout])
 
 
 
@@ -46,7 +38,7 @@ function GPractice() {
     <div className="dpt-page full">
       <div className="container">
         <h3>General Practitioners
-          <h4>Afilliated to this hospital</h4>
+          <span><h4>Afilliated to this hospital</h4></span>
         </h3>
 
       </div>
