@@ -37,7 +37,7 @@ function GPractice() {
     <div className="dpt-page full">
       <div className="container">
         <h3>General Practitioners
-          <h4>Afilliated to this hospital</h4>
+          <span><h4>Afilliated to this hospital</h4></span>
         </h3>
 
       </div>

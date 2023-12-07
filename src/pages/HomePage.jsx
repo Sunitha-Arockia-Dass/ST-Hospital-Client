@@ -40,15 +40,15 @@ function HomePage() {
         <div id="home-page" className="breakout" ref={hp}>
             <div className='center-frame'>
                 <div className="half-frame object" data-value="2">
-                    <h1 className='my-text'>Sunitha</h1>
-                    <h1>Thomas</h1>
+                    <h1 className='my-text'><span className='green'>S</span><span className='blue'>unitha</span></h1>
+                    <h1><span className='green'>T</span><span className='blue'>homas</span></h1>
                     <h1>Hospital</h1>
                     <h2>More than Health !</h2>
                     <h2>We give you well-being</h2>
-                    <button className="scroll-btn">
+                    {/* <button className="scroll-btn">
                         <h4>Scroll</h4>
                         <div className="scroll-down2"></div>
-                    </button>
+                    </button> */}
                 </div>
 
                 <div className="half-frame object" data-value="-2">
