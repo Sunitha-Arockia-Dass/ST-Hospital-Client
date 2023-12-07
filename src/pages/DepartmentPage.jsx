@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { gsap } from "gsap/dist/gsap"
 
 function DepartmentPage() {
-  const [departments, setDepartments] = useState();
+  const [departments, setDepartments] = useState([]);
   const [selectedDept, setSelectedDept] = useState(null);
   const [doctor, setDoctor] = useState(null);
   const [delayLayout, setDelayLayout] = useState(false)
@@ -14,11 +14,11 @@ function DepartmentPage() {
   useEffect(() => {
     axios.get(URL.departments).then((foundDepartments) => {
       setDepartments(foundDepartments.data);
+      setDelayLayout(true)
     })
     .catch((error) => {
       setErrorMessage(error.response.data.message);
     })
-    setDelayLayout(true)
   }, []);
 
 
@@ -41,7 +41,7 @@ function DepartmentPage() {
         </div>
       )}
       <div className="all-dpt">
-        {departments?.map((department) => {
+        {departments.map((department) => {
           return (
 
             <Link

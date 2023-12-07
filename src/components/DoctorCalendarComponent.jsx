@@ -360,7 +360,7 @@ const DoctorCalendarComponent = ({
         : selectedSlot && (
           <div className="champ-rdv">
           <fieldset className="fieldset">
-                      {user.role === "patient" && (
+                      {showTimeGrid && user.role === "patient" && (
               <textarea placeholder="Write complaints"
                 name="complaints"
                 onChange={(e) => {
@@ -370,7 +370,7 @@ const DoctorCalendarComponent = ({
             )}
             </fieldset>
             
-            {user.role === "patient" && (
+            {showTimeGrid && user.role === "patient" && (
               <button
                 className="book-appointment"
                 onClick={creatAppt}
@@ -413,6 +413,7 @@ const DoctorCalendarComponent = ({
               <PatientInfo
                 setPatientDetailsView={setPatientDetailsView}
                 selectedAppt={selectedAppt}
+                setPatientInfoView={setPatientInfoView}
               />
             )}
             {!patientDetailsView && (

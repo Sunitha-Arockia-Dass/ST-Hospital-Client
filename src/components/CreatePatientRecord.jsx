@@ -1,5 +1,5 @@
 import axios from "axios";
-import { usestate, useEffect } from "react";
+import { useState, useEffect } from "react";
 import URL from "../links/links.json";
 
 function CreatePatientRecord({
