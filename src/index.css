@@ -1190,7 +1190,7 @@ main {
 /* GSAP Animation */
 #dpt-main .one-dpt,
 .one-gp {
-  opacity: 0;
+  opacity: 1;
 }
 
 .fieldset {

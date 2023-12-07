@@ -18,7 +18,7 @@ function GPractice() {
       .catch((error) => {
         setErrorMessage(error.response.data.message);
       })
-  }, [])
+    }, [])
 
 
   // GPractice Animation //////////////////////////////////////////
@@ -30,7 +30,8 @@ function GPractice() {
         .fromTo(".one-gp", { x: -100, opacity: 0 }, { x: 0, opacity: 1, stagger: 0.05, }, "<")
         .fromTo(".fieldset legend", { y: -25, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.025, ease: "bounce" }, .5)
             }
-    }, [delayLayout])
+    },[delayLayout])
+
 
 
   return (
