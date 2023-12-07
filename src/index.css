@@ -1587,6 +1587,7 @@ button.change-appointment svg {
   width: 225px;
   padding: 2.5rem;
   border-radius: 50rem 0 50rem 50rem;
+  box-shadow: var(--shadow-elevation-medium);
 }
 
 /* test navbar for devs*/
