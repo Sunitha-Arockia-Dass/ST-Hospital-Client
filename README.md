@@ -16,37 +16,27 @@
 
 
 <h1>Introduction</h1>
-This project is an hospital website that allow patient to take appointments, doctor can manage patient records and admin can create departments, patient, doctors.
+This project is an hospital website that allow patient to book and manage appointments and see their past records, doctor can manage their appointments ,create and view patient records and admin can create another admin,departments, doctors ,doctor credentials.
 
-<h2>Technical Requirements</h2>
-Your full-stack application must meet the following technical requirements:
+<h2>Technical Accomplishments</h2>
 
-- Have a SPA frontend, built with React, consisting of multiple views and implementing all CRUD actions.
+- Have a SPA frontend, built with React, consisting of multiple views and implementing CRUD actions.
 - Have a REST API backend built with ExpressJS, MongoDB and Mongoose, that your React app will communicate with.
-- Have a REST API backend with routes that perform all CRUD actions for at least one model (excluding the user model).
-- Have 3 database models or more. Having one model for users is the first step. The other two (or more) models should represent the main functionality of your app.
-- Include sign-up, log-in and log-out functionality with encrypted passwords (or social login) and authorization (logged-in users can do additional things).
+- Have 6 database models . 
+- Have a REST API backend with routes that perform all CRUD actions for3 models (excluding the user model).
+- Included sign-up, log-in and log-out functionality with encrypted passwords (or social login) and authorization (logged-in users can do additional things).
 - Have two separate repos on GitHub. One repo is for your frontend React application and the other is for your backend REST API.
-- Have at least 2 commits per day that you worked on.
-- Have a backend validation and centralized error handling in your REST API.
-- Be deployed online, allowing anyone to access and use your app.
-- As a final step, check all the features outlined in points 1 - 5 and ensure they are implemented and working ahead of delivery.
+-a backend validation and centralized error handling in your REST API.
 
-
-<h2>Deliverables</h2>
-Students must submit the following deliverables in order for the project to be deemed complete:
-
-- A working app that meets all technical requirements, built by you.
-- A working app deployed on Fly.io/Netlify.
-- The two URLs of your GitHub repositories (frontend and backend).
-- The URL to the deployed React app.
-- The URL of the slides for your project presentation.
-- Your GitHub repos must have a README with the completed project documentation.
-- Present and demo your app during the Final Project presentations.
 
 <h2>Tools</h2>
 
-We used Ironlauncher --auth for the server, react vite for the client part, axios is used to get the datas from the server.
+- Ironlauncher
+- React Vite
+- Full calendar
+- Gsap
+- Mailjet
+- axios
 
 
 ## UX/UI Choices
@@ -88,16 +78,16 @@ Colors :
 
 
 ## LANGUAGES
-using react usecontext for french or english, just to show how it works on the navbar.
+using react usecontext did langauge translation for french and english, just to show how it works on the navbar.
 
 
 ## CRUD
 
 <h2>User</h2>
-User can sign up to create an account, he can acces to his data and update them.
+User can sign up to create an account, they can access their data and update them.
 
 <h2>Appointments</h2>
-User can create an appointments, change his appointement, delete it.
+User can create an appointment, edit their appointement and delete it.
 
 <h2>Departements</h2>
 Admin can create, update, delete departements.
@@ -105,57 +95,40 @@ Admin can create, update, delete departements.
 <h2>Doctors</h2>
 Admin can create, update, delete doctors.
 
-<h2>General Practitioner (GP)</h2>
-Admin can create, update, delete GP.
-
 <h2>Patient Record</h2>
-doctor can create, update, delete doctors.
+doctor can create and view patient records.
 
-
-
-
-## MONGOOSE MODELS
-<ul>
-  <li>User.model.js for user account with feedback</li>
-  <li>Appointment.model.js for react Fullcalendar Appointments with feedback</li>
-  <li>Department.model.js for hospital departements with feedback</li>
-  <li>Doctor.model.js for hospital doctors with feedback</li>
-  <li>GPractice.model.js for hospital General Practitioners with feedback</li>
-  <li>PatientRecord.model.js for hospital Patient Record with feedback</li>
-</ul>
 
 
 ## Departements
 
-All members can accès Departments, only admin car Create, Update, Delete.
+All members can access Departments, only admin car Create, Update, Delete.
 
 ## General Practices
 
-All members can accès General Practices, only admin car Create, Update, Delete.
+All members can access General Practices.
 
 ## Account Page
 
-All members can accès Account Page.
+All members can access Account Page.
 
 Patient : 
-  - see his user date, edit them.
-  - see his GP, edit him.
-  - see his appointments, edit them.
-  - see his past appointments, and consult patient records.
+  - see his user data, edit them.
+  - see his GP info, edit them.
+  - create his appointments, edit/delete them.
+  - see patient records.
 
 Doctor : 
   - see his appointments.
-  - see his patient records.
+  - see his patient's records.
 
 Admin : 
-  - CRUD Departments
-  - CRUD GP
-  - CRUD Doctors
-  - Update doctor or patient administration rigth
-  - Create Users (patient, doctors, admin)
+  - CRUD Departments.
+  - CRUD Doctors.
+  - Create doctor or admin rights.
 
 
-## API used
+## Tools used
 
 <h2>MongoDB & Mongo Atlas</h2> for the DB.
 
@@ -163,12 +136,12 @@ Admin :
 
 <h2>jwt</h2> to create secure token for auth.
 
-<h2>Bcrypt</h2> to crypt password and check them.
+<h2>Bcrypt</h2> to encrypt password and authenticate them.
 
-<h2>Axios</h2> to handle and fetch API.
+<h2>Axios</h2> to handle and fetch datas from API.
 
-<h2>emailJS</h2> to send appointments data by email.
+<h2>Mailjet</h2> to send appointments data by email.
 
-"tchatjs/socketIO WIP"
+<h2>Fullcalendar</h2> to book appointments
 
 <h2>GSAP</h2> to animate.
