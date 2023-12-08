@@ -1,29 +1,25 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
-import { HashRouter as Router } from "react-router-dom"
-import "./index.css"
-import App from "./App"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { HashRouter as Router } from "react-router-dom";
+import "./index.css";
+import App from "./App";
 
 /* Auth Context */
 import { AuthProviderWrapper } from "./context/auth.context.jsx";
 
 /* JSON Context */
-import { LanguageWrapper } from './context/language.context.jsx'
+import { LanguageWrapper } from "./context/language.context.jsx";
 
-const root = ReactDOM.createRoot(document.getElementById("root"))
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
     <Router>
-
       <LanguageWrapper>
-      <AuthProviderWrapper>
-          
+        <AuthProviderWrapper>
           <App />
-
-      </AuthProviderWrapper>
+        </AuthProviderWrapper>
       </LanguageWrapper>
-
     </Router>
   </React.StrictMode>
-)
+);

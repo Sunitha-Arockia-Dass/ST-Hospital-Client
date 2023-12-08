@@ -15,7 +15,6 @@ function SearchResult({ searchOutput, setSearchOutput }) {
       setResult(null); // Reset result if no data is found
     }
   }, [doctors, department, gPractice]);
-  console.log(searchOutput);
   return (
     <div className="search-result">
       <p>

@@ -1,39 +1,56 @@
 import axios from "axios";
 import { useEffect, useState, useLayoutEffect } from "react";
 import URL from "../links/links.json";
-import { Link } from 'react-router-dom';
-import { gsap } from "gsap/dist/gsap"
+import { Link } from "react-router-dom";
+import { gsap } from "gsap/dist/gsap";
 
 function DepartmentPage() {
   const [departments, setDepartments] = useState([]);
   const [selectedDept, setSelectedDept] = useState(null);
   const [doctor, setDoctor] = useState(null);
-  const [delayLayout, setDelayLayout] = useState(false)
-  const [errorMessage, setErrorMessage] = useState(undefined)
+  const [delayLayout, setDelayLayout] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   useEffect(() => {
-    axios.get(URL.departments).then((foundDepartments) => {
-      setDepartments(foundDepartments.data);
-      setDelayLayout(true)
-    })
-    .catch((error) => {
-      setErrorMessage(error.response.data.message);
-    })
+    axios
+      .get(URL.departments)
+      .then((foundDepartments) => {
+        setDepartments(foundDepartments.data);
+        setDelayLayout(true);
+      })
+      .catch((error) => {
+        setErrorMessage(error.response.data.message);
+      });
   }, []);
 
-
-    // GPractice Animation //////////////////////////////////////////
-    useLayoutEffect(() => {
-    if(delayLayout){     
-      const tlOneDpt = gsap.timeline({ defaults: { duration: .3, ease: "power1.out" } })
+  // GPractice Animation //////////////////////////////////////////
+  useLayoutEffect(() => {
+    if (delayLayout) {
+      const tlOneDpt = gsap.timeline({
+        defaults: { duration: 0.3, ease: "power1.out" },
+      });
       tlOneDpt
-      .fromTo("#dpt-main h3", {x:-20 }, {x:0, delay: .5})
-      .fromTo("#dpt-main .one-dpt", { x:-100, opacity: 0 }, { x:0, opacity: 1, stagger: 0.05},"<")
-      .fromTo("#dpt-main legend", { y:-25, opacity: 0 }, { y:0, opacity: 1, stagger: 0.05, ease:"bounce"}, .75)
-      .fromTo("#dpt-main .dpt-img", { scale: .5, opacity: 0 }, { scale: 1, opacity: 1, stagger: 0.05, ease:"bounce"}, "<")
-  } 
-    }, [delayLayout])
- 
+        .fromTo("#dpt-main h3", { x: -20 }, { x: 0, delay: 0.5 })
+        .fromTo(
+          "#dpt-main .one-dpt",
+          { x: -100, opacity: 0 },
+          { x: 0, opacity: 1, stagger: 0.05 },
+          "<"
+        )
+        .fromTo(
+          "#dpt-main legend",
+          { y: -25, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.05, ease: "bounce" },
+          0.75
+        )
+        .fromTo(
+          "#dpt-main .dpt-img",
+          { scale: 0.5, opacity: 0 },
+          { scale: 1, opacity: 1, stagger: 0.05, ease: "bounce" },
+          "<"
+        );
+    }
+  }, [delayLayout]);
 
   return (
     <div id="dpt-main" className="dpt-page full">
@@ -45,13 +62,12 @@ function DepartmentPage() {
       <div className="all-dpt">
         {departments.map((department) => {
           return (
-
             <Link
               key={department._id}
               to={`/departments/${department._id}`}
               state={{ department }}
             >
-              <div className="one-dpt" >
+              <div className="one-dpt">
                 <fieldset className="fieldset gradient-bg">
                   <legend>
                     <h4>{department.name}</h4>

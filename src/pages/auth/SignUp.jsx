@@ -26,15 +26,12 @@ function SignUp() {
       lastname: e.target.lastname.value,
       
     };
-    console.log(data);
     axios
       .post(URL.signup, data)
       .then((response) => {
-        console.log("Signed up successfully");
-        console.log(response.data);
+       
       })
       .catch((error) => {
-        console.log(error);
         setErrorMessage(error.response.data.message);
       });
       navigate("/login");
