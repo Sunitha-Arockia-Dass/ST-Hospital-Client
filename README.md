@@ -4,7 +4,7 @@
 
 <h3>Follow the Trello Board : <a href="https://trello.com/invite/b/LJqzCzCl/ATTI2457db54afb77558ab662601bc60a286E6926B91/ironhack-project3-st-hospital" target="_blank">Here</a></h3>
 
-<h3>Slides presentation : <a href="#" target="_blank"></a></h3>
+<h3>Slides presentation : <a href="https://slides.com/thomaslebas/sthospital#/presentation/1" target="_blank"></a></h3>
 
 <h3>Github Server repository : <a href="https://github.com/Thomas-LBS/ST-Hospital-Server.git" target="_blank" >Here</a></h3>
 
@@ -26,7 +26,9 @@ This project is an hospital website that allow patient to book and manage appoin
 - Have a REST API backend with routes that perform all CRUD actions for3 models (excluding the user model).
 - Included sign-up, log-in and log-out functionality with encrypted passwords (or social login) and authorization (logged-in users can do additional things).
 - Have two separate repos on GitHub. One repo is for your frontend React application and the other is for your backend REST API.
--a backend validation and centralized error handling in your REST API.
+-  Secure JWT authentication for user protection.
+
+- a backend validation and centralized error handling in your REST API.
 
 
 <h2>Tools</h2>
@@ -145,3 +147,23 @@ Admin :
 <h2>Fullcalendar</h2> to book appointments
 
 <h2>GSAP</h2> to animate.
+
+## Installation
+1. Clone the repository:
+https://github.com/Thomas-LBS/ST-Hospital-Server.git
+https://github.com/Sunitha-Arockia-Dass/ST-Hospital-Client.git
+
+# Install dependencies for the client and server:
+cd ST-Hospital-Server
+npm install
+cd ST-Hospital-Client
+npm install
+1. Set up MongoDB Atlas:
+Create a MongoDB Atlas account.
+Configure a new cluster and obtain the connection string.
+Replace the MongoDB connection string in server/config/default.json with your own connection string.
+2. Start the application:
+# Start the server (from the server directory)
+npm start
+# Start the client (from the client directory)
+npm start
