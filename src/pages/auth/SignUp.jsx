@@ -31,13 +31,13 @@ function SignUp() {
       .post(URL.signup, data)
       .then((response) => {
         console.log("Signed up successfully");
-        console.log(response.data.data);
-        navigate("/login");
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
         setErrorMessage(error.response.data.message);
       });
+      navigate("/login");
   };
 
   // const addAdmin = () => {
@@ -72,7 +72,6 @@ function SignUp() {
   useEffect(() => {
     axios.get(URL.gPractice).then((response) => {
       setGPData(response.data);
-      console.log(response.data)
     })
     .catch(error=>{
       setErrorMessage(error.response.data.message);
