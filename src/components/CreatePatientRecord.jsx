@@ -7,7 +7,7 @@ function CreatePatientRecord({
   setCreatePRecords,
   selectedAppt,
 }) {
-  const [errorMessage, setErrorMessage] = useState(undefined)
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -21,9 +21,6 @@ function CreatePatientRecord({
     const pulseRate = e.target.pulseRate.value;
     const bloodPressure = e.target.bloodPressure.value;
     const heartRate = e.target.heartRate.value;
-    console.log('doctor', doctor)
-    console.log('appointment', appointment)
-    console.log('user', user)
     axios
       .post(URL.patientRecordCreate, {
         user,
@@ -38,19 +35,16 @@ function CreatePatientRecord({
         heartRate,
       })
       .then((response) => {
-        // setPatientDetailsView(false);
         setCreatePRecords(false);
-        console.log(response.data);
       })
       .catch((error) => {
         setErrorMessage(error.response.data.message);
-      })
+      });
   }
 
   return (
     <div className="second-block gradient-bg">
       <form onSubmit={handleSubmit}>
-
         <input type="text" name="bloodPressure" placeholder="Blood Pressure" />
 
         <input type="text" name="heartRate" placeholder="Heart Rate" />
@@ -63,12 +57,17 @@ function CreatePatientRecord({
 
         <input type="text" name="description" placeholder="Description" />
 
-        <input type="text" name="prescribedMedications" placeholder="Prescribed Medications" />
+        <input
+          type="text"
+          name="prescribedMedications"
+          placeholder="Prescribed Medications"
+        />
 
-        <button className="back" type="submit">Create</button>
+        <button className="back" type="submit">
+          Create
+        </button>
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-
     </div>
   );
 }

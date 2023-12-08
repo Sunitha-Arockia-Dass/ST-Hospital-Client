@@ -82,14 +82,16 @@ const DoctorCalendarComponent = ({
   };
 
   useEffect(() => {
-    axios.get(`${URL.getDrAppointment}/${doctor._id}`).then((appts) => {
-      // console.log(appts.data);
-      setAllAppts(appts.data);
-      const transformedEvents = transformEvents(appts.data);
-      setEvents(transformedEvents);
-    }).catch((error) => {
-      setErrorMessage(error.response.data.message);
-    })
+    axios
+      .get(`${URL.getDrAppointment}/${doctor._id}`)
+      .then((appts) => {
+        setAllAppts(appts.data);
+        const transformedEvents = transformEvents(appts.data);
+        setEvents(transformedEvents);
+      })
+      .catch((error) => {
+        setErrorMessage(error.response.data.message);
+      });
   }, []);
 
   const handleDateClick = (info) => {
@@ -108,23 +110,14 @@ const DoctorCalendarComponent = ({
     const startTime = info.event.start;
     const dateObject = new Date(startTime);
     const isoString = dateObject.toISOString();
-    // console.log("eventId", isoString);
-    // console.log(allAppts[0].start);
     const selectedAppt = allAppts.filter((appt) => {
       return appt.start === isoString;
     });
-    // console.log('selectedAppt',selectedAppt)
     if (user.role === "doctor") {
-      // Fetch patient details based on the event data (event.id or event.otherUniqueIdentifier)
-      // Display the patient details to the doctor
-      // You might use a modal or another component to show the patient details
-      // Example: Show patient name, complaints, etc.
       setPatientDetailsView(true);
       setShowTimeGrid(false);
       setSelectedAppt(selectedAppt);
-      // alert("Doctor: Display patient details here");
     } else {
-      // For other roles (e.g., patient or admin), show a message or handle differently
       alert("This slot is already booked.");
     }
   };
@@ -141,8 +134,8 @@ const DoctorCalendarComponent = ({
     setShowTimeGrid(false);
     setSelectedSlot(null);
     setPatientInfoView(false);
-    setViewPRecords(false)
-    setCreatePRecords(false)
+    setViewPRecords(false);
+    setCreatePRecords(false);
   };
   function creatAppt() {
     const slotStartTime = new Date(selectedSlot);
@@ -158,23 +151,18 @@ const DoctorCalendarComponent = ({
     if (complaints === "") {
       alert("Enter a complaint to book an appointment");
     }
-    console.log(complaints);
     axios
       .post(URL.createAppointment, apptDetails)
       .then((response) => {
-        console.log(response.data);
         axios.get(`${URL.getDrAppointment}/${doctor._id}`).then((appts) => {
-          // try{
           const transformedEvents = transformEvents(appts.data);
           setEvents(transformedEvents);
           setShowTimeGrid(false);
-          // sendEmail();
-        })
-        
+        });
       })
       .catch((error) => {
         setErrorMessage(error.response.data.message);
-      })
+      });
   }
   function editAppt() {
     const slotStartTime = new Date(selectedSlot);
@@ -197,7 +185,7 @@ const DoctorCalendarComponent = ({
       })
       .catch((error) => {
         setErrorMessage(error.response.data.message);
-      })
+      });
   }
 
   const areDatesEqual = (date1, date2) => {
@@ -207,13 +195,12 @@ const DoctorCalendarComponent = ({
   };
 
   const renderDateEventContent = (eventInfo) => {
-    console.log(eventInfo.event.title);
     return (
       <>
-        {user.role === "doctor" && <p>Title: {eventInfo.event.title}</p>}
+        {user.role === "doctor" && <p>Complaints: {eventInfo.event.title}</p>}
         {update &&
-          details &&
-          areDatesEqual(eventInfo.event.start, details.start) ? (
+        details &&
+        areDatesEqual(eventInfo.event.start, details.start) ? (
           <p style={{ color: "purple" }}>Your Appointment</p>
         ) : (
           <></>
@@ -227,8 +214,8 @@ const DoctorCalendarComponent = ({
       <>
         {user.role === "doctor" && <p>Title: {eventInfo.event.title}</p>}
         {update &&
-          details &&
-          areDatesEqual(eventInfo.event.start, details.start) ? (
+        details &&
+        areDatesEqual(eventInfo.event.start, details.start) ? (
           <p style={{ color: "purple" }}>Your Appointment</p>
         ) : (
           <></>
@@ -253,19 +240,18 @@ const DoctorCalendarComponent = ({
   }
   function viewRecords() {
     setViewPRecords(true);
-    setPatientInfoView(false)
-    setCreatePRecords(false)
+    setPatientInfoView(false);
+    setCreatePRecords(false);
   }
   function createRecords() {
     setCreatePRecords(true);
-    setViewPRecords(false)
-    setPatientInfoView(false)
+    setViewPRecords(false);
+    setPatientInfoView(false);
   }
   function viewPatientInfo() {
     setPatientInfoView(true);
-    setViewPRecords(false)
-    setCreatePRecords(false)
-
+    setViewPRecords(false);
+    setCreatePRecords(false);
   }
   return (
     <div className="fullcalendar-DCC">
@@ -273,10 +259,17 @@ const DoctorCalendarComponent = ({
 
       {patientDetailsView ? (
         <div className="first-block gradient-bg">
-          <button className="inside-block back" onClick={viewRecords}><b>Past Records</b></button>
-          <button className="inside-block back" onClick={createRecords}><b>Create a Record</b></button>
-          <button className="inside-block back" onClick={viewPatientInfo}><b>Patient Details</b></button>
-          <button className="inside-block back"
+          <button className="inside-block back" onClick={viewRecords}>
+            <b>Past Records</b>
+          </button>
+          <button className="inside-block back" onClick={createRecords}>
+            <b>Create a Record</b>
+          </button>
+          <button className="inside-block back" onClick={viewPatientInfo}>
+            <b>Patient Details</b>
+          </button>
+          <button
+            className="inside-block back"
             onClick={() => {
               setPatientDetailsView(false);
             }}
@@ -296,11 +289,10 @@ const DoctorCalendarComponent = ({
           hiddenDays={[0, 6]}
           validRange={validRange}
 
-        // Other props as needed
+          // Other props as needed
         />
       ) : (
         <div className="back-to-month">
-
           <h4>Selected Time: {convertTo12HourFormat(selectedSlot)}</h4>
           <FullCalendar
             plugins={[timeGridPlugin, interactionPlugin]}
@@ -324,108 +316,107 @@ const DoctorCalendarComponent = ({
             eventContent={renderTimeEventContent}
             eventDisplay="block"
             eventClick={handleEventClick}
-          // Other props as needed
+            // Other props as needed
           />
         </div>
       )}
       {update
         ? selectedSlot && (
-          <button
-            className="change-appointment"
-            onClick={editAppt}
-            disabled={!selectedSlot}
-          >
-            <svg width="100px" height="100px" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M13 21H21"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-              <path
-                d="M20.0651 7.39423L7.09967 20.4114C6.72438 20.7882 6.21446 21 5.68265 21H4.00383C3.44943 21 3 20.5466 3 19.9922V18.2987C3 17.7696 3.20962 17.2621 3.58297 16.8873L16.5517 3.86681C19.5632 1.34721 22.5747 4.87462 20.0651 7.39423Z"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-              <path
-                d="M15.3097 5.30981L18.7274 8.72755"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></path>
-            </svg>
-          </button>
-        )
+            <button
+              className="change-appointment"
+              onClick={editAppt}
+              disabled={!selectedSlot}
+            >
+              <svg width="100px" height="100px" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M13 21H21"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M20.0651 7.39423L7.09967 20.4114C6.72438 20.7882 6.21446 21 5.68265 21H4.00383C3.44943 21 3 20.5466 3 19.9922V18.2987C3 17.7696 3.20962 17.2621 3.58297 16.8873L16.5517 3.86681C19.5632 1.34721 22.5747 4.87462 20.0651 7.39423Z"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M15.3097 5.30981L18.7274 8.72755"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </button>
+          )
         : selectedSlot && (
-          <div className="champ-rdv">
-          <fieldset className="fieldset">
-                      {showTimeGrid && user.role === "patient" && (
-              <textarea placeholder="Write complaints"
-                name="complaints"
-                onChange={(e) => {
-                  setComplaints(e.target.value);
-                }}
-              />
-            )}
-            </fieldset>
-            
-            {showTimeGrid && user.role === "patient" && (
-              <button
-                className="book-appointment"
-                onClick={creatAppt}
-                disabled={!selectedSlot}
-              >
-                <svg
-                  width="100px"
-                  height="100px"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z"
-                    stroke-width="1.5"
-                  ></path>{" "}
-                  <path
-                    d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  ></path>
-                </svg>
-              </button>
-            )}
-            
-            {patientDetailsView && createPRecords && (
-              <CreatePatientRecord
-                setPatientDetailsView={setPatientDetailsView}
-                setCreatePRecords={setCreatePRecords}
-                selectedAppt={selectedAppt}
-              />
-            )}
-            {patientDetailsView && viewPRecords && (
-              <ViewPatientRecord
-                setPatientDetailsView={setPatientDetailsView}
-                setViewPRecords={setViewPRecords}
-                selectedAppt={selectedAppt}
-              />
-            )}
-            {patientDetailsView && patientInfoView && (
-              <PatientInfo
-                setPatientDetailsView={setPatientDetailsView}
-                selectedAppt={selectedAppt}
-                setPatientInfoView={setPatientInfoView}
-              />
-            )}
-            {!patientDetailsView && (
-              <button className="back" onClick={handleBackToMonth}>
-                Back to Month
-              </button>
-            )}
-            </div>
-          
-        )}
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <div className="champ-rdv">
+              <fieldset className="fieldset">
+                {showTimeGrid && user.role === "patient" && (
+                  <textarea
+                    placeholder="Write complaints"
+                    name="complaints"
+                    onChange={(e) => {
+                      setComplaints(e.target.value);
+                    }}
+                  />
+                )}
+              </fieldset>
 
+              {showTimeGrid && user.role === "patient" && (
+                <button
+                  className="book-appointment"
+                  onClick={creatAppt}
+                  disabled={!selectedSlot}
+                >
+                  <svg
+                    width="100px"
+                    height="100px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z"
+                      stroke-width="1.5"
+                    ></path>{" "}
+                    <path
+                      d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    ></path>
+                  </svg>
+                </button>
+              )}
+
+              {patientDetailsView && createPRecords && (
+                <CreatePatientRecord
+                  setPatientDetailsView={setPatientDetailsView}
+                  setCreatePRecords={setCreatePRecords}
+                  selectedAppt={selectedAppt}
+                />
+              )}
+              {patientDetailsView && viewPRecords && (
+                <ViewPatientRecord
+                  setPatientDetailsView={setPatientDetailsView}
+                  setViewPRecords={setViewPRecords}
+                  selectedAppt={selectedAppt}
+                />
+              )}
+              {patientDetailsView && patientInfoView && (
+                <PatientInfo
+                  setPatientDetailsView={setPatientDetailsView}
+                  selectedAppt={selectedAppt}
+                  setPatientInfoView={setPatientInfoView}
+                />
+              )}
+              {!patientDetailsView && (
+                <button className="back" onClick={handleBackToMonth}>
+                  Back to Month
+                </button>
+              )}
+            </div>
+          )}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 };

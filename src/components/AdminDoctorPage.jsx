@@ -16,15 +16,17 @@ function AdminDoctorPage({
   const [drView, setDrView] = useState(true);
   const [doctorId, setDoctorId] = useState();
   const [formView, setFormView] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(undefined)
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
   useEffect(() => {
-    axios.get(URL.doctors).then((foundDoctors) => {
-      setDoctors(foundDoctors.data);
-    })
-    .catch((error) => {
-      setErrorMessage(error.response.data.message);
-    })
+    axios
+      .get(URL.doctors)
+      .then((foundDoctors) => {
+        setDoctors(foundDoctors.data);
+      })
+      .catch((error) => {
+        setErrorMessage(error.response.data.message);
+      });
   }, [drView]);
   const updateDoctor = (id) => {
     setDrView(false);
@@ -36,24 +38,21 @@ function AdminDoctorPage({
     axios
       .delete(`${URL.deleteDoctor}/${id}`)
       .then((response) => {
-        console.log("successfully deleted", response.data);
         setDoctors((prevDoctors) =>
           prevDoctors.filter((doctor) => doctor._id !== id)
         );
       })
       .catch((error) => {
         setErrorMessage(error.response.data.message);
-      })
+      });
   };
   function showForm(doctor) {
-    console.log("div clicked");
     setFormView(true);
     setDrView(false);
     setDoctorView(false);
     setSelectedDoctor(doctor);
     createCredentials = false;
   }
-  console.log("doctor", doctors[0]);
   return (
     <div className="dpt-page">
       {createCredentials ? (

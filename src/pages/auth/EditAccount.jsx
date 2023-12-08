@@ -36,7 +36,7 @@ function EditAccount() {
       });
   }, []);
   useEffect(() => {
-    if (user.patientDetails) {
+    if (user.patientDetails && user.patientDetails.gp) {
       axios
         .get(`${URL.gPractice}/${user.patientDetails.gp[0]._id}`)
         .then((response) => {
@@ -110,7 +110,6 @@ function EditAccount() {
   function handleGpChange(e) {
     const selectedGpId =
       e.target.options[e.target.selectedIndex].getAttribute("data-gp-id");
-
     setChangedGpId(selectedGpId);
   }
 

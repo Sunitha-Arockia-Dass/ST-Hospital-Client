@@ -6,7 +6,7 @@ import DoctorCalendarComponent from "./DoctorCalendarComponent";
 import URL from "../links/links.json";
 
 function PatientApptDetails() {
-  const [errorMessage, setErrorMessage] = useState(undefined)
+  const [errorMessage, setErrorMessage] = useState(undefined);
   const { user } = useContext(AuthContext);
   const [appts, setAppts] = useState();
   const [view, setView] = useState({
@@ -16,34 +16,28 @@ function PatientApptDetails() {
     details: [],
   });
   useEffect(() => {
-    axios.get(`${URL.getPatientAppointment}/${user._id}`).then((appts) => {
-      console.log(appts.data);
-
-    setAppts(appts.data);
-    // setView((prevState) => ({
-    //   ...prevState,
-    //   viewAppt: true,
-    // }));
-  })
-  .catch((error) => {
-    setErrorMessage(error.response.data.message);
-  })
-
-  }, [])
+    axios
+      .get(`${URL.getPatientAppointment}/${user._id}`)
+      .then((appts) => {
+        setAppts(appts.data);
+      })
+      .catch((error) => {
+        setErrorMessage(error.response.data.message);
+      });
+  }, []);
   const getAppt = () => {
-    console.log(user._id);
-    axios.get(`${URL.getPatientAppointment}/${user._id}`).then((appts) => {
-      console.log(appts.data);
-
-      setAppts(appts.data);
-      setView((prevState) => ({
-        ...prevState,
-        viewAppt: true,
-      }));
-    })
-    .catch((error) => {
-      setErrorMessage(error.response.data.message);
-    })
+    axios
+      .get(`${URL.getPatientAppointment}/${user._id}`)
+      .then((appts) => {
+        setAppts(appts.data);
+        setView((prevState) => ({
+          ...prevState,
+          viewAppt: true,
+        }));
+      })
+      .catch((error) => {
+        setErrorMessage(error.response.data.message);
+      });
   };
   function convertTo12HourFormat(timestamp) {
     const date = new Date(timestamp);
@@ -60,11 +54,9 @@ function PatientApptDetails() {
     return formattedTime;
   }
   function viewDetail(id) {
-    console.log(view.details.start);
     const filteredAppt = appts.filter((appt) => {
       return appt._id === id;
     });
-    console.log("filteredAppt", filteredAppt[0]._id);
 
     setView((prevState) => ({
       ...prevState,
@@ -74,24 +66,19 @@ function PatientApptDetails() {
     }));
   }
   const deleteappt = (id) => {
-    console.log('deleteappt', id)
     axios.delete(`${URL.patientDeleteAppt}/${id}`).then((response) => {
       setView((prevState) => ({
         ...prevState,
         updateViewAppt: false,
         detailView: false,
         viewAppt: true,
-      }))
-      .catch((error) => {
+      })).catch((error) => {
         setErrorMessage(error.response.data.message);
-      })
+      });
       getAppt();
-      console.log(response);
     });
   };
   function updateAppt() {
-    console.log(view.details[0]);
-
     setView((prevState) => ({
       ...prevState,
       updateViewAppt: true,
@@ -111,9 +98,13 @@ function PatientApptDetails() {
               appts.map((appt) => (
                 <div key={appt.id} className="one-appointment">
                   <h5>
-                    {new Date(appt.start).toDateString()}, {convertTo12HourFormat(appt.start)}
+                    {new Date(appt.start).toDateString()},{" "}
+                    {convertTo12HourFormat(appt.start)}
                   </h5>
-                  <button className="back view-detail" onClick={() => viewDetail(appt._id)}>
+                  <button
+                    className="back view-detail"
+                    onClick={() => viewDetail(appt._id)}
+                  >
                     View Details
                   </button>
                   {/* Other buttons */}
@@ -131,17 +122,16 @@ function PatientApptDetails() {
             }}>
             ↩ Back
           </button> */}
-
           </div>
         ) : (
           <></>
         )}
 
         {view.details && view.detailView ? (
-          
           <div className="appt-specific">
             <h4>
-              With Doctor {view.details[0].doctor[0].firstname} {view.details[0].doctor[0].lastname}
+              With Doctor {view.details[0].doctor[0].firstname}{" "}
+              {view.details[0].doctor[0].lastname}
             </h4>
 
             <h5>
@@ -150,9 +140,10 @@ function PatientApptDetails() {
             </h5>
 
             <h5>{view.details[0].department[0].name}</h5>
-            <br/>
+            <br />
 
-            <button className="back"
+            <button
+              className="back"
               onClick={() => {
                 updateAppt(view.details._id);
               }}
@@ -160,17 +151,18 @@ function PatientApptDetails() {
               Edit your appointments
             </button>
 
-            <button className="back"
+            <button
+              className="back"
               onClick={() => {
-                console.log(view.details)
                 deleteappt(view.details[0]._id);
               }}
             >
               Cancel your appointments
             </button>
 
-          <br/>
-            <button className="back"
+            <br />
+            <button
+              className="back"
               onClick={() => {
                 setView((prevState) => ({
                   ...prevState,
@@ -183,13 +175,13 @@ function PatientApptDetails() {
               ↩ Back
             </button>
           </div>
-          
         ) : (
           <></>
         )}
         {view.updateViewAppt ? (
           <div>
-            <button className="back"
+            <button
+              className="back"
               onClick={() => {
                 setView((prevState) => ({
                   ...prevState,
