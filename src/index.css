@@ -1577,6 +1577,10 @@ button.change-appointment svg {
   background-color: white;
   border: 0.25rem solid var(--clr-green);
   transition: var(--timing03) ease-in-out;
+
+  &:hover {
+    border: 0.25rem solid var(--clr-blue);
+  }
 }
 
 .contact-box {
