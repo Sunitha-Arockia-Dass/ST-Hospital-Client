@@ -4,10 +4,8 @@ import Logo from "/public/images/Logo.png";
 
 /* Gsap */
 import { gsap } from "gsap/dist/gsap";
-
 import { CustomEase } from "gsap/dist/CustomEase";
 import { RoughEase, ExpoScaleEase, SlowMo } from "gsap/dist/EasePack";
-
 import { Flip } from "gsap/dist/Flip";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { Observer } from "gsap/dist/Observer";
