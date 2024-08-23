@@ -12,7 +12,7 @@
 
 <h3>App Server deployed with adaptabe : <a href="https://st-hospital-server.adaptable.app/" target="_blank">Here</a></h3>
 
-<h3>App Client deployed with Netlify : <a href="https://6572201300d1c000a6662a33--musical-buttercream-e1a1d2.netlify.app/#/" target="_blank">Here</a></h3>
+<h3>App Client deployed with Netlify : <a href="https://musical-buttercream-e1a1d2.netlify.app/" target="_blank">Here</a></h3>
 
 
 <h1>Introduction</h1>
